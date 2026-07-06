@@ -1,0 +1,459 @@
+/*
+ * ADK Bayern – Abschlussjahrgang 2027
+ * Design-System: near-black / off-white / warmes Gold.
+ * Ausschließlich CSS-Transitions (kein JS für Animationen).
+ * Mobile-first; Breakpoints bei 640px und 960px.
+ */
+
+:root {
+  --bg: #0f0f0f;
+  --bg-raised: #181816;
+  --text: #f5f2ec;
+  --text-muted: #b9b3a6;   /* Kontrast auf --bg ca. 9:1 */
+  --gold: #c9a84c;         /* Kontrast auf --bg ca. 8:1 */
+  --gold-soft: #e0c87e;
+  --line: #2c2b27;
+  --font-head: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --measure: 42rem;
+  --pad: 1.25rem;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+h1 { font-size: clamp(2.2rem, 6vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 4vw, 2.1rem); }
+h3 { font-size: clamp(1.25rem, 3vw, 1.5rem); color: var(--gold-soft); }
+
+p { margin: 0 0 1em; }
+
+a {
+  color: var(--gold);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover { color: var(--gold-soft); text-decoration: underline; }
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.muted { color: var(--text-muted); }
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--gold);
+  color: #0f0f0f;
+  padding: 0.5rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 0; }
+
+/* ---------- Header ---------- */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  padding: 1rem var(--pad);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.brand:hover { color: var(--gold-soft); text-decoration: none; }
+.brand span { color: var(--gold); font-weight: 500; }
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+.site-header nav a {
+  color: var(--text);
+  font-size: 0.95rem;
+}
+.site-header nav a:hover { color: var(--gold-soft); }
+
+#lang-toggle {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  background: transparent;
+  border: 1px solid var(--gold);
+  border-radius: 3px;
+  padding: 0.35rem 0.7rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+#lang-toggle:hover {
+  background: var(--gold);
+  color: #0f0f0f;
+}
+
+/* ---------- Hero (Startseite) ---------- */
+
+.hero {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-media {
+  position: relative;
+  max-height: 70vh;
+  overflow: hidden;
+  background: linear-gradient(160deg, #1a1815 0%, #0f0f0f 70%);
+}
+.hero-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  object-fit: cover;
+  object-position: center 30%;
+}
+.hero-media.no-img img { display: none; }
+.hero-media.no-img { min-height: 12rem; }
+.hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15, 15, 15, 0.15) 40%, rgba(15, 15, 15, 0.92) 100%);
+  pointer-events: none;
+}
+
+.hero-text {
+  padding: 2rem var(--pad) 2.5rem;
+  max-width: var(--measure);
+}
+.hero-kicker {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+.hero-text h1 { margin-bottom: 0.4em; }
+.hero-text p { color: var(--text-muted); max-width: 36rem; }
+
+/* ---------- Ensemble-Grid ---------- */
+
+.ensemble {
+  padding: 2.5rem var(--pad) 3.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.ensemble h2 { margin-bottom: 1.25rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+.card:hover, .card:focus-visible {
+  border-color: var(--gold);
+  transform: translateY(-3px);
+  text-decoration: none;
+  color: var(--text);
+}
+
+.card-media {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(160deg, #232019 0%, #14130f 80%);
+}
+.card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.card-media.no-img img { display: none; }
+
+.media-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-size: 3rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+}
+.no-img .media-fallback { display: flex; }
+
+.card-name {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  font-weight: 600;
+  padding: 0.9rem 1rem 0.15rem;
+}
+.card-cta {
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 1rem 1rem;
+  transition: color 0.25s ease;
+}
+.card:hover .card-cta { color: var(--gold-soft); }
+
+/* ---------- Profilseite ---------- */
+
+.profile {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2.5rem var(--pad) 4rem;
+}
+
+.profile-head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.portrait {
+  position: relative;
+  width: min(100%, 20rem);
+  aspect-ratio: 3 / 4;
+  background: linear-gradient(160deg, #232019 0%, #14130f 80%);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.portrait.no-img img { display: none; }
+
+.profile-intro h1 { margin-bottom: 0.2em; }
+.pronouns { color: var(--gold); font-size: 0.95rem; letter-spacing: 0.04em; }
+.coming-soon {
+  color: var(--gold);
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+}
+
+.profile-section {
+  margin-bottom: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+.profile-section h2 { color: var(--gold); margin-bottom: 0.9em; }
+
+/* Steckbrief */
+.facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem 1.5rem;
+  margin: 0;
+}
+.facts dt {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 0.9rem;
+}
+.facts dd { margin: 0.15rem 0 0; }
+.fact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fact-list li { padding: 0.1rem 0; }
+
+/* Biografie */
+.bio p { max-width: var(--measure); }
+
+/*
+ * Statische Listen (Vorsprechrollen/-lieder & Credits):
+ * bewusst KEIN Hover-Effekt und Standard-Cursor, damit nichts
+ * fälschlich als klickbar wahrgenommen wird.
+ */
+.entry-list, .credit-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  cursor: default;
+}
+
+.entry {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.entry:last-child { border-bottom: none; }
+.entry-lead { font-weight: 600; }
+.entry em { color: var(--text-muted); font-style: italic; }
+.sep { color: var(--gold); }
+
+.credit-list { margin-bottom: 2rem; }
+.credit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.credit:last-child { border-bottom: none; }
+.credit-years {
+  color: var(--gold);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.credit-production { font-weight: 600; }
+.credit-author { color: var(--text-muted); }
+.credit-role { color: var(--text); font-style: italic; }
+.credit-meta { color: var(--text-muted); font-size: 0.9rem; }
+
+/* Showreel / Audio-Reel */
+.reel {
+  display: block;
+  width: 100%;
+  max-height: 70vh;
+  background: #000;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+.reel-audio {
+  display: block;
+  width: 100%;
+}
+
+/* Kontakt */
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.contact-link { font-size: 1.05rem; }
+
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Rechtstexte ---------- */
+
+.legal {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 2.5rem var(--pad) 4rem;
+}
+.legal h2 { color: var(--gold); margin-top: 2rem; font-size: 1.4rem; }
+.legal .placeholder { color: var(--gold); font-style: italic; }
+
+/* Hinweis „nur auf Deutsch verfügbar“ nur im EN-Modus zeigen */
+.en-note { display: none; color: var(--text-muted); font-style: italic; }
+html[lang="en"] .en-note { display: block; }
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding: 1.75rem var(--pad);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.site-footer nav {
+  display: flex;
+  gap: 1.25rem;
+}
+.site-footer a { color: var(--text-muted); }
+.site-footer a:hover { color: var(--gold-soft); }
+
+/* ---------- Breakpoints ---------- */
+
+@media (min-width: 640px) {
+  :root { --pad: 2rem; }
+
+  .brand { font-size: 1.3rem; }
+
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .profile-head { flex-direction: row; align-items: flex-end; }
+
+  .facts { grid-template-columns: 11rem 1fr; }
+  .facts dt { margin-top: 0; padding: 0.5rem 0; border-top: 1px solid var(--line); }
+  .facts dd { margin: 0; padding: 0.5rem 0; border-top: 1px solid var(--line); }
+  .facts dt:first-of-type, .facts dd:first-of-type { border-top: none; }
+
+  .credit { flex-direction: row; gap: 1.5rem; }
+  .credit-years { flex: 0 0 6.5rem; padding-top: 0.15rem; }
+
+  .site-footer { flex-direction: row; justify-content: space-between; align-items: center; }
+}
+
+@media (min-width: 960px) {
+  .grid { grid-template-columns: repeat(5, 1fr); }
+  .hero-text { padding-top: 2.5rem; }
+}
+
+/* Nutzerpräferenz: reduzierte Bewegung respektieren */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; }
+}
