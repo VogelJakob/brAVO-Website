@@ -23,16 +23,16 @@ const STUDENTS = [
     locations: ["München", "Regensburg", "Wien", "Berlin", "Stuttgart", "Düsseldorf"],
     playingAge: "16–27",
     height: "175 cm",
-    hairColor: { de: "dunkelblond", en: "TODO: Übersetzung folgt" },
-    eyeColor: { de: "blau", en: "TODO: Übersetzung folgt" },
-    voiceType: { de: "Bariton", en: "TODO: Übersetzung folgt" },
+    hairColor: { de: "dunkelblond", en: "dark blonde" },
+    eyeColor: { de: "blau", en: "blue" },
+    voiceType: { de: "Bariton", en: "Baritone" },
     languages: {
       de: ["Deutsch (Muttersprache)", "Griechisch (Muttersprache)", "Englisch (fließend)", "Französisch (Grundkenntnisse)", "Spanisch (Grundkenntnisse)", "Polnisch (Grundkenntnisse)"],
-      en: ["TODO: Übersetzung folgt"]
+      en: ["German (native)", "Greek (native)", "English (fluent)", "French (basic)", "Spanish (basic)", "Polish (basic)"]
     },
     skills: {
       de: ["Tanz (u.a. Jazz, Contemporary, Show Dance, Ballett, griechische Volkstänze, Stepptanz)", "Stelzenlauf", "Luftakrobatik (Aerial Hoop & Lollipop)", "Yoga", "Bühnenkampf (Grundlagen)"],
-      en: ["TODO: Übersetzung folgt"]
+      en: ["Dance (incl. jazz, contemporary, show dance, ballet, Greek folk dances, tap dance)", "Stilt walking", "Aerial acrobatics (aerial hoop & lollipop)", "Yoga", "Stage combat (basics)"]
     },
     auditionRoles: [
       { role: "Mary", play: "Die kahle Sängerin", author: "Eugène Ionesco" },
@@ -48,7 +48,7 @@ const STUDENTS = [
     ],
     bio: {
       de: "Geboren und aufgewachsen im Landkreis München, fand Konstantin früh seine Leidenschaft für das Bühnengeschehen. Sein Interesse an Tanz und Bewegung führte ihn durch eine Vielzahl von Stilrichtungen – von Ballett, Stepptanz und Show Dance über Contemporary und Jazz bis hin zu Heels Dance. Stationen seiner Ausbildung waren unter anderem Kornele Rzeszów, die Iwanson International School of Contemporary Dance sowie die Stonebite Studios.\n\nNeben dem Tanz entdeckte Konstantin die Zirkuskunst für sich, insbesondere das Stelzenlaufen und die Luftakrobatik (Aerial Hoop). Parallel dazu entwickelte er eine Faszination für das Sprechtheater und sammelte wertvolle Bühnenerfahrungen in der Pasinger Fabrik, den Münchner Kammerspielen und im Pathos Theater München.\n\nPrägende künstlerische Begegnungen ergaben sich in der Zusammenarbeit mit Verena Regensburger («These Teens will save the future») und Michiel Vandevelde («Joy 2022»). Als Mitglied des NON ESSENTIALS e.V. kreiert Konstantin regelmäßig Solo-Performances, die sich mit Fragen von Identität und Existenz auseinandersetzen.\n\nSeit 2023 studiert er Schauspiel mit Schwerpunkt Gesang an der Akademie für Darstellende Kunst Bayern und verbindet dort seine vielseitigen Erfahrungen aus Tanz, Artistik und Theater zu einem ganzheitlichen künstlerischen Ausdruck.",
-      en: "TODO: Übersetzung folgt"
+      en: "Born and raised in the district of Munich, Konstantin found his passion for the stage early on. His interest in dance and movement led him through a wide variety of styles — from ballet, tap and show dance to contemporary, jazz and heels dance. Stations of his training included Kornele Rzeszów, the Iwanson International School of Contemporary Dance and the Stonebite Studios.\n\nAlongside dance, Konstantin discovered circus arts for himself, in particular stilt walking and aerial acrobatics (aerial hoop). At the same time he developed a fascination for spoken theatre and gained valuable stage experience at the Pasinger Fabrik, the Münchner Kammerspiele and the Pathos Theater in Munich.\n\nFormative artistic encounters arose from working with Verena Regensburger (“These Teens Will Save The Future”) and Michiel Vandevelde (“Joy 2022”). As a member of NON ESSENTIALS e.V., Konstantin regularly creates solo performances that explore questions of identity and existence.\n\nSince 2023 he has been studying acting with a focus on singing at the Academy of Performing Arts Bavaria, combining his diverse experience from dance, circus arts and theatre into a holistic artistic expression."
     },
     credits: {
       theater: [
@@ -83,16 +83,16 @@ const STUDENTS = [
     locations: ["Berlin", "Stuttgart", "München", "Allgäu", "Hamburg", "Niederlande"],
     playingAge: "17–27",
     height: "1,67 m",
-    hairColor: { de: "Hellbraun", en: "TODO: Übersetzung folgt" },
-    eyeColor: { de: "Hellbraun", en: "TODO: Übersetzung folgt" },
-    voiceType: { de: "Alt-Sopran", en: "TODO: Übersetzung folgt" },
+    hairColor: { de: "Hellbraun", en: "light brown" },
+    eyeColor: { de: "Hellbraun", en: "light brown" },
+    voiceType: { de: "Alt-Sopran", en: "Alto-soprano" },
     languages: {
       de: ["Deutsch (Muttersprache)", "Englisch (Muttersprache)", "Holländisch (Muttersprache)", "Französisch (Grundkenntnisse)", "Berlinerisch"],
-      en: ["TODO: Übersetzung folgt"]
+      en: ["German (native)", "English (native)", "Dutch (native)", "French (basic)", "Berlin dialect"]
     },
     skills: {
       de: ["Impro-Tanz", "Tennis", "Yoga", "Bühnenkampf & Fechten (Grundlagen)", "Standard Tanz (Grundlagen)", "Reiten (Grundlagen)"],
-      en: ["TODO: Übersetzung folgt"]
+      en: ["Improvisational dance", "Tennis", "Yoga", "Stage combat & fencing (basics)", "Ballroom dance (basics)", "Horse riding (basics)"]
     },
     auditionRoles: [
       { role: "Judith", play: "Je suis Fassbinder", author: "Falk Richter" },
@@ -110,7 +110,7 @@ const STUDENTS = [
     ],
     bio: {
       de: "Salome Ridder wurde in Berlin geboren und wuchs in einer dreisprachigen Künstlerfamilie auf, zwischen Kostümkisten, Papier, Farbe, Büchern und Musik. So entwickelte sie eine Begeisterung für Sprache und Ausdruck, die sie bis heute begleitet: im Schauspiel ebenso wie im Schreiben und in der analogen Fotografie.\n\nBereits als Kind stand sie auf der Bühne und 2016 übernahm sie ihre erste Fernsehfilm-Hauptrolle in „Liebling, lass die Hühner frei“ (Regie: Oliver Schmitz). 2024 spielte sie die Titelfigur im Spielfilm „Linda lebt“ (Regie: Amon Bela Bachmann).\n\nSie wirkte zudem in szenischen Lesungen wie „Götter sterben“ und „Say hi to Abdo“ beim LUBIMOVKA Festival in Wien mit. Am Akademietheater Regensburg war sie unter anderem in „Woyzeck“ (auch eingeladen zum JULA-Festival München) sowie in „Die Frau von früher“ und „Die kleine Hexe“ zu sehen.",
-      en: "TODO: Übersetzung folgt"
+      en: "Salome Ridder was born in Berlin and grew up in a trilingual family of artists, among costume chests, paper, paint, books and music. There she developed an enthusiasm for language and expression that has stayed with her to this day: in acting as well as in writing and analogue photography.\n\nShe stood on stage as a child, and in 2016 she took on her first leading role in a TV film in “Liebling, lass die Hühner frei” (directed by Oliver Schmitz). In 2024 she played the title role in the feature film “Linda lebt” (directed by Amon Bela Bachmann).\n\nShe has also taken part in staged readings such as “Götter sterben” and “Say hi to Abdo” at the LUBIMOVKA Festival in Vienna. At the Akademietheater Regensburg she has appeared in “Woyzeck” (also invited to the JULA Festival in Munich) as well as in “Die Frau von früher” and “Die kleine Hexe”."
     },
     credits: {
       theater: [
@@ -134,10 +134,186 @@ const STUDENTS = [
     email: "salome.ridder@gmx.de"
   },
   { slug: "cedric-corazza", name: "Cedric Corazza", placeholder: true },
-  { slug: "charlotte-friederich", name: "Charlotte Friederich", placeholder: true },
-  { slug: "charlotte-gruenewald", name: "Charlotte Grünewald", placeholder: true },
-  { slug: "linda-lehmann", name: "Linda Lehmann", placeholder: true },
-  { slug: "bianca-pitschedell", name: "Bianca Pitschedell", placeholder: true },
+  {
+    slug: "charlotte-friederich",
+    name: "Charlotte Friederich",
+    pronouns: "sie/ihr",
+    born: "08.10.2002",
+    locations: ["Würzburg", "Berlin", "Regensburg", "Hamburg", "Köln", "München"],
+    playingAge: "16–26",
+    height: "167 cm",
+    hairColor: { de: "braun", en: "brown" },
+    eyeColor: { de: "blau-grün", en: "blue-green" },
+    voiceType: { de: "Alt", en: "Alto" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch (fließend)", "Französisch (gut)"],
+      en: ["German (native)", "English (fluent)", "French (good)"]
+    },
+    skills: {
+      de: ["Tanztheater", "Capoeira", "Yoga", "Akrobatik", "Tango Argentino (Grundkenntnisse)", "Bühnenkampf (Grundkenntnisse)", "Fechten (Grundkenntnisse)"],
+      en: ["Dance theatre", "Capoeira", "Yoga", "Acrobatics", "Argentine tango (basics)", "Stage combat (basics)", "Fencing (basics)"]
+    },
+    auditionRoles: [
+      { role: "Ronald Pofalla", play: "Einige Nachrichten an das All", author: "Wolfram Lotz" },
+      { role: "Ophelia", play: "Hamlet", author: "William Shakespeare" },
+      { role: "Betty", play: "Bettys Sommerfrische", author: "Christopher Durang" },
+      { role: "Elbe", play: "Draußen vor der Tür", author: "Wolfgang Borchert" },
+      { role: "Elisabeth", play: "Maria Stuart", author: "Friedrich von Schiller" }
+    ],
+    auditionSongs: [
+      { title: "Der Tod steht um die Ecke", from: "The Addams Family" },
+      { title: "Mad World", from: "Roland Orzabal" }
+    ],
+    bio: {
+      de: "Charlotte Friederich wuchs in Würzburg auf. Um mit zwei älteren Brüdern mithalten zu können, hat Charlotte früh gelernt, in Piraten- oder Räuber-Rollen zu schlüpfen, Bandenlager zu bauen und gemeinsam die unterschiedlichsten Geschichten entstehen zu lassen. Immer auf der Suche nach Magie. Auch eine gewisse Ensemblefähigkeit wurde hier trainiert.\n\nNach ihrem Abitur fand sie ihren Weg zu der Würzburger „Theaterwerkstatt“. Dort konnte sie sowohl als Schauspielerin, als auch als Regieassistentin ihre Leidenschaft ausleben.\n\nAn der ADK Bayern hat sich Charlotte mit Freude durchs Studium gespielt und war unter anderem in den Produktionen „Die Argonauten“ (Franz Grillparzer), „Kasimir und Karoline“ (Ödön von Horváth) und „Die kleine Hexe“ (Otfried Preußler) zu sehen.",
+      en: "Charlotte Friederich grew up in Würzburg. To keep up with two older brothers, she learned early on to slip into pirate and robber roles, build gang hideouts and invent all kinds of stories together — always in search of magic. A certain sense of ensemble was trained there, too.\n\nAfter finishing school she found her way to the Würzburg “Theaterwerkstatt”, where she lived out her passion both as an actress and as an assistant director.\n\nAt ADK Bavaria, Charlotte has played her way through her studies with joy and has appeared in productions including “Die Argonauten” (Franz Grillparzer), “Kasimir und Karoline” (Ödön von Horváth) and “Die kleine Hexe” (Otfried Preußler)."
+    },
+    credits: {
+      theater: [
+        { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Ophelia", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2025–2027", production: "Die kleine Hexe", author: "Otfried Preußler", role: "Kräuterhexe, Holzsammlerin, Papierblumenmädchen, Vroni", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Die Argonauten", author: "Franz Grillparzer", role: "Medea", director: "Sebastian Godditsch", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Erna", director: "Selina Kretschman", venue: "Akademietheater Regensburg" }
+      ]
+    },
+    social: { instagram: "liebercharlyalslina", filmmakers: "https://www.filmmakers.eu/de/actors/charlotte-friederich" },
+    email: "linifr@t-online.de"
+  },
+  {
+    slug: "charlotte-gruenewald",
+    name: "Charlotte Grünewald",
+    pronouns: "sie/ihr",
+    born: "07.03.2000",
+    locations: ["Berlin", "Leipzig", "Köln", "Mannheim", "Frankfurt", "München", "Hamburg", "Wien"],
+    playingAge: "16–30",
+    height: "1,68 m",
+    hairColor: { de: "hellbraun", en: "light brown" },
+    eyeColor: { de: "grün-braun", en: "green-brown" },
+    voiceType: { de: "Mezzosopran", en: "Mezzo-soprano" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch (fließend)", "Russisch (Grundkenntnisse)"],
+      en: ["German (native)", "English (fluent)", "Russian (basic)"]
+    },
+    skills: {
+      de: ["Cello (gut)", "Klavier (Grundlagen)", "Rhönrad (Grundlagen)", "Hip-Hop", "Bühnenkampf & Fechten (Grundlagen)", "Reiten (Grundlagen)", "Führerschein (B, BE)"],
+      en: ["Cello (good)", "Piano (basics)", "Wheel gymnastics (basics)", "Hip hop", "Stage combat & fencing (basics)", "Horse riding (basics)", "Driving licence (B, BE)"]
+    },
+    auditionRoles: [
+      { role: "Die Exfreundin", play: "Global Wunschkonzert", author: "Laura Naumann" },
+      { role: "Iphigenie", play: "Atropa", author: "Tom Lanoye" },
+      { role: "Orlando", play: "Orlando der Roman", author: "Virginia Woolf" },
+      { role: "Kim Jong Un", play: "Das Knurren der Milchstraße", author: "Bonn Park" },
+      { role: "Abigail", play: "Hexenjagd", author: "Arthur Miller" },
+      { role: "Die Studentin", play: "Die Unterrichtsstunde", author: "Eugène Ionesco" },
+      { role: "Iason", play: "Medea", author: "Euripides" }
+    ],
+    auditionSongs: [
+      { title: "Ballade von der Judenhure Marie Sanders", from: "Bertolt Brecht, Hanns Eisler" },
+      { title: "Gar nichts", from: "A Chorus Line" }
+    ],
+    bio: {
+      de: "Charlotte Grünewald wuchs in einer Musiker*innenfamilie in einem kleinen Dorf in der Nähe von Heidelberg auf. Umgeben von Musik, Kassetten und Büchern wird ihre Liebe fürs Geschichtenerzählen und -hören seit jeher gepflegt. Immer auf der Suche nach weiteren Ausdrucksformen kamen mit der Zeit Cello, Tanz und Schreiben hinzu. Charlottes Neu- und Wissbegierde führten sie über mehrere Auslandsaufenthalte in Hawaii, Ljubljana und einem B.A. in Musik- und Kulturwissenschaft (Thema Postfeministische Selbstermächtigung), hin zum Schauspiel.\n\nSchon als Kind stand sie im Schultheater in mehreren Produktionen in deutscher und englischer Sprache auf der Bühne. Zuletzt war sie Teil der Monologlesung „Wanja ist am Leben“ (Natalia Lizorkina) des Kunstkollektivs MOST (2025) und des Stückes „Shadows of Sanity“ (Christine la Renarde) im Rahmen des EKSTASIS Theaterfestivals (2026). Am Akademietheater Regensburg war sie unter anderem in Inszenierungen von „Woyzeck“ (Georg Büchner), „Die kleine Hexe“ (Otfried Preußler) und „Medea“ (Franz Grillparzer) zu sehen.",
+      en: "Charlotte Grünewald grew up in a family of musicians in a small village near Heidelberg. Surrounded by music, cassette tapes and books, her love of telling and listening to stories has been nurtured ever since. Always in search of further forms of expression, cello, dance and writing were added over time. Charlotte's curiosity and thirst for knowledge led her to acting — via several stays abroad in Hawaii and Ljubljana and a B.A. in musicology and cultural studies (thesis on post-feminist self-empowerment).\n\nAs a child she already stood on stage in several school theatre productions in German and English. Most recently she was part of the monologue reading “Wanja ist am Leben” (Natalia Lizorkina) by the art collective MOST (2025) and the play “Shadows of Sanity” (Christine la Renarde) as part of the EKSTASIS theatre festival (2026). At the Akademietheater Regensburg she has appeared in productions of “Woyzeck” (Georg Büchner), “Die kleine Hexe” (Otfried Preußler) and “Medea” (Franz Grillparzer), among others."
+    },
+    credits: {
+      theater: [
+        { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Hamlet, Güldenstern", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2026", production: "Shadows of Sanity", author: "Christine La Renarde", role: "Mira, Er/Ihm", director: "Christine La Renarde", venue: "EKSTASIS Theaterfestival, Regensburg" },
+        { years: "2025", production: "ME (DEA)", author: "Franz Grillparzer", role: "Kreusa", director: "Meike Groeneveld", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Die kleine Hexe", author: "Otfried Preußler, John von Düffel", role: "Vroni, Kräuterhexe u. a.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Woyzeck", author: "Georg Büchner", role: "Marie", director: "Senya Romin", venue: "Akademietheater Regensburg" }
+      ],
+      other: [
+        { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Götter sterben (szenische Lesung)", author: "Marius Ivaškevičius", role: "Kri", director: "Greta Susceviciute", venue: "LUBIMOWKA Festival Wien" },
+        { years: "2025", production: "Say Hi to Abdo (szenische Lesung)", author: "M. Iljintschik", role: "Laborantin", director: "Senya Romin", venue: "LUBIMOWKA Festival Wien" },
+        { years: "2024", production: "Wanja ist am Leben (szenische Lesung)", author: "Natalia Lizorkina", role: "Alle", director: "Senya Romin", venue: "W1, Kunstkollektiv MOST" }
+      ]
+    },
+    social: { instagram: "charlotte.gruenewald" },
+    email: "lotti.gruenewald@web.de"
+  },
+  {
+    slug: "linda-lehmann",
+    name: "Linda Lehmann",
+    pronouns: "sie/ihr",
+    born: "16.02.2000",
+    locations: ["Berlin", "München", "Stuttgart", "Hamburg", "Schweiz", "Dresden", "Leipzig"],
+    playingAge: "15–28",
+    height: "1,60 m",
+    hairColor: { de: "dunkelbraun", en: "dark brown" },
+    eyeColor: { de: "blau", en: "blue" },
+    voiceType: { de: "Mezzosopran – Sopran", en: "Mezzo-soprano – soprano" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch (gute Kenntnisse)", "Spanisch (Grundkenntnisse)", "Vogtländisch (Heimatdialekt)", "Sächsisch"],
+      en: ["German (native)", "English (good)", "Spanish (basic)", "Vogtlandian (native dialect)", "Saxon"]
+    },
+    skills: {
+      de: ["Ski Alpin", "Bühnenkampf & Fechten (Grundlagen)", "Standardtanz (Grundlagen)", "Reiten", "Zeitgenössischer Tanz", "Tanztheater", "Capoeira", "Eislaufen", "Inlineskaten", "Gitarre (Grundkenntnisse)", "Führerschein (B)"],
+      en: ["Alpine skiing", "Stage combat & fencing (basics)", "Ballroom dance (basics)", "Horse riding", "Contemporary dance", "Dance theatre", "Capoeira", "Ice skating", "Inline skating", "Guitar (basics)", "Driving licence (B)"]
+    },
+    bio: {
+      de: "Linda Lehmann wurde in Reichenbach im Vogtland geboren und wuchs dort auf. Als Kind war ihre größte Leidenschaft, Geschichten zu erzählen und diese zu leben. Schon in der Schule war sie stets Teil der Theatergruppe, des Chors und sang Soli vor Publikum. Schauspielen und Gesang zeigten sich früh als wichtiger und erfüllender Teil ihres Lebens. Bis heute begeistert sie sich für Theater, Musicals und Filme und integriert diese Leidenschaft kreativ in ihren Alltag.\n\n2020 wurde sie durch ein Casting Teil der UFA Talentbase. Sie war Teil der Komparserie verschiedener Filmproduktionen, wie „Make me feel“, und spielte Rollen in kleineren Filmproduktionen wie „Glitzer & Atem“. 2021 bis 2023 war sie in verschiedenen Produktionen des TEATR Studio am Salzufer zu sehen.\n\nSeit September 2023 studiert sie Schauspiel an der Akademie für Darstellende Kunst Bayern in Regensburg. Dort wirkte sie unter anderem in Inszenierungen wie „Kasimir und Karoline“ von Ödön von Horváth, „Die kleine Hexe“ nach Otfried Preußler, „Der Mann aus Podolsk“ von Dmitry Danilov und aktuell in der Abschlussproduktion „Hamlet“ nach William Shakespeare mit.",
+      en: "Linda Lehmann was born and raised in Reichenbach in the Vogtland region. As a child, her greatest passion was telling stories and living them. At school she was always part of the theatre group and the choir, and sang solos in front of an audience. Acting and singing proved early on to be an important and fulfilling part of her life. To this day she is passionate about theatre, musicals and films, and creatively weaves this passion into her everyday life.\n\nIn 2020 she became part of the UFA Talentbase through a casting. She appeared as an extra in various film productions such as “Make me feel” and played roles in smaller film productions such as “Glitzer & Atem”. From 2021 to 2023 she was seen in various productions of the TEATR Studio am Salzufer in Berlin.\n\nSince September 2023 she has been studying acting at the Academy of Performing Arts Bavaria in Regensburg, where she has appeared in productions such as “Kasimir und Karoline” by Ödön von Horváth, “Die kleine Hexe” after Otfried Preußler, “The Man from Podolsk” by Dmitry Danilov and currently the graduation production of “Hamlet” after William Shakespeare."
+    },
+    social: { instagram: "lindajustiinee", filmmakers: "https://www.filmmakers.eu/de/actors/linda-lehmann" },
+    email: "linda.lehmann.acting@gmail.com"
+  },
+  {
+    slug: "bianca-pitschedell",
+    name: "Bianca Pitschedell",
+    pronouns: "sie/ihr",
+    born: "13.09.2002",
+    locations: ["Innsbruck", "München", "Regensburg", "Wien", "Berlin", "Köln"],
+    playingAge: "17–28",
+    height: "1,69 m",
+    hairColor: { de: "blond", en: "blonde" },
+    eyeColor: { de: "blau", en: "blue" },
+    voiceType: { de: "Mezzosopran", en: "Mezzo-soprano" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Italienisch (fließend)", "Englisch (fließend)", "Tirolerisch (Heimatdialekt)"],
+      en: ["German (native)", "Italian (fluent)", "English (fluent)", "Tyrolean (native dialect)"]
+    },
+    skills: {
+      de: ["Ballett", "Jazzdance", "Contemporary", "Gesang", "Trompete", "Gitarre", "Klavier", "Fußball", "Bühnenkampf & Fechten", "Führerschein (B, AM)"],
+      en: ["Ballet", "Jazz dance", "Contemporary", "Singing", "Trumpet", "Guitar", "Piano", "Football", "Stage combat & fencing", "Driving licence (B, AM)"]
+    },
+    auditionRoles: [
+      { role: "Krassiwaja", play: "Wir haben Raketen geangelt", author: "Karen Köhler" },
+      { role: "Dorine", play: "Tartuffe", author: "Molière" },
+      { role: "Tanya", play: "White Lotus", author: "Mike White" },
+      { role: "Mephisto", play: "Faust", author: "Johann Wolfgang von Goethe" },
+      { role: "Andromache", play: "Atropa", author: "Tom Lanoye" }
+    ],
+    auditionSongs: [
+      { title: "Nur ein Schritt", from: "Songs for a New World" },
+      { title: "She Used to Be Mine", from: "Waitress" }
+    ],
+    bio: {
+      de: "Bianca Pitschedell ist in Innsbruck geboren und aufgewachsen. Schon seit der Grundschule steht Bianca regelmäßig auf der Bühne und war immer schon fasziniert von der Welt des Theaters.\n\nIhre Leidenschaft brachte sie auf diverse Bühnen in Tirol: Im Landesjugendtheater Innsbruck durfte sie über 10 Jahre regelmäßig in verschiedenen Produktionen auf der Bühne stehen. Professionelle Bühnenluft durfte sie vor allem am Landestheater Innsbruck schnuppern, wo sie ebenfalls über ca. 10 Jahre in vielen Stücken mitwirkte. Ein einschneidendes Theatererlebnis war für sie vor allem ihr selbstgeschriebenes Stück „Als wir zum ersten Mal...“. Damit durfte sie durch Tirol touren und es in verschiedenen Klassen und am Tiroler Landestheater präsentieren.\n\nIn Regensburg konnte man Bianca im Akademietheater der ADK Bayern als Else in „Else (Someone)“ und als Gora und Kreon in „Medea“ erleben. Außerdem organisierte sie dort im Oktober 2024 ein Benefizkonzert für den VKKK Ostbayern. Am Staatstheater Regensburg gestaltete Bianca das Velospezial „Abgewogen“ mit. Die Freunde der ADK Bayern haben Bianca 2025 den Förderpreis für außerordentliche künstlerische und soziale Leistungen verliehen.\n\nNeben der Schauspielerei nimmt Bianca seit ihrem 14. Lebensjahr Gesangsunterricht, tanzt seit 7 Jahren Ballett, Jazz und Lyrical Dance und spielt Flügelhorn.",
+      en: "Bianca Pitschedell was born and raised in Innsbruck. She has been on stage regularly since primary school and has always been fascinated by the world of theatre.\n\nHer passion took her to various stages across Tyrol: at the Landesjugendtheater Innsbruck she performed regularly in a wide range of productions for more than ten years, and she got her first taste of professional theatre above all at the Landestheater Innsbruck, where she likewise appeared in many plays over a period of about ten years. A formative theatre experience was her self-written play “Als wir zum ersten Mal...”, with which she toured Tyrol, presenting it in schools and at the Tiroler Landestheater.\n\nIn Regensburg, Bianca could be seen at the Akademietheater of ADK Bavaria as Else in “Else (Someone)” and as Gora and Creon in “Medea”. In October 2024 she also organised a benefit concert there for the VKKK Ostbayern. At the Staatstheater Regensburg she co-created the cycling special “Abgewogen”. In 2025 the Friends of ADK Bavaria awarded Bianca their prize for exceptional artistic and social achievement.\n\nAlongside acting, Bianca has been taking singing lessons since the age of 14, has been dancing ballet, jazz and lyrical dance for seven years, and plays the flugelhorn."
+    },
+    credits: {
+      theater: [
+        { years: "2026", production: "Hamlet", author: "William Shakespeare", role: "Gertrud", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2026", production: "The Rocky Horror Show", author: "Richard O'Brien", role: "Phantom", director: "Paul Spittler", venue: "Tiroler Landestheater" },
+        { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Die kleine Hexe", author: "Otfried Preußler", role: "Muhme Rumpumpel, Schützin, Schneemann, Holzsammlerin, Marktfrau", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Medea", author: "Franz Grillparzer", role: "Kreon, Gora", director: "Meike Groeneveld", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Else (Someone)", author: "", role: "Else", director: "Melvin Vignano", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Abgewogen (Velospezial)", author: "", role: "", director: "Natascha Weigang", venue: "Staatstheater Regensburg" },
+        { years: "2022", production: "Als wir zum ersten Mal…", author: "Bianca Pitschedell, Alexandra Leonie Kronberger", role: "Ella", director: "Alexandra Leonie Kronberger", venue: "Haus der Musik Innsbruck" },
+        { years: "2021", production: "Blues Brothers. Im Auftrag des Herrn", author: "", role: "", director: "Susi Weber", venue: "Tiroler Landestheater" },
+        { years: "2014–2022", production: "Diverse Musicalproduktionen", author: "", role: "", director: "", venue: "Landesjugendtheater Innsbruck" }
+      ],
+      film: [
+        { years: "2024", production: "Elfi (Spielfilm)", role: "Marianne", director: "Anita Lackenberger", venue: "" },
+        { years: "2023", production: "Getting Hit by Maturity in the Age of #whatthefuckshallwedowithourlives (Kurzfilm)", role: "Mutter", director: "Alexandra Leonie Kronberger", venue: "" }
+      ]
+    },
+    social: { instagram: "bianca_.p" },
+    email: "b.pitschedell@gmail.com"
+  },
   { slug: "karl-georg-roessler", name: "Karl Georg Rößler", placeholder: true },
   {
     slug: "michelle-thielsch",
@@ -209,5 +385,12 @@ const STUDENTS = [
     social: { instagram: "michelli.lie", filmmakers: "https://www.filmmakers.eu/de/actors/michelle-thielsch" },
     email: "michelle.thielsch@gmx.de"
   },
-  { slug: "rosalie-zwenzner", name: "Rosalie Zwenzner", placeholder: true }
+  {
+    slug: "rosalie-zwenzner",
+    name: "Rosalie Zwenzner",
+    bio: {
+      de: "Rosalie Daria Zwenzner wurde am 23.12.1999 in München geboren und ist dort aufgewachsen. Seit ihrer Kindheit hat sie eine große Verbundenheit zu Musik, Tanz und Theater. Sie spielte im Orchester, sang im Chor, nahm zehn Jahre Stepptanzunterricht und begann mit 14 in einer Musical-Gruppe zu spielen und zu singen.\n\nNach Erfahrungen auf verschiedenen Bühnen, wie 2023 in den Münchner Kammerspielen bei „A scheene Leich“ (R: Ruedi Häusermann) und dem Theater Grenzenlos, sowie einigen Inszenierungen auf der Studiobühne München begann sie ihr Schauspielstudium an der ADK Bayern. Nach einem Gastengagement an der Staatsoper Stuttgart in der Produktion „hässlich as fuck“ verbringt sie ihr viertes Studienjahr nun im Schauspielstudio am Theater Chemnitz, wo sie unter anderem in der Studioproduktion „Die Reise von der Erde zum Mond“ nach Jules Verne (R: Tilo Krügel) zu sehen ist.\n\nNeben dem Studium ist sie ehrenamtlich im jungen ensemble-netzwerk und bei Theapolis aktiv. Sie singt, tanzt und liest gerne, liebt die Natur und Tiere.",
+      en: "Rosalie Daria Zwenzner was born in Munich on 23 December 1999 and grew up there. Since childhood she has felt a deep connection to music, dance and theatre. She played in an orchestra, sang in a choir, took tap dance lessons for ten years and began performing and singing in a musical theatre group at the age of 14.\n\nAfter experiences on various stages — such as “A scheene Leich” at the Münchner Kammerspiele in 2023 (directed by Ruedi Häusermann) and Theater Grenzenlos, as well as several productions at the Studiobühne München — she began her acting studies at ADK Bavaria. Following a guest engagement at the Staatsoper Stuttgart in the production “hässlich as fuck”, she is now spending her fourth year of study at the drama studio of Theater Chemnitz, where she can be seen in the studio production “The Journey from the Earth to the Moon” after Jules Verne (directed by Tilo Krügel), among others.\n\nAlongside her studies she volunteers with junges ensemble-netzwerk and Theapolis. She loves singing, dancing and reading, as well as nature and animals."
+    }
+  }
 ];

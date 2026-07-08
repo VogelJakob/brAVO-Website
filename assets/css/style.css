@@ -206,6 +206,25 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   to { transform: translateX(-50%); }
 }
 
+/* ---------- Gruppenfoto-Band (Startseite) ---------- */
+
+.group-band {
+  padding: 3rem var(--pad) 0;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.group-band figure {
+  margin: 0;
+  border: var(--border);
+  box-shadow: var(--shadow-acc);
+  background: var(--paper);
+}
+.group-band img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* ---------- Ensemble-Grid ---------- */
 
 .ensemble {

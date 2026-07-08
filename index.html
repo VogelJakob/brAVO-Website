@@ -59,6 +59,14 @@
       </div>
     </section>
 
+    <!-- Gruppenfoto-Band: blendet sich selbst aus, wenn assets/images/group.jpg fehlt -->
+    <section class="group-band" id="group-band">
+      <figure>
+        <img src="assets/images/group.jpg" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt" loading="lazy"
+             onerror="document.getElementById('group-band').style.display='none'">
+      </figure>
+    </section>
+
     <section class="ensemble">
       <h2 data-i18n="ensemble">Ensemble</h2>
       <div class="grid" id="ensemble-grid">

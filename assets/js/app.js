@@ -50,6 +50,7 @@
       videoFallback: "Ihr Browser unterstützt das Video-Element nicht.",
       audioFallback: "Ihr Browser unterstützt das Audio-Element nicht.",
       portraitAlt: "Portrait von",
+      groupAlt: "Gruppenfoto des Abschlussjahrgangs 2027",
       skipLink: "Zum Inhalt springen",
       footerNote: "Akademie für Darstellende Kunst Bayern · Abschlussjahrgang 2027",
       langToggle: "EN",
@@ -98,6 +99,7 @@
       videoFallback: "Your browser does not support the video element.",
       audioFallback: "Your browser does not support the audio element.",
       portraitAlt: "Portrait of",
+      groupAlt: "Group photo of the graduating class of 2027",
       skipLink: "Skip to content",
       footerNote: "Academy of Performing Arts Bavaria · Graduating class of 2027",
       langToggle: "DE",
@@ -180,6 +182,9 @@
       var self = this;
       document.querySelectorAll("[data-i18n]").forEach(function (el) {
         el.textContent = self.t(el.getAttribute("data-i18n"));
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+        el.setAttribute("alt", self.t(el.getAttribute("data-i18n-alt")));
       });
       var toggle = document.getElementById("lang-toggle");
       if (toggle) {
