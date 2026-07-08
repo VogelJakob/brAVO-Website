@@ -12,7 +12,11 @@
   var slug = main.getAttribute("data-slug");
 
   /* Existenz-Checks nur einmal ausführen und für Sprach-Rerenders cachen. */
-  var media = { video: null, audio: null, checked: false };
+  var media = { video: null, audio: null, audioReels: null, checked: false };
+
+  function audioReelPath(file) {
+    return ADK.root + "assets/audio/" + file;
+  }
 
   function esc(s) { return ADK.esc(s); }
   function t(k) { return ADK.t(k); }
@@ -154,13 +158,39 @@
     } else if (media.checked) {
       out += section("showreel", '<p class="muted">' + esc(t("showreelSoon")) + "</p>");
     }
-    if (media.audio) {
-      out += section("audioReel",
-        '<audio class="reel-audio" controls preload="none" src="' + esc(ADK.mediaPath("audio", slug)) + '">' +
-          esc(t("audioFallback")) +
-        "</audio>");
-    }
+    out += audioHtml(s);
     return out;
+  }
+
+  /*
+   * Hörproben: entweder mehrere beschriftete Dateien (s.audioReels, nur
+   * vorhandene Dateien werden gezeigt) oder die Einzeldatei-Konvention
+   * {slug}.mp3. Beides kombinierbar; Einzeldatei erscheint zuerst.
+   */
+  function audioHtml(s) {
+    var items = "";
+    if (media.audio) {
+      items +=
+        '<div class="audio-item">' +
+          '<audio class="reel-audio" controls preload="none" src="' + esc(ADK.mediaPath("audio", slug)) + '">' +
+            esc(t("audioFallback")) +
+          "</audio>" +
+        "</div>";
+    }
+    if (has(s.audioReels) && media.audioReels) {
+      s.audioReels.forEach(function (reel, i) {
+        if (!media.audioReels[i]) return;
+        items +=
+          '<div class="audio-item">' +
+            '<p class="audio-label">' + esc(pick(reel.label)) + "</p>" +
+            '<audio class="reel-audio" controls preload="none" src="' + esc(audioReelPath(reel.file)) + '">' +
+              esc(t("audioFallback")) +
+            "</audio>" +
+          "</div>";
+      });
+    }
+    if (!items) return "";
+    return section("audioReel", '<div class="audio-list">' + items + "</div>");
   }
 
   function contactHtml(s) {
@@ -171,6 +201,10 @@
     if (s.social && has(s.social.instagram)) {
       links.push('<a class="contact-link" href="https://www.instagram.com/' + esc(s.social.instagram) +
         '" target="_blank" rel="noopener noreferrer">Instagram: @' + esc(s.social.instagram) + "</a>");
+    }
+    if (s.social && has(s.social.filmmakers)) {
+      links.push('<a class="contact-link" href="' + esc(s.social.filmmakers) +
+        '" target="_blank" rel="noopener noreferrer">Filmmakers</a>');
     }
     if (!links.length) return "";
     return section("contact", '<div class="contact-links">' + links.join("") + "</div>");
@@ -218,12 +252,18 @@
   }
 
   function checkMedia() {
+    var s = ADK.findStudent(slug);
+    var reels = (s && s.audioReels) || [];
     Promise.all([
       ADK.mediaExists(ADK.mediaPath("video", slug)),
-      ADK.mediaExists(ADK.mediaPath("audio", slug))
+      ADK.mediaExists(ADK.mediaPath("audio", slug)),
+      Promise.all(reels.map(function (reel) {
+        return ADK.mediaExists(audioReelPath(reel.file));
+      }))
     ]).then(function (results) {
       media.video = results[0];
       media.audio = results[1];
+      media.audioReels = results[2];
       media.checked = true;
       render();
     });

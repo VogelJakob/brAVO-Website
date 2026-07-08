@@ -449,6 +449,20 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   width: 100%;
 }
 
+/* Hörproben-Liste (mehrere beschriftete Audio-Dateien) */
+.audio-list {
+  display: grid;
+  gap: 1.25rem;
+}
+.audio-label {
+  margin: 0 0 0.35rem;
+  color: var(--acc);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
 /* Kontakt */
 .contact-links {
   display: flex;

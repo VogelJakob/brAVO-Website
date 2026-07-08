@@ -139,6 +139,75 @@ const STUDENTS = [
   { slug: "linda-lehmann", name: "Linda Lehmann", placeholder: true },
   { slug: "bianca-pitschedell", name: "Bianca Pitschedell", placeholder: true },
   { slug: "karl-georg-roessler", name: "Karl Georg Rößler", placeholder: true },
-  { slug: "michelle-thielsch", name: "Michelle Thielsch", placeholder: true },
+  {
+    slug: "michelle-thielsch",
+    name: "Michelle Thielsch",
+    pronouns: "sie/ihr",
+    born: "21.11.1999",
+    locations: ["Regensburg", "München", "Berlin", "Leipzig", "Kiel", "Görlitz", "Freiburg i. Br.", "Bern (CH)"],
+    playingAge: "16–30",
+    height: "157 cm",
+    hairColor: { de: "braun", en: "brown" },
+    eyeColor: { de: "graugrün", en: "grey-green" },
+    voiceType: { de: "Mezzosopran (Range: e bis c''', Belt: e'')", en: "Mezzo-soprano (range: E to C''', belt: E'')" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch (fließend)", "Spanisch (gut)", "Französisch (Grundkenntnisse)", "Sächsisch (Heimatdialekt)"],
+      en: ["German (native)", "English (fluent)", "Spanish (good)", "French (basic)", "Saxon (native dialect)"]
+    },
+    skills: {
+      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Tanztheater", "Argentinischer Tango", "Bühnenkampf und Fechten", "Yoga", "Bouldern", "Schach"],
+      en: ["DJing", "Piano", "Rap", "Jazz dance", "Dance theatre", "Argentine tango", "Stage combat and fencing", "Yoga", "Bouldering", "Chess"]
+    },
+    auditionRoles: [
+      { role: "Johanna", play: "Die heilige Johanna der Schlachthöfe", author: "Bertolt Brecht" },
+      { role: "Giraffe / Judy", play: "Traurig und fröhlich ist das Giraffenleben", author: "Tiago Rodrigues" },
+      { role: "", play: "Blutbuch", author: "Kim de l'Horizon" },
+      { role: "Medea", play: "Medea", author: "Euripides" },
+      { role: "Lysistrate", play: "Lysistrate", author: "Aristophanes" },
+      { role: "Sie", play: "Und jetzt: Die Welt", author: "Sibylle Berg" },
+      { role: "Romeo", play: "Romeo und Julia", author: "William Shakespeare" }
+    ],
+    auditionSongs: [
+      { title: "Lesbische Lovestory", from: "The Wild Party" },
+      { title: "Burn", from: "Hamilton" }
+    ],
+    bio: {
+      de: "1999 in der ostsächsischen Provinz geboren und aufgewachsen. Seit 2005 Teil der Kindertheatergruppe „Die Erlichthofgaukler e.V.“. Gesangs- und Klavierunterricht während der Schulzeit. Nach dem Abitur kurzer Abstecher nach Costa Rica für einen Freiwilligendienst, dann Umzug nach Freiburg im Breisgau. Abgetaucht in der studentischen Theaterszene und dort ein Zuhause gefunden. Studium der Medienkulturwissenschaften und Germanistik angefangen und erfolgreich abgebrochen. Was bleibt, ist die Begeisterung für Mittelhochdeutsch und Popkultur.\n\nSeit 2023 Schauspielstudium an der ADK Bayern. Nebenher als DJ h2oMichi aktiv. Ihr Herz schlägt für Queerfeminismus und Puppenspiel.\n\nIm Akademietheater Regensburg wirkte sie u. a. in „Die kleine Hexe“ nach Otfried Preußler, in „Leonce und Lena“ nach Georg Büchner und in „Die Frau von früher“ von Roland Schimmelpfennig mit. Im Mai 2026 spielte sie im Kammerspiel „Shadows of Sanity“ von Christine La Renarde im Rahmen des EKSTASIS Theaterfestivals in Regensburg. Sie ist 2024 im Kurzfilm „Die Einsiedlerinnen“ von Lya Spiegel und 2026 im Film „Rain Check“ (tbp) von Ivy Lißsack zu sehen.",
+      en: "Born in 1999 and raised in the provinces of eastern Saxony. A member of the children's theatre group “Die Erlichthofgaukler e.V.” since 2005. Singing and piano lessons throughout her school years. After finishing school, a brief detour to Costa Rica for a volunteer service, then a move to Freiburg im Breisgau, where she dived into the student theatre scene and found a home. Began a degree in media culture studies and German philology — and successfully dropped out. What remains is her enthusiasm for Middle High German and pop culture.\n\nStudying acting at ADK Bavaria since 2023. Also active as DJ h2oMichi. Her heart beats for queer feminism and puppetry.\n\nAt the Akademietheater Regensburg she appeared in “Die kleine Hexe” after Otfried Preußler, “Leonce und Lena” after Georg Büchner and “Die Frau von früher” by Roland Schimmelpfennig, among others. In May 2026 she performed in the chamber play “Shadows of Sanity” by Christine La Renarde as part of the EKSTASIS theatre festival in Regensburg. She appears in the 2024 short film “Die Einsiedlerinnen” by Lya Spiegel and in the 2026 feature “Rain Check” (tbp) by Ivy Lißsack."
+    },
+    credits: {
+      theater: [
+        { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Horatio, Chor", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2026", production: "Shadows of Sanity", author: "Christine La Renarde", role: "Mira", director: "Christine La Renarde", venue: "EKSTASIS Theaterfestival, Regensburg" },
+        { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
+        { years: "2025–2027", production: "Die Kleine Hexe", author: "Otfried Preußler, John von Düffel", role: "Kleine Hexe", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Die Frau von Früher", author: "Roland Schimmelpfennig", role: "Romy Vogtländer", director: "Ole Heimerdinger", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Leonce und Lena", author: "nach Georg Büchner", role: "Valerie", director: "Alexander Herger", venue: "Akademietheater Regensburg" },
+        { years: "2021", production: "Frühlings Erwachen – Eine Adaption nach Ihrer Wahl", author: "nach Frank Wedekind", role: "Wendla", director: "Robin Haensse, Maya Rollberger, Bernhard Ruchti", venue: "FIST* Freiburg" }
+      ],
+      film: [
+        { years: "2026", production: "Rain Check (Langfilm, tbp)", role: "Mau-Mau", director: "Ivy Lißsack", venue: "" },
+        { years: "2024", production: "Die Einsiedlerinnen (Kurzfilm)", role: "Jewel", director: "Lya Spiegel", venue: "" }
+      ],
+      other: [
+        { years: "2025–2026", production: "Mediensprechen", role: "", director: "", venue: "Benedikt Reidenbach" },
+        { years: "2023–2027", production: "Schwerpunkt Gesang im Studium – Pop, Musical", role: "", director: "", venue: "Valentina Piegger" },
+        { years: "2021–2023", production: "Studium der Medienkulturwissenschaft und Germanistik", role: "", director: "", venue: "Albert-Ludwigs-Universität Freiburg" },
+        { years: "2014–2018", production: "Gesangsunterricht", role: "", director: "", venue: "Kreismusikschule Dreiländereck Niesky" }
+      ]
+    },
+    /*
+     * Mehrere beschriftete Hörproben (Dateien liegen in assets/audio/, nur
+     * Dateiname eintragen). Zusätzlich zur Konvention {slug}.mp3 nutzbar.
+     */
+    audioReels: [
+      { label: { de: "Sachtext: Der Nasenbär", en: "Narration: The coati" }, file: "michelle-thielsch-sachtext-nasenbaer.mp3" },
+      { label: { de: "Voice Acting: Heldin", en: "Voice acting: Heroine" }, file: "michelle-thielsch-voiceacting-heldin.mp3" },
+      { label: { de: "Voice Acting: Kind", en: "Voice acting: Child" }, file: "michelle-thielsch-voiceacting-kind.mp3" },
+      { label: { de: "Voice Acting: Zeichentrick", en: "Voice acting: Cartoon" }, file: "michelle-thielsch-voiceacting-zeichentrick.mp3" }
+    ],
+    social: { instagram: "michelli.lie", filmmakers: "https://www.filmmakers.eu/de/actors/michelle-thielsch" },
+    email: "michelle.thielsch@gmx.de"
+  },
   { slug: "rosalie-zwenzner", name: "Rosalie Zwenzner", placeholder: true }
 ];
