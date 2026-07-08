@@ -137,7 +137,58 @@ const STUDENTS = [
     social: { instagram: "salomeridder" },
     email: "salome.ridder@gmx.de"
   },
-  { slug: "cedric-corazza", name: "Cedric Corazza", placeholder: true },
+  {
+    slug: "cedric-corazza",
+    name: "Cedric Corazza",
+    pronouns: "er/ihm",
+    born: "21.10.2003",
+    locations: ["Chemnitz", "Regensburg", "Berlin", "Hamburg", "München", "Leipzig", "Görlitz"],
+    playingAge: "18–28",
+    height: "181 cm",
+    hairColor: { de: "dunkelblond", en: "dark blonde" },
+    eyeColor: { de: "blaugrau", en: "blue-grey" },
+    voiceType: { de: "Bariton", en: "Baritone" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch (fließend)", "Spanisch (Grundkenntnisse)", "Erzgebirgisch (Heimatdialekt)"],
+      en: ["German (native)", "English (fluent)", "Spanish (basic)", "Erzgebirge dialect (native dialect)"]
+    },
+    skills: {
+      de: ["Zauberkunst", "Tanz (Tanztheater, Standardtanz, Argentinischer Tango)", "Bühnenkampf & Bühnenfechten", "Tischtennis", "Volleyball", "Führerschein (A1, B)"],
+      en: ["Magic", "Dance (dance theatre, ballroom, Argentine tango)", "Stage combat & stage fencing", "Table tennis", "Volleyball", "Driving licence (A1, B)"]
+    },
+    auditionRoles: [
+      { role: "Alejandra", play: "17 Skizzen aus der Dunkelheit", author: "Roland Schimmelpfennig" },
+      { role: "Romeo", play: "Romeo und Julia", author: "William Shakespeare" },
+      { role: "Kostja", play: "Die Möwe", author: "Anton Tschechow" },
+      { role: "Rotpeter", play: "Ein Bericht für eine Akademie", author: "Franz Kafka" },
+      { role: "Beckmann", play: "Draußen vor der Tür", author: "Wolfgang Borchert" }
+    ],
+    auditionSongs: [
+      { title: "Der perfekte Moment… wird heut verpennt", from: "Max Raabe" },
+      { title: "Another Love", from: "Tom Odell" }
+    ],
+    bio: {
+      de: "Cedric Corazza, geboren 2003 in Stollberg, entdeckte früh seine Bühne – zunächst mit Zaubertricks seines Großvaters im Wohnzimmer, später im Kinder- und Jugendtheater „Burattino“. Weitere prägende Stationen waren die Theatergruppen „Spielfreu(n)de“ und „Limited Edition“.\n\nParallel dazu trat Cedric regelmäßig als Zauberkünstler bei Hochzeiten, Firmenevents und Benefizveranstaltungen auf. Mit 15 Jahren wurde er bei den Deutschen Jugendmeisterschaften der Zauberkunst mit dem 3. Platz in der Sparte „Allgemeine Magie“ ausgezeichnet.\n\nSeit 2023 studiert er Schauspiel und war am Akademietheater Regensburg unter anderem als Frank in „Die Frau von früher“ (R: Ole Heimerdinger) und Valerio in „Leonce und Lena“ (R: Alexandra Caroline Herger) zu sehen. Sein letztes Studienjahr absolviert Cedric am Schauspielstudio Chemnitz, wo er derzeit in der Studioproduktion „Die Reise von der Erde zum Mond“ (R: Tilo Krügel) mitwirkt.\n\nAbseits der Bühne bringt er Erfahrung in Gastronomie und Jugendarbeit mit und findet seinen Ausgleich vor allem beim Sport, Tanzen oder dann doch wieder mit einem Kartenspiel in der Hand.",
+      en: "Cedric Corazza, born in Stollberg in 2003, discovered his stage early on — first with his grandfather's magic tricks in the living room, later at the children's and youth theatre “Burattino”. Further formative stations were the theatre groups “Spielfreu(n)de” and “Limited Edition”.\n\nAlongside this, Cedric performed regularly as a magician at weddings, corporate events and charity functions. At the age of 15 he was awarded third place in the category “General Magic” at the German Youth Championships of Magic.\n\nHe has been studying acting since 2023 and has appeared at the Akademietheater Regensburg as Frank in “Die Frau von früher” (dir.: Ole Heimerdinger) and as Valerio in “Leonce und Lena” (dir.: Alexandra Caroline Herger), among others. Cedric is completing his final year of studies at the Schauspielstudio Chemnitz, where he is currently part of the studio production “Die Reise von der Erde zum Mond” (dir.: Tilo Krügel).\n\nOff stage, he brings experience in gastronomy and youth work and finds his balance above all in sport, dancing — or, once again, with a deck of cards in his hand."
+    },
+    credits: {
+      theater: [
+        { years: "2026", production: "Die Reise von der Erde zum Mond", author: "Jules Verne", role: "Michel Ardán", director: "Tilo Krügel", venue: "Theater Chemnitz" },
+        { years: "2025–2027", production: "Die Kleine Hexe", author: "Otfried Preußler", role: "Billiger Jakob, Thomas u. w.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Die Frau von früher", author: "Roland Schimmelpfennig", role: "Frank", director: "Ole Heimerdinger", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Leonce und Lena", author: "Georg Büchner", role: "Valerio", director: "Alexandra Caroline Herger", venue: "Akademietheater Regensburg" },
+        { years: "2023–2024", production: "Aufguss", author: "René Heinersdorff", role: "Alain Steinhammer", director: "Isabelle Weh", venue: "Fritz Theater Chemnitz" }
+      ],
+      film: [
+        { years: "2022", production: "ANDERS", author: "Enrique Thum", role: "Leon", director: "Enrique Thum", venue: "" }
+      ],
+      other: [
+        { years: "2022", production: "Blue Coats (Imagefilm)", role: "Alexander", director: "Andre Koschmieder", venue: "" }
+      ]
+    },
+    social: { instagram: "cedric.corazza" },
+    email: "cedric.corazza@web.de"
+  },
   {
     slug: "charlotte-friederich",
     name: "Charlotte Friederich",
