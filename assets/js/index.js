@@ -11,21 +11,29 @@
       .join("");
   }
 
+  /* Zweistellige Plakat-Nummerierung (01–10) der Ensemble-Karten. */
+  function pad2(n) {
+    return n < 10 ? "0" + n : String(n);
+  }
+
   function render() {
     var grid = document.getElementById("ensemble-grid");
     if (!grid || typeof STUDENTS === "undefined") return;
 
-    var html = STUDENTS.map(function (s) {
+    var html = STUDENTS.map(function (s, i) {
       var img = ADK.mediaPath("image", s.slug);
       return (
         '<a class="card" href="students/' + ADK.esc(s.slug) + '.html">' +
+          '<span class="card-idx" aria-hidden="true">' + pad2(i + 1) + "</span>" +
           '<div class="card-media">' +
             '<img src="' + ADK.esc(img) + '" alt="' + ADK.esc(ADK.t("portraitAlt") + " " + s.name) + '" loading="lazy" ' +
               'onerror="this.closest(\'.card-media\').classList.add(\'no-img\')">' +
             '<div class="media-fallback" aria-hidden="true">' + ADK.esc(initials(s.name)) + "</div>" +
           "</div>" +
-          '<span class="card-name">' + ADK.esc(s.name) + "</span>" +
-          '<span class="card-cta">' + ADK.esc(ADK.t("toProfile")) + "</span>" +
+          '<div class="card-body">' +
+            '<span class="card-name">' + ADK.esc(s.name) + "</span>" +
+            '<span class="card-cta">' + ADK.esc(ADK.t("toProfile")) + "</span>" +
+          "</div>" +
         "</a>"
       );
     }).join("");

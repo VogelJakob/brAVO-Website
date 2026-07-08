@@ -10,8 +10,10 @@
     de: {
       siteName: "ADK Bayern · Jahrgang 2027",
       heroKicker: "Akademie für Darstellende Kunst Bayern",
-      heroTitle: "Abschlussjahrgang 2027",
+      heroTitle1: "Jahrgang",
+      heroTitle2: "2027",
       heroText: "Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.",
+      marquee: "Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·",
       ensemble: "Ensemble",
       toProfile: "Zum Profil",
       toOverview: "Zur Übersicht",
@@ -56,8 +58,10 @@
     en: {
       siteName: "ADK Bavaria · Class of 2027",
       heroKicker: "Academy of Performing Arts Bavaria",
-      heroTitle: "Graduating Class of 2027",
+      heroTitle1: "Class of",
+      heroTitle2: "2027",
       heroText: "Ten acting students introduce themselves – with profile, résumé and showreel. Available for engagements in theatre, film and television from summer 2027.",
+      marquee: "Theatre · Film · Television · Available for engagements from summer 2027 · Theatre · Film · Television · Available for engagements from summer 2027 ·",
       ensemble: "Ensemble",
       toProfile: "View profile",
       toOverview: "Back to overview",
