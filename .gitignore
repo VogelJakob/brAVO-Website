@@ -1,0 +1,15 @@
+# Lokale Rohdaten (Fotos, Videos, Vita-Texte) – bleiben bewusst außerhalb von Git/GitHub
+AVO_Website_Dateien/
+
+# Medien-Dateien vorerst nur lokal nutzen, nicht committen.
+# (Die Ordnerstruktur bleibt über die .gitkeep-Dateien erhalten.)
+# Zum späteren Veröffentlichen einzelner Dateien: Zeile entfernen
+# oder gezielt mit `git add -f <datei>` hinzufügen.
+assets/images/students/*.jpg
+assets/images/group.jpg
+assets/videos/*.mp4
+assets/audio/*.mp3
+
+# Betriebssystem-Dateien
+.DS_Store
+Thumbs.db
