@@ -39,7 +39,7 @@
   <header class="site-header">
     <a class="brand" href="index.html">ADK Bayern <span>Jahrgang 2027</span></a>
     <nav>
-      <a href="#ensemble-grid" data-i18n="ensemble">Ensemble</a>
+      <a href="#ensemble" data-i18n="ensemble">Ensemble</a>
       <a href="#auffuehrungen" data-i18n="productions">Aufführungen</a>
       <button id="lang-toggle" type="button" aria-label="Switch language to English">EN</button>
     </nav>
@@ -60,15 +60,23 @@
                onerror="document.getElementById('hero-photo').style.display='none'">
         </figure>
       </div>
+      <!-- 8 identische Kopien: genug Breite, damit auch bei stark
+           herausgezoomten/sehr breiten Viewports keine Lücke sichtbar wird -->
       <div class="marquee" aria-hidden="true">
         <div class="marquee-in">
+          <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
+          <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
+          <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
+          <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
+          <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
+          <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
           <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
           <span data-i18n="marquee">Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·</span>
         </div>
       </div>
     </section>
 
-    <section class="ensemble">
+    <section class="ensemble" id="ensemble">
       <h2 data-i18n="ensemble">Ensemble</h2>
       <div class="grid" id="ensemble-grid">
         <noscript><p data-i18n="noscript">Bitte aktivieren Sie JavaScript, um die Profile anzuzeigen.</p></noscript>

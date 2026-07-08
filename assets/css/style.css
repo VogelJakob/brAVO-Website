@@ -163,14 +163,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   align-items: end;
 }
 
-/* Gruppenfoto neben dem Titel (Hochformat) */
+/* Gruppenfoto neben dem Titel */
 .hero-photo {
   margin: 0;
   border: var(--border);
   box-shadow: var(--shadow-acc);
   background: var(--paper);
   justify-self: center;
-  max-width: 26rem;
+  width: 100%;
+  max-width: 34rem;
 }
 .hero-photo img {
   display: block;
@@ -227,8 +228,10 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   padding: 0.55rem 0 0.55rem 0.5rem;
   white-space: nowrap;
 }
+/* Verschiebt um genau 1/8 (= eine der 8 identischen Text-Kopien) und
+   springt dann nahtlos zurück – Tempo unabhängig von der Kopienzahl. */
 @keyframes marquee {
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-12.5%); }
 }
 
 /* ---------- Gruppenfoto-Band (Startseite) ---------- */
@@ -304,6 +307,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   grid-template-columns: repeat(2, 1fr);
   gap: 1.4rem;
 }
+/* Versetztes Plakat-Raster auch zweispaltig, damit sich der Look
+   beim Wechsel der Spaltenzahl (Zoom/Fenstergröße) nicht ändert */
+.grid .card:nth-child(2n) { margin-top: 2.6rem; }
 
 .card {
   position: relative;
@@ -372,6 +378,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   font-size: 1.05rem;
   line-height: 1.12;
   letter-spacing: 0.02em;
+  /* Platz für zwei Zeilen reservieren: alle Kacheln behalten dieselbe
+     Höhe/Proportion, egal ob ein Name umbricht oder nicht */
+  min-height: 2.24em;
   transition: color 0.15s ease;
 }
 .card:hover .card-name { color: var(--acc); }
@@ -533,51 +542,61 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   width: 100%;
 }
 
-/* Foto-Galerie im Profil (Konvention: {slug}-2.jpg, {slug}-3.jpg, …) */
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.25rem;
+/* Weitere Fotos ({slug}-2.jpg, …) als sichtbare Vorschauen direkt beim Portrait */
+.head-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 1.6rem;
 }
-.photo-grid figure {
-  margin: 0;
-  border: var(--border);
-  background: #e1e1da;
-  box-shadow: 5px 5px 0 var(--ink);
-}
-.photo-grid img {
+.head-thumbs img {
   display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 5.5rem;
   aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
   cursor: zoom-in;
+  transition: translate 0.15s ease, box-shadow 0.15s ease;
 }
-@media (min-width: 640px) {
-  .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+.head-thumbs img:hover,
+.head-thumbs img:focus-visible {
+  translate: -2px -2px;
+  box-shadow: 6px 6px 0 var(--acc);
 }
 
-/* Lightbox: Klick auf ein Foto zeigt es bildschirmfüllend */
+/*
+ * Lightbox: Klick auf ein Foto zeigt es bildschirmfüllend.
+ * Klick auf das große Bild zoomt auf Originalgröße (Overlay wird scrollbar),
+ * Pfeile/Pfeiltasten blättern durch die Bilder derselben Person.
+ */
 .lightbox {
   position: fixed;
   inset: 0;
   z-index: 100;
   background: rgba(17, 17, 17, 0.92);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: auto;
   padding: 1.5rem;
   cursor: zoom-out;
 }
 .lightbox img {
+  margin: auto;
   max-width: 100%;
   max-height: 100%;
   border: var(--border);
   background: var(--paper);
   box-shadow: 9px 9px 0 var(--acc);
+  cursor: zoom-in;
 }
+.lightbox.zoomed img {
+  max-width: none;
+  max-height: none;
+  cursor: zoom-out;
+}
+/* Bedienelemente fixed, damit sie beim Scrollen im Zoom stehen bleiben */
 .lightbox-close {
-  position: absolute;
+  position: fixed;
   top: 1rem;
   right: 1rem;
   font-family: var(--font-body);
@@ -592,6 +611,33 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   cursor: pointer;
 }
 .lightbox-close:hover { background: var(--paper); }
+.lightbox-nav {
+  position: fixed;
+  top: 50%;
+  translate: 0 -50%;
+  font-family: var(--font-head);
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--bg);
+  border: var(--border);
+  padding: 0.5rem 0.85rem;
+  cursor: pointer;
+}
+.lightbox-nav:hover { background: var(--paper); }
+.lightbox-prev { left: 1rem; }
+.lightbox-next { right: 1rem; }
+.lightbox-count {
+  position: fixed;
+  bottom: 1rem;
+  left: 50%;
+  translate: -50% 0;
+  color: var(--bg);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
 
 /* Hörproben-Liste (mehrere beschriftete Audio-Dateien) */
 .audio-list {
@@ -686,6 +732,7 @@ html[lang="en"] .en-note { display: block; }
 
   .grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
   /* Versetztes Plakat-Raster: jede mittlere Spalte rutscht nach unten */
+  .grid .card:nth-child(2n) { margin-top: 0; }
   .grid .card:nth-child(3n+2) { margin-top: 2.6rem; }
 
   .prod-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -709,13 +756,23 @@ html[lang="en"] .en-note { display: block; }
   .site-footer { flex-direction: row; justify-content: space-between; align-items: center; }
 }
 
+/* Sehr breite Viewports (großer Monitor oder herausgezoomt): fünf Kacheln pro Zeile */
+@media (min-width: 125rem) {
+  .ensemble { max-width: 110rem; }
+  .grid { grid-template-columns: repeat(5, 1fr); }
+  .grid .card:nth-child(3n+2) { margin-top: 0; }
+  .grid .card:nth-child(5n+2),
+  .grid .card:nth-child(5n+4) { margin-top: 2.6rem; }
+}
+
 @media (min-width: 960px) {
   .hero-inner {
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    max-width: 80rem;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
     padding-top: 4rem;
     align-items: center;
   }
-  .hero-photo { justify-self: end; }
+  .hero-photo { justify-self: end; max-width: none; }
 }
 
 /* Nutzerpräferenz: reduzierte Bewegung respektieren */
@@ -725,4 +782,6 @@ html[lang="en"] .en-note { display: block; }
     transition: none !important;
     animation: none !important;
   }
+  /* Ausnahme: das Laufband ist Kernbestandteil des Plakat-Looks und läuft bewusst weiter */
+  .marquee-in { animation: marquee 30s linear infinite !important; }
 }

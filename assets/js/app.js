@@ -23,6 +23,8 @@
       photos: "Fotos",
       lightboxClose: "Schließen",
       lightboxAria: "Vergrößerte Bildansicht",
+      lightboxPrev: "Vorheriges Bild",
+      lightboxNext: "Nächstes Bild",
       toProfile: "Zum Profil",
       toOverview: "Zur Übersicht",
       imprint: "Impressum",
@@ -80,6 +82,8 @@
       photos: "Photos",
       lightboxClose: "Close",
       lightboxAria: "Enlarged image view",
+      lightboxPrev: "Previous image",
+      lightboxNext: "Next image",
       toProfile: "View profile",
       toOverview: "Back to overview",
       imprint: "Legal notice",
@@ -222,17 +226,29 @@
 
   /*
    * Lightbox: jedes Bild mit [data-lightbox] öffnet sich per Klick/Enter
-   * bildschirmfüllend. Schließen über Klick, Schließen-Knopf oder Escape.
+   * bildschirmfüllend. Bilder mit demselben data-gallery-Wert bilden eine
+   * Galerie: Pfeil-Knöpfe bzw. Pfeiltasten blättern durch die Bilder.
+   * Klick auf das große Bild zoomt auf Originalgröße (scrollbar).
+   * Schließen über Klick auf den Hintergrund, Schließen-Knopf oder Escape.
    */
   function openLightbox(img) {
+    var galleryId = img.getAttribute("data-gallery");
+    var group = [img];
+    if (galleryId) {
+      group = Array.prototype.filter.call(
+        document.querySelectorAll("img[data-lightbox]"),
+        function (el) { return el.getAttribute("data-gallery") === galleryId; }
+      );
+    }
+    var index = group.indexOf(img);
+    if (index === -1) { group = [img]; index = 0; }
+
     var overlay = document.createElement("div");
     overlay.className = "lightbox";
     overlay.setAttribute("role", "dialog");
     overlay.setAttribute("aria-label", ADK.t("lightboxAria"));
 
     var big = document.createElement("img");
-    big.src = img.currentSrc || img.src;
-    big.alt = img.alt || "";
 
     var close = document.createElement("button");
     close.type = "button";
@@ -241,18 +257,61 @@
 
     overlay.appendChild(big);
     overlay.appendChild(close);
-    document.body.appendChild(overlay);
+
+    function navButton(cls, glyph, label, dir) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "lightbox-nav " + cls;
+      b.textContent = glyph;
+      b.setAttribute("aria-label", label);
+      b.addEventListener("click", function (e) {
+        e.stopPropagation();
+        show(index + dir);
+      });
+      return b;
+    }
+
+    var count = null;
+    if (group.length > 1) {
+      overlay.appendChild(navButton("lightbox-prev", "‹", ADK.t("lightboxPrev"), -1));
+      overlay.appendChild(navButton("lightbox-next", "›", ADK.t("lightboxNext"), 1));
+      count = document.createElement("span");
+      count.className = "lightbox-count";
+      count.setAttribute("aria-hidden", "true");
+      overlay.appendChild(count);
+    }
+
+    function show(i) {
+      index = (i + group.length) % group.length;
+      overlay.classList.remove("zoomed");
+      big.src = group[index].currentSrc || group[index].src;
+      big.alt = group[index].alt || "";
+      if (count) count.textContent = (index + 1) + " / " + group.length;
+    }
+
+    /* Klick aufs Bild: zwischen Einpassen und Originalgröße wechseln */
+    big.addEventListener("click", function (e) {
+      e.stopPropagation();
+      if (overlay.classList.toggle("zoomed")) {
+        overlay.scrollLeft = (overlay.scrollWidth - overlay.clientWidth) / 2;
+        overlay.scrollTop = (overlay.scrollHeight - overlay.clientHeight) / 2;
+      }
+    });
 
     function destroy() {
       overlay.remove();
       document.removeEventListener("keydown", onKey);
-      img.focus();
+      group[index].focus();
     }
     function onKey(e) {
       if (e.key === "Escape") destroy();
+      else if (e.key === "ArrowLeft" && group.length > 1) show(index - 1);
+      else if (e.key === "ArrowRight" && group.length > 1) show(index + 1);
     }
     overlay.addEventListener("click", destroy);
     document.addEventListener("keydown", onKey);
+    show(index);
+    document.body.appendChild(overlay);
     close.focus();
   }
 

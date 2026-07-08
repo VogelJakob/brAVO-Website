@@ -43,25 +43,27 @@
     return (
       '<div class="portrait">' +
         '<img src="' + esc(ADK.mediaPath("image", slug)) + '" alt="' + esc(t("portraitAlt") + " " + student.name) + '" ' +
-          'data-lightbox tabindex="0" ' +
+          'data-lightbox data-gallery="' + esc(slug) + '" tabindex="0" ' +
           'onerror="this.closest(\'.portrait\').classList.add(\'no-img\')">' +
         '<div class="media-fallback" aria-hidden="true">' + esc(initials(student.name)) + "</div>" +
       "</div>"
     );
   }
 
-  /* Foto-Galerie: zeigt alle vorhandenen Zusatzbilder ({slug}-2.jpg …). */
-  function galleryHtml(s) {
+  /*
+   * Zusatzbilder ({slug}-2.jpg …) als sichtbare Vorschauen direkt beim
+   * Portrait. Portrait + Vorschauen teilen sich denselben data-gallery-Wert,
+   * damit die Lightbox durch alle Bilder der Person blättern kann.
+   */
+  function headThumbsHtml(s) {
     if (!media.gallery || !media.gallery.length) return "";
     var items = media.gallery.map(function (src, i) {
       return (
-        "<figure>" +
-          '<img src="' + esc(src) + '" alt="' + esc(t("portraitAlt") + " " + s.name + " – " + (i + 2)) + '" ' +
-            'loading="lazy" data-lightbox tabindex="0">' +
-        "</figure>"
+        '<img src="' + esc(src) + '" alt="' + esc(t("portraitAlt") + " " + s.name + " – " + (i + 2)) + '" ' +
+          'loading="lazy" data-lightbox data-gallery="' + esc(slug) + '" tabindex="0">'
       );
     }).join("");
-    return section("photos", '<div class="photo-grid">' + items + "</div>");
+    return '<div class="head-thumbs">' + items + "</div>";
   }
 
   /* Steckbrief als Definitionsliste; nur vorhandene Felder. */
@@ -262,11 +264,11 @@
         '<div class="profile-intro">' +
           "<h1>" + esc(s.name) + "</h1>" +
           (has(s.pronouns) ? '<p class="pronouns">' + esc(s.pronouns) + "</p>" : "") +
+          headThumbsHtml(s) +
         "</div>" +
       "</div>" +
       factsHtml(s) +
       bioHtml(s) +
-      galleryHtml(s) +
       rolesHtml(s) +
       songsHtml(s) +
       mediaHtml(s) +
