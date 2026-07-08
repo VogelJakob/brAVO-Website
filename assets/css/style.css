@@ -87,6 +87,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 /* ---------- Header ---------- */
 
 .site-header {
+  position: sticky;   /* Balken bleibt beim Scrollen sichtbar */
+  top: 0;
+  z-index: 60;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -96,6 +99,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   background: var(--ink);
   color: var(--bg);
 }
+
+/* Anker-Ziele nicht unter dem fixierten Balken verschwinden lassen */
+[id] { scroll-margin-top: 4.5rem; }
 
 .brand {
   font-family: var(--font-head);
@@ -148,10 +154,29 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 /* ---------- Hero (Startseite) ---------- */
 
-.hero-text {
-  padding: 3rem var(--pad) 2.5rem;
+.hero-inner {
   max-width: 72rem;
   margin: 0 auto;
+  padding: 3rem var(--pad) 2.5rem;
+  display: grid;
+  gap: 2.5rem;
+  align-items: end;
+}
+
+/* Gruppenfoto neben dem Titel (Hochformat) */
+.hero-photo {
+  margin: 0;
+  border: var(--border);
+  box-shadow: var(--shadow-acc);
+  background: var(--paper);
+  justify-self: center;
+  max-width: 26rem;
+}
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  cursor: zoom-in;
 }
 
 .hero-kicker {
@@ -208,22 +233,62 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 /* ---------- Gruppenfoto-Band (Startseite) ---------- */
 
-.group-band {
-  padding: 3rem var(--pad) 0;
+/* ---------- Aufführungen (Startseite) ---------- */
+
+.productions {
+  padding: 1rem var(--pad) 4.5rem;
   max-width: 72rem;
   margin: 0 auto;
 }
-.group-band figure {
-  margin: 0;
-  border: var(--border);
-  box-shadow: var(--shadow-acc);
+.productions h2 { margin-bottom: 1.5rem; }
+
+.prod-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.4rem;
+}
+
+.prod-card {
   background: var(--paper);
+  border: var(--border);
+  box-shadow: var(--shadow);
 }
-.group-band img {
-  display: block;
+
+.prod-media {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  background: #e1e1da;
+  border-bottom: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.prod-media span {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+  letter-spacing: 0.06em;
+  color: #a6acc2;
+}
+.prod-media img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
 }
+
+.prod-body { padding: 1rem 1.1rem 1.2rem; }
+.prod-date {
+  margin: 0 0 0.35rem;
+  color: var(--acc);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.prod-card h3 { margin-bottom: 0.35em; }
+.prod-text { margin: 0; color: var(--muted); font-size: 0.92rem; }
 
 /* ---------- Ensemble-Grid ---------- */
 
@@ -468,6 +533,66 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   width: 100%;
 }
 
+/* Foto-Galerie im Profil (Konvention: {slug}-2.jpg, {slug}-3.jpg, …) */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+.photo-grid figure {
+  margin: 0;
+  border: var(--border);
+  background: #e1e1da;
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.photo-grid img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  cursor: zoom-in;
+}
+@media (min-width: 640px) {
+  .photo-grid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+}
+
+/* Lightbox: Klick auf ein Foto zeigt es bildschirmfüllend */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(17, 17, 17, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  cursor: zoom-out;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  border: var(--border);
+  background: var(--paper);
+  box-shadow: 9px 9px 0 var(--acc);
+}
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--bg);
+  border: var(--border);
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+}
+.lightbox-close:hover { background: var(--paper); }
+
 /* Hörproben-Liste (mehrere beschriftete Audio-Dateien) */
 .audio-list {
   display: grid;
@@ -563,6 +688,8 @@ html[lang="en"] .en-note { display: block; }
   /* Versetztes Plakat-Raster: jede mittlere Spalte rutscht nach unten */
   .grid .card:nth-child(3n+2) { margin-top: 2.6rem; }
 
+  .prod-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
   .profile-head { flex-direction: row; align-items: flex-end; }
 
   .facts { grid-template-columns: 11rem 1fr; }
@@ -583,7 +710,12 @@ html[lang="en"] .en-note { display: block; }
 }
 
 @media (min-width: 960px) {
-  .hero-text { padding-top: 4rem; }
+  .hero-inner {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    padding-top: 4rem;
+    align-items: center;
+  }
+  .hero-photo { justify-self: end; }
 }
 
 /* Nutzerpräferenz: reduzierte Bewegung respektieren */

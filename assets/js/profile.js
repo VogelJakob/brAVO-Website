@@ -12,10 +12,17 @@
   var slug = main.getAttribute("data-slug");
 
   /* Existenz-Checks nur einmal ausführen und für Sprach-Rerenders cachen. */
-  var media = { video: null, audio: null, audioReels: null, checked: false };
+  var media = { video: null, audio: null, audioReels: null, gallery: null, checked: false };
 
   function audioReelPath(file) {
     return ADK.root + "assets/audio/" + file;
+  }
+
+  /* Galerie-Konvention: {slug}-2.jpg bis {slug}-8.jpg neben dem Hauptportrait. */
+  var GALLERY_MAX = 8;
+
+  function galleryPath(n) {
+    return ADK.root + "assets/images/students/" + slug + "-" + n + ".jpg";
   }
 
   function esc(s) { return ADK.esc(s); }
@@ -36,10 +43,25 @@
     return (
       '<div class="portrait">' +
         '<img src="' + esc(ADK.mediaPath("image", slug)) + '" alt="' + esc(t("portraitAlt") + " " + student.name) + '" ' +
+          'data-lightbox tabindex="0" ' +
           'onerror="this.closest(\'.portrait\').classList.add(\'no-img\')">' +
         '<div class="media-fallback" aria-hidden="true">' + esc(initials(student.name)) + "</div>" +
       "</div>"
     );
+  }
+
+  /* Foto-Galerie: zeigt alle vorhandenen Zusatzbilder ({slug}-2.jpg …). */
+  function galleryHtml(s) {
+    if (!media.gallery || !media.gallery.length) return "";
+    var items = media.gallery.map(function (src, i) {
+      return (
+        "<figure>" +
+          '<img src="' + esc(src) + '" alt="' + esc(t("portraitAlt") + " " + s.name + " – " + (i + 2)) + '" ' +
+            'loading="lazy" data-lightbox tabindex="0">' +
+        "</figure>"
+      );
+    }).join("");
+    return section("photos", '<div class="photo-grid">' + items + "</div>");
   }
 
   /* Steckbrief als Definitionsliste; nur vorhandene Felder. */
@@ -149,10 +171,10 @@
   function mediaHtml(s) {
     var out = "";
     if (media.video) {
+      /* preload="metadata" + #t=0.1: Browser zeigt den Videoanfang als Vorschaubild */
       out += section("showreel",
-        '<video class="reel" controls preload="none" ' +
-          'poster="' + esc(ADK.mediaPath("image", slug)) + '" ' +
-          'src="' + esc(ADK.mediaPath("video", slug)) + '">' +
+        '<video class="reel" controls preload="metadata" ' +
+          'src="' + esc(ADK.mediaPath("video", slug)) + '#t=0.1">' +
           esc(t("videoFallback")) +
         "</video>");
     } else if (media.checked) {
@@ -244,6 +266,7 @@
       "</div>" +
       factsHtml(s) +
       bioHtml(s) +
+      galleryHtml(s) +
       rolesHtml(s) +
       songsHtml(s) +
       mediaHtml(s) +
@@ -254,16 +277,22 @@
   function checkMedia() {
     var s = ADK.findStudent(slug);
     var reels = (s && s.audioReels) || [];
+    var galleryCandidates = [];
+    for (var n = 2; n <= GALLERY_MAX; n++) galleryCandidates.push(galleryPath(n));
     Promise.all([
       ADK.mediaExists(ADK.mediaPath("video", slug)),
       ADK.mediaExists(ADK.mediaPath("audio", slug)),
       Promise.all(reels.map(function (reel) {
         return ADK.mediaExists(audioReelPath(reel.file));
+      })),
+      Promise.all(galleryCandidates.map(function (url) {
+        return ADK.mediaExists(url);
       }))
     ]).then(function (results) {
       media.video = results[0];
       media.audio = results[1];
       media.audioReels = results[2];
+      media.gallery = galleryCandidates.filter(function (url, i) { return results[3][i]; });
       media.checked = true;
       render();
     });

@@ -40,16 +40,25 @@
     <a class="brand" href="index.html">ADK Bayern <span>Jahrgang 2027</span></a>
     <nav>
       <a href="#ensemble-grid" data-i18n="ensemble">Ensemble</a>
+      <a href="#auffuehrungen" data-i18n="productions">Aufführungen</a>
       <button id="lang-toggle" type="button" aria-label="Switch language to English">EN</button>
     </nav>
   </header>
 
   <main id="main">
     <section class="hero">
-      <div class="hero-text">
-        <p class="hero-kicker" data-i18n="heroKicker">Akademie für Darstellende Kunst Bayern</p>
-        <h1 class="hero-title"><span data-i18n="heroTitle1">Jahrgang</span><span class="hero-title-accent" data-i18n="heroTitle2">2027</span></h1>
-        <p data-i18n="heroText">Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.</p>
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-kicker" data-i18n="heroKicker">Akademie für Darstellende Kunst Bayern</p>
+          <h1 class="hero-title"><span data-i18n="heroTitle1">Jahrgang</span><span class="hero-title-accent" data-i18n="heroTitle2">2027</span></h1>
+          <p data-i18n="heroText">Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.</p>
+        </div>
+        <!-- Gruppenfoto neben dem Titel: blendet sich selbst aus, wenn assets/images/group.jpg fehlt -->
+        <figure class="hero-photo" id="hero-photo">
+          <img src="assets/images/group.jpg" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
+               data-lightbox tabindex="0"
+               onerror="document.getElementById('hero-photo').style.display='none'">
+        </figure>
       </div>
       <div class="marquee" aria-hidden="true">
         <div class="marquee-in">
@@ -59,18 +68,41 @@
       </div>
     </section>
 
-    <!-- Gruppenfoto-Band: blendet sich selbst aus, wenn assets/images/group.jpg fehlt -->
-    <section class="group-band" id="group-band">
-      <figure>
-        <img src="assets/images/group.jpg" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt" loading="lazy"
-             onerror="document.getElementById('group-band').style.display='none'">
-      </figure>
-    </section>
-
     <section class="ensemble">
       <h2 data-i18n="ensemble">Ensemble</h2>
       <div class="grid" id="ensemble-grid">
         <noscript><p data-i18n="noscript">Bitte aktivieren Sie JavaScript, um die Profile anzuzeigen.</p></noscript>
+      </div>
+    </section>
+
+    <!-- Aufführungen: vorerst drei Platzhalter-Karten, Inhalte folgen -->
+    <section class="productions" id="auffuehrungen">
+      <h2 data-i18n="productions">Aufführungen</h2>
+      <div class="prod-grid">
+        <article class="prod-card">
+          <div class="prod-media" aria-hidden="true"><span data-i18n="prodImageSoon">Foto folgt</span></div>
+          <div class="prod-body">
+            <p class="prod-date" data-i18n="prodDateSoon">Termin folgt</p>
+            <h3 data-i18n="prodTitleSoon">Produktion folgt</h3>
+            <p class="prod-text" data-i18n="prodTextSoon">Beschreibung folgt in Kürze.</p>
+          </div>
+        </article>
+        <article class="prod-card">
+          <div class="prod-media" aria-hidden="true"><span data-i18n="prodImageSoon">Foto folgt</span></div>
+          <div class="prod-body">
+            <p class="prod-date" data-i18n="prodDateSoon">Termin folgt</p>
+            <h3 data-i18n="prodTitleSoon">Produktion folgt</h3>
+            <p class="prod-text" data-i18n="prodTextSoon">Beschreibung folgt in Kürze.</p>
+          </div>
+        </article>
+        <article class="prod-card">
+          <div class="prod-media" aria-hidden="true"><span data-i18n="prodImageSoon">Foto folgt</span></div>
+          <div class="prod-body">
+            <p class="prod-date" data-i18n="prodDateSoon">Termin folgt</p>
+            <h3 data-i18n="prodTitleSoon">Produktion folgt</h3>
+            <p class="prod-text" data-i18n="prodTextSoon">Beschreibung folgt in Kürze.</p>
+          </div>
+        </article>
       </div>
     </section>
   </main>

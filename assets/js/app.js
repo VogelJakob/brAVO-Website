@@ -15,6 +15,14 @@
       heroText: "Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.",
       marquee: "Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements · Theater · Film · Fernsehen · Ab Sommer 2027 frei für Engagements ·",
       ensemble: "Ensemble",
+      productions: "Aufführungen",
+      prodDateSoon: "Termin folgt",
+      prodTitleSoon: "Produktion folgt",
+      prodTextSoon: "Beschreibung folgt in Kürze.",
+      prodImageSoon: "Foto folgt",
+      photos: "Fotos",
+      lightboxClose: "Schließen",
+      lightboxAria: "Vergrößerte Bildansicht",
       toProfile: "Zum Profil",
       toOverview: "Zur Übersicht",
       imprint: "Impressum",
@@ -64,6 +72,14 @@
       heroText: "Ten acting students introduce themselves – with profile, résumé and showreel. Available for engagements in theatre, film and television from summer 2027.",
       marquee: "Theatre · Film · Television · Available for engagements from summer 2027 · Theatre · Film · Television · Available for engagements from summer 2027 ·",
       ensemble: "Ensemble",
+      productions: "Performances",
+      prodDateSoon: "Date TBA",
+      prodTitleSoon: "Production TBA",
+      prodTextSoon: "Description coming soon.",
+      prodImageSoon: "Photo coming soon",
+      photos: "Photos",
+      lightboxClose: "Close",
+      lightboxAria: "Enlarged image view",
       toProfile: "View profile",
       toOverview: "Back to overview",
       imprint: "Legal notice",
@@ -203,6 +219,52 @@
   };
 
   window.ADK = ADK;
+
+  /*
+   * Lightbox: jedes Bild mit [data-lightbox] öffnet sich per Klick/Enter
+   * bildschirmfüllend. Schließen über Klick, Schließen-Knopf oder Escape.
+   */
+  function openLightbox(img) {
+    var overlay = document.createElement("div");
+    overlay.className = "lightbox";
+    overlay.setAttribute("role", "dialog");
+    overlay.setAttribute("aria-label", ADK.t("lightboxAria"));
+
+    var big = document.createElement("img");
+    big.src = img.currentSrc || img.src;
+    big.alt = img.alt || "";
+
+    var close = document.createElement("button");
+    close.type = "button";
+    close.className = "lightbox-close";
+    close.textContent = ADK.t("lightboxClose");
+
+    overlay.appendChild(big);
+    overlay.appendChild(close);
+    document.body.appendChild(overlay);
+
+    function destroy() {
+      overlay.remove();
+      document.removeEventListener("keydown", onKey);
+      img.focus();
+    }
+    function onKey(e) {
+      if (e.key === "Escape") destroy();
+    }
+    overlay.addEventListener("click", destroy);
+    document.addEventListener("keydown", onKey);
+    close.focus();
+  }
+
+  document.addEventListener("click", function (e) {
+    var img = e.target.closest ? e.target.closest("img[data-lightbox]") : null;
+    if (img) openLightbox(img);
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter") return;
+    var el = document.activeElement;
+    if (el && el.matches && el.matches("img[data-lightbox]")) openLightbox(el);
+  });
 
   document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.lang = ADK.lang;

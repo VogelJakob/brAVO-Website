@@ -2,9 +2,13 @@
  * Zentrale Datenbasis aller Studierenden.
  *
  * MEDIEN-KONVENTION (keine Pfade eintragen – Dateien nur korrekt benennen):
- *   Portraitfoto : assets/images/students/{slug}.jpg   (Pflicht, mit Fallback)
- *   Showreel     : assets/videos/{slug}.mp4            (erscheint automatisch, sobald Datei da ist)
- *   Audio-Reel   : assets/audio/{slug}.mp3             (optional, erscheint nur wenn Datei da ist)
+ *   Portraitfoto : assets/images/students/{slug}.jpg      (Pflicht, mit Fallback)
+ *   Galerie      : assets/images/students/{slug}-2.jpg    bis {slug}-8.jpg (optional,
+ *                  erscheinen automatisch als Foto-Galerie im Profil)
+ *   Showreel     : assets/videos/{slug}.mp4               (erscheint automatisch, sobald Datei da ist)
+ *   Audio-Reel   : assets/audio/{slug}.mp3                (optional, erscheint nur wenn Datei da ist)
+ *   Mehrere Hörproben: Feld audioReels = [{ label: {de,en}, file: "name.mp3" }] –
+ *                  Dateien liegen in assets/audio/, nur vorhandene werden angezeigt.
  *
  * SPRACHEN: Felder mit { de: ..., en: ... } werden vom Sprachumschalter aufgelöst.
  * Fehlende Übersetzungen mit "TODO: Übersetzung folgt" markieren – niemals leer lassen,
