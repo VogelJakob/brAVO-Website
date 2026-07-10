@@ -25,6 +25,7 @@ assets/js/profile.js     Rendert die Einzelprofile
 assets/css/style.css     Design-System
 assets/images/students/  Portraitfotos:  {slug}.jpg
 assets/images/group.jpg  Gruppenfoto für den Hero-Bereich
+assets/images/group-2.jpg  Zweites Gruppenfoto (Band zwischen Ensemble und Aufführungen)
 assets/videos/           Showreels:      {slug}.mp4
 assets/audio/            Audio-Reels:    {slug}.mp3 (optional)
 ```
@@ -76,7 +77,7 @@ Die Existenz wird zur Laufzeit per HTTP-HEAD-Request geprüft; es gibt nirgends 
    grep -rl "adk-bayern-2027.de" --include="*.html" --include="*.xml" --include="*.txt" . | xargs sed -i 's|adk-bayern-2027.de|EURE-DOMAIN.de|g'
    ```
 2. **Impressum & Datenschutz:** alle `[Platzhalter in eckigen Klammern]` ausfüllen, Hosting-Anbieter in der Datenschutzerklärung eintragen.
-3. **Gruppenfoto** als `assets/images/group.jpg` ablegen.
+3. **Gruppenfotos** als `assets/images/group.jpg` (Hero) und `assets/images/group-2.jpg` (Band unter dem Ensemble) ablegen; beide Bereiche blenden sich automatisch aus, solange die Datei fehlt.
 4. Portraits und Videos gemäß Namenskonvention hochladen.
 
 ## Deployment

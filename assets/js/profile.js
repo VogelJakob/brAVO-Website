@@ -217,7 +217,7 @@
     return section("audioReel", '<div class="audio-list">' + items + "</div>");
   }
 
-  function contactHtml(s) {
+  function contactLinks(s) {
     var links = [];
     if (has(s.email)) {
       links.push('<a class="contact-link" href="mailto:' + esc(s.email) + '">' + esc(s.email) + "</a>");
@@ -230,6 +230,19 @@
       links.push('<a class="contact-link" href="' + esc(s.social.filmmakers) +
         '" target="_blank" rel="noopener noreferrer">Filmmakers</a>');
     }
+    return links;
+  }
+
+  /* Kompakte Kontaktlinks direkt unter Portrait und Zusatzfotos */
+  function contactSideHtml(s) {
+    var links = contactLinks(s);
+    if (!links.length) return "";
+    return '<div class="contact-links contact-links-side">' + links.join("") + "</div>";
+  }
+
+  /* Vollständige Kontakt-Sektion am Seitenende (zusätzlich zur Seitenleiste) */
+  function contactHtml(s) {
+    var links = contactLinks(s);
     if (!links.length) return "";
     return section("contact", '<div class="contact-links">' + links.join("") + "</div>");
   }
@@ -258,22 +271,32 @@
       return;
     }
 
+    /*
+     * Layout: Name über beiden Spalten; links Portrait, Zusatzfotos und
+     * Kontakt (mobil direkt unter den Bildern), rechts alle Inhalte.
+     * Auf breiten Bildschirmen stehen beide Spalten nebeneinander (CSS).
+     */
     main.innerHTML =
-      '<div class="profile-head">' +
-        portraitHtml(s) +
-        '<div class="profile-intro">' +
-          "<h1>" + esc(s.name) + "</h1>" +
-          (has(s.pronouns) ? '<p class="pronouns">' + esc(s.pronouns) + "</p>" : "") +
+      '<header class="profile-title">' +
+        "<h1>" + esc(s.name) + "</h1>" +
+        (has(s.pronouns) ? '<p class="pronouns">' + esc(s.pronouns) + "</p>" : "") +
+      "</header>" +
+      '<div class="profile-layout">' +
+        '<aside class="profile-side">' +
+          portraitHtml(s) +
           headThumbsHtml(s) +
+          contactSideHtml(s) +
+        "</aside>" +
+        '<div class="profile-main">' +
+          factsHtml(s) +
+          bioHtml(s) +
+          rolesHtml(s) +
+          songsHtml(s) +
+          mediaHtml(s) +
+          creditsHtml(s) +
+          contactHtml(s) +
         "</div>" +
-      "</div>" +
-      factsHtml(s) +
-      bioHtml(s) +
-      rolesHtml(s) +
-      songsHtml(s) +
-      mediaHtml(s) +
-      creditsHtml(s) +
-      contactHtml(s);
+      "</div>";
   }
 
   function checkMedia() {

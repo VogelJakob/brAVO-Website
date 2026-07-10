@@ -83,6 +83,15 @@
       </div>
     </section>
 
+    <!-- Zweites Gruppenfoto: blendet sich selbst aus, wenn assets/images/group-2.jpg fehlt -->
+    <section class="group-band" id="group-band" aria-label="Gruppenfoto">
+      <figure>
+        <img src="assets/images/group-2.jpg" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
+             data-lightbox tabindex="0" loading="lazy"
+             onerror="document.getElementById('group-band').style.display='none'">
+      </figure>
+    </section>
+
     <!-- Aufführungen: vorerst drei Platzhalter-Karten, Inhalte folgen -->
     <section class="productions" id="auffuehrungen">
       <h2 data-i18n="productions">Aufführungen</h2>
