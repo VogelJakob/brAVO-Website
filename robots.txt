@@ -1,4 +1,6 @@
+# Vorübergehend: Seite ist passwortgeschützt und soll nicht in Suchmaschinen
+# auftauchen. Zum Livegang wieder auf "Allow: /" umstellen (siehe README).
 User-agent: *
-Allow: /
+Disallow: /
 
 Sitemap: https://adk-bayern-2027.de/sitemap.xml
