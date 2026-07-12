@@ -70,8 +70,17 @@ Die Existenz wird zur Laufzeit per HTTP-HEAD-Request geprüft; es gibt nirgends 
 - Personen-Inhalte liegen zweisprachig in `students.js`; fehlt die englische Fassung, wird sichtbar „TODO: Übersetzung folgt“ angezeigt bzw. auf Deutsch zurückgefallen.
 - Impressum & Datenschutz sind bewusst nur auf Deutsch; im EN-Modus erscheint ein Hinweis darauf.
 
+## Vorübergehender Passwortschutz
+
+Solange die Seite noch nicht offiziell veröffentlicht ist, liegt ein einfacher Passwortschutz über allen Seiten (`assets/js/gate.js`, eingebunden im `<head>` jeder HTML-Datei). Nach einmaliger Eingabe merkt sich der Browser die Freischaltung.
+
+- **Passwort ändern:** neuen Hash erzeugen mit `node -e "console.log(require('crypto').createHash('sha256').update('NEUES-PASSWORT').digest('hex'))"` und in `assets/js/gate.js` bei `HASH` eintragen.
+- **Grenzen:** Es ist ein Sichtschutz, keine echte Zugriffskontrolle – bei einer statischen Seite (z.B. GitHub Pages) sind die Inhalte technisch weiter abrufbar, und bei einem öffentlichen Repository ohnehin einsehbar. Für den vorübergehenden Zweck reicht das; echte Zugriffskontrolle bräuchte einen Server bzw. Hosting mit Auth (z.B. Cloudflare Access).
+- **Zum Livegang entfernen:** `assets/js/gate.js` löschen, die `<script ... gate.js>`-Zeile aus allen HTML-Dateien entfernen (`grep -rl "gate.js" --include="*.html" . | xargs sed -i '/gate.js/d'`) und `robots.txt` wieder auf `Allow: /` stellen.
+
 ## Vor dem Livegang (Checkliste)
 
+0. **Passwortschutz entfernen** (siehe Abschnitt oben) und `robots.txt` wieder auf `Allow: /` stellen.
 1. **Domain ersetzen:** Der Platzhalter `https://adk-bayern-2027.de` steht in allen Meta-Tags (Canonical/Open Graph/JSON-LD), in `sitemap.xml` und `robots.txt`. Projektweit suchen & ersetzen:
    ```bash
    grep -rl "adk-bayern-2027.de" --include="*.html" --include="*.xml" --include="*.txt" . | xargs sed -i 's|adk-bayern-2027.de|EURE-DOMAIN.de|g'
