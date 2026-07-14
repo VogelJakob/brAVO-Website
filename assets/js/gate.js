@@ -15,7 +15,7 @@
 (function () {
   "use strict";
 
-  var HASH = "e50225603d3e4a2272c2225e9bcb982dc0543c385eb4ab8a89422a8f27cbda01";
+  var HASH = "f223f4b723b2dee53e7453529440f02ea3920b5332f90d2a8a6621ca6033303c";
   var KEY = "adk-gate";
 
   try {
