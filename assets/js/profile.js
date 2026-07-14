@@ -230,6 +230,10 @@
       links.push('<a class="contact-link" href="' + esc(s.social.filmmakers) +
         '" target="_blank" rel="noopener noreferrer">Filmmakers</a>');
     }
+    if (s.social && has(s.social.etalenta)) {
+      links.push('<a class="contact-link" href="' + esc(s.social.etalenta) +
+        '" target="_blank" rel="noopener noreferrer">e-TALENTA</a>');
+    }
     return links;
   }
 

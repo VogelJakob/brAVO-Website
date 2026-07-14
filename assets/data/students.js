@@ -231,7 +231,7 @@ const STUDENTS = [
         { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Erna", director: "Selina Kretschman", venue: "Akademietheater Regensburg" }
       ]
     },
-    social: { instagram: "liebercharlyalslina", filmmakers: "https://www.filmmakers.eu/de/actors/charlotte-friederich" },
+    social: { instagram: "liebercharlyalslina", filmmakers: "https://www.filmmakers.eu/de/actors/charlotte-friederich", etalenta: "https://www.etalenta.eu/members/profile/charlotte-friederich" },
     email: "linifr@t-online.de"
   },
   {
@@ -386,8 +386,8 @@ const STUDENTS = [
       en: ["German (native)", "English (fluent)", "Spanish (good)", "French (basic)", "Saxon (native dialect)"]
     },
     skills: {
-      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Tanztheater", "Argentinischer Tango", "Bühnenkampf und Fechten", "Yoga", "Bouldern", "Schach"],
-      en: ["DJing", "Piano", "Rap", "Jazz dance", "Dance theatre", "Argentine tango", "Stage combat and fencing", "Yoga", "Bouldering", "Chess"]
+      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf"],
+      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)"]
     },
     auditionRoles: [
       { role: "Johanna", play: "Die heilige Johanna der Schlachthöfe", author: "Bertolt Brecht" },
@@ -403,8 +403,8 @@ const STUDENTS = [
       { title: "Burn", from: "Hamilton" }
     ],
     bio: {
-      de: "1999 in der ostsächsischen Provinz geboren und aufgewachsen. Seit 2005 Teil der Kindertheatergruppe „Die Erlichthofgaukler e.V.“. Gesangs- und Klavierunterricht während der Schulzeit. Nach dem Abitur kurzer Abstecher nach Costa Rica für einen Freiwilligendienst, dann Umzug nach Freiburg im Breisgau. Abgetaucht in der studentischen Theaterszene und dort ein Zuhause gefunden. Studium der Medienkulturwissenschaften und Germanistik angefangen und erfolgreich abgebrochen. Was bleibt, ist die Begeisterung für Mittelhochdeutsch und Popkultur.\n\nSeit 2023 Schauspielstudium an der ADK Bayern. Nebenher als DJ h2oMichi aktiv. Ihr Herz schlägt für Queerfeminismus und Puppenspiel.\n\nIm Akademietheater Regensburg wirkte sie u. a. in „Die kleine Hexe“ nach Otfried Preußler, in „Leonce und Lena“ nach Georg Büchner und in „Die Frau von früher“ von Roland Schimmelpfennig mit. Im Mai 2026 spielte sie im Kammerspiel „Shadows of Sanity“ von Christine La Renarde im Rahmen des EKSTASIS Theaterfestivals in Regensburg. Sie ist 2024 im Kurzfilm „Die Einsiedlerinnen“ von Lya Spiegel und 2026 im Film „Rain Check“ (tbp) von Ivy Lißsack zu sehen.",
-      en: "Born in 1999 and raised in the provinces of eastern Saxony. A member of the children's theatre group “Die Erlichthofgaukler e.V.” since 2005. Singing and piano lessons throughout her school years. After finishing school, a brief detour to Costa Rica for a volunteer service, then a move to Freiburg im Breisgau, where she dived into the student theatre scene and found a home. Began a degree in media culture studies and German philology — and successfully dropped out. What remains is her enthusiasm for Middle High German and pop culture.\n\nStudying acting at ADK Bavaria since 2023. Also active as DJ h2oMichi. Her heart beats for queer feminism and puppetry.\n\nAt the Akademietheater Regensburg she appeared in “Die kleine Hexe” after Otfried Preußler, “Leonce und Lena” after Georg Büchner and “Die Frau von früher” by Roland Schimmelpfennig, among others. In May 2026 she performed in the chamber play “Shadows of Sanity” by Christine La Renarde as part of the EKSTASIS theatre festival in Regensburg. She appears in the 2024 short film “Die Einsiedlerinnen” by Lya Spiegel and in the 2026 feature “Rain Check” (tbp) by Ivy Lißsack."
+      de: "Michelle/Michel/Michi Thielsch\n\nSie hat gesehen: Sachsen und Bayern (dazwischen Freiburg zum Erholen), ist also mit allen Wassern gewaschen\n\nKann auch was anderes als starke Frauenrollen spielen (versprochen!!!)\n\nSie spielt mit Puppen, aber eigentlich spielen die Puppen mit ihr\n\nShe’s a belter!\n\nUnd sie macht sich gerne nackt – nicht aus Verkaufsgründen, sondern aus exhibitionistischen\n\nWas bleibt? Neben der Bühne?\n\nIst sie pünktlich\n\nSie kämpft gegen das Weltgeschehen\n\nDie Welt soll nämlich nicht geschehen\n\nDeswegen: Bitte einstellen, das Potential schießt sonst ins Blaue!",
+      en: "Michelle/Michel/Michi Thielsch\n\nShe has seen: Saxony and Bavaria (with Freiburg in between, to recover) — so there’s no fooling her\n\nCan play more than just strong female leads (promise!!!)\n\nShe plays with puppets — but really, the puppets play with her\n\nShe’s a belter!\n\nAnd she likes getting naked — not to sell tickets, but out of pure exhibitionism\n\nWhat else? Off stage?\n\nShe’s punctual\n\nShe fights against world events\n\nBecause the world is not supposed to just happen\n\nSo: hire her — otherwise all that potential just fires off into the blue!"
     },
     credits: {
       theater: [
