@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ADK Bayern – Jahrgang 2027 | Links</title>
+  <!-- Interne Link-Seite für den QR-Code auf Visitenkarten.
+       Absichtlich: nicht in Navigation/Sitemap verlinkt, noindex und ohne gate.js,
+       damit sie über den QR-Code direkt erreichbar ist. -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .links-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2.5rem var(--pad);
+      text-align: center;
+    }
+    .links-head h1 { margin-bottom: 0.2em; }
+    .links-head h1 span { color: var(--acc); }
+    .links-head p { color: var(--muted); margin: 0; }
+    .links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      width: min(100%, 24rem);
+    }
+    .links-group {
+      font-family: var(--font-head);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0.6rem 0 -0.4rem;
+    }
+    .link-btn {
+      display: block;
+      background: var(--paper);
+      border: var(--border);
+      box-shadow: var(--shadow);
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      padding: 0.9rem 1.2rem;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    }
+    .link-btn small {
+      display: block;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      text-transform: none;
+      letter-spacing: 0;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .link-btn:hover, .link-btn:focus-visible {
+      text-decoration: none;
+      color: #fff;
+      background: var(--acc);
+      transform: translate(-2px, -2px);
+      box-shadow: 9px 9px 0 var(--ink);
+    }
+    .link-btn:hover small, .link-btn:focus-visible small { color: #fff; }
+    .links-footer { font-size: 0.85rem; color: var(--muted); }
+    .links-footer a { margin: 0 0.4rem; }
+  </style>
+</head>
+<body>
+  <main class="links-page">
+    <header class="links-head">
+      <h1>ADK Bayern <span>2027</span></h1>
+      <p>Abschlussjahrgang Schauspiel · Regensburg</p>
+    </header>
+
+    <nav class="links-list" aria-label="Links">
+      <p class="links-group">Regensburg</p>
+      <a class="link-btn" href="https://adk-bayern-2027.de/">Unsere Website
+        <small>adk-bayern-2027.de</small></a>
+      <a class="link-btn" href="https://www.instagram.com/adkbayern2027/" target="_blank" rel="noopener noreferrer">Instagram
+        <small>@adkbayern2027</small></a>
+
+      <p class="links-group">Linz · Anton Bruckner Privatuniversität</p>
+      <a class="link-btn" href="https://www.schauspielabsolventen.at/" target="_blank" rel="noopener noreferrer">Website Linz
+        <small>schauspielabsolventen.at</small></a>
+      <a class="link-btn" href="https://www.instagram.com/bruckneruniversity/" target="_blank" rel="noopener noreferrer">Instagram Linz
+        <small>@bruckneruniversity</small></a>
+    </nav>
+
+    <footer class="links-footer">
+      <a href="../impressum.html">Impressum</a>
+      <a href="../datenschutz.html">Datenschutz</a>
+    </footer>
+  </main>
+</body>
+</html>
