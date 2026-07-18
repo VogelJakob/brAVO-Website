@@ -1,6 +1,6 @@
 # Vorübergehend: Seite ist passwortgeschützt und soll nicht in Suchmaschinen
 # auftauchen. Zum Livegang wieder auf "Allow: /" umstellen (siehe README).
-# WICHTIG: /hallo/ (QR-Code-Linkseite für Visitenkarten) auch nach dem
+# WICHTIG: /links/ (QR-Code-Linkseite für Visitenkarten) auch nach dem
 # Livegang auf "Disallow" lassen – sie soll nur über den QR-Code erreichbar sein.
 User-agent: *
 Disallow: /
