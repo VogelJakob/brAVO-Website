@@ -14,19 +14,21 @@ python3 -m http.server 8000
 ## Struktur
 
 ```
-index.html               Gruppenübersicht (Hero + Ensemble-Grid)
+index.html               Startseite (Hero, Einleitung, Ensemble, Aufführungen, AVO, News)
 students/{slug}.html     Einzelprofile (dünne Hüllen, Inhalt kommt aus students.js)
 impressum.html           Impressum (Platzhalter [in eckigen Klammern] ausfüllen!)
 datenschutz.html         Datenschutzerklärung (Platzhalter ausfüllen!)
 assets/data/students.js  ZENTRALE DATENBASIS – alle Textinhalte aller Personen
-assets/js/app.js         Sprachumschaltung (DE/EN), Medien-Konvention, Helfer
-assets/js/index.js       Rendert das Ensemble-Grid
+assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Helfer
+assets/js/index.js       Rendert das Ensemble-Grid (alphabetisch nach Nachname)
 assets/js/profile.js     Rendert die Einzelprofile
+assets/js/avo.js         AVO-Anmeldeformular (Formspree) und Trailer-Einbindung
 assets/css/style.css     Design-System
 assets/images/students/  Portraitfotos:  {slug}.jpg
-assets/images/group.jpg  Gruppenfoto für den Hero-Bereich
+assets/images/group.jpg  Gruppenfoto (QUER) für den Hero-Bereich
 assets/images/group-2.jpg  Zweites Gruppenfoto (Band zwischen Ensemble und Aufführungen)
-assets/videos/           Showreels:      {slug}.mp4
+assets/images/productions/  Szenenfotos: hamlet.jpg, reise-zum-mond.jpg, kleine-hexe.jpg
+assets/videos/           Showreels: {slug}.mp4 · AVO-Trailer: avo-trailer.mp4
 assets/audio/            Audio-Reels:    {slug}.mp3 (optional)
 ```
 
@@ -38,7 +40,9 @@ In `assets/data/students.js` beim jeweiligen Eintrag `placeholder: true` entfern
 
 - Alle Felder sind optional: fehlende/leere Felder (auch ganze Sektionen wie `auditionSongs` oder `credits.film`) werden einfach ausgelassen.
 - Arrays dürfen beliebig lang sein – es gibt keine festen Längen.
-- Mehrsprachige Felder haben die Form `{ de: "...", en: "..." }`. Solange keine Übersetzung vorliegt: `en: "TODO: Übersetzung folgt"` eintragen (niemals leer lassen).
+- Die Website ist rein deutsch. Alte Felder der Form `{ de: "...", en: "..." }` funktionieren weiter (angezeigt wird immer der deutsche Wert); neue Felder einfach als einfachen String anlegen.
+- Das Feld `pronouns` wird nicht mehr angezeigt.
+- Die Reihenfolge im Ensemble-Grid ist automatisch alphabetisch nach Nachname – die Reihenfolge der Einträge in `students.js` spielt keine Rolle.
 
 ### Medien ergänzen (kein Code nötig!)
 
@@ -49,6 +53,9 @@ Dateien nur korrekt benennen und in den passenden Ordner legen:
 | Portraitfoto | `assets/images/students/{slug}.jpg` | Fallback mit Initialen, solange es fehlt |
 | Showreel | `assets/videos/{slug}.mp4` | Player erscheint automatisch; solange die Datei fehlt: Hinweis „Showreel folgt in Kürze“ |
 | Audio-Reel | `assets/audio/{slug}.mp3` | Optional – Player erscheint **nur**, wenn die Datei existiert |
+| Gruppenfoto Hero | `assets/images/group.jpg` (**Querformat**) | Solange es fehlt, zeigt der Hero automatisch `group-2.jpg` und blendet das Gruppenfoto-Band aus |
+| Szenenfotos | `assets/images/productions/hamlet.jpg`, `reise-zum-mond.jpg`, `kleine-hexe.jpg` | Erscheinen automatisch in den Aufführungs-Karten (mit Lightbox/Zoom); solange sie fehlen: „Foto folgt“ |
+| AVO-Trailer | `assets/videos/avo-trailer.mp4` | Player erscheint automatisch in der AVO-Sektion; solange die Datei fehlt: Hinweis „Trailer folgt“ |
 
 Die Existenz wird zur Laufzeit per HTTP-HEAD-Request geprüft; es gibt nirgends manuell gepflegte Pfade. Videos werden mit `preload="none"` und dem Portrait als Poster eingebunden – die Seite lädt also nicht schwer.
 
@@ -63,12 +70,23 @@ Die Existenz wird zur Laufzeit per HTTP-HEAD-Request geprüft; es gibt nirgends 
 - Neue Textfelder: in `students.js` ergänzen und in `assets/js/profile.js` eine kleine Render-Funktion nach dem Muster der bestehenden (`songsHtml`, `rolesHtml`, …) hinzufügen. Bestehende Profile ohne das Feld brechen nicht.
 - Neue Medientypen: in `app.js` → `mediaPath()` eine Zeile ergänzen und in `profile.js` analog zum Audio-Reel per `mediaExists()` einbinden.
 
-## Sprachen (DE/EN)
+## Sprache
 
-- Umschalter oben rechts auf jeder Seite; Auswahl wird in `localStorage` gemerkt, `<html lang>` wird dynamisch aktualisiert.
-- UI-Texte (Überschriften, Labels, Navigation) liegen zweisprachig in `assets/js/app.js` (`UI`-Objekt).
-- Personen-Inhalte liegen zweisprachig in `students.js`; fehlt die englische Fassung, wird sichtbar „TODO: Übersetzung folgt“ angezeigt bzw. auf Deutsch zurückgefallen.
-- Impressum & Datenschutz sind bewusst nur auf Deutsch; im EN-Modus erscheint ein Hinweis darauf.
+Die Website ist rein deutsch (der frühere DE/EN-Umschalter wurde auf Kundenwunsch entfernt). UI-Texte liegen zentral in `assets/js/app.js` (`UI`-Objekt); englische Altbestände in `students.js` werden ignoriert.
+
+## Noch offene Platzhalter (nach Feedback-Umsetzung)
+
+| Was | Wo eintragen |
+|---|---|
+| Fotograf:innen-Name (Wasserzeichen + Credit) | `assets/css/style.css` → CSS-Variable `--foto-credit` in `:root`, zusätzlich `impressum.html` unter „Urheberrecht“ |
+| Formspree-Formular-ID | `index.html` → `action="https://formspree.io/f/FORMSPREE_ID"` (kostenloser Account auf formspree.io, Zieladresse = ADK-Mail) |
+| ADK-Mailadresse (Fehlerhinweis im Formular) | `assets/js/avo.js` → Konstante `ADK_MAIL` |
+| GoFundMe-Link | `index.html` → Button „Zur GoFundMe-Kampagne“ in der AVO-Sektion |
+| Uhrzeiten der übrigen AVO-Termine | `index.html` (AVO-Terminliste + Formular-Optionen + Marquee-Spans) und `assets/js/app.js` (`marquee`-Text) |
+| Karls Doppelname („Karl Georg“ vs. „Karl-Georg“) | `assets/data/students.js` (TODO-Kommentar beim Eintrag) |
+| Impressum-Kontaktdaten | `impressum.html` + `datenschutz.html` (eckige Klammern) |
+
+Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepflegt – neue Einträge immer oben einfügen.
 
 ## Vorübergehender Passwortschutz
 
@@ -86,8 +104,9 @@ Solange die Seite noch nicht offiziell veröffentlicht ist, liegt ein einfacher 
    grep -rl "adk-bayern-2027.de" --include="*.html" --include="*.xml" --include="*.txt" . | xargs sed -i 's|adk-bayern-2027.de|EURE-DOMAIN.de|g'
    ```
 2. **Impressum & Datenschutz:** alle `[Platzhalter in eckigen Klammern]` ausfüllen, Hosting-Anbieter in der Datenschutzerklärung eintragen.
-3. **Gruppenfotos** als `assets/images/group.jpg` (Hero) und `assets/images/group-2.jpg` (Band unter dem Ensemble) ablegen; beide Bereiche blenden sich automatisch aus, solange die Datei fehlt.
-4. Portraits und Videos gemäß Namenskonvention hochladen.
+3. **Gruppenfotos** als `assets/images/group.jpg` (Hero, **Querformat**) und `assets/images/group-2.jpg` (Band unter dem Ensemble) ablegen.
+4. Portraits, Szenenfotos und Videos gemäß Namenskonvention hochladen.
+5. **Platzhalter aus der Tabelle oben** (Formspree-ID, GoFundMe, Foto-Credit, …) ausfüllen.
 
 ## Deployment
 

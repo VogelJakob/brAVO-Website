@@ -22,6 +22,10 @@
   --font-body: "Archivo", system-ui, -apple-system, sans-serif;
   --measure: 42rem;
   --pad: 1.25rem;
+  /* PLATZHALTER: Fotograf:innen-Name eintragen, sobald bekannt
+     (erscheint als Wasserzeichen unten rechts auf allen Fotos;
+     zusätzlich den Namen im Impressum unter „Urheberrecht" ergänzen) */
+  --foto-credit: "© Foto: [Name folgt]";
 }
 
 * { box-sizing: border-box; }
@@ -134,22 +138,41 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   text-decoration-thickness: 2px;
 }
 
-#lang-toggle {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--bg);
-  background: transparent;
-  border: 2px solid var(--bg);
-  border-radius: 0;
-  padding: 0.3rem 0.65rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease;
+/* ---------- Foto-Credit / Wasserzeichen ----------
+   Erscheint unten rechts auf allen großen Fotos; der Name wird zentral
+   über die CSS-Variable --foto-credit (siehe :root) gepflegt. */
+
+.hero-photo::after,
+.group-band figure::after,
+.portrait::after,
+.prod-media:has(img)::after {
+  content: var(--foto-credit);
+  position: absolute;
+  right: 0.4rem;
+  bottom: 0.4rem;
+  z-index: 1;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 0.15rem 0.4rem;
+  pointer-events: none;
 }
-#lang-toggle:hover {
-  background: var(--bg);
-  color: var(--ink);
+.portrait.no-img::after { content: none; }
+/* Auch in der Lightbox-Großansicht sichtbar */
+.lightbox::after {
+  content: var(--foto-credit);
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 0.2rem 0.5rem;
+  pointer-events: none;
 }
 
 /* ---------- Hero (Startseite) ---------- */
@@ -165,6 +188,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 /* Gruppenfoto neben dem Titel */
 .hero-photo {
+  position: relative;   /* Bezugsrahmen für das Foto-Credit-Wasserzeichen */
   margin: 0;
   border: var(--border);
   box-shadow: var(--shadow-acc);
@@ -206,14 +230,22 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   font-weight: 500;
 }
 
-/* Laufband: reine CSS-Animation, wird bei prefers-reduced-motion angehalten */
+/* Laufband: reine CSS-Animation; als Link führt es direkt zur AVO-Anmeldung */
 .marquee {
+  display: block;
   overflow: hidden;
   background: var(--acc);
   color: #fff;
   border-top: var(--border);
   border-bottom: var(--border);
   margin-top: 2.5rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+.marquee:hover, .marquee:focus-visible {
+  background: var(--acc-deep);
+  color: #fff;
+  text-decoration: none;
 }
 .marquee-in {
   display: flex;
@@ -234,6 +266,27 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   to { transform: translateX(-12.5%); }
 }
 
+/* ---------- Einleitungstext (Startseite) ---------- */
+
+.intro {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 3.5rem var(--pad) 0;
+}
+.intro p {
+  max-width: var(--measure);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+.intro-sign {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  color: var(--acc);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  margin-bottom: 0;
+}
+
 /* ---------- Gruppenfoto-Band (Startseite) ----------
    Zweites Gruppenbild zwischen Ensemble und Aufführungen;
    blendet sich selbst aus, wenn assets/images/group-2.jpg fehlt. */
@@ -244,6 +297,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   padding: 0 var(--pad) 4.5rem;
 }
 .group-band figure {
+  position: relative;   /* Bezugsrahmen für das Foto-Credit-Wasserzeichen */
   margin: 0;
   border: var(--border);
   box-shadow: var(--shadow-acc);
@@ -308,17 +362,23 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   width: 100%;
   height: 100%;
   object-fit: cover;
+  cursor: zoom-in;
 }
 
 .prod-body { padding: 1rem 1.1rem 1.2rem; }
+/* Termin als auffälliger Akzent-Chip statt kleiner Overline */
 .prod-date {
-  margin: 0 0 0.35rem;
-  color: var(--acc);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  background: var(--acc);
+  color: #fff;
+  font-family: var(--font-head);
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
 }
+.prod-text strong { color: var(--ink); }
 .prod-card h3 { margin-bottom: 0.35em; }
 .prod-venue {
   margin: 0 0 0.5rem;
@@ -326,21 +386,26 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   font-size: 0.9rem;
 }
 .prod-text { margin: 0; color: var(--muted); font-size: 0.92rem; }
-.prod-tickets {
+/* Gemeinsamer Button-Stil: Tickets, GoFundMe, Formular-Absenden */
+.prod-tickets, .btn-cta {
   display: inline-block;
   margin-top: 1rem;
   background: var(--acc);
   color: #fff;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 0.55rem 1.1rem;
   border: 2px solid var(--ink);
+  border-radius: 0;
   box-shadow: 4px 4px 0 var(--ink);
+  cursor: pointer;
   transition: translate 0.15s ease, box-shadow 0.15s ease;
 }
-.prod-tickets:hover, .prod-tickets:focus-visible {
+.prod-tickets:hover, .prod-tickets:focus-visible,
+.btn-cta:hover, .btn-cta:focus-visible {
   translate: -2px -2px;
   box-shadow: 6px 6px 0 var(--ink);
   color: #fff;
@@ -388,18 +453,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   box-shadow: 9px 9px 0 var(--acc);
   text-decoration: none;
   color: var(--ink);
-}
-
-.card-idx {
-  position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
-  z-index: 1;
-  font-family: var(--font-head);
-  font-size: 0.9rem;
-  background: var(--bg);
-  border: 2px solid var(--ink);
-  padding: 0.05rem 0.4rem;
 }
 
 .card-media {
@@ -464,7 +517,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   padding: 3rem var(--pad) 4rem;
 }
 
-/* Name + Pronomen als Kopfzeile über beiden Spalten */
+/* Name als Kopfzeile über beiden Spalten */
 .profile-title { margin-bottom: 2rem; }
 .profile-title h1 { margin-bottom: 0.15em; }
 
@@ -505,13 +558,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .portrait.no-img img { display: none; }
 
 .profile-intro h1 { margin-bottom: 0.25em; }
-.pronouns {
-  color: var(--acc);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
 .coming-soon {
   font-family: var(--font-head);
   text-transform: uppercase;
@@ -793,6 +839,211 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 .back-link:hover { color: var(--acc); text-decoration: none; }
 
+/* ---------- AVO: Abschlussvorsprechen (Startseite) ---------- */
+
+.avo {
+  padding: 1rem var(--pad) 4.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.avo h2 { margin-bottom: 0.6rem; }
+.avo-lead {
+  max-width: var(--measure);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+/* Terminliste: jede Zeile führt zur Anmeldung */
+.avo-dates {
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 0;
+  border: var(--border);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+.avo-dates li + li { border-top: 2px solid var(--ink); }
+.avo-dates a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  padding: 0.8rem 1rem;
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+.avo-dates a:hover, .avo-dates a:focus-visible {
+  background: #f3ede1;
+  text-decoration: none;
+  color: var(--ink);
+}
+.avo-date {
+  font-family: var(--font-head);
+  font-size: 1.35rem;
+  letter-spacing: 0.02em;
+  color: var(--acc);
+  font-variant-numeric: tabular-nums;
+}
+.avo-city {
+  font-weight: 700;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.avo-venue { color: var(--muted); font-size: 0.92rem; }
+.avo-time {
+  margin-left: auto;
+  background: var(--acc);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  white-space: nowrap;
+}
+.avo-time-tba { background: var(--muted); }
+
+/* Trailer + GoFundMe nebeneinander (ab Breakpoint) */
+.avo-extra {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.avo-trailer, .avo-support {
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.4rem 1.5rem;
+}
+.avo-support p { max-width: 38ch; }
+
+/* Anmeldeformular */
+.avo-form {
+  background: var(--paper);
+  border: var(--border);
+  box-shadow: var(--shadow-acc);
+  padding: 1.5rem 1.4rem 1.75rem;
+  max-width: 38rem;
+}
+.avo-form h3 { margin-bottom: 0.4em; }
+.form-field { margin: 1.1rem 0; }
+.form-field label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--acc);
+  margin-bottom: 0.35rem;
+}
+.form-field .optional { color: var(--muted); text-transform: none; letter-spacing: 0; }
+.form-field select,
+.form-field input {
+  display: block;
+  width: 100%;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: 0;
+  padding: 0.6rem 0.7rem;
+}
+.form-field select:focus-visible,
+.form-field input:focus-visible {
+  outline: 3px solid var(--acc);
+  outline-offset: 2px;
+}
+.form-status {
+  margin: 1rem 0 0;
+  font-weight: 700;
+  color: var(--acc);
+}
+.form-status-error { color: var(--acc-deep); }
+
+/* ---------- News (Startseite) ---------- */
+
+.news {
+  padding: 1rem var(--pad) 4.5rem;
+  max-width: 72rem;
+  margin: 0 auto;
+}
+.news h2 { margin-bottom: 1.25rem; }
+.news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+.news-item {
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.news-item:last-child { border-bottom: none; }
+.news-date {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  margin-bottom: 0.5rem;
+}
+.news-item p { margin: 0; }
+
+/* ---------- Bauchbinde unten („Engagiert uns“) ----------
+   Bewusst auffälliger als das Laufband oben: dunkler Balken,
+   pulsierende Leuchtpfeile als Lauflicht Richtung Anmeldung. */
+
+.hire-banner {
+  background: var(--ink);
+  border-top: 3px solid var(--acc);
+  border-bottom: 3px solid var(--acc);
+}
+.hire-banner a {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.5rem;
+  padding: 1.6rem var(--pad);
+  text-decoration: none;
+}
+.hire-banner a:hover, .hire-banner a:focus-visible { text-decoration: none; }
+.hire-text {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  text-align: center;
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
+  line-height: 1.15;
+  letter-spacing: 0.03em;
+  color: var(--bg);
+  transition: color 0.15s ease;
+}
+.hire-banner a:hover .hire-text { color: var(--acc-on-dark); }
+.hire-arrows {
+  display: flex;
+  gap: 0.25rem;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  color: var(--acc-on-dark);
+}
+.hire-arrows span {
+  animation: hire-glow 1.2s ease-in-out infinite;
+  text-shadow: 0 0 6px #fff, 0 0 18px var(--acc-on-dark);
+}
+/* Gestaffelte Verzögerung = Lauflicht-Effekt */
+.hire-arrows span:nth-child(2) { animation-delay: 0.2s; }
+.hire-arrows span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes hire-glow {
+  0%, 100% { opacity: 0.35; text-shadow: none; }
+  50% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 18px var(--acc-on-dark); }
+}
+
 /* ---------- Rechtstexte ---------- */
 
 .legal {
@@ -802,10 +1053,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 .legal h2 { margin-top: 2rem; font-size: 1.3rem; }
 .legal .placeholder { color: var(--acc); font-style: italic; }
-
-/* Hinweis „nur auf Deutsch verfügbar“ nur im EN-Modus zeigen */
-.en-note { display: none; color: var(--muted); font-style: italic; }
-html[lang="en"] .en-note { display: block; }
 
 /* ---------- Footer ---------- */
 
@@ -857,6 +1104,8 @@ html[lang="en"] .en-note { display: block; }
   .credit { flex-direction: row; gap: 1.5rem; }
   .credit-years { flex: 0 0 6.5rem; padding-top: 0.15rem; }
 
+  .avo-extra { grid-template-columns: 1fr 1fr; align-items: start; }
+
   .site-footer { flex-direction: row; justify-content: space-between; align-items: center; }
 }
 
@@ -870,12 +1119,15 @@ html[lang="en"] .en-note { display: block; }
 }
 
 @media (min-width: 960px) {
+  /* Querformat-Gruppenfoto: Bildspalte bekommt mehr Platz als der Titel */
   .hero-inner {
     max-width: 80rem;
-    grid-template-columns: minmax(0, 3fr) minmax(0, 2.6fr);
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     padding-top: 4rem;
     align-items: center;
   }
+  /* Titel an die schmalere Textspalte anpassen, damit „Jahrgang“ nicht abschneidet */
+  .hero-title { font-size: clamp(3rem, 6.5vw, 5rem); }
   .hero-photo { justify-self: end; max-width: none; }
 
   /*

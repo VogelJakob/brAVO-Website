@@ -10,9 +10,10 @@
  *   Mehrere Hörproben: Feld audioReels = [{ label: {de,en}, file: "name.mp3" }] –
  *                  Dateien liegen in assets/audio/, nur vorhandene werden angezeigt.
  *
- * SPRACHEN: Felder mit { de: ..., en: ... } werden vom Sprachumschalter aufgelöst.
- * Fehlende Übersetzungen mit "TODO: Übersetzung folgt" markieren – niemals leer lassen,
- * wenn das Feld auf Deutsch existiert.
+ * SPRACHEN: Die Website ist rein deutsch. Felder mit { de: ..., en: ... }
+ * (Altbestand) funktionieren weiter – es wird immer der deutsche Wert angezeigt,
+ * die EN-Werte werden ignoriert. Neue Felder einfach als einfachen String anlegen.
+ * Das Feld "pronouns" wird nicht mehr angezeigt.
  *
  * NEUE PERSON: Eintrag mit mindestens { slug, name, placeholder: true } anlegen.
  * Sobald Inhalte vorliegen: placeholder entfernen und Felder ergänzen.
@@ -369,6 +370,8 @@ const STUDENTS = [
     social: { instagram: "bianca_.p" },
     email: "b.pitschedell@gmail.com"
   },
+  /* TODO: Schreibweise des Doppelnamens klären („Karl Georg" vs. „Karl-Georg")
+     und hier berichtigen – Slug und Dateinamen können unverändert bleiben. */
   { slug: "karl-georg-roessler", name: "Karl Georg Rößler", placeholder: true },
   {
     slug: "michelle-thielsch",

@@ -1,5 +1,5 @@
 /*
- * Gemeinsame Logik: Sprachumschaltung (DE/EN), Medien-Konvention, Helfer.
+ * Gemeinsame Logik: UI-Texte (nur Deutsch), Medien-Konvention, Helfer.
  * Keine JS-Animationen – nur Zustands-/Inhaltslogik. Übergänge macht CSS.
  */
 (function () {
@@ -13,15 +13,12 @@
       heroTitle1: "Jahrgang",
       heroTitle2: "2027",
       heroText: "Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.",
-      marquee: "Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·",
+      marquee: "Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·",
       ensemble: "Ensemble",
       productions: "Aufführungen",
       prodDateSoon: "Termine folgen",
       prod1Premiere: "Premiere · Sa 08.08.2026",
-      prod1Dates: "Weitere Vorstellungen: 18./19.09., 25./26.09. und 01./02.10.2026 · weitere Termine folgen …",
       prod2Premiere: "Premiere · Fr 02.10.2026",
-      prod2Dates: "Weitere Vorstellungen: 07.10., 16.10. und 23.10.2026 · weitere Termine folgen …",
-      prod3Dates: "Voraussichtlich 15. und 16.01.2027 · alle Termine folgen …",
       tickets: "Tickets",
       prodImageSoon: "Foto folgt",
       photos: "Fotos",
@@ -34,7 +31,6 @@
       imprint: "Impressum",
       privacy: "Datenschutz",
       steckbrief: "Steckbrief",
-      pronouns: "Pronomen",
       born: "Geburtsdatum",
       locations: "Wohnmöglichkeiten",
       playingAge: "Spielalter",
@@ -66,90 +62,14 @@
       portraitAlt: "Portrait von",
       groupAlt: "Gruppenfoto des Abschlussjahrgangs 2027",
       skipLink: "Zum Inhalt springen",
-      footerNote: "Akademie für Darstellende Kunst Bayern · Abschlussjahrgang 2027",
-      langToggle: "EN",
-      langToggleAria: "Switch language to English"
-    },
-    en: {
-      siteName: "ADK Bavaria · Class of 2027",
-      heroKicker: "Academy of Performing Arts Bavaria",
-      heroTitle1: "Class of",
-      heroTitle2: "2027",
-      heroText: "Ten acting students introduce themselves – with profile, résumé and showreel. Available for engagements in theatre, film and television from summer 2027.",
-      marquee: "Auditions · 22 Oct 2026 Linz (Anton Bruckner Universität) · 30 Oct 2026 Regensburg (Akademietheater Regensburg) · 2 Nov 2026 Cologne (Theater im Bauturm) · 3 Nov 2026 Hamburg (Hamburger Sprechwerk) · 4 Nov 2026 Berlin (Theaterhaus Berlin Schöneweide) · 5 Nov 2026 Dresden (Zentralwerk) · 7 Nov 2026 Munich (Mucca Halle) ·",
-      ensemble: "Ensemble",
-      productions: "Performances",
-      prodDateSoon: "Dates TBA",
-      prod1Premiere: "Premiere · Sat 8 Aug 2026",
-      prod1Dates: "Further performances: 18/19 Sep, 25/26 Sep and 1/2 Oct 2026 · more dates to follow …",
-      prod2Premiere: "Premiere · Fri 2 Oct 2026",
-      prod2Dates: "Further performances: 7, 16 and 23 Oct 2026 · more dates to follow …",
-      prod3Dates: "Expected 15 and 16 Jan 2027 · all dates to follow …",
-      tickets: "Tickets",
-      prodImageSoon: "Photo coming soon",
-      photos: "Photos",
-      lightboxClose: "Close",
-      lightboxAria: "Enlarged image view",
-      lightboxPrev: "Previous image",
-      lightboxNext: "Next image",
-      toProfile: "View profile",
-      toOverview: "Back to overview",
-      imprint: "Legal notice",
-      privacy: "Privacy policy",
-      steckbrief: "Profile",
-      pronouns: "Pronouns",
-      born: "Date of birth",
-      locations: "Possible places of residence",
-      playingAge: "Playing age",
-      height: "Height",
-      hairColor: "Hair colour",
-      eyeColor: "Eye colour",
-      voiceType: "Voice type",
-      languages: "Languages",
-      skills: "Special skills",
-      bio: "Biography",
-      auditionRoles: "Audition roles (selection)",
-      auditionSongs: "Audition songs (selection)",
-      credits: "Work",
-      theater: "Theatre",
-      film: "Film",
-      other: "Other work",
-      director: "Director",
-      byAuthor: "by",
-      showreel: "Showreel",
-      showreelSoon: "The showreel will be added shortly.",
-      audioReel: "Audio samples",
-      contact: "Contact",
-      email: "Email",
-      comingSoon: "Content coming soon.",
-      comingSoonText: "The full profile with facts, résumé and showreel is currently being prepared.",
-      noscript: "Please enable JavaScript to view the profiles.",
-      videoFallback: "Your browser does not support the video element.",
-      audioFallback: "Your browser does not support the audio element.",
-      portraitAlt: "Portrait of",
-      groupAlt: "Group photo of the graduating class of 2027",
-      skipLink: "Skip to content",
-      footerNote: "Academy of Performing Arts Bavaria · Graduating class of 2027",
-      langToggle: "DE",
-      langToggleAria: "Sprache auf Deutsch umstellen"
+      footerNote: "Akademie für Darstellende Kunst Bayern · Abschlussjahrgang 2027"
     }
   };
-
-  var STORAGE_KEY = "adk-lang";
-
-  function storedLang() {
-    try {
-      var l = localStorage.getItem(STORAGE_KEY);
-      return l === "en" || l === "de" ? l : "de";
-    } catch (e) {
-      return "de";
-    }
-  }
 
   var ADK = {
     // Relativer Pfad zur Projektwurzel (Profilseiten liegen in /students/)
     root: /\/students\//.test(location.pathname) ? "../" : "./",
-    lang: storedLang(),
+    lang: "de",
 
     t: function (key) {
       var dict = UI[this.lang] || UI.de;
@@ -157,9 +77,9 @@
     },
 
     /*
-     * Löst ein mehrsprachiges Feld auf.
-     * Akzeptiert Strings, Arrays oder { de: ..., en: ... }-Objekte.
-     * Fällt auf Deutsch zurück, wenn die gewählte Sprache fehlt.
+     * Löst ein Datenfeld auf. Akzeptiert Strings, Arrays oder
+     * { de: ..., en: ... }-Objekte (Altbestand in students.js);
+     * bei Objekten wird immer der deutsche Wert verwendet.
      */
     pick: function (value) {
       if (value === null || value === undefined) return null;
@@ -197,15 +117,7 @@
       });
     },
 
-    setLang: function (lang) {
-      this.lang = lang === "en" ? "en" : "de";
-      try { localStorage.setItem(STORAGE_KEY, this.lang); } catch (e) { /* privater Modus o.ä. */ }
-      document.documentElement.lang = this.lang;
-      this.applyStatic();
-      document.dispatchEvent(new CustomEvent("adk:lang"));
-    },
-
-    /* Statische Elemente mit data-i18n-Attribut übersetzen. */
+    /* Statische Elemente mit data-i18n-Attribut aus dem UI-Wörterbuch befüllen. */
     applyStatic: function () {
       var self = this;
       document.querySelectorAll("[data-i18n]").forEach(function (el) {
@@ -214,11 +126,6 @@
       document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
         el.setAttribute("alt", self.t(el.getAttribute("data-i18n-alt")));
       });
-      var toggle = document.getElementById("lang-toggle");
-      if (toggle) {
-        toggle.textContent = this.t("langToggle");
-        toggle.setAttribute("aria-label", this.t("langToggleAria"));
-      }
     },
 
     findStudent: function (slug) {
@@ -334,13 +241,6 @@
   });
 
   document.addEventListener("DOMContentLoaded", function () {
-    document.documentElement.lang = ADK.lang;
     ADK.applyStatic();
-    var toggle = document.getElementById("lang-toggle");
-    if (toggle) {
-      toggle.addEventListener("click", function () {
-        ADK.setLang(ADK.lang === "de" ? "en" : "de");
-      });
-    }
   });
 })();

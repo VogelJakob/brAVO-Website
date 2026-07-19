@@ -69,7 +69,6 @@
   /* Steckbrief als Definitionsliste; nur vorhandene Felder. */
   function factsHtml(s) {
     var rows = [
-      ["pronouns", s.pronouns],
       ["born", s.born],
       ["locations", s.locations],
       ["playingAge", s.playingAge],
@@ -283,7 +282,6 @@
     main.innerHTML =
       '<header class="profile-title">' +
         "<h1>" + esc(s.name) + "</h1>" +
-        (has(s.pronouns) ? '<p class="pronouns">' + esc(s.pronouns) + "</p>" : "") +
       "</header>" +
       '<div class="profile-layout">' +
         '<aside class="profile-side">' +
@@ -332,5 +330,4 @@
     var s = ADK.findStudent(slug);
     if (s && !s.placeholder) checkMedia();
   });
-  document.addEventListener("adk:lang", render);
 })();

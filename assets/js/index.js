@@ -11,20 +11,25 @@
       .join("");
   }
 
-  /* Zweistellige Plakat-Nummerierung (01–10) der Ensemble-Karten. */
-  function pad2(n) {
-    return n < 10 ? "0" + n : String(n);
+  /* Anzeige alphabetisch nach Nachname (letzter Namensbestandteil);
+     die Reihenfolge in students.js bleibt davon unberührt. */
+  function nachname(s) {
+    var parts = s.name.trim().split(/\s+/);
+    return parts[parts.length - 1];
   }
 
   function render() {
     var grid = document.getElementById("ensemble-grid");
     if (!grid || typeof STUDENTS === "undefined") return;
 
-    var html = STUDENTS.map(function (s, i) {
+    var sorted = STUDENTS.slice().sort(function (a, b) {
+      return nachname(a).localeCompare(nachname(b), "de");
+    });
+
+    var html = sorted.map(function (s) {
       var img = ADK.mediaPath("image", s.slug);
       return (
         '<a class="card" href="students/' + ADK.esc(s.slug) + '.html">' +
-          '<span class="card-idx" aria-hidden="true">' + pad2(i + 1) + "</span>" +
           '<div class="card-media">' +
             '<img src="' + ADK.esc(img) + '" alt="' + ADK.esc(ADK.t("portraitAlt") + " " + s.name) + '" loading="lazy" ' +
               'onerror="this.closest(\'.card-media\').classList.add(\'no-img\')">' +
@@ -42,5 +47,4 @@
   }
 
   document.addEventListener("DOMContentLoaded", render);
-  document.addEventListener("adk:lang", render);
 })();

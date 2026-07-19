@@ -10,7 +10,7 @@
   <meta property="og:title" content="ADK Bayern – Abschlussjahrgang 2027">
   <meta property="og:description" content="Zehn Schauspielstudierende der Akademie für Darstellende Kunst Bayern stellen sich vor – mit Steckbrief, Vita und Showreel.">
   <meta property="og:url" content="https://adk-bayern-2027.de/">
-  <meta property="og:image" content="https://adk-bayern-2027.de/assets/images/group.jpg">
+  <meta property="og:image" content="https://adk-bayern-2027.de/assets/images/group-2.jpg">
   <meta property="og:locale" content="de_DE">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ADK Bayern – Abschlussjahrgang 2027">
@@ -42,7 +42,8 @@
     <nav>
       <a href="#ensemble" data-i18n="ensemble">Ensemble</a>
       <a href="#auffuehrungen" data-i18n="productions">Aufführungen</a>
-      <button id="lang-toggle" type="button" aria-label="Switch language to English">EN</button>
+      <a href="#avo">AVO</a>
+      <a href="#news">News</a>
     </nav>
   </header>
 
@@ -54,27 +55,36 @@
           <h1 class="hero-title"><span data-i18n="heroTitle1">Jahrgang</span><span class="hero-title-accent" data-i18n="heroTitle2">2027</span></h1>
           <p data-i18n="heroText">Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.</p>
         </div>
-        <!-- Gruppenfoto neben dem Titel: blendet sich selbst aus, wenn assets/images/group.jpg fehlt -->
+        <!-- Gruppenfoto (quer) neben dem Titel. Bevorzugt assets/images/group.jpg
+             (neues Querformat-Foto, kommt Anfang August – Datei einfach unter diesem
+             Namen ablegen). Solange es fehlt, springt das Bild auf group-2.jpg und
+             das Gruppenfoto-Band weiter unten wird ausgeblendet (kein Doppel-Foto). -->
         <figure class="hero-photo" id="hero-photo">
           <img src="assets/images/group.jpg" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
                data-lightbox tabindex="0"
-               onerror="document.getElementById('hero-photo').style.display='none'">
+               onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='assets/images/group-2.jpg';var b=document.getElementById('group-band');if(b)b.style.display='none';}else{document.getElementById('hero-photo').style.display='none';}">
         </figure>
       </div>
       <!-- 8 identische Kopien: genug Breite, damit auch bei stark
            herausgezoomten/sehr breiten Viewports keine Lücke sichtbar wird -->
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-in">
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
-          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+      <a class="marquee" href="#anmeldung" aria-label="Vorsprechtermine – zur Anmeldung springen">
+        <div class="marquee-in" aria-hidden="true">
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
+          <span data-i18n="marquee">Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·</span>
         </div>
-      </div>
+      </a>
+    </section>
+
+    <!-- Einleitungstext des Jahrgangs -->
+    <section class="intro" id="intro" aria-label="Über uns">
+      <p>ADK Bayern 2027 hier. Wir bringen euch die heißesten News der Saison! Die letzten Jahre haben wir Rollen und Texte gelebt, verflucht, geliebt – oder lieben gelernt. Wir haben Premieren gezählt und die Bühne immer wieder neu erobert. Laut, leise, wild oder präzise: Jede*r auf seine/ihre ganz eigene Art. Und jetzt heißt es: letzter Vorhang, nächster Akt. Wir sagen Tschüss zur Klasse und Hallo zur Theaterwelt … bereit für große Auftritte, Nebenrollen, Umwege und alles dazwischen. Bühne frei. You know you will love us.</p>
+      <p class="intro-sign">XOXO, Euer Abschlussjahrgang ADK Bayern 2027</p>
     </section>
 
     <section class="ensemble" id="ensemble">
@@ -98,34 +108,157 @@
       <h2 data-i18n="productions">Aufführungen</h2>
       <div class="prod-grid">
         <article class="prod-card">
-          <div class="prod-media" aria-hidden="true"><span data-i18n="prodImageSoon">Foto folgt</span></div>
+          <!-- Szenenfoto: Datei einfach unter assets/images/productions/hamlet.jpg ablegen -->
+          <div class="prod-media">
+            <img src="assets/images/productions/hamlet.jpg" alt="Szenenfoto aus Hamlet"
+                 data-lightbox data-gallery="produktionen" tabindex="0" loading="lazy"
+                 onerror="this.remove()">
+            <span aria-hidden="true" data-i18n="prodImageSoon">Foto folgt</span>
+          </div>
           <div class="prod-body">
             <p class="prod-date" data-i18n="prod1Premiere">Premiere · Sa 08.08.2026</p>
             <h3>Hamlet</h3>
             <p class="prod-venue">Akademietheater Regensburg</p>
-            <p class="prod-text" data-i18n="prod1Dates">Weitere Vorstellungen: 18./19.09., 25./26.09. und 01./02.10.2026 · weitere Termine folgen …</p>
+            <p class="prod-text">Weitere Vorstellungen: <strong>18./19.09.</strong>, <strong>25./26.09.</strong> und <strong>01./02.10.2026</strong> · weitere Termine folgen …</p>
             <a class="prod-tickets" href="https://okticket.de/tickets-hamlet-regensburg-akademietheater-e58704?event_id=58704" target="_blank" rel="noopener noreferrer" data-i18n="tickets">Tickets</a>
           </div>
         </article>
         <article class="prod-card">
-          <div class="prod-media" aria-hidden="true"><span data-i18n="prodImageSoon">Foto folgt</span></div>
+          <!-- Szenenfoto: Datei einfach unter assets/images/productions/reise-zum-mond.jpg ablegen -->
+          <div class="prod-media">
+            <img src="assets/images/productions/reise-zum-mond.jpg" alt="Szenenfoto aus Die Reise von der Erde zum Mond"
+                 data-lightbox data-gallery="produktionen" tabindex="0" loading="lazy"
+                 onerror="this.remove()">
+            <span aria-hidden="true" data-i18n="prodImageSoon">Foto folgt</span>
+          </div>
           <div class="prod-body">
             <p class="prod-date" data-i18n="prod2Premiere">Premiere · Fr 02.10.2026</p>
             <h3>Die Reise von der Erde zum Mond</h3>
             <p class="prod-venue">Theater Chemnitz</p>
-            <p class="prod-text" data-i18n="prod2Dates">Weitere Vorstellungen: 07.10., 16.10. und 23.10.2026 · weitere Termine folgen …</p>
+            <p class="prod-text">Weitere Vorstellungen: <strong>07.10.</strong>, <strong>16.10.</strong> und <strong>23.10.2026</strong> · weitere Termine folgen …</p>
             <a class="prod-tickets" href="https://www.theater-chemnitz.de/spielplan/detailseite/die-reise-von-der-erde-zum-mond" target="_blank" rel="noopener noreferrer" data-i18n="tickets">Tickets</a>
           </div>
         </article>
         <article class="prod-card">
-          <div class="prod-media" aria-hidden="true"><span data-i18n="prodImageSoon">Foto folgt</span></div>
+          <!-- Szenenfoto: Datei einfach unter assets/images/productions/kleine-hexe.jpg ablegen -->
+          <div class="prod-media">
+            <img src="assets/images/productions/kleine-hexe.jpg" alt="Szenenfoto aus Die kleine Hexe"
+                 data-lightbox data-gallery="produktionen" tabindex="0" loading="lazy"
+                 onerror="this.remove()">
+            <span aria-hidden="true" data-i18n="prodImageSoon">Foto folgt</span>
+          </div>
           <div class="prod-body">
             <p class="prod-date" data-i18n="prodDateSoon">Termine folgen</p>
             <h3>Die kleine Hexe</h3>
-            <p class="prod-text" data-i18n="prod3Dates">Voraussichtlich 15. und 16.01.2027 · alle Termine folgen …</p>
+            <p class="prod-text">Voraussichtlich <strong>15. und 16.01.2027</strong> · alle Termine folgen …</p>
           </div>
         </article>
       </div>
+    </section>
+
+    <!-- AVO: Abschlussvorsprechen mit Terminliste, Trailer, GoFundMe und Anmeldung -->
+    <section class="avo" id="avo">
+      <h2>AVO – Abschlussvorsprechen</h2>
+      <p class="avo-lead">Unsere Abschlussvorsprechen – wir freuen uns auf euren Besuch. Ein Klick auf einen Termin führt direkt zur Anmeldung.</p>
+
+      <ol class="avo-dates">
+        <li><a href="#anmeldung"><span class="avo-date">22.10.2026</span><span class="avo-city">Linz</span><span class="avo-venue">Anton Bruckner Universität</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">30.10.2026</span><span class="avo-city">Regensburg</span><span class="avo-venue">Akademietheater Regensburg</span><span class="avo-time">14 Uhr</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">02.11.2026</span><span class="avo-city">Köln</span><span class="avo-venue">Theater im Bauturm</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">03.11.2026</span><span class="avo-city">Hamburg</span><span class="avo-venue">Hamburger Sprechwerk</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">04.11.2026</span><span class="avo-city">Berlin</span><span class="avo-venue">Theaterhaus Berlin Schöneweide</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">05.11.2026</span><span class="avo-city">Dresden</span><span class="avo-venue">Zentralwerk</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">07.11.2026</span><span class="avo-city">München</span><span class="avo-venue">Mucca Halle</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+      </ol>
+
+      <!-- AVO-Trailer: sobald assets/videos/avo-trailer.mp4 vorliegt, ersetzt
+           avo.js den Hinweistext automatisch durch den Videoplayer. -->
+      <div class="avo-extra">
+        <div class="avo-trailer" id="avo-trailer">
+          <h3>AVO-Trailer</h3>
+          <p class="muted" id="avo-trailer-soon">Der AVO-Trailer folgt in Kürze.</p>
+        </div>
+        <div class="avo-support">
+          <h3>Unterstützt uns</h3>
+          <p>Unsere Vorsprechtour finanzieren wir selbst – jede Unterstützung hilft.</p>
+          <!-- PLATZHALTER: echte GoFundMe-URL eintragen, sobald die Kampagne steht -->
+          <a class="btn-cta" href="https://www.gofundme.com/f/PLATZHALTER-ADK-BAYERN-2027" target="_blank" rel="noopener noreferrer">Zur GoFundMe-Kampagne</a>
+        </div>
+      </div>
+
+      <!-- Anmeldung: optional, aber gern gesehen. Versand über Formspree –
+           PLATZHALTER "FORMSPREE_ID" durch die echte Formular-ID ersetzen
+           (kostenloser Account auf formspree.io, Zieladresse = ADK-Mail). -->
+      <div id="anmeldung" class="avo-anmeldung">
+        <form id="avo-form" class="avo-form" action="https://formspree.io/f/FORMSPREE_ID" method="POST">
+          <h3>Zum Vorsprechen anmelden</h3>
+          <p>Man muss sich nicht anmelden – aber es ist gern gesehen und hilft uns bei der Planung.</p>
+          <div class="form-field">
+            <label for="avo-termin">Welches Vorsprechen möchtet ihr besuchen?</label>
+            <select id="avo-termin" name="vorsprechen" required>
+              <option value="" disabled selected>Bitte wählen …</option>
+              <option>22.10.2026 – Linz (Anton Bruckner Universität)</option>
+              <option>30.10.2026 – Regensburg, 14 Uhr (Akademietheater Regensburg)</option>
+              <option>02.11.2026 – Köln (Theater im Bauturm)</option>
+              <option>03.11.2026 – Hamburg (Hamburger Sprechwerk)</option>
+              <option>04.11.2026 – Berlin (Theaterhaus Berlin Schöneweide)</option>
+              <option>05.11.2026 – Dresden (Zentralwerk)</option>
+              <option>07.11.2026 – München (Mucca Halle)</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="avo-personen">Anzahl Personen</label>
+            <select id="avo-personen" name="anzahl_personen" required>
+              <option value="" disabled selected>Bitte wählen …</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>mehr als 10</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="avo-name">Name / Institution <span class="optional">(optional)</span></label>
+            <input id="avo-name" name="name" type="text" autocomplete="organization">
+          </div>
+          <div class="form-field">
+            <label for="avo-email">E-Mail für Rückfragen <span class="optional">(optional)</span></label>
+            <input id="avo-email" name="email" type="email" autocomplete="email">
+          </div>
+          <button class="btn-cta" type="submit">Anmeldung senden</button>
+          <p class="form-status" id="avo-form-status" role="status" aria-live="polite" hidden></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- News: statisch gepflegt – neue Einträge immer OBEN einfügen -->
+    <section class="news" id="news">
+      <h2>News</h2>
+      <ol class="news-list">
+        <li class="news-item">
+          <span class="news-date">Juli 2026</span>
+          <p>Die Termine unserer Abschlussvorsprechen 2026 stehen fest – alle Städte und Spielstätten unter <a href="#avo">AVO</a>. Die Anmeldung ist ab sofort möglich.</p>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Juli 2026</span>
+          <p>Am 08.08.2026 feiert <em>Hamlet</em> am Akademietheater Regensburg Premiere – Tickets gibt es unter <a href="#auffuehrungen">Aufführungen</a>. Fotos vom Jahrgang und aus den Produktionen folgen in Kürze.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Bauchbinde unten: bewusst auffälliger als das Laufband oben -->
+    <section class="hire-banner" id="engagiert" aria-label="Engagiert uns">
+      <a href="#anmeldung">
+        <span class="hire-arrows" aria-hidden="true"><span>➤</span><span>➤</span><span>➤</span></span>
+        <span class="hire-text">Engagiert uns · Stellt uns ein · Wir sind bereit für unseren Traumjob</span>
+        <span class="hire-arrows hire-arrows-r" aria-hidden="true"><span>➤</span><span>➤</span><span>➤</span></span>
+      </a>
     </section>
   </main>
 
@@ -140,5 +273,6 @@
   <script src="assets/data/students.js"></script>
   <script src="assets/js/app.js"></script>
   <script src="assets/js/index.js"></script>
+  <script src="assets/js/avo.js"></script>
 </body>
 </html>
