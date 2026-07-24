@@ -69,6 +69,38 @@
       box-shadow: 9px 9px 0 var(--ink);
     }
     .link-btn:hover small, .link-btn:focus-visible small { color: #fff; }
+
+    /* Hervorgehobener Spenden-Link (GoFundMe).
+       Nutzt die zentrale Farb-Variable --donate aus assets/css/style.css. */
+    .link-btn--donate {
+      position: relative;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .link-btn--donate .link-badge {
+      position: absolute;
+      top: -11px;
+      right: 16px;
+      background: var(--donate);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      transition: opacity 0.15s ease;
+    }
+    /* Hover/Fokus: Box wird grün, Texte hell, Rahmen/Schatten bleiben wie im
+       Ruhezustand (kein Versatz), Badge blendet aus. */
+    .link-btn--donate:hover, .link-btn--donate:focus-visible {
+      background: var(--donate);
+      color: #fff;
+      transform: none;
+      box-shadow: var(--shadow);
+    }
+    .link-btn--donate:hover small, .link-btn--donate:focus-visible small { color: var(--donate-soft); }
+    .link-btn--donate:hover .link-badge, .link-btn--donate:focus-visible .link-badge { opacity: 0; }
+
     .links-footer { font-size: 0.85rem; color: var(--muted); }
     .links-footer a { margin: 0 0.4rem; }
   </style>
@@ -86,6 +118,9 @@
         <small>adk-bayern-2027.de</small></a>
       <a class="link-btn" href="https://www.instagram.com/adkbayern2027/" target="_blank" rel="noopener noreferrer">Instagram
         <small>@adkbayern2027</small></a>
+      <a class="link-btn link-btn--donate" href="https://www.gofundme.com/f/unsere-avoreise-zu-stemmen-absolventinnenvorsprechen" target="_blank" rel="noopener noreferrer">
+        <span class="link-badge">Spenden</span>GoFundMe
+        <small>AVO-Reise nach Stemmen (Absolvent:innenvorsprechen)</small></a>
 
       <p class="links-group">Linz · Anton Bruckner Privatuniversität</p>
       <a class="link-btn" href="https://www.schauspielabsolventen.at/" target="_blank" rel="noopener noreferrer">Website Linz

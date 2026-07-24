@@ -14,6 +14,8 @@
   --acc-deep: #7c1013;
   --acc-on-dark: #ff8a80;  /* Rot-Variante für dunkle Flächen, Kontrast auf --ink ca. 7.5:1 */
   --muted: #60584f;        /* Kontrast auf --bg ca. 6.5:1 */
+  --donate: #0F8A50;       /* Spenden-Grün – projektspezifische Zusatzfarbe (GoFundMe-Link) */
+  --donate-soft: #CFEEDD;  /* helles Grün für Beschreibungstext auf --donate-Hintergrund */
   --line-soft: #ded5c6;    /* feine Trennlinien in statischen Listen */
   --border: 3px solid var(--ink);
   --shadow: 7px 7px 0 var(--ink);
