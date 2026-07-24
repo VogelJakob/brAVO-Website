@@ -74,13 +74,17 @@
        Nutzt die zentrale Farb-Variable --donate aus assets/css/style.css. */
     .link-btn--donate {
       position: relative;
+      /* Extra Luft nach oben, damit das hochstehende Badge nie mit dem
+         Element darüber kollidiert (BUG 1). */
+      margin-top: 0.5rem;
       transition: background 0.15s ease, color 0.15s ease;
     }
     .link-btn--donate .link-badge {
       position: absolute;
       top: -11px;
       right: 16px;
-      background: var(--donate);
+      /* Fallback-Grün, falls die zentrale Variable (noch) nicht geladen ist. */
+      background: var(--donate, #0F8A50);
       color: #fff;
       font-family: var(--font-body);
       font-size: 0.62rem;
@@ -93,12 +97,15 @@
     /* Hover/Fokus: Box wird grün, Texte hell, Rahmen/Schatten bleiben wie im
        Ruhezustand (kein Versatz), Badge blendet aus. */
     .link-btn--donate:hover, .link-btn--donate:focus-visible {
-      background: var(--donate);
+      /* Fallback-Werte verhindern, dass der Hover bei fehlender Variable auf
+         'transparent' bzw. geerbtes Weiß zusammenfällt und der Inhalt
+         unsichtbar wird (BUG 2). */
+      background: var(--donate, #0F8A50);
       color: #fff;
       transform: none;
       box-shadow: var(--shadow);
     }
-    .link-btn--donate:hover small, .link-btn--donate:focus-visible small { color: var(--donate-soft); }
+    .link-btn--donate:hover small, .link-btn--donate:focus-visible small { color: var(--donate-soft, #CFEEDD); }
     .link-btn--donate:hover .link-badge, .link-btn--donate:focus-visible .link-badge { opacity: 0; }
 
     .links-footer { font-size: 0.85rem; color: var(--muted); }
@@ -113,14 +120,16 @@
     </header>
 
     <nav class="links-list" aria-label="Links">
+      <!-- Spenden-Aufruf ganz oben, eigene Sektion ohne Überschrift (Badge liefert Kontext). -->
+      <a class="link-btn link-btn--donate" href="https://www.gofundme.com/f/unsere-avoreise-zu-stemmen-absolventinnenvorsprechen" target="_blank" rel="noopener noreferrer">
+        <span class="link-badge">Spenden</span>GoFundMe
+        <small>AVO-Reise nach Stemmen (Absolvent:innenvorsprechen)</small></a>
+
       <p class="links-group">Regensburg</p>
       <a class="link-btn" href="https://adk-bayern-2027.de/">Unsere Website
         <small>adk-bayern-2027.de</small></a>
       <a class="link-btn" href="https://www.instagram.com/adkbayern2027/" target="_blank" rel="noopener noreferrer">Instagram
         <small>@adkbayern2027</small></a>
-      <a class="link-btn link-btn--donate" href="https://www.gofundme.com/f/unsere-avoreise-zu-stemmen-absolventinnenvorsprechen" target="_blank" rel="noopener noreferrer">
-        <span class="link-badge">Spenden</span>GoFundMe
-        <small>AVO-Reise nach Stemmen (Absolvent:innenvorsprechen)</small></a>
 
       <p class="links-group">Linz · Anton Bruckner Privatuniversität</p>
       <a class="link-btn" href="https://www.schauspielabsolventen.at/" target="_blank" rel="noopener noreferrer">Website Linz
