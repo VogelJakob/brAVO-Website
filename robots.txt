@@ -1,8 +1,11 @@
 # Vorübergehend: Seite ist passwortgeschützt und soll nicht in Suchmaschinen
 # auftauchen. Zum Livegang wieder auf "Allow: /" umstellen (siehe README).
-# WICHTIG: /links/ (QR-Code-Linkseite für Visitenkarten) auch nach dem
-# Livegang auf "Disallow" lassen – sie soll nur über den QR-Code erreichbar sein.
+# Ausnahme: /links/ (QR-Code-Linkseite für Visitenkarten) soll auffindbar und
+# indexierbar sein und ist daher explizit freigegeben (Allow überschreibt das
+# pauschale Disallow, da die längere/spezifischere Regel gilt).
 User-agent: *
 Disallow: /
+Allow: /links
+Allow: /links/
 
 Sitemap: https://adk-bayern-2027.de/sitemap.xml
