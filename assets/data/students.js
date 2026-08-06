@@ -58,7 +58,7 @@ const STUDENTS = [
     credits: {
       theater: [
         { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Hamlet, Laertes", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
-        { years: "2026–2027", production: "Cabaret", author: "Joe Masteroff, John Kander, Fred Ebb", role: "Kit Kat Swing", director: "Claus Guth", venue: "Residenztheater München" },
+        { years: "2025–2027", production: "Cabaret", author: "Joe Masteroff, John Kander, Fred Ebb", role: "Kit Kat Swing", director: "Claus Guth", venue: "Residenztheater München" },
         { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
         { years: "2025–2027", production: "Die Kleine Hexe", author: "Otfried Preußler", role: "Abraxas, Knusperhexe", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Der Mann aus Podolsk", author: "Dmitri Danilow", role: "Polizist 1", director: "Senya Romin", venue: "Akademietheater Regensburg" },
@@ -69,7 +69,7 @@ const STUDENTS = [
         { years: "2019", production: "These Teens Will Save The Future", author: "", role: "", director: "Verena Regensburger", venue: "Münchner Kammerspiele" }
       ],
       film: [
-        { years: "2025", production: "Melpomene – Fragmente eines Fiebertraums (Kurzfilm)", role: "Lucian", director: "Kai Siberi", venue: "ImagoMota – Kai Sieber & Jared Fantaye GbR" },
+        { years: "2025", production: "Melpomene – Fragmente eines Fiebertraums (Kurzfilm)", role: "Lucian", director: "Kai Sieber", venue: "ImagoMota – Kai Sieber & Jared Fantaye GbR" },
         { years: "2023", production: "Welcome to the 70s (Social Spot, Tanz)", role: "", director: "Gretta Sammalniemi", venue: "WennDann Film GmbH, HFF München" },
         { years: "2022", production: "Nach uns der Rest der Welt (TV-Film, Tanz)", role: "", director: "Franziska Buch", venue: "SWR" }
       ],
@@ -87,7 +87,7 @@ const STUDENTS = [
     born: "26.05.2003",
     locations: ["Berlin", "Stuttgart", "München", "Allgäu", "Hamburg", "Niederlande"],
     playingAge: "17–27",
-    height: "1,67 m",
+    height: "167 cm",
     hairColor: { de: "Hellbraun", en: "light brown" },
     eyeColor: { de: "Hellbraun", en: "light brown" },
     voiceType: { de: "Alt-Sopran", en: "Alto-soprano" },
@@ -107,7 +107,7 @@ const STUDENTS = [
       { role: "Doris", play: "Das Kunstseidene Mädchen", author: "Irmgard Keun" },
       { role: "Franz Moor", play: "Die Räuber", author: "Friedrich Schiller" },
       { role: "Die Biologin", play: "Annihilation", author: "Jeff Vandermeer" },
-      { role: "Trini", play: "Die Ganze Wahrheiten", author: "Sathyan Ramesh" }
+      { role: "Trini", play: "Die Ganzen Wahrheiten", author: "Sathyan Ramesh" }
     ],
     auditionSongs: [
       { title: "Maybe This Time", from: "Cabaret" },
@@ -119,20 +119,17 @@ const STUDENTS = [
     },
     credits: {
       theater: [
-        { years: "2026–2027", production: "Hamlet", author: "", role: "Polonius, Hamlet & Ophelia", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
-        { years: "2024–2027", production: "Die kleine Hexe", author: "", role: "Rumpumpel & weitere", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
-        { years: "2026", production: "John Proctor, is the Villain", author: "", role: "Shelby", director: "Guido Wachter", venue: "Akademietheater Regensburg" },
+        { years: "2026–2027", production: "Hamlet", author: "", role: "Polonius, Hamlet & Ophelia, Chor", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
+        { years: "2025–2027", production: "Die kleine Hexe", author: "", role: "Rumpumpel & weitere", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Die Frau von Früher", author: "", role: "Claudia", director: "Ole Heimerdinger", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Götter sterben (szenische Lesung)", author: "", role: "", director: "Greta Susceviciute", venue: "LUBIMOVKA Festival" },
         { years: "2024", production: "Woyzeck", author: "", role: "Ärztin", director: "Roman Senin", venue: "Einstein Kultur „JULA Festival“ & Akademietheater Regensburg" },
         { years: "2023", production: "Antigone ein Requiem", author: "", role: "Chor", director: "Mehdi Moinzadeh", venue: "Theater unterm Dach" }
       ],
       film: [
         { years: "2025", production: "Linda Lebt (Spielfilm)", role: "Linda", director: "Amon Bela Bachmann", venue: "" },
         { years: "2016", production: "Liebling lass die Hühner Frei (Fernsehfilm)", role: "Sophie Teuffel", director: "Oliver Schmitz", venue: "ARD/WDR" }
-      ],
-      other: [
-        { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
-        { years: "2025", production: "Götter sterben (szenische Lesung)", role: "", director: "Greta Susceviciute", venue: "LUBIMOVKA Festival" }
       ]
     },
     social: { instagram: "salomeridder" },
@@ -169,22 +166,21 @@ const STUDENTS = [
       { title: "Another Love", from: "Tom Odell" }
     ],
     bio: {
-      de: "Cedric Corazza, geboren 2003 in Stollberg, entdeckte früh seine Bühne – zunächst mit Zaubertricks seines Großvaters im Wohnzimmer, später im Kinder- und Jugendtheater „Burattino“. Weitere prägende Stationen waren die Theatergruppen „Spielfreu(n)de“ und „Limited Edition“.\n\nParallel dazu trat Cedric regelmäßig als Zauberkünstler bei Hochzeiten, Firmenevents und Benefizveranstaltungen auf. Mit 15 Jahren wurde er bei den Deutschen Jugendmeisterschaften der Zauberkunst mit dem 3. Platz in der Sparte „Allgemeine Magie“ ausgezeichnet.\n\nSeit 2023 studiert er Schauspiel und war am Akademietheater Regensburg unter anderem als Frank in „Die Frau von früher“ (R: Ole Heimerdinger) und Valerio in „Leonce und Lena“ (R: Alexandra Caroline Herger) zu sehen. Sein letztes Studienjahr absolviert Cedric am Schauspielstudio Chemnitz, wo er derzeit in der Studioproduktion „Die Reise von der Erde zum Mond“ (R: Tilo Krügel) mitwirkt.\n\nAbseits der Bühne bringt er Erfahrung in Gastronomie und Jugendarbeit mit und findet seinen Ausgleich vor allem beim Sport, Tanzen oder dann doch wieder mit einem Kartenspiel in der Hand.",
+      de: "Cedric Corazza, geboren 2003 in Stollberg, entdeckte früh die Bühne – zunächst mit Zaubertricks seines Großvaters im Wohnzimmer, später im Kinder- und Jugendtheater „Burattino“. Weitere prägende Stationen waren die Theatergruppen „Spielfreu(n)de“ und „Limited Edition“.\n\nParallel dazu trat Cedric regelmäßig als Zauberkünstler bei Hochzeiten, Firmenevents und Benefizveranstaltungen auf. Mit 15 Jahren wurde er bei den Deutschen Jugendmeisterschaften der Zauberkunst mit dem 3. Platz in der Sparte „Allgemeine Magie“ ausgezeichnet.\n\nSeit 2023 studiert er Schauspiel und war am Akademietheater Regensburg unter anderem als Frank in „Die Frau von früher“ (R: Ole Heimerdinger) und Valerio in „Leonce und Lena“ (R: Alexandra Caroline Herger) zu sehen. Sein letztes Studienjahr absolviert Cedric am Schauspielstudio Chemnitz, wo er derzeit in der Studioproduktion „Die Reise von der Erde zum Mond“ (R: Tilo Krügel) mitwirkt.\n\nAbseits der Bühne bringt er Erfahrung in Gastronomie und Jugendarbeit mit und findet seinen Ausgleich vor allem beim Sport, Tanzen oder dann doch wieder mit einem Kartenspiel in der Hand.",
       en: "Cedric Corazza, born in Stollberg in 2003, discovered his stage early on — first with his grandfather's magic tricks in the living room, later at the children's and youth theatre “Burattino”. Further formative stations were the theatre groups “Spielfreu(n)de” and “Limited Edition”.\n\nAlongside this, Cedric performed regularly as a magician at weddings, corporate events and charity functions. At the age of 15 he was awarded third place in the category “General Magic” at the German Youth Championships of Magic.\n\nHe has been studying acting since 2023 and has appeared at the Akademietheater Regensburg as Frank in “Die Frau von früher” (dir.: Ole Heimerdinger) and as Valerio in “Leonce und Lena” (dir.: Alexandra Caroline Herger), among others. Cedric is completing his final year of studies at the Schauspielstudio Chemnitz, where he is currently part of the studio production “Die Reise von der Erde zum Mond” (dir.: Tilo Krügel).\n\nOff stage, he brings experience in gastronomy and youth work and finds his balance above all in sport, dancing — or, once again, with a deck of cards in his hand."
     },
     credits: {
       theater: [
         { years: "2026", production: "Die Reise von der Erde zum Mond", author: "Jules Verne", role: "Michel Ardán", director: "Tilo Krügel", venue: "Theater Chemnitz" },
+        { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
         { years: "2025–2027", production: "Die Kleine Hexe", author: "Otfried Preußler", role: "Billiger Jakob, Thomas u. w.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Die Frau von früher", author: "Roland Schimmelpfennig", role: "Frank", director: "Ole Heimerdinger", venue: "Akademietheater Regensburg" },
         { years: "2024", production: "Leonce und Lena", author: "Georg Büchner", role: "Valerio", director: "Alexandra Caroline Herger", venue: "Akademietheater Regensburg" },
         { years: "2023–2024", production: "Aufguss", author: "René Heinersdorff", role: "Alain Steinhammer", director: "Isabelle Weh", venue: "Fritz Theater Chemnitz" }
       ],
       film: [
-        { years: "2022", production: "ANDERS", author: "Enrique Thum", role: "Leon", director: "Enrique Thum", venue: "" }
-      ],
-      other: [
-        { years: "2022", production: "Blue Coats (Imagefilm)", role: "Alexander", director: "Andre Koschmieder", venue: "" }
+        { years: "2022", production: "ANDERS", author: "Enrique Thum", role: "Leon", director: "Enrique Thum", venue: "" },
+        { years: "2022", production: "Blue Coats (Imagefilm)", author: "", role: "Alexander", director: "Andre Koschmieder", venue: "" }
       ]
     },
     social: { instagram: "cedric.corazza" },
@@ -221,7 +217,7 @@ const STUDENTS = [
       { title: "Mad World", from: "Roland Orzabal" }
     ],
     bio: {
-      de: "Charlotte Friederich wuchs in Würzburg auf. Um mit zwei älteren Brüdern mithalten zu können, hat Charlotte früh gelernt, in Piraten- oder Räuber-Rollen zu schlüpfen, Bandenlager zu bauen und gemeinsam die unterschiedlichsten Geschichten entstehen zu lassen. Immer auf der Suche nach Magie. Auch eine gewisse Ensemblefähigkeit wurde hier trainiert.\n\nNach ihrem Abitur fand sie ihren Weg zu der Würzburger „Theaterwerkstatt“. Dort konnte sie sowohl als Schauspielerin, als auch als Regieassistentin ihre Leidenschaft ausleben.\n\nAn der ADK Bayern hat sich Charlotte mit Freude durchs Studium gespielt und war unter anderem in den Produktionen „Die Argonauten“ (Franz Grillparzer), „Kasimir und Karoline“ (Ödön von Horváth) und „Die kleine Hexe“ (Otfried Preußler) zu sehen.",
+      de: "Charlotte Friederich wuchs in Würzburg auf. Um mit zwei älteren Brüdern mithalten zu können, hat Charlotte früh gelernt, in Piraten- oder Räuber-Rollen zu schlüpfen, Bandenlager zu bauen und gemeinsam die unterschiedlichsten Geschichten entstehen zu lassen. Immer auf der Suche nach Magie. Auch eine gewisse Ensemblefähigkeit wurde hier trainiert.\n\nNach ihrem Abitur fand sie ihren Weg zu der Würzburger „Theaterwerkstatt“. Dort konnte sie sowohl als Schauspielerin als auch als Regieassistentin ihre Leidenschaft ausleben.\n\nAn der ADK Bayern hat sich Charlotte mit Freude durchs Studium gespielt und war unter anderem in den Produktionen „Die Argonauten“ (Franz Grillparzer), „Kasimir und Karoline“ (Ödön von Horváth) und „Die kleine Hexe“ (Otfried Preußler) zu sehen.",
       en: "Charlotte Friederich grew up in Würzburg. To keep up with two older brothers, she learned early on to slip into pirate and robber roles, build gang hideouts and invent all kinds of stories together — always in search of magic. A certain sense of ensemble was trained there, too.\n\nAfter finishing school she found her way to the Würzburg “Theaterwerkstatt”, where she lived out her passion both as an actress and as an assistant director.\n\nAt ADK Bavaria, Charlotte has played her way through her studies with joy and has appeared in productions including “Die Argonauten” (Franz Grillparzer), “Kasimir und Karoline” (Ödön von Horváth) and “Die kleine Hexe” (Otfried Preußler)."
     },
     credits: {
@@ -229,7 +225,7 @@ const STUDENTS = [
         { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Ophelia", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
         { years: "2025–2027", production: "Die kleine Hexe", author: "Otfried Preußler", role: "Kräuterhexe, Holzsammlerin, Papierblumenmädchen, Vroni", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Die Argonauten", author: "Franz Grillparzer", role: "Medea", director: "Sebastian Godditsch", venue: "Akademietheater Regensburg" },
-        { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Erna", director: "Selina Kretschman", venue: "Akademietheater Regensburg" }
+        { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Erna", director: "Selina Kretschmann", venue: "Akademietheater Regensburg" }
       ]
     },
     social: { instagram: "liebercharlyalslina", filmmakers: "https://www.filmmakers.eu/de/actors/charlotte-friederich", etalenta: "https://www.etalenta.eu/members/profile/charlotte-friederich" },
@@ -242,7 +238,7 @@ const STUDENTS = [
     born: "07.03.2000",
     locations: ["Berlin", "Leipzig", "Köln", "Mannheim", "Frankfurt", "München", "Hamburg", "Wien"],
     playingAge: "16–30",
-    height: "1,68 m",
+    height: "168 cm",
     hairColor: { de: "hellbraun", en: "light brown" },
     eyeColor: { de: "grün-braun", en: "green-brown" },
     voiceType: { de: "Mezzosopran", en: "Mezzo-soprano" },
@@ -274,15 +270,13 @@ const STUDENTS = [
     credits: {
       theater: [
         { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Hamlet, Güldenstern", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
-        { years: "2026", production: "Shadows of Sanity", author: "Christine La Renarde", role: "Mira, Er/Ihm", director: "Christine La Renarde", venue: "EKSTASIS Theaterfestival, Regensburg" },
-        { years: "2025", production: "ME (DEA)", author: "Franz Grillparzer", role: "Kreusa", director: "Meike Groeneveld", venue: "Akademietheater Regensburg" },
-        { years: "2025", production: "Die kleine Hexe", author: "Otfried Preußler, John von Düffel", role: "Vroni, Kräuterhexe u. a.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
-        { years: "2024", production: "Woyzeck", author: "Georg Büchner", role: "Marie", director: "Senya Romin", venue: "Akademietheater Regensburg" }
-      ],
-      other: [
+        { years: "2026", production: "Shadows of Sanity", author: "Christine La Renarde", role: "Dr. Red, Er/Ihm", director: "Christine La Renarde", venue: "EKSTASIS Theaterfestival, Regensburg" },
         { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
+        { years: "2025–2027", production: "Die kleine Hexe", author: "Otfried Preußler, John von Düffel", role: "Vroni, Kräuterhexe u. a.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "ME (DEA)", author: "Franz Grillparzer", role: "Kreusa", director: "Meike Groeneveld", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Götter sterben (szenische Lesung)", author: "Marius Ivaškevičius", role: "Kri", director: "Greta Susceviciute", venue: "LUBIMOWKA Festival Wien" },
         { years: "2025", production: "Say Hi to Abdo (szenische Lesung)", author: "M. Iljintschik", role: "Laborantin", director: "Senya Romin", venue: "LUBIMOWKA Festival Wien" },
+        { years: "2024", production: "Woyzeck", author: "Georg Büchner", role: "Marie", director: "Senya Romin", venue: "Akademietheater Regensburg" },
         { years: "2024", production: "Wanja ist am Leben (szenische Lesung)", author: "Natalia Lizorkina", role: "Alle", director: "Senya Romin", venue: "W1, Kunstkollektiv MOST" }
       ]
     },
@@ -296,7 +290,7 @@ const STUDENTS = [
     born: "16.02.2000",
     locations: ["Berlin", "München", "Stuttgart", "Hamburg", "Schweiz", "Dresden", "Leipzig"],
     playingAge: "15–28",
-    height: "1,60 m",
+    height: "160 cm",
     hairColor: { de: "dunkelbraun", en: "dark brown" },
     eyeColor: { de: "blau", en: "blue" },
     voiceType: { de: "Mezzosopran – Sopran", en: "Mezzo-soprano – soprano" },
@@ -308,9 +302,34 @@ const STUDENTS = [
       de: ["Ski Alpin", "Bühnenkampf & Fechten (Grundlagen)", "Standardtanz (Grundlagen)", "Reiten", "Zeitgenössischer Tanz", "Tanztheater", "Capoeira", "Eislaufen", "Inlineskaten", "Gitarre (Grundkenntnisse)", "Führerschein (B)"],
       en: ["Alpine skiing", "Stage combat & fencing (basics)", "Ballroom dance (basics)", "Horse riding", "Contemporary dance", "Dance theatre", "Capoeira", "Ice skating", "Inline skating", "Guitar (basics)", "Driving licence (B)"]
     },
+    auditionRoles: [
+      { role: "Frau", play: "Gebrüllt vor Lachen", author: "Christopher Durang" },
+      { role: "Orlando", play: "Orlando", author: "Virginia Woolf" },
+      { role: "Meggie", play: "King Kongs Töchter", author: "Theresia Walser" },
+      { role: "Elisabeth", play: "Maria Stuart", author: "Friedrich Schiller" },
+      { role: "Sonja", play: "Onkel Wanja", author: "Anton Tschechow" }
+    ],
+    auditionSongs: [
+      { title: "Ein Neandertaler", from: "Günter Neumann" },
+      { title: "I Don’t Know How to Love Him", from: "Jesus Christ Superstar" }
+    ],
     bio: {
-      de: "Linda Lehmann wurde in Reichenbach im Vogtland geboren und wuchs dort auf. Als Kind war ihre größte Leidenschaft, Geschichten zu erzählen und diese zu leben. Schon in der Schule war sie stets Teil der Theatergruppe, des Chors und sang Soli vor Publikum. Schauspielen und Gesang zeigten sich früh als wichtiger und erfüllender Teil ihres Lebens. Bis heute begeistert sie sich für Theater, Musicals und Filme und integriert diese Leidenschaft kreativ in ihren Alltag.\n\n2020 wurde sie durch ein Casting Teil der UFA Talentbase. Sie war Teil der Komparserie verschiedener Filmproduktionen, wie „Make me feel“, und spielte Rollen in kleineren Filmproduktionen wie „Glitzer & Atem“. 2021 bis 2023 war sie in verschiedenen Produktionen des TEATR Studio am Salzufer zu sehen.\n\nSeit September 2023 studiert sie Schauspiel an der Akademie für Darstellende Kunst Bayern in Regensburg. Dort wirkte sie unter anderem in Inszenierungen wie „Kasimir und Karoline“ von Ödön von Horváth, „Die kleine Hexe“ nach Otfried Preußler, „Der Mann aus Podolsk“ von Dmitry Danilov und aktuell in der Abschlussproduktion „Hamlet“ nach William Shakespeare mit.",
+      de: "Linda Lehmann wurde in Reichenbach im Vogtland geboren und wuchs dort auf. Als Kind war ihre größte Leidenschaft Geschichten zu erzählen und diese zu leben. Schon in der Schule war sie stets Teil der Theatergruppe, des Chors und sang Soli vor Publikum. Schauspielen und Gesang zeigten sich früh als wichtiger und erfüllender Teil ihres Lebens. Bis heute begeistert sie sich für Theater, Musicals und Filme und integriert diese Leidenschaft kreativ in ihren Alltag.\n\n2020 wurde sie durch ein Casting Teil der UFA Talentbase. Sie war Teil der Komparserie verschiedener Filmproduktionen, wie „Make me feel“, und spielte Rollen in kleineren Filmproduktionen wie „Glitzer & Atem“. 2021 bis 2023 war sie in verschiedenen Produktionen des TEATR Studio am Salzufer zu sehen.\n\nSeit September 2023 studiert sie Schauspiel an der Akademie für Darstellende Kunst Bayern in Regensburg. Dort wirkte sie unter anderem in Inszenierungen wie „Kasimir und Karoline“ von Ödön von Horváth, „Die kleine Hexe“ nach Otfried Preußler, „Der Mann aus Podolsk“ von Dmitry Danilov und aktuell in der Abschlussproduktion „Hamlet“ nach William Shakespeare mit.",
       en: "Linda Lehmann was born and raised in Reichenbach in the Vogtland region. As a child, her greatest passion was telling stories and living them. At school she was always part of the theatre group and the choir, and sang solos in front of an audience. Acting and singing proved early on to be an important and fulfilling part of her life. To this day she is passionate about theatre, musicals and films, and creatively weaves this passion into her everyday life.\n\nIn 2020 she became part of the UFA Talentbase through a casting. She appeared as an extra in various film productions such as “Make me feel” and played roles in smaller film productions such as “Glitzer & Atem”. From 2021 to 2023 she was seen in various productions of the TEATR Studio am Salzufer in Berlin.\n\nSince September 2023 she has been studying acting at the Academy of Performing Arts Bavaria in Regensburg, where she has appeared in productions such as “Kasimir und Karoline” by Ödön von Horváth, “Die kleine Hexe” after Otfried Preußler, “The Man from Podolsk” by Dmitry Danilov and currently the graduation production of “Hamlet” after William Shakespeare."
+    },
+    credits: {
+      theater: [
+        { years: "2026–2027", production: "Hamlet", author: "nach William Shakespeare", role: "Rosenkranz, Totengräber, Hamlet, Ophelia, Geist des Vaters, Voltemand", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2026", production: "Hexenjagd", author: "Arthur Miller", role: "Abigail", director: "Guido Wachter", venue: "Akademietheater Regensburg" },
+        { years: "2025–2026", production: "Der Mann aus Podolsk", author: "Dmitry Danilov", role: "Polizeioberkommissarin", director: "Senya Romin", venue: "Akademietheater Regensburg, Kultur on Tour Bremen, Festival „Victory of Art“ Bukarest" },
+        { years: "2024–2027", production: "Die kleine Hexe", author: "nach Otfried Preußler", role: "Oberhexe, Revierförster, Schützenhauptfrau u. a.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Elli", director: "Selina Kretschmann", venue: "Akademietheater Regensburg" },
+        { years: "2021–2023", production: "Diverse Produktionen", author: "", role: "", director: "", venue: "TEATR Studio am Salzufer Berlin" }
+      ],
+      film: [
+        { years: "2025", production: "Make Me Feel", author: "", role: "Komparsin", director: "Timur Örge", venue: "" },
+        { years: "2024", production: "Glitzer & Atem", author: "", role: "Lici", director: "Emin Vibe", venue: "" }
+      ]
     },
     social: { instagram: "lindajustiinee", filmmakers: "https://www.filmmakers.eu/de/actors/linda-lehmann" },
     email: "linda.lehmann.acting@gmail.com"
@@ -322,7 +341,7 @@ const STUDENTS = [
     born: "13.09.2002",
     locations: ["Innsbruck", "München", "Regensburg", "Wien", "Berlin", "Köln"],
     playingAge: "17–28",
-    height: "1,69 m",
+    height: "169 cm",
     hairColor: { de: "blond", en: "blonde" },
     eyeColor: { de: "blau", en: "blue" },
     voiceType: { de: "Mezzosopran", en: "Mezzo-soprano" },
@@ -336,7 +355,7 @@ const STUDENTS = [
     },
     auditionRoles: [
       { role: "Krassiwaja", play: "Wir haben Raketen geangelt", author: "Karen Köhler" },
-      { role: "Dorine", play: "Tartuffe", author: "Molière" },
+      { role: "Dorine", play: "Tartuffe", author: "Jean-Baptiste Molière" },
       { role: "Tanya", play: "White Lotus", author: "Mike White" },
       { role: "Mephisto", play: "Faust", author: "Johann Wolfgang von Goethe" },
       { role: "Andromache", play: "Atropa", author: "Tom Lanoye" }
@@ -370,9 +389,41 @@ const STUDENTS = [
     social: { instagram: "bianca_.p" },
     email: "b.pitschedell@gmail.com"
   },
-  /* TODO: Schreibweise des Doppelnamens klären („Karl Georg" vs. „Karl-Georg")
-     und hier berichtigen – Slug und Dateinamen können unverändert bleiben. */
-  { slug: "karl-georg-roessler", name: "Karl Georg Rößler", placeholder: true },
+  {
+    slug: "karl-georg-roessler",
+    name: "Karl-Georg Rößler",
+    pronouns: "er/ihn",
+    born: "07.04.2003",
+    locations: ["Regensburg", "Leipzig", "Dresden"],
+    playingAge: "16–30",
+    height: "176 cm",
+    hairColor: { de: "dunkelblond", en: "dark blonde" },
+    eyeColor: { de: "blau-grau", en: "blue-grey" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch (fließend)", "Sächsisch (Oberlausitzer Mundart)"],
+      en: ["German (native)", "English (fluent)", "Saxon (Upper Lusatian dialect)"]
+    },
+    skills: {
+      de: ["Fechten", "Reiten (Grundlagen)", "Standard- und Lateinpaartanz (Level Gold)"],
+      en: ["Fencing", "Horse riding (basics)", "Ballroom and Latin partner dance (gold level)"]
+    },
+    auditionRoles: [
+      { role: "Kosinsky", play: "Die Räuber", author: "Friedrich Schiller" },
+      { role: "Orlando", play: "Orlando", author: "Virginia Woolf" },
+      { role: "Adrien", play: "Ein Leben in Takt", author: "Cédric Chapuis, aus dem Französischen übersetzt von Eugénie Verbeurgt-Passlick" }
+    ],
+    auditionSongs: [
+      { title: "Kanonensong", from: "Die Dreigroschenoper (Bertolt Brecht)" },
+      { title: "Burn Butcher Burn", from: "The Witcher" },
+      { title: "Katzen brauchen furchtbar viel Musik", from: "Aristocats" }
+    ],
+    bio: {
+      de: "Karl-Georg Rößler wuchs in der Ostsächsischen Oberlausitz auf und fand seine Liebe zur Bühne bereits in der Grundschule. Bis zu seinem Abschluss zur Allgemeinen Hochschulreife 2021 spielte er in unterschiedlichsten Produktionen, unter anderem in der Hauptrolle in der Uraufführung „The Walking Z“ (*2019) des Gerhart-Hauptmann-Theaters Görlitz/Zittau.\n\nNach seinem Abschluss arbeitete er für zwei Jahre am GHT-Görlitz/Zittau als FSJ-ler im Bereich Dramaturgie. In dieser Zeit war er vermehrt als Souffleur, Regieassistent und Darsteller in unterschiedlichen Produktionen tätig und inszenierte das eigene Projekt „Madhouse“ nach Vorlage des englischen Buches „Mindgame“ von Anthony Horowitz.",
+      en: "Karl-Georg Rößler grew up in the Eastern Saxon region of Upper Lusatia and discovered his love for the stage as early as primary school. Until finishing secondary school in 2021 he appeared in a wide range of productions, including the leading role in the premiere of “The Walking Z” (*2019) at the Gerhart Hauptmann Theatre Görlitz/Zittau.\n\nAfter graduating he worked for two years at the GHT Görlitz/Zittau as a volunteer in the dramaturgy department. During this time he was increasingly active as a prompter, assistant director and performer in various productions, and directed his own project “Madhouse”, based on the English book “Mindgame” by Anthony Horowitz."
+    },
+    social: { instagram: "karltofffel2" },
+    email: "karlgeorgroessler@online.de"
+  },
   {
     slug: "michelle-thielsch",
     name: "Michelle Thielsch",
@@ -389,8 +440,8 @@ const STUDENTS = [
       en: ["German (native)", "English (fluent)", "Spanish (good)", "French (basic)", "Saxon (native dialect)"]
     },
     skills: {
-      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf"],
-      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)"]
+      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf", "Schwerpunkt Gesang im Studium (Pop, Musical) bei Valentina Piegger", "Mediensprechen bei Benedikt Reidenbach", "Studium der Medienkulturwissenschaft und Germanistik (Albert-Ludwigs-Universität Freiburg)", "Gesangsunterricht (Kreismusikschule Dreiländereck Niesky)"],
+      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)", "Singing as a major focus of her studies (pop, musical) with Valentina Piegger", "Media speaking with Benedikt Reidenbach", "Studies in media culture and German literature (University of Freiburg)", "Singing lessons (Kreismusikschule Dreiländereck Niesky)"]
     },
     auditionRoles: [
       { role: "Johanna", play: "Die heilige Johanna der Schlachthöfe", author: "Bertolt Brecht" },
@@ -422,12 +473,6 @@ const STUDENTS = [
       film: [
         { years: "2026", production: "Rain Check (Langfilm, tbp)", role: "Mau-Mau", director: "Ivy Lißsack", venue: "" },
         { years: "2024", production: "Die Einsiedlerinnen (Kurzfilm)", role: "Jewel", director: "Lya Spiegel", venue: "" }
-      ],
-      other: [
-        { years: "2025–2026", production: "Mediensprechen", role: "", director: "", venue: "Benedikt Reidenbach" },
-        { years: "2023–2027", production: "Schwerpunkt Gesang im Studium – Pop, Musical", role: "", director: "", venue: "Valentina Piegger" },
-        { years: "2021–2023", production: "Studium der Medienkulturwissenschaft und Germanistik", role: "", director: "", venue: "Albert-Ludwigs-Universität Freiburg" },
-        { years: "2014–2018", production: "Gesangsunterricht", role: "", director: "", venue: "Kreismusikschule Dreiländereck Niesky" }
       ]
     },
     /*
@@ -446,9 +491,53 @@ const STUDENTS = [
   {
     slug: "rosalie-zwenzner",
     name: "Rosalie Zwenzner",
+    pronouns: "sie/ihr",
+    born: "23.12.1999",
+    locations: ["München", "Stuttgart", "Berlin", "Regensburg", "Chemnitz"],
+    playingAge: "20–28",
+    height: "165 cm",
+    hairColor: { de: "braun", en: "brown" },
+    eyeColor: { de: "braun", en: "brown" },
+    voiceType: { de: "Sopran", en: "Soprano" },
+    languages: {
+      de: ["Deutsch (Muttersprache)", "Englisch", "Sächsisch"],
+      en: ["German (native)", "English", "Saxon"]
+    },
+    skills: {
+      de: ["Stepptanz", "Reiten", "Klarinette"],
+      en: ["Tap dance", "Horse riding", "Clarinet"]
+    },
+    auditionRoles: [
+      { role: "Kulturreferentin", play: "Theaterzwang", author: "nach Karl Valentin" },
+      { role: "Frau", play: "Kopf und Herz", author: "Herbert Achternbusch" },
+      { role: "Orlando", play: "Orlando", author: "Virginia Woolf" },
+      { role: "Emilia Galotti", play: "Emilia Galotti", author: "Gotthold Ephraim Lessing" },
+      { role: "Meroe", play: "Penthesilea", author: "Heinrich von Kleist" }
+    ],
+    auditionSongs: [
+      { title: "Maybe This Time", from: "Cabaret" },
+      { title: "You’ve Got a Friend", from: "Carole King" },
+      { title: "Nur nicht aus Liebe weinen", from: "Zarah Leander" },
+      { title: "Ich hab geweint heut’ Nacht", from: "Weber-Beckmann" }
+    ],
     bio: {
       de: "Rosalie Daria Zwenzner wurde am 23.12.1999 in München geboren und ist dort aufgewachsen. Seit ihrer Kindheit hat sie eine große Verbundenheit zu Musik, Tanz und Theater. Sie spielte im Orchester, sang im Chor, nahm zehn Jahre Stepptanzunterricht und begann mit 14 in einer Musical-Gruppe zu spielen und zu singen.\n\nNach Erfahrungen auf verschiedenen Bühnen, wie 2023 in den Münchner Kammerspielen bei „A scheene Leich“ (R: Ruedi Häusermann) und dem Theater Grenzenlos, sowie einigen Inszenierungen auf der Studiobühne München begann sie ihr Schauspielstudium an der ADK Bayern. Nach einem Gastengagement an der Staatsoper Stuttgart in der Produktion „hässlich as fuck“ verbringt sie ihr viertes Studienjahr nun im Schauspielstudio am Theater Chemnitz, wo sie unter anderem in der Studioproduktion „Die Reise von der Erde zum Mond“ nach Jules Verne (R: Tilo Krügel) zu sehen ist.\n\nNeben dem Studium ist sie ehrenamtlich im jungen ensemble-netzwerk und bei Theapolis aktiv. Sie singt, tanzt und liest gerne, liebt die Natur und Tiere.",
       en: "Rosalie Daria Zwenzner was born in Munich on 23 December 1999 and grew up there. Since childhood she has felt a deep connection to music, dance and theatre. She played in an orchestra, sang in a choir, took tap dance lessons for ten years and began performing and singing in a musical theatre group at the age of 14.\n\nAfter experiences on various stages — such as “A scheene Leich” at the Münchner Kammerspiele in 2023 (directed by Ruedi Häusermann) and Theater Grenzenlos, as well as several productions at the Studiobühne München — she began her acting studies at ADK Bavaria. Following a guest engagement at the Staatsoper Stuttgart in the production “hässlich as fuck”, she is now spending her fourth year of study at the drama studio of Theater Chemnitz, where she can be seen in the studio production “The Journey from the Earth to the Moon” after Jules Verne (directed by Tilo Krügel), among others.\n\nAlongside her studies she volunteers with junges ensemble-netzwerk and Theapolis. She loves singing, dancing and reading, as well as nature and animals."
-    }
+    },
+    credits: {
+      theater: [
+        { years: "2026–2027", production: "Die Reise von der Erde zum Mond", author: "nach Jules Verne", role: "Barbicane", director: "Tilo Krügel", venue: "Theater Chemnitz" },
+        { years: "2026", production: "1984", author: "nach George Orwell", role: "junge Frau", director: "Senya Romin", venue: "" },
+        { years: "2026", production: "Hässlich as fuck", author: "Raphaela Fiuza Nowakowski, Martin Mutschler", role: "Rosy", director: "Raphaela Fiuza Nowakowski, Martin Mutschler", venue: "Junge Oper im Nord – Staatsoper Stuttgart" },
+        { years: "2025–2027", production: "Die kleine Hexe", author: "Otfried Preußler", role: "Die kleine Hexe", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
+        { years: "2025", production: "Die Frau von früher", author: "Roland Schimmelpfennig", role: "Tina", director: "Ole Heimerdinger", venue: "Akademietheater Regensburg" },
+        { years: "2024", production: "Sergej ist sehr dumm (szenische Lesung)", author: "Dmitri Danilow", role: "Mascha", director: "Senya Romin", venue: "Most Kunstkollektiv" },
+        { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Maria", director: "Selina Kretschmann", venue: "Akademietheater Regensburg" },
+        { years: "2023–2025", production: "A scheene Leich", author: "Gerhard Polt", role: "Frau Harzer", director: "Ruedi Häusermann", venue: "Münchner Kammerspiele" },
+        { years: "2023", production: "Rape of the Sabine Women", author: "Raphaela Fiuza Nowakowski", role: "", director: "Raphaela Fiuza Nowakowski", venue: "Studiobühne München" }
+      ]
+    },
+    social: { instagram: "rosaliezwenzner" },
+    email: "rosalie.zwenzner@gmx.de"
   }
 ];

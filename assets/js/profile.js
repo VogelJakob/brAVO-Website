@@ -138,7 +138,12 @@
     var items = list.map(function (c) {
       var head = [];
       if (has(c.production)) head.push('<span class="credit-production">' + esc(c.production) + "</span>");
-      if (has(c.author)) head.push('<span class="credit-author">' + esc(t("byAuthor")) + " " + esc(c.author) + "</span>");
+      /* Autorenangaben wie „nach Georg Büchner" bringen ihre Präposition schon mit –
+         dann kein zusätzliches „von" davorsetzen. */
+      if (has(c.author)) {
+        var lead = /^nach\s/i.test(String(c.author)) ? "" : esc(t("byAuthor")) + " ";
+        head.push('<span class="credit-author">' + lead + esc(c.author) + "</span>");
+      }
 
       var meta = [];
       if (has(c.director)) meta.push(esc(t("director")) + ": " + esc(c.director));
