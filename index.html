@@ -162,27 +162,27 @@
       <p class="avo-lead">Unsere Abschlussvorsprechen – wir freuen uns auf euren Besuch. Ein Klick auf einen Termin führt direkt zur Anmeldung.</p>
 
       <ol class="avo-dates">
-        <li><a href="#anmeldung"><span class="avo-date">22.10.2026</span><span class="avo-city">Linz</span><span class="avo-venue">Anton Bruckner Universität</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">22.10.2026</span><span class="avo-city">Linz</span><span class="avo-venue">Anton Bruckner Universität</span><span class="avo-time">14 Uhr</span></a></li>
         <li><a href="#anmeldung"><span class="avo-date">30.10.2026</span><span class="avo-city">Regensburg</span><span class="avo-venue">Akademietheater Regensburg</span><span class="avo-time">14 Uhr</span></a></li>
-        <li><a href="#anmeldung"><span class="avo-date">02.11.2026</span><span class="avo-city">Köln</span><span class="avo-venue">Theater im Bauturm</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
-        <li><a href="#anmeldung"><span class="avo-date">03.11.2026</span><span class="avo-city">Hamburg</span><span class="avo-venue">Hamburger Sprechwerk</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
-        <li><a href="#anmeldung"><span class="avo-date">04.11.2026</span><span class="avo-city">Berlin</span><span class="avo-venue">Theaterhaus Berlin Schöneweide</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
-        <li><a href="#anmeldung"><span class="avo-date">05.11.2026</span><span class="avo-city">Dresden</span><span class="avo-venue">Zentralwerk</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
-        <li><a href="#anmeldung"><span class="avo-date">07.11.2026</span><span class="avo-city">München</span><span class="avo-venue">Mucca Halle</span><span class="avo-time avo-time-tba">Uhrzeit folgt</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">02.11.2026</span><span class="avo-city">Köln</span><span class="avo-venue">Theater im Bauturm</span><span class="avo-time">14 Uhr</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">03.11.2026</span><span class="avo-city">Hamburg</span><span class="avo-venue">Hamburger Sprechwerk</span><span class="avo-time">14 Uhr</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">04.11.2026</span><span class="avo-city">Berlin</span><span class="avo-venue">Theaterhaus Berlin Schöneweide</span><span class="avo-time">14 Uhr</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">05.11.2026</span><span class="avo-city">Dresden</span><span class="avo-venue">Zentralwerk</span><span class="avo-time">14 Uhr</span></a></li>
+        <li><a href="#anmeldung"><span class="avo-date">07.11.2026</span><span class="avo-city">München</span><span class="avo-venue">Mucca Halle</span><span class="avo-time">14 Uhr</span></a></li>
       </ol>
 
-      <!-- AVO-Trailer: sobald assets/videos/avo-trailer.mp4 vorliegt, ersetzt
-           avo.js den Hinweistext automatisch durch den Videoplayer. -->
+      <!-- AVO-Trailer: bleibt ausgeblendet, solange assets/videos/avo-trailer.mp4
+           fehlt. Sobald die Datei da ist, blendet avo.js den Kasten ein und
+           ersetzt den Hinweistext durch den Videoplayer. -->
       <div class="avo-extra">
-        <div class="avo-trailer" id="avo-trailer">
+        <div class="avo-trailer" id="avo-trailer" hidden>
           <h3>AVO-Trailer</h3>
           <p class="muted" id="avo-trailer-soon">Der AVO-Trailer folgt in Kürze.</p>
         </div>
         <div class="avo-support">
           <h3>Unterstützt uns</h3>
           <p>Unsere Vorsprechtour finanzieren wir selbst – jede Unterstützung hilft.</p>
-          <!-- PLATZHALTER: echte GoFundMe-URL eintragen, sobald die Kampagne steht -->
-          <a class="btn-cta" href="https://www.gofundme.com/f/PLATZHALTER-ADK-BAYERN-2027" target="_blank" rel="noopener noreferrer">Zur GoFundMe-Kampagne</a>
+          <a class="btn-cta btn-cta--donate" href="https://www.gofundme.com/f/unsere-avoreise-zu-stemmen-absolventinnenvorsprechen" target="_blank" rel="noopener noreferrer">Zur GoFundMe-Kampagne</a>
         </div>
       </div>
 
@@ -197,13 +197,13 @@
             <label for="avo-termin">Welches Vorsprechen möchtet ihr besuchen?</label>
             <select id="avo-termin" name="vorsprechen" required>
               <option value="" disabled selected>Bitte wählen …</option>
-              <option>22.10.2026 – Linz (Anton Bruckner Universität)</option>
+              <option>22.10.2026 – Linz, 14 Uhr (Anton Bruckner Universität)</option>
               <option>30.10.2026 – Regensburg, 14 Uhr (Akademietheater Regensburg)</option>
-              <option>02.11.2026 – Köln (Theater im Bauturm)</option>
-              <option>03.11.2026 – Hamburg (Hamburger Sprechwerk)</option>
-              <option>04.11.2026 – Berlin (Theaterhaus Berlin Schöneweide)</option>
-              <option>05.11.2026 – Dresden (Zentralwerk)</option>
-              <option>07.11.2026 – München (Mucca Halle)</option>
+              <option>02.11.2026 – Köln, 14 Uhr (Theater im Bauturm)</option>
+              <option>03.11.2026 – Hamburg, 14 Uhr (Hamburger Sprechwerk)</option>
+              <option>04.11.2026 – Berlin, 14 Uhr (Theaterhaus Berlin Schöneweide)</option>
+              <option>05.11.2026 – Dresden, 14 Uhr (Zentralwerk)</option>
+              <option>07.11.2026 – München, 14 Uhr (Mucca Halle)</option>
             </select>
           </div>
           <div class="form-field">

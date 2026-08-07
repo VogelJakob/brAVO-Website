@@ -47,9 +47,11 @@
   }
 
   /*
-   * Trailer-Konvention: sobald assets/videos/avo-trailer.mp4 vorliegt,
-   * wird der Hinweistext durch den Videoplayer ersetzt (gleiches Muster
-   * wie die Showreels auf den Profilseiten).
+   * Trailer-Konvention: der Kasten steht in index.html auf "hidden" und
+   * erscheint erst, wenn assets/videos/avo-trailer.mp4 wirklich vorliegt –
+   * dann ersetzt der Videoplayer den Hinweistext (gleiches Muster wie die
+   * Showreels auf den Profilseiten). Ein leerer Platzhalterkasten wuerde
+   * sonst dem Spendenaufruf daneben die halbe Breite wegnehmen.
    * Alternative YouTube/Vimeo-Einbettung: statt des <video>-Elements ein
    * <iframe> einsetzen – dann aber die Datenschutzerklärung ergänzen!
    */
@@ -61,6 +63,7 @@
     var src = ADK.root + "assets/videos/avo-trailer.mp4";
     ADK.mediaExists(src).then(function (exists) {
       if (!exists) return;
+      box.hidden = false;
       var video = document.createElement("video");
       video.className = "reel";
       video.controls = true;

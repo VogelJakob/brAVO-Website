@@ -413,6 +413,8 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   color: #fff;
   text-decoration: none;
 }
+/* Spenden-CTA: gleiches Grün wie der GoFundMe-Button auf der Linkseite. */
+.btn-cta--donate { background: var(--donate); }
 
 /* ---------- Ensemble-Grid ---------- */
 
@@ -907,16 +909,19 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 .avo-time-tba { background: var(--muted); }
 
-/* Trailer + GoFundMe nebeneinander (ab Breakpoint) */
+/* Trailer + GoFundMe nebeneinander – solange der Trailer fehlt (Attribut
+   "hidden", siehe avo.js), fuellt der Spendenkasten die Zeile allein aus. */
 .avo-extra {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
   gap: 1.5rem;
   margin-bottom: 2.5rem;
 }
+/* Bewusst ohne Schlagschatten: Terminliste und Anmeldeformular sind die
+   beiden Ankerpunkte der Sektion, diese Kaesten treten dahinter zurueck. */
 .avo-trailer, .avo-support {
   background: var(--paper);
   border: var(--border);
-  box-shadow: var(--shadow);
   padding: 1.25rem 1.4rem 1.5rem;
 }
 .avo-support p { max-width: 38ch; }
@@ -1106,7 +1111,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   .credit { flex-direction: row; gap: 1.5rem; }
   .credit-years { flex: 0 0 6.5rem; padding-top: 0.15rem; }
 
-  .avo-extra { grid-template-columns: 1fr 1fr; align-items: start; }
+  .avo-extra { align-items: start; }
 
   .site-footer { flex-direction: row; justify-content: space-between; align-items: center; }
 }
