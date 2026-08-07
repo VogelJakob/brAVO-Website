@@ -9,7 +9,11 @@
 (function () {
   "use strict";
 
-  /* PLATZHALTER: ADK-Mailadresse für den Fehlerhinweis im Formular */
+  /*
+   * PLATZHALTER: Anmelde-Mailadresse (ADK). Erscheint im Fehlerhinweis des
+   * Formulars und – als eigener Button – auf der Linkseite links/index.html.
+   * Wird die Adresse geändert, beide Stellen anpassen.
+   */
   var ADK_MAIL = "avo@adk-bayern.de";
 
   /* --- Anmeldeformular: per fetch absenden, Bestätigung inline anzeigen --- */

@@ -304,6 +304,9 @@
           contactHtml(s) +
         "</div>" +
       "</div>";
+
+    /* Foto-Credits (assets/data/credits.js) auf die frisch gerenderten Bilder */
+    ADK.applyCredits(main);
   }
 
   function checkMedia() {

@@ -16,18 +16,22 @@ python3 -m http.server 8000
 ```
 index.html               Startseite (Hero, Einleitung, Ensemble, Aufführungen, AVO, News)
 students/{slug}.html     Einzelprofile (dünne Hüllen, Inhalt kommt aus students.js)
-impressum.html           Impressum (Platzhalter [in eckigen Klammern] ausfüllen!)
-datenschutz.html         Datenschutzerklärung (Platzhalter ausfüllen!)
+impressum.html           Impressum (Kontaktdaten eingetragen)
+datenschutz.html         Datenschutzerklärung (Hosting-Anbieter vor Livegang ergänzen)
 assets/data/students.js  ZENTRALE DATENBASIS – alle Textinhalte aller Personen
-assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Helfer
+assets/data/termine.js   ZENTRALE TERMINE – Produktionen und AVO (siehe unten)
+assets/data/credits.js   Foto-Credits pro Bild (Wasserzeichen)
+assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Foto-Credits, Helfer
 assets/js/index.js       Rendert das Ensemble-Grid (alphabetisch nach Nachname)
 assets/js/profile.js     Rendert die Einzelprofile
+assets/js/termine.js     Rendert Laufband, AVO-Liste, Formular-Auswahl, Aufführungs-Termine
 assets/js/avo.js         AVO-Anmeldeformular (Formspree) und Trailer-Einbindung
 assets/css/style.css     Design-System
-assets/images/students/  Portraitfotos:  {slug}.jpg
+assets/images/students/  Portraitfotos:  {slug}.jpg · Galerie: {slug}-2.jpg … -8.jpg
 assets/images/group.jpg  Gruppenfoto (QUER) für den Hero-Bereich
 assets/images/group-2.jpg  Zweites Gruppenfoto (Band zwischen Ensemble und Aufführungen)
 assets/images/productions/  Szenenfotos: hamlet.jpg, reise-zum-mond.jpg, kleine-hexe.jpg
+                            (+ Galerie: hamlet-2.jpg … hamlet-5.jpg usw.)
 assets/videos/           Showreels: {slug}.mp4 · AVO-Trailer: avo-trailer.mp4
 assets/audio/            Audio-Reels:    {slug}.mp3 (optional)
 ```
@@ -44,6 +48,30 @@ In `assets/data/students.js` beim jeweiligen Eintrag `placeholder: true` entfern
 - Das Feld `pronouns` wird nicht mehr angezeigt.
 - Die Reihenfolge im Ensemble-Grid ist automatisch alphabetisch nach Nachname – die Reihenfolge der Einträge in `students.js` spielt keine Rolle.
 
+### Termine ändern oder ergänzen
+
+Alle Termine stehen **nur** in `assets/data/termine.js`. Daraus entstehen automatisch: das Laufband oben, die AVO-Terminliste, die Auswahl im Anmeldeformular, die Datumszeilen der Aufführungs-Karten und die Event-Auszeichnung für Suchmaschinen.
+
+- **Neue Vorstellung:** eine Zeile in `termine` der jeweiligen Produktion ergänzen, z.B. `{ d: "2026-11-14" }`.
+- **Datum immer im Format `"JJJJ-MM-TT"`** – der Wochentag wird daraus berechnet und nie eingetragen.
+- `typ: "premiere"` markiert die Premiere (Chip auf der Karte), `unsicher: true` weist einen Termin als „voraussichtlich" aus.
+- Stehen alle Termine fest: `weitereFolgen: false` setzen, dann verschwindet „weitere Termine folgen …".
+- **AVO-Uhrzeit nachtragen:** beim jeweiligen Eintrag `zeit` setzen. Fehlt `zeit`, zeigt die Seite „Uhrzeit folgt" statt einer erfundenen Uhrzeit.
+
+Die `<noscript>`-Blöcke in `index.html` (AVO-Sektion und Aufführungen) enthalten dieselben Termine im Klartext für Besucher:innen ohne JavaScript – bei größeren Änderungen bitte mitziehen.
+
+### Foto-Credits eintragen
+
+Die Credits erscheinen als Wasserzeichen unten rechts auf den großen Fotos und in der Lightbox. Gepflegt werden sie pro Bild in `assets/data/credits.js`:
+
+```js
+"assets/images/students/linda-lehmann-2.jpg": "Vorname Nachname",
+```
+
+- Ohne Eintrag greift `default` (aktuell „ADK Bayern Jahrgang 2027").
+- Ein leerer String (`""`) blendet das Wasserzeichen für dieses eine Bild aus.
+- Die Leute liefern ihre Fotos mit den Credits **im Dateinamen**: beim Umbenennen auf die Namenskonvention den Namen einfach hier als Zeile eintragen.
+
 ### Medien ergänzen (kein Code nötig!)
 
 Dateien nur korrekt benennen und in den passenden Ordner legen:
@@ -53,8 +81,10 @@ Dateien nur korrekt benennen und in den passenden Ordner legen:
 | Portraitfoto | `assets/images/students/{slug}.jpg` | Fallback mit Initialen, solange es fehlt |
 | Showreel | `assets/videos/{slug}.mp4` | Player erscheint automatisch; solange die Datei fehlt: Hinweis „Showreel folgt in Kürze“ |
 | Audio-Reel | `assets/audio/{slug}.mp3` | Optional – Player erscheint **nur**, wenn die Datei existiert |
+| Fotogalerie Person | `assets/images/students/{slug}-2.jpg` … `-8.jpg` | Erscheinen automatisch als Vorschaureihe im Profil; Lightbox blättert durch alle Bilder der Person |
 | Gruppenfoto Hero | `assets/images/group.jpg` (**Querformat**) | Solange es fehlt, zeigt der Hero automatisch `group-2.jpg` und blendet das Gruppenfoto-Band aus |
 | Szenenfotos | `assets/images/productions/hamlet.jpg`, `reise-zum-mond.jpg`, `kleine-hexe.jpg` | Erscheinen automatisch in den Aufführungs-Karten (mit Lightbox/Zoom); solange sie fehlen: „Foto folgt“ |
+| Szenenfoto-Galerie | `assets/images/productions/{key}-2.jpg` … `-5.jpg` | Vorschaureihe unter dem Hauptbild der Karte; Lightbox blättert durch alle Szenenfotos |
 | AVO-Trailer | `assets/videos/avo-trailer.mp4` | Player erscheint automatisch in der AVO-Sektion; solange die Datei fehlt: Hinweis „Trailer folgt“ |
 
 Die Existenz wird zur Laufzeit per HTTP-HEAD-Request geprüft; es gibt nirgends manuell gepflegte Pfade. Videos werden mit `preload="none"` und dem Portrait als Poster eingebunden – die Seite lädt also nicht schwer.
@@ -78,13 +108,13 @@ Die Website ist rein deutsch (der frühere DE/EN-Umschalter wurde auf Kundenwuns
 
 | Was | Wo eintragen |
 |---|---|
-| Fotograf:innen-Name (Wasserzeichen + Credit) | `assets/css/style.css` → CSS-Variable `--foto-credit` in `:root`, zusätzlich `impressum.html` unter „Urheberrecht“ |
-| Formspree-Formular-ID | `index.html` → `action="https://formspree.io/f/FORMSPREE_ID"` (kostenloser Account auf formspree.io, Zieladresse = ADK-Mail) |
-| ADK-Mailadresse (Fehlerhinweis im Formular) | `assets/js/avo.js` → Konstante `ADK_MAIL` |
-| GoFundMe-Link | `index.html` → Button „Zur GoFundMe-Kampagne“ in der AVO-Sektion |
-| Uhrzeiten der übrigen AVO-Termine | `index.html` (AVO-Terminliste + Formular-Optionen + Marquee-Spans) und `assets/js/app.js` (`marquee`-Text) |
+| Fotograf:innen-Namen | `assets/data/credits.js` (pro Bild), zusätzlich `impressum.html` unter „Urheberrecht“ |
+| Anmelde-Mailadresse (ADK) | `assets/js/avo.js` → Konstante `ADK_MAIL` **und** `links/index.html` → Button „Anmeldung AVO“ (beide Stellen zusammen ändern) |
+| Formspree-Formular-ID | `index.html` → `action="https://formspree.io/f/FORMSPREE_ID"` (kostenloser Account auf formspree.io, Zieladresse = die Anmelde-Mail) |
 | Karls Doppelname („Karl Georg“ vs. „Karl-Georg“) | `assets/data/students.js` (TODO-Kommentar beim Eintrag) |
-| Impressum-Kontaktdaten | `impressum.html` + `datenschutz.html` (eckige Klammern) |
+| Domain | projektweit `adk-bayern-2027.de` ersetzen (siehe Checkliste unten) |
+
+Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, AVO-Uhrzeiten (Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
 
 Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepflegt – neue Einträge immer oben einfügen.
 
@@ -103,10 +133,10 @@ Solange die Seite noch nicht offiziell veröffentlicht ist, liegt ein einfacher 
    ```bash
    grep -rl "adk-bayern-2027.de" --include="*.html" --include="*.xml" --include="*.txt" . | xargs sed -i 's|adk-bayern-2027.de|EURE-DOMAIN.de|g'
    ```
-2. **Impressum & Datenschutz:** alle `[Platzhalter in eckigen Klammern]` ausfüllen, Hosting-Anbieter in der Datenschutzerklärung eintragen.
+2. **Datenschutz:** Hosting-Anbieter in der Datenschutzerklärung eintragen.
 3. **Gruppenfotos** als `assets/images/group.jpg` (Hero, **Querformat**) und `assets/images/group-2.jpg` (Band unter dem Ensemble) ablegen.
-4. Portraits, Szenenfotos und Videos gemäß Namenskonvention hochladen.
-5. **Platzhalter aus der Tabelle oben** (Formspree-ID, GoFundMe, Foto-Credit, …) ausfüllen.
+4. Portraits, Szenenfotos (inkl. Galerien) und Videos gemäß Namenskonvention hochladen und die Foto-Credits in `assets/data/credits.js` eintragen.
+5. **Platzhalter aus der Tabelle oben** (Formspree-ID, Anmelde-Mail, Foto-Credits, …) ausfüllen.
 
 ## Deployment
 

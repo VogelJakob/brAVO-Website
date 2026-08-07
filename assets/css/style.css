@@ -24,10 +24,11 @@
   --font-body: "Archivo", system-ui, -apple-system, sans-serif;
   --measure: 42rem;
   --pad: 1.25rem;
-  /* PLATZHALTER: Fotograf:innen-Name eintragen, sobald bekannt
-     (erscheint als Wasserzeichen unten rechts auf allen Fotos;
-     zusätzlich den Namen im Impressum unter „Urheberrecht" ergänzen) */
-  --foto-credit: "© Foto: [Name folgt]";
+  /* Foto-Credit-Wasserzeichen (unten rechts auf allen großen Fotos).
+     Gepflegt wird pro Bild in assets/data/credits.js – app.js setzt diese
+     Variable je Foto passend. Der Wert hier ist nur der Notnagel, falls das
+     JavaScript nicht läuft. */
+  --foto-credit: "© Foto: ADK Bayern Jahrgang 2027";
 }
 
 * { box-sizing: border-box; }
@@ -232,7 +233,10 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   font-weight: 500;
 }
 
-/* Laufband: reine CSS-Animation; als Link führt es direkt zur AVO-Anmeldung */
+/* Laufband: reine CSS-Animation; als Link führt es direkt zur AVO-Anmeldung.
+   Inhalt kommt aus assets/js/termine.js – bis dahin (und ohne JavaScript)
+   bleibt das Band per hidden unsichtbar. */
+.marquee[hidden] { display: none; }
 .marquee {
   display: block;
   overflow: hidden;
@@ -275,6 +279,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   margin: 0 auto;
   padding: 3.5rem var(--pad) 0;
 }
+.intro h2 { margin-bottom: 0.6rem; }
 .intro p {
   max-width: var(--measure);
   font-size: 1.1rem;
@@ -365,6 +370,29 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   height: 100%;
   object-fit: cover;
   cursor: zoom-in;
+}
+
+/* Weitere Szenenfotos ({key}-2.jpg …) als Vorschaureihe unter dem Hauptbild;
+   erzeugt von assets/js/termine.js, nur vorhandene Dateien erscheinen. */
+.prod-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.6rem 0.6rem 0;
+}
+.prod-thumbs img {
+  display: block;
+  width: 4.2rem;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  cursor: zoom-in;
+  transition: translate 0.15s ease, box-shadow 0.15s ease;
+}
+.prod-thumbs img:hover,
+.prod-thumbs img:focus-visible {
+  translate: -2px -2px;
+  box-shadow: 4px 4px 0 var(--acc);
 }
 
 .prod-body { padding: 1rem 1.1rem 1.2rem; }

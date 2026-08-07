@@ -13,12 +13,18 @@
       heroTitle1: "Jahrgang",
       heroTitle2: "2027",
       heroText: "Zehn Schauspielstudierende stellen sich vor – mit Steckbrief, Vita und Showreel. Ab Sommer 2027 frei für Engagements an Theater, Film und Fernsehen.",
-      marquee: "Vorsprechen · 22.10.2026 Linz (Anton Bruckner Universität) · 30.10.2026 Regensburg 14 Uhr (Akademietheater Regensburg) · 02.11.2026 Köln (Theater im Bauturm) · 03.11.2026 Hamburg (Hamburger Sprechwerk) · 04.11.2026 Berlin (Theaterhaus Berlin Schöneweide) · 05.11.2026 Dresden (Zentralwerk) · 07.11.2026 München (Mucca Halle) ·",
       ensemble: "Ensemble",
       productions: "Aufführungen",
       prodDateSoon: "Termine folgen",
-      prod1Premiere: "Premiere · Sa 08.08.2026",
-      prod2Premiere: "Premiere · Fr 02.10.2026",
+      /* Termin-Texte: aus assets/data/termine.js zusammengesetzt (termine.js) */
+      marqueeLead: "Vorsprechen",
+      premiere: "Premiere",
+      moreShows: "Weitere Vorstellungen",
+      moreDatesSoon: "weitere Termine folgen …",
+      allDatesSoon: "alle Termine folgen …",
+      expected: "Voraussichtlich",
+      timeSoon: "Uhrzeit folgt",
+      creditPrefix: "© Foto: ",
       tickets: "Tickets",
       prodImageSoon: "Foto folgt",
       photos: "Fotos",
@@ -117,6 +123,63 @@
       });
     },
 
+    /* Datum "JJJJ-MM-TT" -> { tag: "Sa", datum: "08.08.2026" } */
+    datum: function (iso) {
+      var p = String(iso).split("-");
+      var d = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+      return {
+        tag: d.toLocaleDateString("de-DE", { weekday: "short" }).replace(".", ""),
+        datum: p[2] + "." + p[1] + "." + p[0]
+      };
+    },
+
+    /* ---------- Foto-Credits (assets/data/credits.js) ---------- */
+
+    /* Text als CSS-String für content: … */
+    cssString: function (s) {
+      return '"' + String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"';
+    },
+
+    /*
+     * Sucht den Credit zu einem Bildpfad: der längste passende Schlüssel aus
+     * FOTO_CREDITS gewinnt, sonst greift "default". Rückgabe "" bedeutet:
+     * bewusst kein Wasserzeichen.
+     */
+    credit: function (src) {
+      if (typeof FOTO_CREDITS === "undefined") return null;
+      var path = String(src || "").split(/[?#]/)[0];
+      var best = null;
+      Object.keys(FOTO_CREDITS).forEach(function (key) {
+        if (key === "default") return;
+        var end = path.length - key.length;
+        if (end >= 0 && path.slice(end) === key && (best === null || key.length > best.length)) best = key;
+      });
+      var name = best === null ? FOTO_CREDITS.default : FOTO_CREDITS[best];
+      return name === undefined || name === null ? null : name;
+    },
+
+    /*
+     * Setzt --foto-credit passend zum jeweiligen Bild auf dem Container, der
+     * das Wasserzeichen zeichnet (die ::after-Regeln in style.css lesen die
+     * Variable). Nach jedem dynamischen Rendern aufrufen.
+     */
+    applyCredits: function (root) {
+      var self = this;
+      var scope = root || document;
+      var sel = ".hero-photo, .group-band figure, .portrait, .prod-media";
+      Array.prototype.forEach.call(scope.querySelectorAll(sel), function (box) {
+        var img = box.querySelector("img");
+        if (!img) return;
+        self.setCredit(box, img.getAttribute("src"));
+      });
+    },
+
+    setCredit: function (el, src) {
+      var name = this.credit(src);
+      if (name === null) return;
+      el.style.setProperty("--foto-credit", name === "" ? "none" : this.cssString(this.t("creditPrefix") + name));
+    },
+
     /* Statische Elemente mit data-i18n-Attribut aus dem UI-Wörterbuch befüllen. */
     applyStatic: function () {
       var self = this;
@@ -201,6 +264,8 @@
       overlay.classList.remove("zoomed");
       big.src = group[index].currentSrc || group[index].src;
       big.alt = group[index].alt || "";
+      /* Wasserzeichen der Großansicht: Credit des gerade gezeigten Bildes */
+      ADK.setCredit(overlay, group[index].getAttribute("src"));
       if (count) count.textContent = (index + 1) + " / " + group.length;
     }
 
@@ -242,5 +307,12 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     ADK.applyStatic();
+    /* Standard-Credit global setzen, danach die einzelnen Bilder überschreiben */
+    if (typeof FOTO_CREDITS !== "undefined" && FOTO_CREDITS.default) {
+      document.documentElement.style.setProperty(
+        "--foto-credit", ADK.cssString(ADK.t("creditPrefix") + FOTO_CREDITS.default)
+      );
+    }
+    ADK.applyCredits();
   });
 })();
