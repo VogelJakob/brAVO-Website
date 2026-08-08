@@ -53,10 +53,16 @@ const TERMINE = {
     {
       key: "kleine-hexe",
       titel: "Die kleine Hexe",
-      weitereFolgen: true,
+      venue: "Akademietheater Regensburg",
+      tickets: "https://okticket.de/tickets-akademietheater-regensburg-v171199",
+      weitereFolgen: false,
       termine: [
-        { d: "2027-01-15", unsicher: true },
-        { d: "2027-01-16", unsicher: true }
+        { d: "2027-01-16", typ: "premiere" },
+        { d: "2027-01-17" },
+        { d: "2027-01-23" },
+        { d: "2027-01-24" },
+        { d: "2027-01-30" },
+        { d: "2027-01-31" }
       ]
     }
   ],
