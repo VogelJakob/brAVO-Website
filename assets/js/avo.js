@@ -2,19 +2,24 @@
  * AVO-Sektion der Startseite: Anmeldeformular (Formspree) und Trailer.
  *
  * Formspree-Setup (einmalig): kostenlosen Account auf https://formspree.io
- * anlegen, als Zieladresse die ADK-Mail eintragen und im Formular in
- * index.html den Platzhalter "FORMSPREE_ID" durch die echte Formular-ID
- * ersetzen (z.B. action="https://formspree.io/f/abcdwxyz").
+ * anlegen, als Zieladresse adk.bayern27@gmail.com (Konstante ADK_MAIL)
+ * eintragen und im Formular in index.html den Platzhalter "FORMSPREE_ID"
+ * durch die echte Formular-ID ersetzen
+ * (z.B. action="https://formspree.io/f/abcdwxyz").
+ * Achtung: Der Empfänger wird bei Formspree im Account hinterlegt, nicht im
+ * Markup – ADK_MAIL und die Formspree-Zieladresse müssen zusammenpassen.
  */
 (function () {
   "use strict";
 
   /*
-   * PLATZHALTER: Anmelde-Mailadresse (ADK). Erscheint im Fehlerhinweis des
-   * Formulars und – als eigener Button – auf der Linkseite links/index.html.
-   * Wird die Adresse geändert, beide Stellen anpassen.
+   * Zieladresse des Anmeldeformulars. Erscheint als Rückfall-Kontakt im
+   * Fehlerhinweis des Formulars und muss identisch mit der im Formspree-
+   * Account hinterlegten Empfängeradresse sein.
+   * Die Linkseite links/index.html verlinkt bewusst auf das Formular
+   * (index.html#anmeldung) statt auf diese Adresse.
    */
-  var ADK_MAIL = "avo@adk-bayern.de";
+  var ADK_MAIL = "adk.bayern27@gmail.com";
 
   /* --- Anmeldeformular: per fetch absenden, Bestätigung inline anzeigen --- */
   function initForm() {
@@ -25,10 +30,19 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
 
+      /* Fehlerfall: Hinweis mit klickbarem mailto-Fallback auf ADK_MAIL. */
       function fail() {
         status.hidden = false;
         status.classList.add("form-status-error");
-        status.textContent = "Senden hat leider nicht geklappt – bitte versucht es später erneut oder schreibt uns direkt an " + ADK_MAIL + ".";
+        status.textContent = "";
+        status.appendChild(document.createTextNode(
+          "Senden hat leider nicht geklappt – bitte versucht es später erneut oder schreibt uns direkt an "
+        ));
+        var mail = document.createElement("a");
+        mail.href = "mailto:" + ADK_MAIL + "?subject=AVO-Anmeldung";
+        mail.textContent = ADK_MAIL;
+        status.appendChild(mail);
+        status.appendChild(document.createTextNode("."));
       }
 
       status.hidden = false;

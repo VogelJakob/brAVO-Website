@@ -1013,6 +1013,8 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   color: var(--acc);
 }
 .form-status-error { color: var(--acc-deep); }
+/* mailto-Fallback im Fehlerhinweis: übernimmt die Farbe des Status-Texts. */
+.form-status a { color: inherit; text-decoration: underline; }
 
 /* ---------- News (Startseite) ---------- */
 
