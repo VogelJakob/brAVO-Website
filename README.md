@@ -31,7 +31,7 @@ assets/images/students/  Portraitfotos:  {slug}.jpg · Galerie: {slug}-2.jpg …
 assets/images/group.jpg  Gruppenfoto (QUER) für den Hero-Bereich
 assets/images/group-2.jpg  Zweites Gruppenfoto (Band zwischen Ensemble und Aufführungen)
 assets/images/productions/  Szenenfotos: hamlet.jpg, reise-zum-mond.jpg, kleine-hexe.jpg
-                            (+ Galerie: hamlet-2.jpg … hamlet-5.jpg usw.)
+                            (+ Galerie: hamlet-2.jpg … hamlet-6.jpg usw.)
 assets/videos/           Showreels: {slug}.mp4 · AVO-Trailer: avo-trailer.mp4
 assets/audio/            Audio-Reels:    {slug}.mp3 (optional)
 ```
@@ -84,7 +84,7 @@ Dateien nur korrekt benennen und in den passenden Ordner legen:
 | Fotogalerie Person | `assets/images/students/{slug}-2.jpg` … `-8.jpg` | Erscheinen automatisch als Vorschaureihe im Profil; Lightbox blättert durch alle Bilder der Person |
 | Gruppenfoto Hero | `assets/images/group.jpg` (**Querformat**) | Solange es fehlt, zeigt der Hero automatisch `group-2.jpg` und blendet das Gruppenfoto-Band aus |
 | Szenenfotos | `assets/images/productions/hamlet.jpg`, `reise-zum-mond.jpg`, `kleine-hexe.jpg` | Erscheinen automatisch in den Aufführungs-Karten (mit Lightbox/Zoom); solange sie fehlen: „Foto folgt“ |
-| Szenenfoto-Galerie | `assets/images/productions/{key}-2.jpg` … `-5.jpg` | Vorschaureihe unter dem Hauptbild der Karte; Lightbox blättert durch alle Szenenfotos |
+| Szenenfoto-Galerie | `assets/images/productions/{key}-2.jpg` … `-6.jpg` | Vorschaureihe unter dem Hauptbild der Karte; Lightbox blättert durch alle Szenenfotos |
 | AVO-Trailer | `assets/videos/avo-trailer.mp4` | Player erscheint automatisch in der AVO-Sektion; solange die Datei fehlt: Hinweis „Trailer folgt“ |
 
 Die Existenz wird zur Laufzeit per HTTP-HEAD-Request geprüft; es gibt nirgends manuell gepflegte Pfade. Videos werden mit `preload="none"` und dem Portrait als Poster eingebunden – die Seite lädt also nicht schwer.

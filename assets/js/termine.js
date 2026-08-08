@@ -17,8 +17,8 @@
   var esc = function (s) { return ADK.esc(s); };
   var t = function (k) { return ADK.t(k); };
 
-  /* Galerie-Konvention der Produktionen: {key}-2.jpg bis {key}-5.jpg */
-  var PROD_GALLERY_MAX = 5;
+  /* Galerie-Konvention der Produktionen: {key}-2.jpg bis {key}-6.jpg */
+  var PROD_GALLERY_MAX = 6;
 
   function prodImage(key, n) {
     return ADK.root + "assets/images/productions/" + key + (n ? "-" + n : "") + ".jpg";

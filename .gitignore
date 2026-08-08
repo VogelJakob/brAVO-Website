@@ -7,7 +7,6 @@ AVO-Website/
 # Zum späteren Veröffentlichen einzelner Dateien: Zeile entfernen
 # oder gezielt mit `git add -f <datei>` hinzufügen.
 assets/images/students/*.jpg
-assets/images/group.jpg
 assets/videos/*.mp4
 assets/audio/*.mp3
 
