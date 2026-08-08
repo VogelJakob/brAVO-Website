@@ -249,6 +249,16 @@
       return b;
     }
 
+    /*
+     * Fußzeile unten mittig: Bildzähler als erste Zeile, darunter der
+     * Foto-Credit (den zeichnet ::after aus style.css). Beide stehen im
+     * normalen Fluss einer Spalte, der Container wächst also mit – ein
+     * zweizeiliger Credit kann den Zähler nicht mehr überdecken.
+     */
+    var footer = document.createElement("div");
+    footer.className = "lightbox-footer";
+    overlay.appendChild(footer);
+
     var count = null;
     if (group.length > 1) {
       overlay.appendChild(navButton("lightbox-prev", "‹", ADK.t("lightboxPrev"), -1));
@@ -256,7 +266,7 @@
       count = document.createElement("span");
       count.className = "lightbox-count";
       count.setAttribute("aria-hidden", "true");
-      overlay.appendChild(count);
+      footer.appendChild(count);
     }
 
     function show(i) {

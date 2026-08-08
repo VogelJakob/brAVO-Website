@@ -163,17 +163,12 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   pointer-events: none;
 }
 .portrait.no-img::after { content: none; }
-/* Auch in der Lightbox-Großansicht sichtbar.
-   Auf schmalen Viewports steht der Credit mittig unten – der Bildzähler
-   rückt dafür eine Zeile höher (siehe .lightbox-count), sonst würde der
-   lange Name die Zahlen überdecken. */
-.lightbox::after {
+/* Auch in der Lightbox-Großansicht sichtbar: dort ist der Credit die zweite
+   Zeile der Fußzeile (.lightbox-footer), steht also immer unter dem
+   Bildzähler – egal wie lang der Name ist und wie oft er umbricht. */
+.lightbox-footer::after {
   content: var(--foto-credit);
-  position: fixed;
-  left: 50%;
-  bottom: 1rem;
-  translate: -50% 0;
-  max-width: calc(100% - 2rem);
+  max-width: 100%;
   text-align: center;
   font-size: 0.72rem;
   font-weight: 600;
@@ -790,11 +785,22 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .lightbox-nav:hover { background: var(--paper); }
 .lightbox-prev { left: 1rem; }
 .lightbox-next { right: 1rem; }
-.lightbox-count {
-  position: fixed;
-  bottom: 2.6rem;   /* schmale Viewports: eine Zeile über dem Foto-Credit */
+/* Fußzeile der Lightbox: Bildzähler (Zeile 1) und Foto-Credit (Zeile 2, als
+   ::after – siehe oben) stehen untereinander im normalen Fluss. Der Container
+   wächst mit dem Text, deshalb kann sich hier nichts überlagern. */
+.lightbox-footer {
+  position: fixed;   /* fixed wie die übrigen Bedienelemente: bleibt beim Zoom-Scrollen stehen */
   left: 50%;
+  bottom: 1rem;
   translate: -50% 0;
+  max-width: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  pointer-events: none;
+}
+.lightbox-count {
   color: var(--bg);
   font-size: 0.85rem;
   font-weight: 700;
@@ -1152,16 +1158,13 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
   .site-footer { flex-direction: row; justify-content: space-between; align-items: center; }
 
-  /* Lightbox: ab hier ist genug Platz, damit Foto-Credit (rechts) und
-     Bildzähler (mittig) nebeneinander in eine Zeile passen. */
-  .lightbox::after {
-    left: auto;
-    right: 1rem;
-    translate: none;
-    max-width: 40%;
-    text-align: right;
+  /* Lightbox: ab hier ist mehr Platz, der Credit bleibt also praktisch immer
+     einzeilig. Zähler und Credit stehen trotzdem in derselben Spalte
+     (.lightbox-footer) – nur etwas kompakter. */
+  .lightbox-footer {
+    max-width: min(40rem, calc(100% - 2rem));
+    gap: 0.3rem;
   }
-  .lightbox-count { bottom: 1rem; }
 }
 
 /* Sehr breite Viewports (großer Monitor oder herausgezoomt): fünf Kacheln pro Zeile */
