@@ -1,11 +1,5 @@
-# Vorübergehend: Seite ist passwortgeschützt und soll nicht in Suchmaschinen
-# auftauchen. Zum Livegang wieder auf "Allow: /" umstellen (siehe README).
-# Ausnahme: /links/ (QR-Code-Linkseite für Visitenkarten) soll auffindbar und
-# indexierbar sein und ist daher explizit freigegeben (Allow überschreibt das
-# pauschale Disallow, da die längere/spezifischere Regel gilt).
+# Die Seite ist öffentlich und darf vollständig indexiert werden.
 User-agent: *
-Disallow: /
-Allow: /links
-Allow: /links/
+Allow: /
 
 Sitemap: https://adk-bayern-2027.de/sitemap.xml
