@@ -57,7 +57,7 @@ const TERMINE = {
       tickets: "https://okticket.de/tickets-akademietheater-regensburg-v171199",
       weitereFolgen: false,
       termine: [
-        { d: "2027-01-16", typ: "premiere" },
+        { d: "2027-01-16" },
         { d: "2027-01-17" },
         { d: "2027-01-23" },
         { d: "2027-01-24" },
