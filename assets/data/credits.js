@@ -21,6 +21,9 @@ const FOTO_CREDITS = {
   "assets/images/group.jpg": "Laukart Photography",
   "assets/images/group-2.jpg": "Laukart Photography",
 
+  /* Aufführung „Hamlet“ */
+  "assets/images/productions/hamlet.jpg": "Konstantin Kloppe",
+
   /* Aufführung „Die kleine Hexe“ */
   "assets/images/productions/kleine-hexe.jpg": "Werner Hofbauer",
   "assets/images/productions/kleine-hexe-2.jpg": "Werner Hofbauer",
@@ -32,6 +35,17 @@ const FOTO_CREDITS = {
   /* Cedric Corazza */
   "assets/images/students/cedric-corazza.jpg": "Laukart Photography",
   "assets/images/students/cedric-corazza-2.jpg": "Jan Louis Trummer",
+  "assets/images/students/cedric-corazza-3.jpg": "Jan Louis Trummer",
+
+  /* Charlotte Friederich – alle Bilder */
+  "assets/images/students/charlotte-friederich.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-2.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-3.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-4.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-5.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-6.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-7.jpg": "Salome Ridder",
+  "assets/images/students/charlotte-friederich-8.jpg": "Salome Ridder",
 
   /* Charlotte Grünewald */
   "assets/images/students/charlotte-gruenewald.jpg": "Alexander Schank",
@@ -54,20 +68,34 @@ const FOTO_CREDITS = {
 
   /* Bianca Pitschedell */
   "assets/images/students/bianca-pitschedell.jpg": "Laukart Photography",
+  "assets/images/students/bianca-pitschedell-2.jpg": "Konstantin Kloppe",
+  "assets/images/students/bianca-pitschedell-3.jpg": "Saskia Wagner",
+
+  /* Salome Ridder – alle Bilder */
+  "assets/images/students/salome-ridder.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-2.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-3.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-4.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-5.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-6.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-7.jpg": "Oliver Look",
+  "assets/images/students/salome-ridder-8.jpg": "Oliver Look",
 
   /* Karl-Georg Rößler */
   "assets/images/students/karl-georg-roessler.jpg": "Laukart Photography",
+  "assets/images/students/karl-georg-roessler-2.jpg": "Werner Hofbauer",
+  "assets/images/students/karl-georg-roessler-3.jpg": "Werner Hofbauer",
 
   /* Michelle Thielsch */
   "assets/images/students/michelle-thielsch.jpg": "Laukart Photography",
   "assets/images/students/michelle-thielsch-2.jpg": "Christine la Renard",
   "assets/images/students/michelle-thielsch-3.jpg": "Laukart Photography",
-  "assets/images/students/michelle-thielsch-4.jpg": "Manuel Schmid",
+  "assets/images/students/michelle-thielsch-4.jpg": "Manuerl",
 
   /* Rosalie Zwenzner */
-  "assets/images/students/rosalie-zwenzner.jpg": "Rosalie Zwenzner",
-  "assets/images/students/rosalie-zwenzner-2.jpg": "Rosalie Zwenzner",
-  "assets/images/students/rosalie-zwenzner-3.jpg": "Rosalie Zwenzner",
-  "assets/images/students/rosalie-zwenzner-4.jpg": "Rosalie Zwenzner",
-  "assets/images/students/rosalie-zwenzner-5.jpg": "Rosalie Zwenzner",
+  "assets/images/students/rosalie-zwenzner.jpg": "Einbrandfoto",
+  "assets/images/students/rosalie-zwenzner-2.jpg": "Einbrandfoto",
+  "assets/images/students/rosalie-zwenzner-3.jpg": "Einbrandfoto",
+  "assets/images/students/rosalie-zwenzner-4.jpg": "Einbrandfoto",
+  "assets/images/students/rosalie-zwenzner-5.jpg": "Einbrandfoto",
 };
