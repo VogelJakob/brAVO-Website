@@ -1,11 +1,9 @@
 /*
  * AVO-Sektion der Startseite: Anmeldeformular (Formspree) und Trailer.
  *
- * Formspree-Setup (einmalig): kostenlosen Account auf https://formspree.io
- * anlegen, als Zieladresse adk.bayern27@gmail.com (Konstante ADK_MAIL)
- * eintragen und im Formular in index.html den Platzhalter "FORMSPREE_ID"
- * durch die echte Formular-ID ersetzen
- * (z.B. action="https://formspree.io/f/abcdwxyz").
+ * Formspree-Setup: Das Formular in index.html postet an die Formular-ID
+ * "xaewqpbo" (action="https://formspree.io/f/xaewqpbo"), Zieladresse im
+ * Formspree-Account ist adk.bayern27@gmail.com (Konstante ADK_MAIL).
  * Achtung: Der Empfänger wird bei Formspree im Account hinterlegt, nicht im
  * Markup – ADK_MAIL und die Formspree-Zieladresse müssen zusammenpassen.
  */

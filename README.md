@@ -109,11 +109,10 @@ Die Website ist rein deutsch (der frühere DE/EN-Umschalter wurde auf Kundenwuns
 | Was | Wo eintragen |
 |---|---|
 | Fotograf:innen-Namen | `assets/data/credits.js` (pro Bild), zusätzlich `impressum.html` unter „Urheberrecht“ |
-| Formspree-Formular-ID | `index.html` → `action="https://formspree.io/f/FORMSPREE_ID"` (kostenloser Account auf formspree.io, **Zieladresse im Formspree-Account: `adk.bayern27@gmail.com`** – identisch mit `ADK_MAIL` in `assets/js/avo.js`, das nur den mailto-Fallback im Fehlerfall liefert) |
 | Karls Doppelname („Karl Georg“ vs. „Karl-Georg“) | `assets/data/students.js` (TODO-Kommentar beim Eintrag) |
 | Domain | projektweit `adk-bayern-2027.de` ersetzen (siehe Checkliste unten) |
 
-Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, AVO-Uhrzeiten (Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
+Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, Formspree-Formular-ID (`index.html` → `action="https://formspree.io/f/xaewqpbo"`; **Zieladresse im Formspree-Account: `adk.bayern27@gmail.com`** – identisch mit `ADK_MAIL` in `assets/js/avo.js`, das nur den mailto-Fallback im Fehlerfall liefert), AVO-Uhrzeiten (Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
 
 Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepflegt – neue Einträge immer oben einfügen.
 
@@ -126,7 +125,7 @@ Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepfleg
 2. **Datenschutz:** Hosting-Anbieter in der Datenschutzerklärung eintragen.
 3. **Gruppenfotos** als `assets/images/group.jpg` (Hero, **Querformat**) und `assets/images/group-2.jpg` (Band unter dem Ensemble) ablegen.
 4. Portraits, Szenenfotos (inkl. Galerien) und Videos gemäß Namenskonvention hochladen und die Foto-Credits in `assets/data/credits.js` eintragen.
-5. **Platzhalter aus der Tabelle oben** (Formspree-ID, Foto-Credits, …) ausfüllen.
+5. **Platzhalter aus der Tabelle oben** (Foto-Credits, Domain, …) ausfüllen.
 
 ## Deployment
 
