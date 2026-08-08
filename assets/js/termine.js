@@ -117,9 +117,16 @@
       text = esc(t("moreDatesSoon"));
     }
 
+    /*
+     * Der Chip nennt die Premiere. Ohne Premiere, aber mit (auch nur
+     * voraussichtlichen) Terminen bleibt er leer – die Termine stehen dann
+     * schon in der Zeile darunter, ein zusätzliches "Termine folgen" wäre
+     * dazu widersprüchlich. Nur wenn gar kein Datum bekannt ist, tritt der
+     * Platzhalter an.
+     */
     var chip = premiere
       ? t("premiere") + " · " + ADK.datum(premiere.d).tag + " " + ADK.datum(premiere.d).datum
-      : t("prodDateSoon");
+      : (weitere.length ? "" : t("prodDateSoon"));
 
     return { chip: chip, text: text };
   }
@@ -131,7 +138,10 @@
       var zeile = terminZeile(p);
       var chip = card.querySelector(".prod-date");
       var text = card.querySelector(".prod-text");
-      if (chip) chip.textContent = zeile.chip;
+      if (chip) {
+        chip.textContent = zeile.chip;
+        chip.hidden = !zeile.chip;
+      }
       if (text) {
         text.innerHTML = zeile.text;
         text.hidden = !zeile.text;
@@ -141,8 +151,9 @@
 
   /*
    * Szenenfotos: neben dem Hauptbild ({key}.jpg) erscheinen vorhandene
-   * Zusatzbilder ({key}-2.jpg …) als Vorschaureihe. Alle Bilder teilen sich
-   * die Galerie "produktionen", sodass die Lightbox durchblättern kann.
+   * Zusatzbilder ({key}-2.jpg …) als Vorschaureihe. Jede Aufführung bildet
+   * eine eigene Lightbox-Galerie (data-gallery = key), damit die Pfeiltasten
+   * nur innerhalb dieser Aufführung blättern und nicht in die nächste laufen.
    */
   function renderProdGalerien() {
     TERMINE.produktionen.forEach(function (p) {
@@ -159,7 +170,7 @@
         box.innerHTML = bilder.map(function (src, i) {
           return (
             '<img src="' + esc(src) + '" alt="' + esc("Szenenfoto aus " + p.titel + " – " + (i + 2)) + '" ' +
-              'loading="lazy" data-lightbox data-gallery="produktionen" tabindex="0">'
+              'loading="lazy" data-lightbox data-gallery="' + esc(p.key) + '" tabindex="0">'
           );
         }).join("");
         var media = card.querySelector(".prod-media");

@@ -396,7 +396,10 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 
 .prod-body { padding: 1rem 1.1rem 1.2rem; }
-/* Termin als auffälliger Akzent-Chip statt kleiner Overline */
+/* Termin als auffälliger Akzent-Chip statt kleiner Overline.
+   Ohne Premiere bleibt der Chip leer – dann muss das display: inline-block
+   dem hidden-Attribut weichen (siehe assets/js/termine.js). */
+.prod-date[hidden] { display: none; }
 .prod-date {
   display: inline-block;
   margin: 0 0 0.6rem;
