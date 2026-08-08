@@ -255,11 +255,18 @@
     return section("contact", '<div class="contact-links">' + links.join("") + "</div>");
   }
 
+  /* Pronomen als dezenter Untertitel direkt unter dem Namen (nur im Profil). */
+  function pronounsHtml(s) {
+    if (!has(s.pronouns)) return "";
+    return '<p class="profile-pronouns">' + esc(s.pronouns) + "</p>";
+  }
+
   function placeholderHtml(s) {
     return (
       '<div class="profile-head">' +
         portraitHtml(s) +
         '<div class="profile-intro"><h1>' + esc(s.name) + "</h1>" +
+          pronounsHtml(s) +
           '<p class="coming-soon">' + esc(t("comingSoon")) + "</p>" +
           "<p class='muted'>" + esc(t("comingSoonText")) + "</p>" +
         "</div>" +
@@ -287,6 +294,7 @@
     main.innerHTML =
       '<header class="profile-title">' +
         "<h1>" + esc(s.name) + "</h1>" +
+        pronounsHtml(s) +
       "</header>" +
       '<div class="profile-layout">' +
         '<aside class="profile-side">' +

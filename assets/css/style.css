@@ -557,6 +557,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .profile-title { margin-bottom: 2rem; }
 .profile-title h1 { margin-bottom: 0.15em; }
 
+/* Pronomen als dezenter Untertitel direkt unter dem Namen */
+.profile-pronouns {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+}
+
 /*
  * Zweispaltiges Layout gegen lange Scrollwege: mobil untereinander
  * (Portrait, darunter direkt die Kontaktlinks, dann die Inhalte),

@@ -92,7 +92,7 @@ const FOTO_CREDITS = {
   "assets/images/students/michelle-thielsch-3.jpg": "Laukart Photography",
   "assets/images/students/michelle-thielsch-4.jpg": "Manuerl",
 
-  /* Rosalie Zwenzner */
+  /* Rosalie Daria Zwenzner */
   "assets/images/students/rosalie-zwenzner.jpg": "Einbrandfoto",
   "assets/images/students/rosalie-zwenzner-2.jpg": "Einbrandfoto",
   "assets/images/students/rosalie-zwenzner-3.jpg": "Einbrandfoto",
