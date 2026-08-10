@@ -46,6 +46,7 @@
       voiceType: "Stimmlage",
       languages: "Sprachen",
       skills: "Besondere Fähigkeiten",
+      qualifications: "Zusatzqualifikationen",
       bio: "Biografie",
       auditionRoles: "Vorsprechrollen (Auswahl)",
       auditionSongs: "Vorsprechlieder (Auswahl)",

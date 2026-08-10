@@ -625,6 +625,10 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   text-transform: uppercase;
   padding: 0.7rem 0.9rem 0;
   border-top: 2px solid var(--ink);
+  /* Lange Labels („Zusatzqualifikationen“) passen sonst nicht in die schmale
+     Label-Spalte der Desktop-Ansicht – lieber sauber trennen als überlaufen. */
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 .facts dd {
   margin: 0;

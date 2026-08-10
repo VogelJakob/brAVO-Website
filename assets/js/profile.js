@@ -77,7 +77,11 @@
       ["eyeColor", pick(s.eyeColor)],
       ["voiceType", pick(s.voiceType)],
       ["languages", pick(s.languages)],
-      ["skills", pick(s.skills)]
+      ["skills", pick(s.skills)],
+      /* Formale Qualifikationen (Abschlüsse, Zertifikate, Lizenzen) – bewusst
+         getrennt von den praktischen "Besonderen Fähigkeiten" darüber.
+         Fehlt das Feld, entfällt die Zeile durch den has()-Filter komplett. */
+      ["qualifications", pick(s.qualifications)]
     ].filter(function (row) { return has(row[1]); });
 
     if (!rows.length) return "";

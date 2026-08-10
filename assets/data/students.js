@@ -15,6 +15,14 @@
  * die EN-Werte werden ignoriert. Neue Felder einfach als einfachen String anlegen.
  * Das Feld "pronouns" wird nicht mehr angezeigt.
  *
+ * FÄHIGKEITEN vs. ZUSATZQUALIFIKATIONEN:
+ *   skills         = praktische/künstlerische/physische Fähigkeiten
+ *                    (Dialekte, Instrumente, Sportarten, Tanzstile, Akzente …)
+ *   qualifications = formale Qualifikationen: abgeschlossene bzw. laufende
+ *                    weitere Ausbildungen/Studiengänge, Zertifikate, Lizenzen.
+ *   Beide Felder sind optional (einfaches String-Array) – fehlt eines, entfällt
+ *   die Zeile im Steckbrief ersatzlos.
+ *
  * NEUE PERSON: Eintrag mit mindestens { slug, name, placeholder: true } anlegen.
  * Sobald Inhalte vorliegen: placeholder entfernen und Felder ergänzen.
  * Alle Array-Felder dürfen beliebig lang sein oder fehlen – das Rendering ist generisch.
@@ -250,6 +258,10 @@ const STUDENTS = [
       de: ["Cello (gut)", "Klavier (Grundlagen)", "Rhönrad (Grundlagen)", "Hip-Hop", "Bühnenkampf & Fechten (Grundlagen)", "Reiten (Grundlagen)", "Führerschein (B, BE)"],
       en: ["Cello (good)", "Piano (basics)", "Wheel gymnastics (basics)", "Hip hop", "Stage combat & fencing (basics)", "Horse riding (basics)", "Driving licence (B, BE)"]
     },
+    qualifications: [
+      "B.A. Musikwissenschaft (Hauptfach) und Kulturwissenschaft (Nebenfach), Universität Leipzig",
+      "Bachelorarbeit: „Postfeministische Selbstermächtigung am Beispiel von Shirin Davids Musikvideos ‚Ich darf das‘ und ‚Babsibars‘“"
+    ],
     auditionRoles: [
       { role: "Die Exfreundin", play: "Global Wunschkonzert", author: "Laura Naumann" },
       { role: "Iphigenie", play: "Atropa", author: "Tom Lanoye" },
@@ -440,9 +452,14 @@ const STUDENTS = [
       en: ["German (native)", "English (fluent)", "Spanish (good)", "French (basic)", "Saxon (native dialect)"]
     },
     skills: {
-      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf", "Schwerpunkt Gesang im Studium (Pop, Musical) bei Valentina Piegger", "Mediensprechen bei Benedikt Reidenbach", "Studium der Medienkulturwissenschaft und Germanistik (Albert-Ludwigs-Universität Freiburg)", "Gesangsunterricht (Kreismusikschule Dreiländereck Niesky)"],
-      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)", "Singing as a major focus of her studies (pop, musical) with Valentina Piegger", "Media speaking with Benedikt Reidenbach", "Studies in media culture and German literature (University of Freiburg)", "Singing lessons (Kreismusikschule Dreiländereck Niesky)"]
+      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf", "Mediensprechen bei Benedikt Reidenbach (2025–2026)"],
+      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)", "Media speaking with Benedikt Reidenbach (2025–2026)"]
     },
+    qualifications: [
+      "Schwerpunkt Gesang im Studium (Pop, Musical) bei Valentina Piegger (2023–2027)",
+      "Studium der Medienkulturwissenschaft und Germanistik (Albert-Ludwigs-Universität Freiburg, 2021–2023)",
+      "Gesangsunterricht (Kreismusikschule Dreiländereck Niesky, 2014–2018)"
+    ],
     auditionRoles: [
       { role: "Johanna", play: "Die heilige Johanna der Schlachthöfe", author: "Bertolt Brecht" },
       { role: "Giraffe / Judy", play: "Traurig und fröhlich ist das Giraffenleben", author: "Tiago Rodrigues" },
