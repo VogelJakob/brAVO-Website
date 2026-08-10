@@ -13,7 +13,8 @@
  * SPRACHEN: Die Website ist rein deutsch. Felder mit { de: ..., en: ... }
  * (Altbestand) funktionieren weiter – es wird immer der deutsche Wert angezeigt,
  * die EN-Werte werden ignoriert. Neue Felder einfach als einfachen String anlegen.
- * Das Feld "pronouns" wird nicht mehr angezeigt.
+ * Das Feld "pronouns" erscheint auf der Profilseite als Untertitel direkt
+ * unter dem Namen (nicht in der Ensemble-Übersicht).
  *
  * FÄHIGKEITEN vs. ZUSATZQUALIFIKATIONEN:
  *   skills         = praktische/künstlerische/physische Fähigkeiten
@@ -404,7 +405,7 @@ const STUDENTS = [
   {
     slug: "karl-georg-roessler",
     name: "Karl-Georg Rößler",
-    pronouns: "er/ihn",
+    pronouns: "er/ihm",
     born: "07.04.2003",
     locations: ["Regensburg", "Leipzig", "Dresden"],
     playingAge: "16–30",
@@ -507,7 +508,7 @@ const STUDENTS = [
   },
   {
     slug: "rosalie-zwenzner",
-    name: "Rosalie Zwenzner",
+    name: "Rosalie Daria Zwenzner",
     pronouns: "sie/ihr",
     born: "23.12.1999",
     locations: ["München", "Stuttgart", "Berlin", "Regensburg", "Chemnitz"],

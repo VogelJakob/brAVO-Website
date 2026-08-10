@@ -42,7 +42,6 @@
     }
   }
   </script>
-  <script src="assets/js/gate.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#main" data-i18n="skipLink">Zum Inhalt springen</a>
@@ -162,7 +161,7 @@
       <noscript>
         <p><strong>Hamlet</strong> · Premiere Sa 08.08.2026, weitere Vorstellungen 18.09., 19.09., 25.09., 26.09., 01.10. und 02.10.2026 · weitere Termine folgen …</p>
         <p><strong>Die Reise von der Erde zum Mond</strong> · Premiere Fr 02.10.2026, weitere Vorstellungen 07.10., 16.10. und 23.10.2026 · weitere Termine folgen …</p>
-        <p><strong>Die kleine Hexe</strong> · Premiere Sa 16.01.2027, weitere Vorstellungen 17.01., 23.01., 24.01., 30.01. und 31.01.2027</p>
+        <p><strong>Die kleine Hexe</strong> · Weitere Vorstellungen: 16.01., 17.01., 23.01., 24.01., 30.01. und 31.01.2027</p>
       </noscript>
     </section>
 
@@ -201,10 +200,12 @@
       </div>
 
       <!-- Anmeldung: optional, aber gern gesehen. Versand über Formspree –
-           PLATZHALTER "FORMSPREE_ID" durch die echte Formular-ID ersetzen
-           (kostenloser Account auf formspree.io, Zieladresse = ADK-Mail). -->
+           Formular-ID "xaewqpbo" (Zieladresse im Formspree-Account =
+           adk.bayern27@gmail.com, siehe ADK_MAIL in assets/js/avo.js).
+           Abgeschickt wird per fetch() aus avo.js, nicht als normaler
+           Browser-POST – dadurch bleibt die Statusanzeige auf der Seite. -->
       <div id="anmeldung" class="avo-anmeldung">
-        <form id="avo-form" class="avo-form" action="https://formspree.io/f/FORMSPREE_ID" method="POST">
+        <form id="avo-form" class="avo-form" action="https://formspree.io/f/xaewqpbo" method="POST">
           <h3>Zum Vorsprechen anmelden</h3>
           <p>Man muss sich nicht anmelden – aber es ist gern gesehen und hilft uns bei der Planung.</p>
           <div class="form-field">
