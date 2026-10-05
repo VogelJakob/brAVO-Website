@@ -200,13 +200,21 @@
     var heights = [];
     for (var c = 0; c < cols; c++) heights.push(0);
     box.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
-    Array.prototype.forEach.call(box.querySelectorAll("img"), function (img) {
+    var plan = Array.prototype.map.call(box.querySelectorAll("img"), function (img) {
       var ratio = img.naturalWidth ? img.naturalHeight / img.naturalWidth : 2 / 3;
       var h = Math.ceil((colW - THUMB_BORDER) * ratio + THUMB_BORDER);
       var col = heights.indexOf(Math.min.apply(null, heights));
-      img.style.gridColumn = String(col + 1);
-      img.style.gridRow = (heights[col] + 1) + " / span " + h;
+      var top = heights[col];
       heights[col] += h + THUMB_GAP;
+      return { img: img, col: col, top: top, h: h };
+    });
+    // Spalten nach Höhe absteigend anordnen: die längste steht links, der
+    // freie Rest sammelt sich unten rechts („linksbündig“).
+    var order = heights.map(function (h, i) { return i; })
+      .sort(function (a, b) { return heights[b] - heights[a] || a - b; });
+    plan.forEach(function (p) {
+      p.img.style.gridColumn = String(order.indexOf(p.col) + 1);
+      p.img.style.gridRow = (p.top + 1) + " / span " + p.h;
     });
   }
 
