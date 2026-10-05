@@ -35,7 +35,7 @@ const STUDENTS = [
     pronouns: "er/ihm, they/them",
     born: "08.01.2004",
     locations: ["München", "Regensburg", "Wien", "Berlin", "Stuttgart", "Düsseldorf"],
-    playingAge: "16–27",
+    playingAge: "16–30",
     height: "175 cm",
     hairColor: { de: "dunkelblond", en: "dark blonde" },
     eyeColor: { de: "blau", en: "blue" },
@@ -50,11 +50,8 @@ const STUDENTS = [
     },
     auditionRoles: [
       { role: "Mary", play: "Die kahle Sängerin", author: "Eugène Ionesco" },
-      { role: "Beckmann", play: "Draußen vor der Tür", author: "Wolfgang Borchert" },
       { role: "Meerjungraun", play: "Die kleinen Meerjungraun", author: "Kim de l'Horizon" },
-      { role: "Haimon", play: "Antigone", author: "Sophokles" },
-      { role: "Antipholus von Ephesus", play: "Komödie der Irrungen", author: "William Shakespeare" },
-      { role: "Scapin", play: "Scapinos Gaunerstreiche", author: "Jean-Baptiste Molière" }
+      { role: "Haimon", play: "Antigone", author: "Sophokles" }
     ],
     auditionSongs: [
       { title: "Wahrheit", from: "Tanz der Vampire" },
@@ -94,7 +91,7 @@ const STUDENTS = [
     name: "Salome Ridder",
     pronouns: "sie/ihr",
     born: "26.05.2003",
-    locations: ["Berlin", "Stuttgart", "München", "Allgäu", "Hamburg", "Niederlande"],
+    locations: ["Berlin", "Stuttgart", "München", "Allgäu", "Hamburg", "Niederlande", "Bern", "Zürich"],
     playingAge: "17–27",
     height: "167 cm",
     hairColor: { de: "Hellbraun", en: "light brown" },
@@ -112,20 +109,17 @@ const STUDENTS = [
       { role: "Judith", play: "Je suis Fassbinder", author: "Falk Richter" },
       { role: "AmMedea", play: "AmMedea", author: "Ron Rosenberg" },
       { role: "Eve", play: "Der Zerbrochene Krug", author: "Heinrich von Kleist" },
+      { role: "Die Biologin", play: "Annihilation", author: "Jeff Vandermeer" },
       { role: "Die erste Liebe", play: "Der Auftrag", author: "Heiner Müller" },
       { role: "Doris", play: "Das Kunstseidene Mädchen", author: "Irmgard Keun" },
       { role: "Franz Moor", play: "Die Räuber", author: "Friedrich Schiller" },
-      { role: "Die Biologin", play: "Annihilation", author: "Jeff Vandermeer" },
       { role: "Trini", play: "Die Ganzen Wahrheiten", author: "Sathyan Ramesh" }
     ],
     auditionSongs: [
       { title: "Maybe This Time", from: "Cabaret" },
       { title: "Männer", from: "Herbert Grönemeyer" }
     ],
-    bio: {
-      de: "Salome Ridder wurde in Berlin geboren und wuchs in einer dreisprachigen Künstlerfamilie auf, zwischen Kostümkisten, Papier, Farbe, Büchern und Musik. So entwickelte sie eine Begeisterung für Sprache und Ausdruck, die sie bis heute begleitet: im Schauspiel ebenso wie im Schreiben und in der analogen Fotografie.\n\nBereits als Kind stand sie auf der Bühne und 2016 übernahm sie ihre erste Fernsehfilm-Hauptrolle in „Liebling, lass die Hühner frei“ (Regie: Oliver Schmitz). 2024 spielte sie die Titelfigur im Spielfilm „Linda lebt“ (Regie: Amon Bela Bachmann).\n\nSie wirkte zudem in szenischen Lesungen wie „Götter sterben“ und „Say hi to Abdo“ beim LUBIMOVKA Festival in Wien mit. Am Akademietheater Regensburg war sie unter anderem in „Woyzeck“ (auch eingeladen zum JULA-Festival München) sowie in „Die Frau von früher“ und „Die kleine Hexe“ zu sehen.",
-      en: "Salome Ridder was born in Berlin and grew up in a trilingual family of artists, among costume chests, paper, paint, books and music. There she developed an enthusiasm for language and expression that has stayed with her to this day: in acting as well as in writing and analogue photography.\n\nShe stood on stage as a child, and in 2016 she took on her first leading role in a TV film in “Liebling, lass die Hühner frei” (directed by Oliver Schmitz). In 2024 she played the title role in the feature film “Linda lebt” (directed by Amon Bela Bachmann).\n\nShe has also taken part in staged readings such as “Götter sterben” and “Say hi to Abdo” at the LUBIMOVKA Festival in Vienna. At the Akademietheater Regensburg she has appeared in “Woyzeck” (also invited to the JULA Festival in Munich) as well as in “Die Frau von früher” and “Die kleine Hexe”."
-    },
+    bio: "Salome Ridder wurde in Berlin geboren und wuchs dreisprachig auf. Als Schauspielerin interessiert sie besonders das Zusammenspiel von Sprache und Identität. Während ihrer Ausbildung arbeitete sie unter anderem mit englischen und niederländischen Spracheinflüssen.\n\nBereits als Kind stand sie auf der Bühne. 2016 übernahm sie ihre erste Fernsehfilm-Hauptrolle in „Liebling, lass die Hühner frei“ (Regie: Oliver Schmitz), 2024 spielte sie die Titelfigur im Spielfilm „Linda lebt“ (Regie: Amon Bela Bachmann).\n\nZudem wirkte sie in szenischen Lesungen beim LUBIMOVKA Festival in Wien mit und war am Akademietheater Regensburg unter anderem in „Woyzeck“, „Die Frau von früher“, „Die kleine Hexe“ und „Hamlet“ zu sehen.\n\nNeben dem Schauspiel beschäftigt sie sich mit Schreiben, analoger Fotografie und Musik. Für ihre Rollen erstellt sie Playlists, die ihre Fantasie anregen und ihr helfen, mit Hingabe und Unbefangenheit in das Innenleben ihrer Figuren einzutauchen.",
     credits: {
       theater: [
         { years: "2026–2027", production: "Hamlet", author: "", role: "Polonius, Hamlet & Ophelia, Chor", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
@@ -167,8 +161,7 @@ const STUDENTS = [
       { role: "Alejandra", play: "17 Skizzen aus der Dunkelheit", author: "Roland Schimmelpfennig" },
       { role: "Romeo", play: "Romeo und Julia", author: "William Shakespeare" },
       { role: "Kostja", play: "Die Möwe", author: "Anton Tschechow" },
-      { role: "Rotpeter", play: "Ein Bericht für eine Akademie", author: "Franz Kafka" },
-      { role: "Beckmann", play: "Draußen vor der Tür", author: "Wolfgang Borchert" }
+      { role: "Rotpeter", play: "Ein Bericht für eine Akademie", author: "Franz Kafka" }
     ],
     auditionSongs: [
       { title: "Der perfekte Moment… wird heut verpennt", from: "Max Raabe" },
@@ -180,7 +173,10 @@ const STUDENTS = [
     },
     credits: {
       theater: [
-        { years: "2026", production: "Die Reise von der Erde zum Mond", author: "Jules Verne", role: "Michel Ardán", director: "Tilo Krügel", venue: "Theater Chemnitz" },
+        { years: "2026", production: "A Christmas Carol", author: "nach Charles Dickens", role: "Tiny Tim, Dick Wilkins, Spendensammler", director: "Jens Kerbel", venue: "Theater Chemnitz" },
+        { years: "2026", production: "Der Feuervogel", author: "Philipp Engelmann", role: "Palastwache", director: "Michael Ihnow", venue: "Theater Chemnitz" },
+        { years: "2026", production: "In der Strafkolonie", author: "nach Franz Kafka", role: "Der Soldat", director: "Bogdan Koca", venue: "Theater Chemnitz" },
+        { years: "2026", production: "Die Reise von der Erde zum Mond", author: "nach Jules Verne", role: "Michel Ardán", director: "Tilo Krügel", venue: "Theater Chemnitz" },
         { years: "2026", production: "Lügen über meine Mutter (szenische Lesung)", author: "Daniela Dröscher", role: "", director: "Meike Fabian", venue: "Akademietheater Regensburg" },
         { years: "2025–2027", production: "Die Kleine Hexe", author: "Otfried Preußler", role: "Billiger Jakob, Thomas u. w.", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Die Frau von früher", author: "Roland Schimmelpfennig", role: "Frank", director: "Ole Heimerdinger", venue: "Akademietheater Regensburg" },
@@ -192,7 +188,7 @@ const STUDENTS = [
         { years: "2022", production: "Blue Coats (Imagefilm)", author: "", role: "Alexander", director: "Andre Koschmieder", venue: "" }
       ]
     },
-    social: { instagram: "cedric.corazza" },
+    social: { instagram: "cedric.corazza", filmmakers: "https://www.filmmakers.eu/de/actors/cedric-corazza" },
     email: "cedric.corazza@web.de"
   },
   {
@@ -225,20 +221,23 @@ const STUDENTS = [
       { title: "Der Tod steht um die Ecke", from: "The Addams Family" },
       { title: "Mad World", from: "Roland Orzabal" }
     ],
-    bio: {
-      de: "Charlotte Friederich wuchs in Würzburg auf. Um mit zwei älteren Brüdern mithalten zu können, hat Charlotte früh gelernt, in Piraten- oder Räuber-Rollen zu schlüpfen, Bandenlager zu bauen und gemeinsam die unterschiedlichsten Geschichten entstehen zu lassen. Immer auf der Suche nach Magie. Auch eine gewisse Ensemblefähigkeit wurde hier trainiert.\n\nNach ihrem Abitur fand sie ihren Weg zu der Würzburger „Theaterwerkstatt“. Dort konnte sie sowohl als Schauspielerin als auch als Regieassistentin ihre Leidenschaft ausleben.\n\nAn der ADK Bayern hat sich Charlotte mit Freude durchs Studium gespielt und war unter anderem in den Produktionen „Die Argonauten“ (Franz Grillparzer), „Kasimir und Karoline“ (Ödön von Horváth) und „Die kleine Hexe“ (Otfried Preußler) zu sehen.",
-      en: "Charlotte Friederich grew up in Würzburg. To keep up with two older brothers, she learned early on to slip into pirate and robber roles, build gang hideouts and invent all kinds of stories together — always in search of magic. A certain sense of ensemble was trained there, too.\n\nAfter finishing school she found her way to the Würzburg “Theaterwerkstatt”, where she lived out her passion both as an actress and as an assistant director.\n\nAt ADK Bavaria, Charlotte has played her way through her studies with joy and has appeared in productions including “Die Argonauten” (Franz Grillparzer), “Kasimir und Karoline” (Ödön von Horváth) and “Die kleine Hexe” (Otfried Preußler)."
-    },
+    bio: "Charlotte Friederich wuchs in Würzburg auf und sammelte hier während ihrer Schulzeit erste Theatererfahrungen.\n\nNach ihrem Abitur fand sie ihren Weg zur Würzburger „Theaterwerkstatt“. Dort konnte sie sowohl als Schauspielerin als auch als Regieassistentin ihre Leidenschaft ausleben.\n\nAn der ADK Bayern hat sich Charlotte mit Freude durchs Studium gespielt. Dabei immer im Fokus: Das Interesse an Menschen und ihren Geschichten, Fragen zu stellen und nie aufhören zu suchen.\n\nSie war unter anderem in den Produktionen „Die Argonauten“ (Franz Grillparzer), „Die kleine Hexe“ (Otfried Preußler) und „Hamlet“ (William Shakespeare) zu sehen.",
     credits: {
       theater: [
         { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Ophelia", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
+        { years: "2026", production: "Szenenstudium", author: "", role: "Elizabeth Proctor, Lehrerin", director: "Guido Wachter", venue: "Akademietheater Regensburg" },
         { years: "2025–2027", production: "Die kleine Hexe", author: "Otfried Preußler", role: "Kräuterhexe, Holzsammlerin, Papierblumenmädchen, Vroni", director: "Oliver Severin", venue: "Akademietheater Regensburg" },
         { years: "2025", production: "Die Argonauten", author: "Franz Grillparzer", role: "Medea", director: "Sebastian Godditsch", venue: "Akademietheater Regensburg" },
         { years: "2024", production: "Kasimir und Karoline", author: "Ödön von Horváth", role: "Erna", director: "Selina Kretschmann", venue: "Akademietheater Regensburg" }
       ]
     },
+    /* Hörproben (Dateien in assets/audio/, nur vorhandene werden angezeigt) */
+    audioReels: [
+      { label: "Hörbuch (Ausschnitt)", file: "charlotte-friederich-hoerbuch-ausschnitt.mp3" },
+      { label: "Werbung", file: "charlotte-friederich-werbung.mp3" }
+    ],
     social: { instagram: "liebercharlyalslina", filmmakers: "https://www.filmmakers.eu/de/actors/charlotte-friederich", etalenta: "https://www.etalenta.eu/members/profile/charlotte-friederich" },
-    email: "linifr@t-online.de"
+    email: "charlottelina.friederich@gmail.com"
   },
   {
     slug: "charlotte-gruenewald",
@@ -267,19 +266,13 @@ const STUDENTS = [
       { role: "Die Exfreundin", play: "Global Wunschkonzert", author: "Laura Naumann" },
       { role: "Iphigenie", play: "Atropa", author: "Tom Lanoye" },
       { role: "Orlando", play: "Orlando der Roman", author: "Virginia Woolf" },
-      { role: "Kim Jong Un", play: "Das Knurren der Milchstraße", author: "Bonn Park" },
-      { role: "Abigail", play: "Hexenjagd", author: "Arthur Miller" },
-      { role: "Die Studentin", play: "Die Unterrichtsstunde", author: "Eugène Ionesco" },
-      { role: "Iason", play: "Medea", author: "Euripides" }
+      { role: "Abigail", play: "Hexenjagd", author: "Arthur Miller" }
     ],
     auditionSongs: [
       { title: "Ballade von der Judenhure Marie Sanders", from: "Bertolt Brecht, Hanns Eisler" },
       { title: "Gar nichts", from: "A Chorus Line" }
     ],
-    bio: {
-      de: "Charlotte Grünewald wuchs in einer Musiker*innenfamilie in einem kleinen Dorf in der Nähe von Heidelberg auf. Umgeben von Musik, Kassetten und Büchern wird ihre Liebe fürs Geschichtenerzählen und -hören seit jeher gepflegt. Immer auf der Suche nach weiteren Ausdrucksformen kamen mit der Zeit Cello, Tanz und Schreiben hinzu. Charlottes Neu- und Wissbegierde führten sie über mehrere Auslandsaufenthalte in Hawaii, Ljubljana und einem B.A. in Musik- und Kulturwissenschaft (Thema Postfeministische Selbstermächtigung), hin zum Schauspiel.\n\nSchon als Kind stand sie im Schultheater in mehreren Produktionen in deutscher und englischer Sprache auf der Bühne. Zuletzt war sie Teil der Monologlesung „Wanja ist am Leben“ (Natalia Lizorkina) des Kunstkollektivs MOST (2025) und des Stückes „Shadows of Sanity“ (Christine la Renarde) im Rahmen des EKSTASIS Theaterfestivals (2026). Am Akademietheater Regensburg war sie unter anderem in Inszenierungen von „Woyzeck“ (Georg Büchner), „Die kleine Hexe“ (Otfried Preußler) und „Medea“ (Franz Grillparzer) zu sehen.",
-      en: "Charlotte Grünewald grew up in a family of musicians in a small village near Heidelberg. Surrounded by music, cassette tapes and books, her love of telling and listening to stories has been nurtured ever since. Always in search of further forms of expression, cello, dance and writing were added over time. Charlotte's curiosity and thirst for knowledge led her to acting — via several stays abroad in Hawaii and Ljubljana and a B.A. in musicology and cultural studies (thesis on post-feminist self-empowerment).\n\nAs a child she already stood on stage in several school theatre productions in German and English. Most recently she was part of the monologue reading “Wanja ist am Leben” (Natalia Lizorkina) by the art collective MOST (2025) and the play “Shadows of Sanity” (Christine la Renarde) as part of the EKSTASIS theatre festival (2026). At the Akademietheater Regensburg she has appeared in productions of “Woyzeck” (Georg Büchner), “Die kleine Hexe” (Otfried Preußler) and “Medea” (Franz Grillparzer), among others."
-    },
+    bio: "Charlotte Grünewald wuchs in einer Musiker*innenfamilie in einem kleinen Dorf in der Nähe von Heidelberg auf. Umgeben von Musik, Kassetten und Büchern wird ihre Liebe fürs Geschichtenerzählen und -hören seit jeher gepflegt. Immer auf der Suche nach weiteren Ausdrucksformen kamen mit der Zeit Cello, Tanz und Schreiben hinzu. Charlottes Neu- und Wissbegierde führten sie über mehrere Auslandsaufenthalte in Hawaii, Ljubljana und einem B.A. in Musik- und Kulturwissenschaft (Thema Postfeministische Selbstermächtigung), hin zum Schauspiel.\n\nSchon als Kind stand sie im Schultheater in mehreren Produktionen in deutscher und englischer Sprache auf der Bühne. Zuletzt war sie Teil der Monologlesung „Wanja ist am Leben“ (Natalia Lizorkina) des Kunstkollektivs MOST (2025) und des Stückes „Shadows of Sanity“ (Christine la Renarde) im Rahmen des EKSTASIS Theaterfestivals (2026). Am Akademietheater Regensburg war sie unter anderem in Inszenierungen von „Woyzeck“ (Georg Büchner), „Die kleine Hexe“ (Otfried Preußler) und „Medea“ (Franz Grillparzer) zu sehen.\n\nSeit 2023 studiert Charlotte an der Akademie für Darstellende Kunst Bayern Schauspiel mit dem Schwerpunkt Gesang.",
     credits: {
       theater: [
         { years: "2026–2027", production: "Hamlet", author: "William Shakespeare", role: "Hamlet, Güldenstern", director: "Michael Blumenthal", venue: "Akademietheater Regensburg" },
@@ -293,6 +286,14 @@ const STUDENTS = [
         { years: "2024", production: "Wanja ist am Leben (szenische Lesung)", author: "Natalia Lizorkina", role: "Alle", director: "Senya Romin", venue: "W1, Kunstkollektiv MOST" }
       ]
     },
+    /* Hörproben (Dateien in assets/audio/, nur vorhandene werden angezeigt) */
+    audioReels: [
+      { label: "Kinderhörbuch: Erzählerin", file: "charlotte-gruenewald-kinderhoerbuch-erzaehlerin.mp4" },
+      { label: "Kinovorschau", file: "charlotte-gruenewald-kinovorschau.wav" },
+      { label: "Voice Acting: Protagonistin", file: "charlotte-gruenewald-voiceacting-protagonistin.mp3" },
+      { label: "Voice Acting: Zeichentrick", file: "charlotte-gruenewald-voiceacting-zeichentrick.wav" },
+      { label: "Werbung", file: "charlotte-gruenewald-werbung.wav" }
+    ],
     social: { instagram: "charlotte.gruenewald" },
     email: "lotti.gruenewald@web.de"
   },
@@ -311,13 +312,10 @@ const STUDENTS = [
       de: ["Deutsch (Muttersprache)", "Englisch (gute Kenntnisse)", "Spanisch (Grundkenntnisse)", "Vogtländisch (Heimatdialekt)", "Sächsisch"],
       en: ["German (native)", "English (good)", "Spanish (basic)", "Vogtlandian (native dialect)", "Saxon"]
     },
-    skills: {
-      de: ["Ski Alpin", "Bühnenkampf & Fechten (Grundlagen)", "Standardtanz (Grundlagen)", "Reiten", "Zeitgenössischer Tanz", "Tanztheater", "Capoeira", "Eislaufen", "Inlineskaten", "Gitarre (Grundkenntnisse)", "Führerschein (B)"],
-      en: ["Alpine skiing", "Stage combat & fencing (basics)", "Ballroom dance (basics)", "Horse riding", "Contemporary dance", "Dance theatre", "Capoeira", "Ice skating", "Inline skating", "Guitar (basics)", "Driving licence (B)"]
-    },
+    skills: ["Gesangsschwerpunkt", "Ski Alpin", "Bühnenkampf & Fechten (Grundlagen)", "Standardtanz (Grundlagen)", "Reiten", "Zeitgenössischer Tanz", "Tanztheater", "Capoeira", "Eislaufen", "Inlineskaten", "Gitarre (Grundkenntnisse)", "Führerschein (B)"],
     auditionRoles: [
       { role: "Frau", play: "Gebrüllt vor Lachen", author: "Christopher Durang" },
-      { role: "Orlando", play: "Orlando", author: "Virginia Woolf" },
+      { role: "Schustersfrau", play: "Die wundersame Schustersfrau", author: "Federico García Lorca" },
       { role: "Meggie", play: "King Kongs Töchter", author: "Theresia Walser" },
       { role: "Elisabeth", play: "Maria Stuart", author: "Friedrich Schiller" },
       { role: "Sonja", play: "Onkel Wanja", author: "Anton Tschechow" }
@@ -463,12 +461,9 @@ const STUDENTS = [
     ],
     auditionRoles: [
       { role: "Johanna", play: "Die heilige Johanna der Schlachthöfe", author: "Bertolt Brecht" },
-      { role: "Giraffe / Judy", play: "Traurig und fröhlich ist das Giraffenleben", author: "Tiago Rodrigues" },
-      { role: "", play: "Blutbuch", author: "Kim de l'Horizon" },
-      { role: "Medea", play: "Medea", author: "Euripides" },
-      { role: "Lysistrate", play: "Lysistrate", author: "Aristophanes" },
+      { role: "Klärchen", play: "Egmont", author: "Johann Wolfgang von Goethe" },
       { role: "Sie", play: "Und jetzt: Die Welt", author: "Sibylle Berg" },
-      { role: "Romeo", play: "Romeo und Julia", author: "William Shakespeare" }
+      { role: "Jesus", play: "Eigenarbeit mit Manuerl", author: "" }
     ],
     auditionSongs: [
       { title: "Lesbische Lovestory", from: "The Wild Party" },

@@ -1,6 +1,10 @@
 # Lokale Rohdaten (Fotos, Videos, Vita-Texte) – bleiben bewusst außerhalb von Git/GitHub
 AVO_Website_Dateien/
 AVO-Website/
+AVO Website/
+# Server-Kopie (IONOS /public) und erzeugter Upload-Ordner für FileZilla
+Avo Website alt/
+AVO Website upload/
 
 # Medien-Dateien vorerst nur lokal nutzen, nicht committen.
 # (Die Ordnerstruktur bleibt über die .gitkeep-Dateien erhalten.)
@@ -9,6 +13,15 @@ AVO-Website/
 assets/images/students/*.jpg
 assets/videos/*.mp4
 assets/audio/*.mp3
+assets/audio/*.wav
+assets/audio/*.mp4
+# Gruppen- und Szenenfotos ebenfalls nur per FileZilla
+assets/images/*.jpg
+assets/images/productions/*.jpg
+
+# Entwurfsmaterial und lokale Werkzeug-Einstellungen (gehören nicht ins Webroot)
+design/
+.claude/
 
 # Betriebssystem-Dateien
 .DS_Store

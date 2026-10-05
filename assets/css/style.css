@@ -364,12 +364,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   letter-spacing: 0.06em;
   color: #c4a8a0;
 }
+/* Szenenfoto komplett zeigen, nie beschneiden: einheitlicher 3:2-Rahmen der
+   Karten bleibt, Hoch- bzw. abweichende Formate werden eingepasst; freie
+   Flächen zeigt der getönte Rahmenhintergrund (#eae2d3). */
 .prod-media img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   cursor: zoom-in;
 }
 
@@ -378,14 +381,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .prod-thumbs {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 0.5rem;
   padding: 0.6rem 0.6rem 0;
 }
+/* Vorschau ohne Beschnitt: feste Breite, Höhe folgt dem Seitenverhältnis */
 .prod-thumbs img {
   display: block;
   width: 4.2rem;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
+  height: auto;
   border: 2px solid var(--ink);
   cursor: zoom-in;
   transition: translate 0.15s ease, box-shadow 0.15s ease;
@@ -497,10 +501,12 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   background: #eae2d3;   /* getönte Fläche hinter Foto/Fallback */
   border-bottom: var(--border);
 }
+/* Einheitlicher 3:4-Rahmen fürs Raster; das Foto wird ohne Beschnitt
+   eingepasst, freie Flächen zeigt der getönte Hintergrund. */
 .card-media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
 }
 .card-media.no-img img { display: none; }
@@ -584,10 +590,11 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   margin-bottom: 3rem;
 }
 
+/* Rahmenhöhe folgt dem Foto (kein Beschnitt, Seitenverhältnis bleibt);
+   nur der Initialen-Fallback ohne Foto behält das 3:4-Format. */
 .portrait {
   position: relative;
   width: min(100%, 19rem);
-  aspect-ratio: 3 / 4;
   background: #eae2d3;
   border: var(--border);
   box-shadow: var(--shadow-acc);
@@ -596,10 +603,10 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 .portrait img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
 }
+.portrait.no-img { aspect-ratio: 3 / 4; }
 .portrait.no-img img { display: none; }
 
 .profile-intro h1 { margin-bottom: 0.25em; }
@@ -717,14 +724,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .head-thumbs {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 0.9rem;
   margin-top: 1.6rem;
 }
+/* Vorschau ohne Beschnitt: feste Breite, Höhe folgt dem Seitenverhältnis */
 .head-thumbs img {
   display: block;
   width: 5.5rem;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
+  height: auto;
   border: 2px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
   cursor: zoom-in;
@@ -751,10 +759,18 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   padding: 1.5rem;
   cursor: zoom-out;
 }
+/* Originaldatei, nie über die natürliche Größe hochskaliert (width/height
+   auto); nur wenn sie größer als der Viewport ist, proportional verkleinert.
+   object-fit: contain sichert zusätzlich, dass nichts beschnitten/verzerrt wird. */
 .lightbox img {
   margin: auto;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
   border: var(--border);
   background: var(--paper);
   box-shadow: 9px 9px 0 var(--acc);

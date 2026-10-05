@@ -21,4 +21,4 @@ jobs:
           local_path: './*'
           remote_path: '/public'
           sftp_only: true
-          exclude: '["assets/images/students/*", "assets/videos/students/*", ".git*", ".github", "README.md", "node_modules"]'
+          exclude: '["assets/images/students/*", "assets/videos/students/*", ".git*", ".github", "README.md", "node_modules", "design", "design/*"]'
