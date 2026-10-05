@@ -189,7 +189,7 @@
    * Nur die Platzierung ändert sich, die DOM-Reihenfolge (Lightbox) nicht.
    * Noch nicht geladene Bilder werden vorläufig als 3:2 angenommen.
    */
-  var THUMB_GAP = 5, THUMB_MIN = 56, THUMB_COLS = 5, THUMB_BORDER = 3;
+  var THUMB_GAP = 5, THUMB_MIN = 48, THUMB_COLS = 5, THUMB_BORDER = 3;
 
   function layoutThumbs(box) {
     var cs = getComputedStyle(box);

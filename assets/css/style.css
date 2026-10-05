@@ -378,7 +378,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 /* Weitere Szenenfotos ({key}-2.jpg …) als Vorschaureihe unter dem Hauptbild;
    erzeugt von assets/js/termine.js, nur vorhandene Dateien erscheinen. */
 /* Mosaik: 5 gleich breite Spalten (auf sehr schmalen Karten weniger, jede
-   mindestens 56px breit = gut antippbar). Ein reines CSS-Mehrspaltenlayout
+   mindestens 48px breit = gut antippbar). Ein reines CSS-Mehrspaltenlayout
    lässt beim Höhenausgleich gern eine Spalte leer, deshalb setzt
    assets/js/termine.js (layoutThumbs) jedes Bild in die jeweils kürzeste
    Spalte; die 1px-Zeilen nehmen die individuelle Bildhöhe auf. Die
@@ -388,7 +388,8 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: 1px;
   column-gap: 5px;
-  padding: 0.6rem 0.6rem 0;
+  /* seitlich wie .prod-body, damit die Vorschauen bündig mit dem Text stehen */
+  padding: 1rem 1.1rem 0;
 }
 /* Vorschau ohne Beschnitt: volle Spaltenbreite, Höhe folgt dem
    Seitenverhältnis – Quer- und Hochformate füllen die Spalten lückenlos. */
