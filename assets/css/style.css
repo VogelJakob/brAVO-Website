@@ -381,22 +381,26 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 0.5rem;
+  gap: 5px;
   padding: 0.6rem 0.6rem 0;
 }
-/* Vorschau ohne Beschnitt: feste Breite, Höhe folgt dem Seitenverhältnis */
+/* Vorschau ohne Beschnitt: feste Höhe, Breite folgt dem Seitenverhältnis –
+   Quer- und Hochformate stehen lückenlos nebeneinander. Mobil 52px hoch
+   (bequemes Touch-Ziel), ab 640px 48px (siehe Media Query unten). */
 .prod-thumbs img {
   display: block;
-  width: 4.2rem;
-  height: auto;
-  border: 2px solid var(--ink);
+  height: 52px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  border: 1.5px solid var(--ink);
   cursor: zoom-in;
   transition: translate 0.15s ease, box-shadow 0.15s ease;
 }
 .prod-thumbs img:hover,
 .prod-thumbs img:focus-visible {
-  translate: -2px -2px;
-  box-shadow: 4px 4px 0 var(--acc);
+  translate: -1px -1px;
+  box-shadow: 3px 3px 0 var(--acc);
 }
 
 .prod-body { padding: 1rem 1.1rem 1.2rem; }
@@ -1168,6 +1172,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   .grid .card:nth-child(3n+2) { margin-top: 2.6rem; }
 
   .prod-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+  .prod-thumbs img { height: 48px; }
 
   .profile-head { flex-direction: row; align-items: flex-end; }
 
