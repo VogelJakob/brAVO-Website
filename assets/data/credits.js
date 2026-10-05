@@ -66,6 +66,7 @@ const FOTO_CREDITS = {
   "assets/images/students/charlotte-gruenewald-3.jpeg": "Konstantin Kloppe",
   "assets/images/students/charlotte-gruenewald-4.jpg": "Laukart Photography",
   "assets/images/students/charlotte-gruenewald-5.jpg": "Konstantin Kloppe",
+  "assets/images/students/charlotte-gruenewald-6.jpg": "Mareike Breunig",
 
   /* Konstantin Dimitrios Kloppe */
   "assets/images/students/konstantin-kloppe.jpg": "Laukart Photography",

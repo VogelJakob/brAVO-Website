@@ -188,7 +188,7 @@ const STUDENTS = [
         { years: "2022", production: "Blue Coats (Imagefilm)", author: "", role: "Alexander", director: "Andre Koschmieder", venue: "" }
       ]
     },
-    social: { instagram: "cedric.corazza", filmmakers: "https://www.filmmakers.eu/de/actors/cedric-corazza" },
+    social: { instagram: "cedric.corazza", filmmakers: "https://www.filmmakers.eu/de/actors/cedric-corazza", theapolis: "https://www.theapolis.de/de/profil/cedric-corazza" },
     email: "cedric.corazza@web.de"
   },
   {

@@ -242,6 +242,10 @@
       links.push('<a class="contact-link" href="' + esc(s.social.etalenta) +
         '" target="_blank" rel="noopener noreferrer">e-TALENTA</a>');
     }
+    if (s.social && has(s.social.theapolis)) {
+      links.push('<a class="contact-link" href="' + esc(s.social.theapolis) +
+        '" target="_blank" rel="noopener noreferrer">Theapolis</a>');
+    }
     return links;
   }
 
