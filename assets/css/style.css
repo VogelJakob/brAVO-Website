@@ -348,10 +348,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   box-shadow: var(--shadow);
 }
 
-/* Mit Foto folgt die Rahmenhöhe dem Bild; das 3:2-Format gilt nur für den
-   Platzhalter „Foto folgt“ (img wird bei fehlender Datei entfernt). */
 .prod-media {
   position: relative;
+  aspect-ratio: 3 / 2;
   background: #eae2d3;
   border-bottom: var(--border);
   display: flex;
@@ -365,14 +364,14 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   letter-spacing: 0.06em;
   color: #c4a8a0;
 }
-.prod-media:not(:has(img)) { aspect-ratio: 3 / 2; }
-.prod-media:has(img) span { display: none; }
-/* Szenenfoto komplett zeigen, nie beschneiden: volle Breite, Höhe folgt
-   dem Seitenverhältnis des Bildes. */
+/* Einheitlicher 3:2-Rahmen; das Szenenfoto füllt ihn vollständig aus.
+   Das ganze Bild zeigt die Lightbox. */
 .prod-media img {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   cursor: zoom-in;
 }
 
@@ -470,7 +469,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;   /* jede Karte so hoch wie ihr Foto, kein Strecken */
   gap: 1.4rem;
 }
 .grid .card { width: calc((100% - 1.4rem) / 2); }
@@ -498,18 +496,18 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 .card-media {
   position: relative;
+  aspect-ratio: 3 / 4;
   background: #eae2d3;   /* getönte Fläche hinter Foto/Fallback */
   border-bottom: var(--border);
 }
-/* Rahmenhöhe folgt dem Foto: volle Kartenbreite, Höhe aus dem
-   Seitenverhältnis – kein Beschnitt, keine Leerflächen. Nur der
-   Initialen-Fallback ohne Foto behält das 3:4-Format. */
+/* Einheitlicher 3:4-Rahmen; das Foto füllt ihn vollständig aus.
+   Das ganze Bild ohne Beschnitt zeigt die Lightbox im Profil. */
 .card-media img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
-.card-media.no-img { aspect-ratio: 3 / 4; }
 .card-media.no-img img { display: none; }
 
 /* Initialen-Fallback, solange kein Portraitfoto vorliegt */
