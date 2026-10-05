@@ -589,11 +589,12 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   margin-bottom: 3rem;
 }
 
-/* Rahmenhöhe folgt dem Foto (kein Beschnitt, Seitenverhältnis bleibt);
-   nur der Initialen-Fallback ohne Foto behält das 3:4-Format. */
+/* Einheitlicher 3:4-Rahmen; das Foto füllt ihn vollständig aus.
+   Per Klick zeigt die Lightbox das Originalbild im vollen Format. */
 .portrait {
   position: relative;
   width: min(100%, 19rem);
+  aspect-ratio: 3 / 4;
   background: #eae2d3;
   border: var(--border);
   box-shadow: var(--shadow-acc);
@@ -602,10 +603,10 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 .portrait img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
-.portrait.no-img { aspect-ratio: 3 / 4; }
 .portrait.no-img img { display: none; }
 
 .profile-intro h1 { margin-bottom: 0.25em; }
@@ -723,15 +724,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .head-thumbs {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
   gap: 0.9rem;
   margin-top: 1.6rem;
 }
-/* Vorschau ohne Beschnitt: feste Breite, Höhe folgt dem Seitenverhältnis */
+/* Einheitliche 3:4-Vorschauen, das Foto füllt sie aus (Original per Klick) */
 .head-thumbs img {
   display: block;
   width: 5.5rem;
-  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
   border: 2px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
   cursor: zoom-in;
