@@ -451,8 +451,8 @@ const STUDENTS = [
       en: ["German (native)", "English (fluent)", "Spanish (good)", "French (basic)", "Saxon (native dialect)"]
     },
     skills: {
-      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf", "Mediensprechen bei Benedikt Reidenbach (2025–2026)"],
-      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)", "Media speaking with Benedikt Reidenbach (2025–2026)"]
+      de: ["DJ", "Klavier", "Rap", "Jazz Dance", "Bouldern", "Schach", "Doppelkopf"],
+      en: ["DJing", "Piano", "Rap", "Jazz dance", "Bouldering", "Chess", "Doppelkopf (German card game)"]
     },
     qualifications: [
       "Schwerpunkt Gesang im Studium (Pop, Musical) bei Valentina Piegger (2023–2027)",

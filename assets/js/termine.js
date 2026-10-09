@@ -3,7 +3,9 @@
  *   - Laufband oben (8 identische Kopien, wie es die CSS-Animation erwartet)
  *   - AVO-Terminliste
  *   - Auswahlfeld im Anmeldeformular
- *   - Datumszeilen der Aufführungs-Karten (+ Szenenfoto-Galerien)
+ *   - Datumszeilen der Aufführungs-Karten (+ Uhrzeiten, Besetzung,
+ *     Szenenfoto-Galerien)
+ *   - Datums-Platzhalter in den News ([data-news-premiere], [data-news-avo])
  *   - Event-Auszeichnung (JSON-LD) für Suchmaschinen
  *
  * Termine werden ausschließlich in termine.js gepflegt – hier steht nur die
@@ -17,7 +19,8 @@
   var esc = function (s) { return ADK.esc(s); };
   var t = function (k) { return ADK.t(k); };
 
-  /* Galerie-Konvention der Produktionen: {key}-2.jpg bis {key}-10.jpg */
+  /* Galerie-Konvention der Produktionen: {key}-2.jpg bis {key}-10.jpg;
+     pro Produktion über "fotosMax" in termine.js begrenzbar. */
   var PROD_GALLERY_MAX = 10;
 
   function prodImage(key, n) {
@@ -37,6 +40,15 @@
       if (i === 0) return text;
       return (letzter ? " und " : ", ") + text;
     }).join("");
+  }
+
+  /* ["14:00", "17:00"] -> "14:00 und 17:00 Uhr"; leer, wenn keine Uhrzeit gepflegt ist */
+  function uhrzeitText(zeiten) {
+    if (!zeiten || !zeiten.length) return "";
+    var liste = zeiten.length > 1
+      ? zeiten.slice(0, -1).join(", ") + " und " + zeiten[zeiten.length - 1]
+      : zeiten[0];
+    return liste + " " + t("oClock");
   }
 
   /* ---------- Laufband ---------- */
@@ -105,11 +117,13 @@
     });
     var unsicher = weitere.length > 0 && weitere.every(function (item) { return item.unsicher; });
 
+    var zeit = uhrzeitText(p.uhrzeiten);
     var text = "";
     if (weitere.length) {
       text = unsicher && !premiere
         ? t("expected") + " " + aufzaehlung(weitere)
         : t("moreShows") + ": " + aufzaehlung(weitere);
+      if (zeit) text += " · " + esc(t("eachAt") + " " + zeit);
       if (p.weitereFolgen) {
         text += " · " + esc(unsicher && !premiere ? t("allDatesSoon") : t("moreDatesSoon"));
       }
@@ -125,7 +139,7 @@
      * Platzhalter an.
      */
     var chip = premiere
-      ? t("premiere") + " · " + ADK.datum(premiere.d).tag + " " + ADK.datum(premiere.d).datum
+      ? t("premiere") + " · " + ADK.datum(premiere.d).tag + " " + ADK.datum(premiere.d).datum + (zeit ? " · " + zeit : "")
       : (weitere.length ? "" : t("prodDateSoon"));
 
     return { chip: chip, text: text };
@@ -146,6 +160,59 @@
         text.innerHTML = zeile.text;
         text.hidden = !zeile.text;
       }
+      renderBesetzung(card, p);
+    });
+  }
+
+  function namen(list) {
+    return (list || []).filter(function (n) { return n && String(n).trim(); });
+  }
+
+  /*
+   * "Es spielen: …" unter dem Termintext. Bei Doppelbesetzung (ensembles)
+   * eine Zeile je Ensemble. Leere Listen erzeugen keine Zeile.
+   */
+  function renderBesetzung(card, p) {
+    var zeilen = [];
+    if (namen(p.besetzung).length) {
+      zeilen.push(t("cast") + ": " + namen(p.besetzung).join(", "));
+    }
+    (p.ensembles || []).forEach(function (e) {
+      var liste = namen(e.besetzung);
+      if (!liste.length) return;
+      zeilen.push((e.name ? e.name + " – " : "") + t("cast") + ": " + liste.join(", "));
+    });
+    if (!zeilen.length) return;
+    var anker = card.querySelector(".prod-text");
+    if (!anker) return;
+    zeilen.reverse().forEach(function (z) {
+      var el = document.createElement("p");
+      el.className = "prod-text prod-cast";
+      el.textContent = z;
+      anker.parentNode.insertBefore(el, anker.nextSibling);
+    });
+  }
+
+  /* ---------- News: Termine aus termine.js statt doppelt gepflegt ---------- */
+
+  function renderNews() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-news-premiere]"), function (el) {
+      var key = el.getAttribute("data-news-premiere");
+      TERMINE.produktionen.forEach(function (p) {
+        if (p.key !== key) return;
+        var premiere = p.termine.filter(function (item) { return item.typ === "premiere"; })[0];
+        if (!premiere) return;
+        var zeit = uhrzeitText(p.uhrzeiten);
+        el.textContent = "am " + ADK.datum(premiere.d).datum + (zeit ? " um " + zeit : "");
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("[data-news-avo]"), function (el) {
+      el.innerHTML = TERMINE.avo.map(function (a, i) {
+        var letzter = i === TERMINE.avo.length - 1;
+        var text = esc(kurz(a.d, letzter) + " " + a.stadt);
+        if (i === 0) return text;
+        return (letzter ? " und " : ", ") + text;
+      }).join("");
     });
   }
 
@@ -160,7 +227,8 @@
       var card = document.querySelector('[data-prod="' + p.key + '"]');
       if (!card) return;
       var kandidaten = [];
-      for (var n = 2; n <= PROD_GALLERY_MAX; n++) kandidaten.push(prodImage(p.key, n));
+      var max = Math.min(p.fotosMax || PROD_GALLERY_MAX, PROD_GALLERY_MAX);
+      for (var n = 2; n <= max; n++) kandidaten.push(prodImage(p.key, n));
 
       Promise.all(kandidaten.map(function (url) { return ADK.mediaExists(url); })).then(function (da) {
         var bilder = kandidaten.filter(function (url, i) { return da[i]; });
@@ -233,15 +301,19 @@
     TERMINE.produktionen.forEach(function (p) {
       p.termine.forEach(function (item) {
         if (item.unsicher) return;
-        var ev = {
-          "@type": "TheaterEvent",
-          name: p.titel,
-          startDate: item.d,
-          eventStatus: "https://schema.org/EventScheduled"
-        };
-        if (p.venue) ev.location = { "@type": "Place", name: p.venue };
-        if (p.tickets) ev.offers = { "@type": "Offer", url: p.tickets };
-        events.push(ev);
+        /* Eine Event-Auszeichnung je Vorstellung (bei zwei Uhrzeiten zwei) */
+        var zeiten = p.uhrzeiten && p.uhrzeiten.length ? p.uhrzeiten : [null];
+        zeiten.forEach(function (z) {
+          var ev = {
+            "@type": "TheaterEvent",
+            name: p.titel,
+            startDate: z ? item.d + "T" + z : item.d,
+            eventStatus: "https://schema.org/EventScheduled"
+          };
+          if (p.venue) ev.location = { "@type": "Place", name: p.venue };
+          if (p.tickets) ev.offers = { "@type": "Offer", url: p.tickets };
+          events.push(ev);
+        });
       });
     });
     TERMINE.avo.forEach(function (a) {
@@ -266,6 +338,7 @@
     renderAvoOptionen();
     renderProduktionen();
     renderProdGalerien();
+    renderNews();
     renderJsonLd();
     ADK.applyCredits();
   });

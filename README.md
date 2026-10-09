@@ -56,6 +56,9 @@ Alle Termine stehen **nur** in `assets/data/termine.js`. Daraus entstehen automa
 - **Datum immer im Format `"JJJJ-MM-TT"`** – der Wochentag wird daraus berechnet und nie eingetragen.
 - `typ: "premiere"` markiert die Premiere (Chip auf der Karte), `unsicher: true` weist einen Termin als „voraussichtlich" aus.
 - Stehen alle Termine fest: `weitereFolgen: false` setzen, dann verschwindet „weitere Termine folgen …".
+- **Uhrzeiten der Produktionen:** `uhrzeiten: ["19:00"]` bzw. bei zwei Vorstellungen pro Tag `["14:00", "17:00"]` – gilt für alle Termine der Produktion.
+- **Besetzung:** `besetzung: ["Name", …]` bzw. bei Doppelbesetzung `ensembles: [{ name: "Ensemble 1", besetzung: [...] }, …]`. Leere Listen erzeugen keine Zeile „Es spielen: …“.
+- **Szenenfotos begrenzen:** `fotosMax: 7` zeigt höchstens `{key}.jpg` bis `{key}-7.jpg`.
 - **AVO-Uhrzeit nachtragen:** beim jeweiligen Eintrag `zeit` setzen. Fehlt `zeit`, zeigt die Seite „Uhrzeit folgt" statt einer erfundenen Uhrzeit.
 
 Die `<noscript>`-Blöcke in `index.html` (AVO-Sektion und Aufführungen) enthalten dieselben Termine im Klartext für Besucher:innen ohne JavaScript – bei größeren Änderungen bitte mitziehen.
@@ -79,7 +82,7 @@ Dateien nur korrekt benennen und in den passenden Ordner legen:
 | Medium | Pfad | Verhalten |
 |---|---|---|
 | Portraitfoto | `assets/images/students/{slug}.jpg` | Fallback mit Initialen, solange es fehlt |
-| Showreel | `assets/videos/{slug}.mp4` | Player erscheint automatisch; solange die Datei fehlt: Hinweis „Showreel folgt in Kürze“ |
+| Showreel | `assets/videos/{slug}.mp4` | Player erscheint automatisch; solange die Datei fehlt, entfällt der Showreel-Abschnitt komplett |
 | Audio-Reel | `assets/audio/{slug}.mp3` | Optional – Player erscheint **nur**, wenn die Datei existiert |
 | Fotogalerie Person | `assets/images/students/{slug}-2.jpg` … `-8.jpg` | Erscheinen automatisch als Vorschaureihe im Profil; Lightbox blättert durch alle Bilder der Person |
 | Gruppenfoto Hero | `assets/images/group.jpg` (**Querformat**) | Solange es fehlt, zeigt der Hero automatisch `group-2.jpg` und blendet das Gruppenfoto-Band aus |
@@ -112,7 +115,7 @@ Die Website ist rein deutsch (der frühere DE/EN-Umschalter wurde auf Kundenwuns
 | Karls Doppelname („Karl Georg“ vs. „Karl-Georg“) | `assets/data/students.js` (TODO-Kommentar beim Eintrag) |
 | Domain | projektweit `adk-bayern-2027.de` ersetzen (siehe Checkliste unten) |
 
-Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, Formspree-Formular-ID (`index.html` → `action="https://formspree.io/f/xaewqpbo"`; **Zieladresse im Formspree-Account: `adk.bayern27@gmail.com`** – identisch mit `ADK_MAIL` in `assets/js/avo.js`, das nur den mailto-Fallback im Fehlerfall liefert), AVO-Uhrzeiten (Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
+Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, Formspree-Formular-ID (`index.html` → `action="https://formspree.io/f/xaewqpbo"`; **Zieladresse im Formspree-Account: `adk.bayern27@gmail.com`** – identisch mit `ADK_MAIL` in `assets/js/avo.js`, das nur den mailto-Fallback im Fehlerfall liefert), AVO-Uhrzeiten (Linz 17:00 Uhr, Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
 
 Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepflegt – neue Einträge immer oben einfügen.
 

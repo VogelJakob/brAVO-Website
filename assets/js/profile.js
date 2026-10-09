@@ -177,7 +177,7 @@
     return section("credits", inner);
   }
 
-  /* Showreel: Player nur bei vorhandener Datei, sonst Hinweis. Audio: nur bei vorhandener Datei. */
+  /* Showreel und Audio: nur bei vorhandener Datei – sonst entfällt der Abschnitt ganz. */
   function mediaHtml(s) {
     var out = "";
     if (media.video) {
@@ -187,8 +187,6 @@
           'src="' + esc(ADK.mediaPath("video", slug)) + '#t=0.1">' +
           esc(t("videoFallback")) +
         "</video>");
-    } else if (media.checked) {
-      out += section("showreel", '<p class="muted">' + esc(t("showreelSoon")) + "</p>");
     }
     out += audioHtml(s);
     return out;
