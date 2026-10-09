@@ -37,6 +37,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Absicherung gegen seitliches Scrollen: clip statt hidden, weil hidden
+   einen Scroll-Container erzeugt und das position: sticky des Headers
+   aushebeln würde. */
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   margin: 0;
   background: var(--bg);
@@ -1164,6 +1172,21 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .site-footer a:hover { color: var(--acc-on-dark); }
 
 /* ---------- Breakpoints ---------- */
+
+/* Schmale Bildschirme: Hauptnavigation verkleinern, damit alle Punkte ab
+   360px in eine Zeile passen (bei 639px stufenlos zurück auf die Desktop-
+   Werte). Darunter darf sie notfalls in eine zweite Zeile umbrechen –
+   abgeschnitten oder versteckt wird kein Menüpunkt. */
+@media (max-width: 639.98px) {
+  .site-header nav {
+    flex-wrap: wrap;
+    gap: 0.4rem clamp(0.75rem, 5vw - 0.75rem, 1.25rem);
+  }
+  .site-header nav a {
+    font-size: clamp(0.72rem, 2.5vw + 0.15rem, 0.8rem);
+    letter-spacing: clamp(0.04rem, 0.5vw - 0.05rem, 0.08rem);
+  }
+}
 
 @media (min-width: 640px) {
   :root { --pad: 2rem; }
