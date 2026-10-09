@@ -95,7 +95,7 @@ const TERMINE = {
    */
   avo: [
     { d: "2026-10-22", stadt: "Linz",       venue: "Anton Bruckner Universität",     zeit: "17:00 Uhr" },
-    { d: "2026-10-30", stadt: "Regensburg", venue: "Akademietheater Regensburg",     zeit: "14 Uhr" },
+    { d: "2026-10-30", stadt: "Regensburg", venue: "Akademietheater Regensburg",     zeit: "14:00 Uhr" },
     { d: "2026-11-02", stadt: "Köln",       venue: "Theater im Bauturm",             zeit: "14:30 Uhr" },
     { d: "2026-11-03", stadt: "Hamburg",    venue: "Hamburger Sprechwerk",           zeit: "14:30 Uhr" },
     { d: "2026-11-04", stadt: "Berlin",     venue: "Theaterhaus Berlin (Mitte)",     zeit: "14:30 Uhr" },
