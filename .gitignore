@@ -26,3 +26,23 @@ design/
 # Betriebssystem-Dateien
 .DS_Store
 Thumbs.db
+
+# ---------------------------------------------------------------------------
+# BILDER GEHÖREN NICHT INS REPOSITORY.
+# Die Website wird per SFTP deployt; Git versioniert ausschließlich den Code.
+# Daher werden Bilddateien generell ignoriert – in JEDEM Ordner und unabhängig
+# von der Groß-/Kleinschreibung der Endung (Git-Muster sind case-sensitiv,
+# deshalb die Zeichenklassen je Buchstabe).
+# Die Ordnerstruktur bleibt über die .gitkeep-Dateien erhalten.
+# ---------------------------------------------------------------------------
+*.[jJ][pP][gG]
+*.[jJ][pP][eE][gG]
+*.[pP][nN][gG]
+*.[wW][eE][bB][pP]
+*.[gG][iI][fF]
+*.[hH][eE][iI][cC]
+*.[aA][vV][iI][fF]
+*.[tT][iI][fF]
+*.[tT][iI][fF][fF]
+*.[bB][mM][pP]
+*.[sS][vV][gG]
