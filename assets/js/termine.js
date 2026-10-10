@@ -253,7 +253,43 @@
         }).join("");
         var media = card.querySelector(".prod-media");
         if (media && media.parentNode) media.parentNode.insertBefore(box, media.nextSibling);
+        var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
+        Promise.all(imgs.map(geladen)).then(function () { stapleThumbs(box, imgs); });
       });
+    });
+  }
+
+  function geladen(img) {
+    return new Promise(function (resolve) {
+      if (img.complete) return resolve();
+      img.addEventListener("load", resolve);
+      img.addEventListener("error", resolve);
+    });
+  }
+
+  /*
+   * Vorschauen ordnen: aufeinanderfolgende Querformate paarweise
+   * übereinander, Hochformate einzeln (so hoch wie ein Paar, siehe CSS).
+   * Die Reihenfolge bleibt erhalten, nur die Gruppierung ändert sich.
+   */
+  function stapleThumbs(box, imgs) {
+    var stapel = null;
+    imgs.forEach(function (img) {
+      if (img.naturalHeight > img.naturalWidth) {
+        img.classList.add("is-portrait");
+        box.appendChild(img);
+        stapel = null;
+        return;
+      }
+      if (!stapel) {
+        stapel = document.createElement("div");
+        stapel.className = "prod-thumb-stack";
+        box.appendChild(stapel);
+        stapel.appendChild(img);
+      } else {
+        stapel.appendChild(img);
+        stapel = null;
+      }
     });
   }
 

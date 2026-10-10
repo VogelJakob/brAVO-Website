@@ -385,26 +385,38 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 /* Weitere Szenenfotos ({key}-2.jpg …) als Vorschaureihe unter dem Hauptbild;
    erzeugt von assets/js/termine.js, nur vorhandene Dateien erscheinen. */
-/* Einheitliche Bildhöhe, Breite folgt dem Seitenverhältnis (kein Beschnitt).
-   Die Bilder laufen in Markup-Reihenfolge ({key}-2, -3 …) und brechen bei
-   Bedarf um – dieselbe Reihenfolge wie in der Lightbox.
-   Handy: 54px hoch → bei 360–412px Breite drei Querformate in Zeile 1,
-   der Rest in Zeile 2. Desktop: siehe Media Query (min-width: 640px). */
+/* Ohne Beschnitt: Breite folgt immer dem Seitenverhältnis. Querformate
+   haben eine einheitliche Höhe (--thumb-h) und stehen paarweise
+   übereinander (.prod-thumb-stack), Hochformate sind so hoch wie ein
+   solches Paar. assets/js/termine.js gruppiert die Bilder in dieser
+   Reihenfolge ({key}-2, -3 …) – wie in der Lightbox. Die Höhe richtet sich
+   nach der Kartenbreite: bei Hamlet (4 quer, 2 hoch) passt alles auf dem
+   Handy wie auf dem Desktop in eine Doppelzeile; mehr Bilder brechen um. */
 .prod-thumbs {
+  container-type: inline-size;
+  --thumb-h: 2.75rem;
+  --thumb-h: clamp(2rem, 16.5cqi - 6px, 3.5rem);
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-start;
   gap: 5px;
   /* seitlich wie .prod-body, damit die Vorschauen bündig mit dem Text stehen */
   padding: 1rem 1.1rem 0;
 }
+.prod-thumb-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 .prod-thumbs img {
   display: block;
-  height: 54px;
+  height: var(--thumb-h);
   width: auto;
   border: 1.5px solid var(--ink);
   cursor: zoom-in;
   transition: translate 0.15s ease, box-shadow 0.15s ease;
 }
+.prod-thumbs img.is-portrait { height: calc(2 * var(--thumb-h) + 5px); }
 .prod-thumbs img:hover,
 .prod-thumbs img:focus-visible {
   translate: -1px -1px;
@@ -1195,8 +1207,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   .grid .card:nth-child(3n+2) { margin-top: 2.6rem; }
 
   .prod-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-  /* Vorschauen möglichst in einer Zeile unter dem Hauptbild */
-  .prod-thumbs img { height: clamp(1.5rem, 4.5vw - 1.1rem, 2.125rem); }
 
   .profile-head { flex-direction: row; align-items: flex-end; }
 
