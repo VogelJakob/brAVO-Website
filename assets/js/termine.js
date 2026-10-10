@@ -37,6 +37,7 @@
     return list.map(function (item, i) {
       var letzter = i === list.length - 1;
       var text = "<strong>" + esc(kurz(item.d, letzter)) + "</strong>";
+      if (item.ausverkauft) text += " (" + esc(t("soldOut")) + ")";
       if (i === 0) return text;
       return (letzter ? " und " : ", ") + text;
     }).join("");
@@ -108,10 +109,20 @@
 
   /* ---------- Aufführungs-Karten ---------- */
 
+  /* Heutiges Datum als ISO-String "JJJJ-MM-TT" (lokale Zeit) */
+  function heuteIso() {
+    var h = new Date();
+    return h.getFullYear() + "-" + ("0" + (h.getMonth() + 1)).slice(-2) + "-" + ("0" + h.getDate()).slice(-2);
+  }
+
   function terminZeile(p) {
     var premiere = null;
     var weitere = [];
-    p.termine.forEach(function (item) {
+    var heute = heuteIso();
+    /* Vergangene Termine werden nicht mehr angezeigt (der heutige noch). */
+    var kommende = p.termine.filter(function (item) { return item.d >= heute; });
+    var alleVorbei = p.termine.length > 0 && !kommende.length;
+    kommende.forEach(function (item) {
       if (item.typ === "premiere" && !premiere) premiere = item;
       else weitere.push(item);
     });
@@ -122,7 +133,7 @@
     if (weitere.length) {
       text = unsicher && !premiere
         ? t("expected") + " " + aufzaehlung(weitere)
-        : t("moreShows") + ": " + aufzaehlung(weitere);
+        : (premiere ? t("moreShows") : (p.chipNaechster ? t("shows") : t("moreShows"))) + ": " + aufzaehlung(weitere);
       if (zeit) text += " · " + esc(t("eachAt") + " " + zeit);
       if (p.weitereFolgen) {
         text += " · " + esc(unsicher && !premiere ? t("allDatesSoon") : t("moreDatesSoon"));
@@ -140,7 +151,15 @@
      */
     var chip = premiere
       ? t("premiere") + " · " + ADK.datum(premiere.d).tag + " " + ADK.datum(premiere.d).datum + (zeit ? " · " + zeit : "")
-      : (weitere.length ? "" : t("prodDateSoon"));
+      : (weitere.length || alleVorbei ? "" : t("prodDateSoon"));
+
+    /* chipNaechster: Chip zeigt den nächsten kommenden Termin (ohne Premiere) */
+    if (!premiere && p.chipNaechster) {
+      var naechster = weitere.filter(function (item) { return !item.unsicher; })[0];
+      chip = naechster
+        ? ADK.datum(naechster.d).tag + " " + ADK.datum(naechster.d).datum + (zeit ? " · " + zeit : "")
+        : "";
+    }
 
     return { chip: chip, text: text };
   }

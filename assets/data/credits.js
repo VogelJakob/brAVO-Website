@@ -33,6 +33,9 @@ const FOTO_CREDITS = {
   "assets/images/productions/hamlet-9.jpg": "Konstantin Kloppe",
   "assets/images/productions/hamlet-10.jpg": "Konstantin Kloppe",
 
+  /* Aufführung „Die Reise von der Erde zum Mond“ – Bilder 2–6 ohne Eintrag: default */
+  "assets/images/productions/reise-zum-mond.jpg": "Nasser Hashemi",
+
   /* Aufführung „Die kleine Hexe“ */
   "assets/images/productions/kleine-hexe.jpg": "Werner Hofbauer",
   "assets/images/productions/kleine-hexe-2.jpg": "Werner Hofbauer",
