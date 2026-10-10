@@ -24,7 +24,7 @@
   var PROD_GALLERY_MAX = 10;
 
   function prodImage(key, n) {
-    return ADK.root + "assets/images/productions/" + key + (n ? "-" + n : "") + ".jpg";
+    return ADK.asset(ADK.root + "assets/images/productions/" + key + (n ? "-" + n : "") + ".jpg");
   }
 
   /* "08.08.2026" bzw. ohne Jahr "08.08." – das Jahr trägt nur der letzte Termin. */

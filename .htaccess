@@ -1,0 +1,45 @@
+# =====================================================================
+# Cache-Steuerung (Details und Ablauf beim Upload: siehe CACHE.md)
+# ---------------------------------------------------------------------
+# Alle Regeln stehen in <IfModule>-Blöcken: Fehlt ein Modul auf dem
+# Server, werden sie einfach ignoriert statt einen Fehler 500 auszulösen.
+# ETag und Last-Modified sendet Apache weiterhin automatisch – der
+# Browser fragt also nur kurz nach und lädt eine Datei nur dann neu
+# herunter, wenn sie sich wirklich geändert hat (Antwort 304 sonst).
+# =====================================================================
+
+# Eventuelle Expires-Vorgaben des Servers abschalten, damit nur die
+# Cache-Control-Regeln unten gelten.
+<IfModule mod_expires.c>
+  ExpiresActive Off
+</IfModule>
+
+<IfModule mod_headers.c>
+
+  # --- HTML-Seiten: immer beim Server nachfragen (gilt in beiden Modi) ---
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # --- MODUS A (AKTIV): Assets ebenfalls immer nachfragen --------------
+  # Änderungen an CSS/JS/Daten/Bildern/Medien kommen sofort an, auch
+  # wenn die Versionskennung (?v=…) einmal nicht erhöht wurde.
+  <FilesMatch "\.(css|js|jpe?g|png|gif|webp|avif|svg|ico|mp3|wav|m4a|ogg|mp4|webm|mov|woff2?|ttf|otf|eot)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+
+  # --- MODUS B (für später, auskommentiert): lange Gültigkeit ----------
+  # Assets werden ein Jahr ohne Nachfrage aus dem Browser-Cache geladen;
+  # für Aktualität sorgt allein die Versionskennung ?v=… in den HTML-
+  # Dateien. UMSCHALTEN: den FilesMatch-Block von MODUS A oben mit "#"
+  # auskommentieren und bei den drei Zeilen von MODUS B unten das
+  # führende "# " entfernen. Zurück auf MODUS A: genau umgekehrt.
+  # ACHTUNG: In MODUS B MUSS bei jedem Upload geänderter Assets die
+  # Versionskennung erhöht werden, sonst sehen Besucher bis zu ein Jahr
+  # lang die alte Datei.
+  # <FilesMatch "\.(css|js|jpe?g|png|gif|webp|avif|svg|ico|mp3|wav|m4a|ogg|mp4|webm|mov|woff2?|ttf|otf|eot)$">
+  #   Header set Cache-Control "public, max-age=31536000, immutable"
+  # </FilesMatch>
+
+</IfModule>
+# ===================== Ende Cache-Steuerung ==========================

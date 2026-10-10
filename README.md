@@ -132,6 +132,7 @@ Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepfleg
 
 ## Deployment
 
+- **Caching / Versionskennung:** Bei jedem Upload geänderter CSS/JS/Daten/Bilder die Versionskennung `?v=JJJJMMTT-N` in allen HTML-Dateien erhöhen und die `.htaccess` im Webroot mit hochladen – Details in [`CACHE.md`](CACHE.md).
 - **GitHub Pages:** Repo pushen → Settings → Pages → Branch `main`, Ordner `/ (root)`. Relative Pfade funktionieren auch bei Projekt-Pages (URL mit `/repo-name/`) unverändert.
 - **Netlify:** Ordner per Drag & Drop hochladen oder Repo verbinden – kein Build-Command, Publish-Directory ist die Wurzel.
 - GitHub hat ein Datei-Limit von 100 MB – Showreels ggf. komprimieren (z.B. 1080p, H.264, ~5 Mbit/s) oder Netlify verwenden.
