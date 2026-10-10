@@ -12,7 +12,6 @@
  * Termin-Felder (Produktionen):
  *   d         Datum (Pflicht)
  *   typ       "premiere" für die Premiere, sonst weglassen
- *   ausverkauft  true = Termin wird mit "(ausverkauft)" gekennzeichnet
  *   unsicher  true = Termin steht noch nicht fest (wird als "voraussichtlich"
  *             ausgewiesen)
  *
@@ -20,8 +19,6 @@
  *   uhrzeiten  Beginnzeiten, die für ALLE Termine der Produktion gelten,
  *              z.B. ["19:00"] oder bei zwei Vorstellungen pro Tag
  *              ["14:00", "17:00"]. Fehlt das Feld, wird keine Uhrzeit gezeigt.
- *   chipNaechster  true = roter Chip zeigt den nächsten kommenden Termin
- *              (für Produktionen ohne Premiere-Eintrag)
  *   fotosMax   Höchstzahl der Szenenfotos inkl. Hauptbild ({key}.jpg bis
  *              {key}-{fotosMax}.jpg). Ohne Angabe: 10.
  *   besetzung  Wer spielt mit – Liste von Namen. Wird als Zeile
@@ -57,14 +54,13 @@ const TERMINE = {
       key: "reise-zum-mond",
       titel: "Die Reise von der Erde zum Mond",
       venue: "Theater Chemnitz · Spinnbau – Ostflügel",
-      chipNaechster: true,
       tickets: "https://www.theater-chemnitz.de/spielplan/detailseite/die-reise-von-der-erde-zum-mond",
       uhrzeiten: ["20:00"],
       fotosMax: 7,
       weitereFolgen: false,
       termine: [
-        { d: "2026-10-16", ausverkauft: true },
-        { d: "2026-10-23", ausverkauft: true },
+        { d: "2026-10-16" },
+        { d: "2026-10-23" },
         { d: "2026-11-28" },
         { d: "2026-12-21" },
         { d: "2026-12-30" }

@@ -37,7 +37,6 @@
     return list.map(function (item, i) {
       var letzter = i === list.length - 1;
       var text = "<strong>" + esc(kurz(item.d, letzter)) + "</strong>";
-      if (item.ausverkauft) text += " (" + esc(t("soldOut")) + ")";
       if (i === 0) return text;
       return (letzter ? " und " : ", ") + text;
     }).join("");
@@ -133,7 +132,7 @@
     if (weitere.length) {
       text = unsicher && !premiere
         ? t("expected") + " " + aufzaehlung(weitere)
-        : (premiere ? t("moreShows") : (p.chipNaechster ? t("shows") : t("moreShows"))) + ": " + aufzaehlung(weitere);
+        : (premiere ? t("moreShows") : t("shows")) + ": " + aufzaehlung(weitere);
       if (zeit) text += " · " + esc(t("eachAt") + " " + zeit);
       if (p.weitereFolgen) {
         text += " · " + esc(unsicher && !premiere ? t("allDatesSoon") : t("moreDatesSoon"));
@@ -152,14 +151,6 @@
     var chip = premiere
       ? t("premiere") + " · " + ADK.datum(premiere.d).tag + " " + ADK.datum(premiere.d).datum + (zeit ? " · " + zeit : "")
       : (weitere.length || alleVorbei ? "" : t("prodDateSoon"));
-
-    /* chipNaechster: Chip zeigt den nächsten kommenden Termin (ohne Premiere) */
-    if (!premiere && p.chipNaechster) {
-      var naechster = weitere.filter(function (item) { return !item.unsicher; })[0];
-      chip = naechster
-        ? ADK.datum(naechster.d).tag + " " + ADK.datum(naechster.d).datum + (zeit ? " · " + zeit : "")
-        : "";
-    }
 
     return { chip: chip, text: text };
   }

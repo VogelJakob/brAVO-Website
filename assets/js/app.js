@@ -20,7 +20,6 @@
       premiere: "Premiere",
       moreShows: "Weitere Vorstellungen",
       shows: "Vorstellungen",
-      soldOut: "ausverkauft",
       moreDatesSoon: "weitere Termine folgen …",
       allDatesSoon: "alle Termine folgen …",
       expected: "Voraussichtlich",
