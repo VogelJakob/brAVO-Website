@@ -254,7 +254,7 @@
         var media = card.querySelector(".prod-media");
         if (media && media.parentNode) media.parentNode.insertBefore(box, media.nextSibling);
         var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
-        Promise.all(imgs.map(geladen)).then(function () { stapleThumbs(box, imgs); });
+        Promise.all(imgs.map(geladen)).then(function () { layoutThumbs(box); });
       });
     });
   }
@@ -268,30 +268,91 @@
   }
 
   /*
-   * Vorschauen ordnen: aufeinanderfolgende Querformate paarweise
-   * übereinander, Hochformate einzeln (so hoch wie ein Paar, siehe CSS).
-   * Die Reihenfolge bleibt erhalten, nur die Gruppierung ändert sich.
+   * Vorschauen im 5-Spalten-Raster: aufeinanderfolgende Querformate teilen
+   * sich eine Spalte (übereinander), ein Hochformat belegt eine Spalte über
+   * beide Zeilen. Je 5 Spalten bilden eine Doppelzeile. Hat die letzte
+   * Doppelzeile Spalten frei, werden Querformat-Paare von hinten aufgeteilt;
+   * einzelne Querformate rücken ans Ende, damit die Lücken unten rechts
+   * liegen. Nur die Platzierung ändert sich, die DOM- (Lightbox-)
+   * Reihenfolge bleibt. Bildmaße ohne Beschnitt: Querformate füllen die
+   * Spaltenbreite (höchstens 3:2-Höhe), Hochformate sind so hoch wie zwei
+   * Querformate plus Abstand.
    */
-  function stapleThumbs(box, imgs) {
-    var stapel = null;
+  var THUMB_COLS = 5, THUMB_GAP = 5, THUMB_BORDER = 3;
+
+  function istHoch(img) { return img.naturalHeight > img.naturalWidth; }
+
+  function layoutThumbs(box) {
+    var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
+    if (!imgs.length || imgs.some(function (img) { return !img.naturalWidth; })) return;
+
+    // Spalten bilden
+    var spalten = [], offen = null;
     imgs.forEach(function (img) {
-      if (img.naturalHeight > img.naturalWidth) {
-        img.classList.add("is-portrait");
-        box.appendChild(img);
-        stapel = null;
-        return;
-      }
-      if (!stapel) {
-        stapel = document.createElement("div");
-        stapel.className = "prod-thumb-stack";
-        box.appendChild(stapel);
-        stapel.appendChild(img);
+      if (istHoch(img)) {
+        spalten.push([img]);
+        offen = null;
+      } else if (offen) {
+        offen.push(img);
+        offen = null;
       } else {
-        stapel.appendChild(img);
-        stapel = null;
+        offen = [img];
+        spalten.push(offen);
       }
     });
+
+    // in Doppelzeilen zu je 5 Spalten aufteilen
+    var baender = [];
+    for (var i = 0; i < spalten.length; i += THUMB_COLS) baender.push(spalten.slice(i, i + THUMB_COLS));
+    var letztes = baender[baender.length - 1];
+    for (var j = letztes.length - 1; j >= 0 && letztes.length < THUMB_COLS; j--) {
+      if (letztes[j].length === 2) letztes.splice(j, 1, [letztes[j][0]], [letztes[j][1]]);
+    }
+    baender = baender.map(function (band) {
+      var einzeln = function (s) { return s.length === 1 && !istHoch(s[0]); };
+      return band.filter(function (s) { return !einzeln(s); })
+        .concat(band.filter(einzeln));
+    });
+
+    // Maße
+    var cs = getComputedStyle(box);
+    var inner = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    if (inner <= 0) return;
+    var colW = (inner - THUMB_GAP * (THUMB_COLS - 1)) / THUMB_COLS;
+    var rowH = (colW - THUMB_BORDER) * 2 / 3 + THUMB_BORDER;
+
+    baender.forEach(function (band, b) {
+      band.forEach(function (spalte, c) {
+        spalte.forEach(function (img, r) {
+          var ratio = img.naturalWidth / img.naturalHeight;
+          var w, h;
+          if (istHoch(img)) {
+            h = 2 * rowH + THUMB_GAP;
+            w = (h - THUMB_BORDER) * ratio + THUMB_BORDER;
+            if (w > colW) { w = colW; h = (w - THUMB_BORDER) / ratio + THUMB_BORDER; }
+          } else {
+            w = colW;
+            h = (w - THUMB_BORDER) / ratio + THUMB_BORDER;
+            if (h > rowH) { h = rowH; w = (h - THUMB_BORDER) * ratio + THUMB_BORDER; }
+          }
+          img.style.width = w + "px";
+          img.style.height = h + "px";
+          img.style.gridColumn = String(c + 1);
+          img.style.gridRow = istHoch(img)
+            ? (2 * b + 1) + " / span 2"
+            : String(2 * b + 1 + r);
+        });
+      });
+    });
   }
+
+  var thumbResizeTimer;
+  window.addEventListener("resize", function () {
+    clearTimeout(thumbResizeTimer);
+    thumbResizeTimer = setTimeout(function () {
+      Array.prototype.forEach.call(document.querySelectorAll(".prod-thumbs"), layoutThumbs);
+    }, 100);
+  });
 
   /* ---------- Event-Auszeichnung für Suchmaschinen ---------- */
 
