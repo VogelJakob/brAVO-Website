@@ -253,56 +253,9 @@
         }).join("");
         var media = card.querySelector(".prod-media");
         if (media && media.parentNode) media.parentNode.insertBefore(box, media.nextSibling);
-        layoutThumbs(box);
-        Array.prototype.forEach.call(box.querySelectorAll("img"), function (img) {
-          if (!img.complete) img.addEventListener("load", function () { layoutThumbs(box); });
-        });
       });
     });
   }
-
-  /*
-   * Mosaik der Vorschaubilder: jedes Bild kommt in die aktuell kürzeste
-   * Spalte und belegt so viele 1px-Grid-Zeilen, wie es hoch ist (+ Abstand).
-   * Nur die Platzierung ändert sich, die DOM-Reihenfolge (Lightbox) nicht.
-   * Noch nicht geladene Bilder werden vorläufig als 3:2 angenommen.
-   */
-  var THUMB_GAP = 5, THUMB_MIN = 48, THUMB_COLS = 5, THUMB_BORDER = 3;
-
-  function layoutThumbs(box) {
-    var cs = getComputedStyle(box);
-    var inner = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-    if (inner <= 0) return;
-    var cols = Math.max(1, Math.min(THUMB_COLS, Math.floor((inner + THUMB_GAP) / (THUMB_MIN + THUMB_GAP))));
-    var colW = (inner - THUMB_GAP * (cols - 1)) / cols;
-    var heights = [];
-    for (var c = 0; c < cols; c++) heights.push(0);
-    box.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
-    var plan = Array.prototype.map.call(box.querySelectorAll("img"), function (img) {
-      var ratio = img.naturalWidth ? img.naturalHeight / img.naturalWidth : 2 / 3;
-      var h = Math.ceil((colW - THUMB_BORDER) * ratio + THUMB_BORDER);
-      var col = heights.indexOf(Math.min.apply(null, heights));
-      var top = heights[col];
-      heights[col] += h + THUMB_GAP;
-      return { img: img, col: col, top: top, h: h };
-    });
-    // Spalten nach Höhe absteigend anordnen: die längste steht links, der
-    // freie Rest sammelt sich unten rechts („linksbündig“).
-    var order = heights.map(function (h, i) { return i; })
-      .sort(function (a, b) { return heights[b] - heights[a] || a - b; });
-    plan.forEach(function (p) {
-      p.img.style.gridColumn = String(order.indexOf(p.col) + 1);
-      p.img.style.gridRow = (p.top + 1) + " / span " + p.h;
-    });
-  }
-
-  var thumbResizeTimer;
-  window.addEventListener("resize", function () {
-    clearTimeout(thumbResizeTimer);
-    thumbResizeTimer = setTimeout(function () {
-      Array.prototype.forEach.call(document.querySelectorAll(".prod-thumbs"), layoutThumbs);
-    }, 100);
-  });
 
   /* ---------- Event-Auszeichnung für Suchmaschinen ---------- */
 
