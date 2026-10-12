@@ -22,16 +22,16 @@ const FOTO_CREDITS = {
   "assets/images/group-2.jpg": "Laukart Photography",
 
   /* Aufführung „Hamlet“ */
-  "assets/images/productions/hamlet.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-2.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-3.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-4.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-5.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-6.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-7.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-8.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-9.jpg": "Konstantin Kloppe",
-  "assets/images/productions/hamlet-10.jpg": "Konstantin Kloppe",
+  "assets/images/productions/hamlet.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-2.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-3.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-4.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-5.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-6.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-7.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-8.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-9.jpg": "Fritz Barth",
+  "assets/images/productions/hamlet-10.jpg": "Fritz Barth",
 
   /* Aufführung „Die Reise von der Erde zum Mond“ – Bilder 2–6 ohne Eintrag: default */
   "assets/images/productions/reise-zum-mond.jpg": "Nasser Hashemi",
