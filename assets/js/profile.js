@@ -15,14 +15,14 @@
   var media = { video: null, audio: null, audioReels: null, gallery: null, checked: false };
 
   function audioReelPath(file) {
-    return ADK.root + "assets/audio/" + file;
+    return ADK.asset(ADK.root + "assets/audio/" + file);
   }
 
   /* Galerie-Konvention: {slug}-2.jpg bis {slug}-8.jpg neben dem Hauptportrait. */
   var GALLERY_MAX = 8;
 
   function galleryPath(n) {
-    return ADK.root + "assets/images/students/" + slug + "-" + n + ".jpg";
+    return ADK.asset(ADK.root + "assets/images/students/" + slug + "-" + n + ".jpg");
   }
 
   function esc(s) { return ADK.esc(s); }

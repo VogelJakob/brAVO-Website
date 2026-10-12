@@ -24,7 +24,7 @@
   var PROD_GALLERY_MAX = 10;
 
   function prodImage(key, n) {
-    return ADK.root + "assets/images/productions/" + key + (n ? "-" + n : "") + ".jpg";
+    return ADK.asset(ADK.root + "assets/images/productions/" + key + (n ? "-" + n : "") + ".jpg");
   }
 
   /* "08.08.2026" bzw. ohne Jahr "08.08." – das Jahr trägt nur der letzte Termin. */
@@ -253,46 +253,96 @@
         }).join("");
         var media = card.querySelector(".prod-media");
         if (media && media.parentNode) media.parentNode.insertBefore(box, media.nextSibling);
-        layoutThumbs(box);
-        Array.prototype.forEach.call(box.querySelectorAll("img"), function (img) {
-          if (!img.complete) img.addEventListener("load", function () { layoutThumbs(box); });
-        });
+        var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
+        Promise.all(imgs.map(geladen)).then(function () { layoutThumbs(box); });
       });
     });
   }
 
+  function geladen(img) {
+    return new Promise(function (resolve) {
+      if (img.complete) return resolve();
+      img.addEventListener("load", resolve);
+      img.addEventListener("error", resolve);
+    });
+  }
+
   /*
-   * Mosaik der Vorschaubilder: jedes Bild kommt in die aktuell kürzeste
-   * Spalte und belegt so viele 1px-Grid-Zeilen, wie es hoch ist (+ Abstand).
-   * Nur die Platzierung ändert sich, die DOM-Reihenfolge (Lightbox) nicht.
-   * Noch nicht geladene Bilder werden vorläufig als 3:2 angenommen.
+   * Vorschauen im 5-Spalten-Raster: aufeinanderfolgende Querformate teilen
+   * sich eine Spalte (übereinander), ein Hochformat belegt eine Spalte über
+   * beide Zeilen. Je 5 Spalten bilden eine Doppelzeile. Hat die letzte
+   * Doppelzeile Spalten frei, werden Querformat-Paare von hinten aufgeteilt;
+   * einzelne Querformate rücken ans Ende, damit die Lücken unten rechts
+   * liegen. Nur die Platzierung ändert sich, die DOM- (Lightbox-)
+   * Reihenfolge bleibt. Bildmaße ohne Beschnitt: Querformate füllen die
+   * Spaltenbreite (höchstens 3:2-Höhe), Hochformate sind so hoch wie zwei
+   * Querformate plus Abstand.
    */
-  var THUMB_GAP = 5, THUMB_MIN = 48, THUMB_COLS = 5, THUMB_BORDER = 3;
+  var THUMB_COLS = 5, THUMB_GAP = 5, THUMB_BORDER = 3;
+
+  function istHoch(img) { return img.naturalHeight > img.naturalWidth; }
 
   function layoutThumbs(box) {
+    var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
+    if (!imgs.length || imgs.some(function (img) { return !img.naturalWidth; })) return;
+
+    // Spalten bilden
+    var spalten = [], offen = null;
+    imgs.forEach(function (img) {
+      if (istHoch(img)) {
+        spalten.push([img]);
+        offen = null;
+      } else if (offen) {
+        offen.push(img);
+        offen = null;
+      } else {
+        offen = [img];
+        spalten.push(offen);
+      }
+    });
+
+    // in Doppelzeilen zu je 5 Spalten aufteilen
+    var baender = [];
+    for (var i = 0; i < spalten.length; i += THUMB_COLS) baender.push(spalten.slice(i, i + THUMB_COLS));
+    var letztes = baender[baender.length - 1];
+    for (var j = letztes.length - 1; j >= 0 && letztes.length < THUMB_COLS; j--) {
+      if (letztes[j].length === 2) letztes.splice(j, 1, [letztes[j][0]], [letztes[j][1]]);
+    }
+    baender = baender.map(function (band) {
+      var einzeln = function (s) { return s.length === 1 && !istHoch(s[0]); };
+      return band.filter(function (s) { return !einzeln(s); })
+        .concat(band.filter(einzeln));
+    });
+
+    // Maße
     var cs = getComputedStyle(box);
     var inner = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
     if (inner <= 0) return;
-    var cols = Math.max(1, Math.min(THUMB_COLS, Math.floor((inner + THUMB_GAP) / (THUMB_MIN + THUMB_GAP))));
-    var colW = (inner - THUMB_GAP * (cols - 1)) / cols;
-    var heights = [];
-    for (var c = 0; c < cols; c++) heights.push(0);
-    box.style.gridTemplateColumns = "repeat(" + cols + ", 1fr)";
-    var plan = Array.prototype.map.call(box.querySelectorAll("img"), function (img) {
-      var ratio = img.naturalWidth ? img.naturalHeight / img.naturalWidth : 2 / 3;
-      var h = Math.ceil((colW - THUMB_BORDER) * ratio + THUMB_BORDER);
-      var col = heights.indexOf(Math.min.apply(null, heights));
-      var top = heights[col];
-      heights[col] += h + THUMB_GAP;
-      return { img: img, col: col, top: top, h: h };
-    });
-    // Spalten nach Höhe absteigend anordnen: die längste steht links, der
-    // freie Rest sammelt sich unten rechts („linksbündig“).
-    var order = heights.map(function (h, i) { return i; })
-      .sort(function (a, b) { return heights[b] - heights[a] || a - b; });
-    plan.forEach(function (p) {
-      p.img.style.gridColumn = String(order.indexOf(p.col) + 1);
-      p.img.style.gridRow = (p.top + 1) + " / span " + p.h;
+    var colW = (inner - THUMB_GAP * (THUMB_COLS - 1)) / THUMB_COLS;
+    var rowH = (colW - THUMB_BORDER) * 2 / 3 + THUMB_BORDER;
+
+    baender.forEach(function (band, b) {
+      band.forEach(function (spalte, c) {
+        spalte.forEach(function (img, r) {
+          var ratio = img.naturalWidth / img.naturalHeight;
+          var w, h;
+          if (istHoch(img)) {
+            h = 2 * rowH + THUMB_GAP;
+            w = (h - THUMB_BORDER) * ratio + THUMB_BORDER;
+            if (w > colW) { w = colW; h = (w - THUMB_BORDER) / ratio + THUMB_BORDER; }
+          } else {
+            w = colW;
+            h = (w - THUMB_BORDER) / ratio + THUMB_BORDER;
+            if (h > rowH) { h = rowH; w = (h - THUMB_BORDER) * ratio + THUMB_BORDER; }
+          }
+          img.style.width = w + "px";
+          img.style.height = h + "px";
+          img.style.gridColumn = String(c + 1);
+          img.style.gridRow = istHoch(img)
+            ? (2 * b + 1) + " / span 2"
+            : String(2 * b + 1 + r);
+        });
+      });
     });
   }
 

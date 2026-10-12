@@ -76,7 +76,7 @@
     var soon = document.getElementById("avo-trailer-soon");
     if (!box || !soon) return;
 
-    var src = ADK.root + "assets/videos/avo-trailer.mp4";
+    var src = ADK.asset(ADK.root + "assets/videos/avo-trailer.mp4");
     ADK.mediaExists(src).then(function (exists) {
       if (!exists) return;
       box.hidden = false;

@@ -75,10 +75,28 @@
     }
   };
 
+  /*
+   * Cache-Busting (siehe CACHE.md): Die Versionskennung wird aus dem
+   * ?v=…-Parameter gelesen, mit dem die HTML-Seite app.js einbindet.
+   * So steht sie nur in den HTML-Dateien und muss hier nie angepasst werden.
+   */
+  var VERSION = (function () {
+    var el = document.currentScript;
+    var m = el && el.src ? el.src.match(/[?&]v=([^&#]+)/) : null;
+    return m ? decodeURIComponent(m[1]) : "";
+  })();
+
   var ADK = {
     // Relativer Pfad zur Projektwurzel (Profilseiten liegen in /students/)
     root: /\/students\//.test(location.pathname) ? "../" : "./",
     lang: "de",
+    version: VERSION,
+
+    /* Hängt die Versionskennung an eine eigene Datei-URL an (Bilder, Audio, Video). */
+    asset: function (url) {
+      if (!this.version) return url;
+      return url + (url.indexOf("?") === -1 ? "?" : "&") + "v=" + encodeURIComponent(this.version);
+    },
 
     t: function (key) {
       var dict = UI[this.lang] || UI.de;
@@ -106,7 +124,7 @@
         video: "assets/videos/" + slug + ".mp4",
         audio: "assets/audio/" + slug + ".mp3"
       };
-      return this.root + map[type];
+      return this.asset(this.root + map[type]);
     },
 
     /*
