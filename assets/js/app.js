@@ -336,6 +336,82 @@
     if (el && el.matches && el.matches("img[data-lightbox]")) openLightbox(el);
   });
 
+  /* ---------- Sprunglinks (#anker) ----------
+   * Der Header ist sticky; damit ein Anker-Ziel direkt darunter beginnt, gilt
+   * html { scroll-padding-top: var(--header-h) } (style.css). Die Höhe
+   * schwankt (auf dem Handy bricht das Menü um) und wird deshalb hier
+   * gemessen und bei jeder Größenänderung nachgeführt.
+   * Außerdem bekommen Inhalte oberhalb des Ziels ihre Höhe teils erst nach
+   * dem Sprung (Fotos ohne feste Maße, Lazy-Loading, per JS erzeugte Grids
+   * und Vorschaureihen) und schieben das Ziel weiter. Nach einem Sprung wird
+   * das Ziel daher kurz nachgeführt, bis das Layout steht oder Besucher:innen
+   * selbst scrollen. Kein eigener Versatz: scrollIntoView beachtet
+   * scroll-padding-top, damit wird nichts doppelt ausgeglichen. */
+  var siteHeader = document.querySelector(".site-header");
+  var follow = null;
+  var STOP_EVENTS = ["wheel", "touchstart", "keydown", "mousedown"];
+
+  function setHeaderHeight() {
+    if (!siteHeader) return;
+    document.documentElement.style.setProperty(
+      "--header-h", siteHeader.getBoundingClientRect().height + "px"
+    );
+    if (follow) follow.target.scrollIntoView();
+  }
+
+  function stopFollow() {
+    if (!follow) return;
+    follow.observer.disconnect();
+    clearTimeout(follow.timer);
+    STOP_EVENTS.forEach(function (type) { window.removeEventListener(type, stopFollow, true); });
+    follow = null;
+  }
+
+  function followTarget(target, ms) {
+    stopFollow();
+    if (!target || !("ResizeObserver" in window)) return;
+    var initial = true;   /* ResizeObserver meldet sich einmal direkt beim Start */
+    var observer = new ResizeObserver(function () {
+      if (initial) { initial = false; return; }
+      target.scrollIntoView();
+    });
+    follow = { target: target, observer: observer, timer: setTimeout(stopFollow, ms) };
+    observer.observe(document.body);
+    STOP_EVENTS.forEach(function (type) {
+      window.addEventListener(type, stopFollow, { capture: true, passive: true });
+    });
+  }
+
+  function hashTarget(hash) {
+    if (!hash || hash.length < 2) return null;
+    try { return document.getElementById(decodeURIComponent(hash.slice(1))); }
+    catch (e) { return null; }
+  }
+
+  setHeaderHeight();
+  if (siteHeader && "ResizeObserver" in window) new ResizeObserver(setHeaderHeight).observe(siteHeader);
+  window.addEventListener("resize", setHeaderHeight);
+
+  /* Klick auf einen Sprunglink dieser Seite: Browser springt selbst, wir führen nur nach */
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest ? e.target.closest("a[href*='#']") : null;
+    if (!a || e.defaultPrevented || a.host !== location.host || a.pathname !== location.pathname) return;
+    var target = hashTarget(a.hash);
+    if (target) followTarget(target, 3000);
+  });
+
+  /* Aufruf mit #anker in der URL (z. B. /#avo): bis nach dem Laden nachführen */
+  var initialTarget = hashTarget(location.hash);
+  if (initialTarget) {
+    followTarget(initialTarget, 10000);
+    window.addEventListener("load", function () {
+      if (!follow || follow.target !== initialTarget) return;
+      initialTarget.scrollIntoView();
+      clearTimeout(follow.timer);
+      follow.timer = setTimeout(stopFollow, 1500);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     ADK.applyStatic();
     /* Standard-Credit global setzen, danach die einzelnen Bilder überschreiben */

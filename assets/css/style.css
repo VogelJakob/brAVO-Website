@@ -10,6 +10,10 @@
   --bg: #fbfaf7;           /* helles Weiß mit minimaler Wärme – passt zum roten Akzent */
   --ink: #111111;          /* Tinte – Kontrast auf --bg ca. 18:1 */
   --paper: #ffffff;
+  /* Höhe des sticky Headers – Abstand für Sprunglinks (scroll-padding-top).
+     assets/js/app.js misst den echten Wert und führt ihn bei Größenänderung
+     nach (auf dem Handy bricht das Menü um); 4.5rem gilt nur ohne JS. */
+  --header-h: 4.5rem;
   --acc: #a4161a;          /* Karminrot – gleiche Helligkeit wie das frühere Ultramarin, Kontrast auf Weiß ca. 7.8:1 */
   --acc-deep: #7c1013;
   --acc-on-dark: #ff8a80;  /* Rot-Variante für dunkle Flächen, Kontrast auf --ink ca. 7.5:1 */
@@ -35,6 +39,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Anker-Ziele beginnen direkt unter dem sticky Header (gilt für alle
+     #-Links, den Aufruf mit #anker in der URL und Fokus per Tastatur) */
+  scroll-padding-top: var(--header-h);
 }
 
 /* Absicherung gegen seitliches Scrollen: clip statt hidden, weil hidden
@@ -114,9 +121,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   background: var(--ink);
   color: var(--bg);
 }
-
-/* Anker-Ziele nicht unter dem fixierten Balken verschwinden lassen */
-[id] { scroll-margin-top: 4.5rem; }
 
 .brand {
   font-family: var(--font-head);
