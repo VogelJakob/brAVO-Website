@@ -33,8 +33,13 @@ const FOTO_CREDITS = {
   "assets/images/productions/hamlet-9.jpg": "Fritz Barth",
   "assets/images/productions/hamlet-10.jpg": "Fritz Barth",
 
-  /* Aufführung „Die Reise von der Erde zum Mond“ – Bilder 2–6 ohne Eintrag: default */
+  /* Aufführung „Die Reise von der Erde zum Mond“ */
   "assets/images/productions/reise-zum-mond.jpg": "Nasser Hashemi",
+  "assets/images/productions/reise-zum-mond-2.jpg": "Nasser Hashemi",
+  "assets/images/productions/reise-zum-mond-3.jpg": "Nasser Hashemi",
+  "assets/images/productions/reise-zum-mond-4.jpg": "Nasser Hashemi",
+  "assets/images/productions/reise-zum-mond-5.jpg": "Nasser Hashemi",
+  "assets/images/productions/reise-zum-mond-6.jpg": "Nasser Hashemi",
 
   /* Aufführung „Die kleine Hexe“ */
   "assets/images/productions/kleine-hexe.jpg": "Werner Hofbauer",
