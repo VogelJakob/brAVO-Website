@@ -480,8 +480,17 @@
       var ah = overlay.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - by;
       var f = Math.max(0, Math.min(aw / dims.w, ah / dims.h));
       if (overlay.classList.contains("zoomed")) f = Math.max(f, 1);
-      big.style.width = Math.floor(dims.w * f + bx) + "px";
-      big.style.height = Math.floor(dims.h * f + by) + "px";
+      /* Höhe aus der gerundeten Breite ableiten (bzw. umgekehrt), damit das
+         Seitenverhältnis exakt bleibt – sonst entsteht durch object-fit ein
+         Streifen Hintergrund über/unter dem Bild */
+      var w = Math.floor(dims.w * f);
+      var h = Math.round(w * dims.h / dims.w);
+      if (h > dims.h * f) {
+        h = Math.floor(dims.h * f);
+        w = Math.round(h * dims.w / dims.h);
+      }
+      big.style.width = (w + bx) + "px";
+      big.style.height = (h + by) + "px";
     }
 
     function show(i) {

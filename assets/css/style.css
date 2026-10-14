@@ -789,7 +789,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   max-height: none;
   object-fit: contain;
   border: var(--border);
-  background: var(--paper);
+  /* dunkel wie der Rahmen: Rundungsreste bei skalierter Anzeige
+     (z. B. Windows 125 %) fallen so nicht als heller Strich auf */
+  background: var(--ink);
   box-shadow: 9px 9px 0 var(--acc);
   cursor: zoom-in;
 }
