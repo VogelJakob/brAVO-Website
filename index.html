@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261014-1">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261014-3">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -67,9 +67,11 @@
              Sollte die Datei einmal fehlen, springt das Bild auf group-2.jpg und
              das Gruppenfoto-Band weiter unten wird ausgeblendet (kein Doppel-Foto). -->
         <figure class="hero-photo" id="hero-photo">
-          <img src="assets/images/group.jpg?v=20261014-1" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
+          <img data-img="assets/images/group.jpg" data-eager
+               data-sizes="(min-width: 80rem) 46rem, (min-width: 960px) 57vw, (min-width: 37rem) 34rem, 100vw"
+               alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
                data-lightbox tabindex="0"
-               onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src='assets/images/group-2.jpg';var b=document.getElementById('group-band');if(b)b.style.display='none';}else{document.getElementById('hero-photo').style.display='none';}">
+               onerror="if(ADK.imgFallback(this))return;if(!this.dataset.fb){this.dataset.fb=1;this.setAttribute('data-orig','assets/images/group-2.jpg');this.src='assets/images/group-2.jpg';var b=document.getElementById('group-band');if(b)b.style.display='none';}else{document.getElementById('hero-photo').style.display='none';}">
         </figure>
       </div>
       <!-- Laufband: Inhalt kommt aus assets/data/termine.js (assets/js/termine.js
@@ -98,9 +100,10 @@
     <!-- Zweites Gruppenfoto: blendet sich selbst aus, wenn assets/images/group-2.jpg fehlt -->
     <section class="group-band" id="group-band" aria-label="Gruppenfoto">
       <figure>
-        <img src="assets/images/group-2.jpg?v=20261014-1" alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
-             data-lightbox tabindex="0" loading="lazy"
-             onerror="document.getElementById('group-band').style.display='none'">
+        <img data-img="assets/images/group-2.jpg" data-sizes="(min-width: 72rem) 68rem, 100vw"
+             alt="Gruppenfoto des Abschlussjahrgangs 2027" data-i18n-alt="groupAlt"
+             data-lightbox tabindex="0"
+             onerror="if(!ADK.imgFallback(this))document.getElementById('group-band').style.display='none'">
       </figure>
     </section>
 
@@ -113,9 +116,9 @@
       <div class="prod-grid">
         <article class="prod-card" data-prod="hamlet">
           <div class="prod-media">
-            <img src="assets/images/productions/hamlet.jpg?v=20261014-1" alt="Szenenfoto aus Hamlet"
-                 data-lightbox data-gallery="hamlet" tabindex="0" loading="lazy"
-                 onerror="this.remove()">
+            <img data-img="assets/images/productions/hamlet.jpg" data-sizes="(min-width: 72rem) 22rem, (min-width: 640px) 31vw, 100vw"
+                 alt="Szenenfoto aus Hamlet" data-lightbox data-gallery="hamlet" tabindex="0"
+                 onerror="if(!ADK.imgFallback(this))this.remove()">
             <span aria-hidden="true" data-i18n="prodImageSoon">Foto folgt</span>
           </div>
           <div class="prod-body">
@@ -128,9 +131,9 @@
         </article>
         <article class="prod-card" data-prod="reise-zum-mond">
           <div class="prod-media">
-            <img src="assets/images/productions/reise-zum-mond.jpg?v=20261014-1" alt="Szenenfoto aus Die Reise von der Erde zum Mond"
-                 data-lightbox data-gallery="reise-zum-mond" tabindex="0" loading="lazy"
-                 onerror="this.remove()">
+            <img data-img="assets/images/productions/reise-zum-mond.jpg" data-sizes="(min-width: 72rem) 22rem, (min-width: 640px) 31vw, 100vw"
+                 alt="Szenenfoto aus Die Reise von der Erde zum Mond" data-lightbox data-gallery="reise-zum-mond" tabindex="0"
+                 onerror="if(!ADK.imgFallback(this))this.remove()">
             <span aria-hidden="true" data-i18n="prodImageSoon">Foto folgt</span>
           </div>
           <div class="prod-body">
@@ -143,9 +146,9 @@
         </article>
         <article class="prod-card" data-prod="kleine-hexe">
           <div class="prod-media">
-            <img src="assets/images/productions/kleine-hexe.jpg?v=20261014-1" alt="Szenenfoto aus Die kleine Hexe"
-                 data-lightbox data-gallery="kleine-hexe" tabindex="0" loading="lazy"
-                 onerror="this.remove()">
+            <img data-img="assets/images/productions/kleine-hexe.jpg" data-sizes="(min-width: 72rem) 22rem, (min-width: 640px) 31vw, 100vw"
+                 alt="Szenenfoto aus Die kleine Hexe" data-lightbox data-gallery="kleine-hexe" tabindex="0"
+                 onerror="if(!ADK.imgFallback(this))this.remove()">
             <span aria-hidden="true" data-i18n="prodImageSoon">Foto folgt</span>
           </div>
           <div class="prod-body">
@@ -285,12 +288,13 @@
     </nav>
   </footer>
 
-  <script src="assets/data/students.js?v=20261014-1"></script>
-  <script src="assets/data/termine.js?v=20261014-1"></script>
-  <script src="assets/data/credits.js?v=20261014-1"></script>
-  <script src="assets/js/app.js?v=20261014-1"></script>
-  <script src="assets/js/index.js?v=20261014-1"></script>
-  <script src="assets/js/termine.js?v=20261014-1"></script>
-  <script src="assets/js/avo.js?v=20261014-1"></script>
+  <script src="assets/data/students.js?v=20261014-3"></script>
+  <script src="assets/data/termine.js?v=20261014-3"></script>
+  <script src="assets/data/credits.js?v=20261014-3"></script>
+  <script src="assets/data/image-sizes.js?v=20261014-3"></script>
+  <script src="assets/js/app.js?v=20261014-3"></script>
+  <script src="assets/js/index.js?v=20261014-3"></script>
+  <script src="assets/js/termine.js?v=20261014-3"></script>
+  <script src="assets/js/avo.js?v=20261014-3"></script>
 </body>
 </html>

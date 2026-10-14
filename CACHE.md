@@ -18,7 +18,7 @@ hochgeladen, die Versionskennung erhöhen:
 
 - Format: `JJJJMMTT-N` (Datum des Uploads, `N` = laufende Nummer am Tag),
   z. B. `20261010-1` → `20261010-2` → am nächsten Tag `20261011-1`.
-- Aktueller Stand: **`20261014-1`**
+- Aktueller Stand: **`20261014-3`**
 
 ### Wo die Kennung steht
 
@@ -27,9 +27,9 @@ austauschen):
 
 | Datei | Stellen |
 |---|---|
-| `index.html` | style.css, 7 Skripte, 5 statische Bilder |
+| `index.html` | style.css, 8 Skripte |
 | `impressum.html`, `datenschutz.html` | style.css, app.js |
-| `students/*.html` (10 Profile) | style.css, students.js, credits.js, app.js, profile.js |
+| `students/*.html` (10 Profile) | style.css, students.js, credits.js, image-sizes.js, app.js, profile.js |
 | `links/index.html` | style.css |
 
 Befehl dafür (im Projektordner, ALT und NEU anpassen):
@@ -42,7 +42,8 @@ Danach **alle geänderten HTML-Dateien mit hochladen** – sonst kommt die neue
 Kennung nicht beim Besucher an.
 
 Bilder, Audio und Video, die per JavaScript gerendert werden (Portraits,
-Galerien, Szenenfotos, Showreels, Hörproben, Trailer), bekommen die Kennung
+Galerien, Szenenfotos, Showreels, Hörproben, Trailer – auch die Bilder in
+`index.html`, die dort nur als `data-img` stehen), bekommen die Kennung
 automatisch: `assets/js/app.js` liest sie aus dem `?v=…` seiner eigenen
 Einbindung (`ADK.version`) und hängt sie über `ADK.asset()` an. In den
 JS-Dateien und in `assets/data/*.js` muss also nichts geändert werden.

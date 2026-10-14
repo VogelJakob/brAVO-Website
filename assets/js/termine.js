@@ -246,15 +246,19 @@
         var box = document.createElement("div");
         box.className = "prod-thumbs";
         box.innerHTML = bilder.map(function (src, i) {
-          return (
-            '<img src="' + esc(src) + '" alt="' + esc("Szenenfoto aus " + p.titel + " – " + (i + 2)) + '" ' +
-              'loading="lazy" data-lightbox data-gallery="' + esc(p.key) + '" tabindex="0">'
-          );
+          return ADK.imageHtml(src, {
+            alt: "Szenenfoto aus " + p.titel + " – " + (i + 2),
+            /* 5 Spalten je Karte (1 Karte bis 640px, dann 3 nebeneinander) */
+            sizes: "(min-width: 72rem) 5rem, (min-width: 640px) 7vw, 20vw",
+            extra: 'data-lightbox data-gallery="' + esc(p.key) + '" tabindex="0"'
+          });
         }).join("");
         var media = card.querySelector(".prod-media");
         if (media && media.parentNode) media.parentNode.insertBefore(box, media.nextSibling);
         var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
-        Promise.all(imgs.map(geladen)).then(function () { layoutThumbs(box); });
+        /* Mit Maßen aus image-sizes.js sofort anordnen, sonst nach dem Laden */
+        if (imgs.every(function (img) { return masse(img).w; })) layoutThumbs(box);
+        else Promise.all(imgs.map(geladen)).then(function () { layoutThumbs(box); });
       });
     });
   }
@@ -280,11 +284,20 @@
    */
   var THUMB_COLS = 5, THUMB_GAP = 5, THUMB_BORDER = 3;
 
-  function istHoch(img) { return img.naturalHeight > img.naturalWidth; }
+  /* Originalmaße aus den width/height-Attributen (image-sizes.js), sonst
+     die geladenen Pixelmaße; das Seitenverhältnis ist bei allen Fassungen gleich. */
+  function masse(img) {
+    return {
+      w: Number(img.getAttribute("width")) || img.naturalWidth,
+      h: Number(img.getAttribute("height")) || img.naturalHeight
+    };
+  }
+
+  function istHoch(img) { var m = masse(img); return m.h > m.w; }
 
   function layoutThumbs(box) {
     var imgs = Array.prototype.slice.call(box.querySelectorAll("img"));
-    if (!imgs.length || imgs.some(function (img) { return !img.naturalWidth; })) return;
+    if (!imgs.length || imgs.some(function (img) { return !masse(img).w; })) return;
 
     // Spalten bilden
     var spalten = [], offen = null;
@@ -324,7 +337,8 @@
     baender.forEach(function (band, b) {
       band.forEach(function (spalte, c) {
         spalte.forEach(function (img, r) {
-          var ratio = img.naturalWidth / img.naturalHeight;
+          var m = masse(img);
+          var ratio = m.w / m.h;
           var w, h;
           if (istHoch(img)) {
             h = 2 * rowH + THUMB_GAP;

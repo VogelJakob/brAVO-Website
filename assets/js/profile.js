@@ -42,9 +42,14 @@
   function portraitHtml(student) {
     return (
       '<div class="portrait">' +
-        '<img src="' + esc(ADK.mediaPath("image", slug)) + '" alt="' + esc(t("portraitAlt") + " " + student.name) + '" ' +
-          'data-lightbox data-gallery="' + esc(slug) + '" tabindex="0" ' +
-          'onerror="this.closest(\'.portrait\').classList.add(\'no-img\')">' +
+        /* Hauptbild der Profilseite: sofort laden (kein Lazy-Loading) */
+        ADK.imageHtml(ADK.mediaPath("image", slug), {
+          alt: t("portraitAlt") + " " + student.name,
+          sizes: "(max-width: 22rem) 100vw, 19rem",
+          eager: true,
+          extra: 'data-lightbox data-gallery="' + esc(slug) + '" tabindex="0"',
+          onerror: "this.closest('.portrait').classList.add('no-img')"
+        }) +
         '<div class="media-fallback" aria-hidden="true">' + esc(initials(student.name)) + "</div>" +
       "</div>"
     );
@@ -58,10 +63,11 @@
   function headThumbsHtml(s) {
     if (!media.gallery || !media.gallery.length) return "";
     var items = media.gallery.map(function (src, i) {
-      return (
-        '<img src="' + esc(src) + '" alt="' + esc(t("portraitAlt") + " " + s.name + " – " + (i + 2)) + '" ' +
-          'loading="lazy" data-lightbox data-gallery="' + esc(slug) + '" tabindex="0">'
-      );
+      return ADK.imageHtml(src, {
+        alt: t("portraitAlt") + " " + s.name + " – " + (i + 2),
+        sizes: "88px",   /* .head-thumbs img: 5.5rem */
+        extra: 'data-lightbox data-gallery="' + esc(slug) + '" tabindex="0"'
+      });
     }).join("");
     return '<div class="head-thumbs">' + items + "</div>";
   }

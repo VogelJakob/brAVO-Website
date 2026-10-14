@@ -21,7 +21,7 @@ jobs:
           local_path: './*'
           remote_path: '/public'
           sftp_only: true
-          exclude: '["assets/images/students/*", "assets/videos/students/*", ".git*", ".github", "README.md", "node_modules", "design", "design/*"]'
+          exclude: '["assets/images/students/*", "assets/videos/students/*", ".git*", ".github", "README.md", "node_modules", "design", "design/*", "tools", "tools/*"]'
 
       # "./*" oben erfasst keine versteckten Dateien (Name beginnt mit Punkt),
       # deshalb die .htaccess (Cache-Regeln, siehe CACHE.md) separat hochladen.
