@@ -9,6 +9,7 @@ AVO Website aktuell/
 # Von tools/build-images.py erzeugte Bildfassungen (Upload per FileZilla)
 _upload/
 _upload_nachtrag/
+_upload_hamlet/
 _wiederherstellung/
 __pycache__/
 
