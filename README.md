@@ -21,8 +21,6 @@ datenschutz.html         Datenschutzerklärung (Hosting-Anbieter vor Livegang er
 assets/data/students.js  ZENTRALE DATENBASIS – alle Textinhalte aller Personen
 assets/data/termine.js   ZENTRALE TERMINE – Produktionen und AVO (siehe unten)
 assets/data/credits.js   Foto-Credits pro Bild (Wasserzeichen)
-assets/data/image-sizes.js  Bildmaße + vorhandene Fassungen (erzeugt von tools/build-images.py)
-tools/build-images.py    Erzeugt verkleinerte Bildfassungen w600/w1200/w2000 nach _upload/
 assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Foto-Credits, Helfer
 assets/js/index.js       Rendert das Ensemble-Grid (alphabetisch nach Nachname)
 assets/js/profile.js     Rendert die Einzelprofile
@@ -37,12 +35,6 @@ assets/images/productions/  Szenenfotos: hamlet.jpg, reise-zum-mond.jpg, kleine-
 assets/videos/           Showreels: {slug}.mp4 · AVO-Trailer: avo-trailer.mp4
 assets/audio/            Audio-Reels:    {slug}.mp3 (optional)
 ```
-
-## Bildfassungen (schnelles Laden)
-
-Neben jedem Original liegen auf dem Server verkleinerte Fassungen in den Unterordnern `w600/`, `w1200/` und `w2000/` (gleicher Dateiname, Zahl = längste Kante). Die Seiten laden per `srcset` nur die passende Größe; die Lightbox zeigt erst `w2000` und tauscht nahtlos gegen das Original, sobald es geladen ist. Fehlt eine Fassung, wird automatisch das Original geladen.
-
-Bei neuen oder geänderten Fotos: `python tools/build-images.py` ausführen (Anleitung im Kopf des Skripts), den Inhalt von `_upload/` per FileZilla nach `/public` hochladen, `assets/data/image-sizes.js` mit hochladen und die Versionskennung erhöhen ([`CACHE.md`](CACHE.md)).
 
 ## Inhalte ergänzen
 

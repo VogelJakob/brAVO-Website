@@ -35,7 +35,6 @@
       lightboxAria: "Vergrößerte Bildansicht",
       lightboxPrev: "Vorheriges Bild",
       lightboxNext: "Nächstes Bild",
-      lightboxLoading: "Lädt …",
       toProfile: "Zum Profil",
       toOverview: "Zur Übersicht",
       imprint: "Impressum",
@@ -139,120 +138,6 @@
         .catch(function () { return false; });
     },
 
-    /* ---------- Bildfassungen (assets/data/image-sizes.js) ----------
-     * Neben jedem Original liegen verkleinerte Fassungen in w600/, w1200/
-     * und w2000/ (Zahl = längste Kante, erzeugt von tools/build-images.py).
-     * Welche Stufen es gibt und wie groß das Original ist, steht in
-     * IMAGE_SIZES. Bilder ohne Eintrag werden wie bisher als Original geladen.
-     */
-    /* Eintrag { w, h, s } zu einem Bildpfad (mit/ohne ?v=), sonst null */
-    imageInfo: function (url) {
-      if (typeof IMAGE_SIZES === "undefined") return null;
-      var path = String(url || "").split(/[?#]/)[0];
-      var i = path.indexOf("assets/images/");
-      return i === -1 ? null : IMAGE_SIZES[path.slice(i + 14)] || null;
-    },
-
-    /* …/students/name.jpg -> …/students/w1200/name.jpg (mit Versionskennung) */
-    variantUrl: function (url, level) {
-      var path = String(url).split(/[?#]/)[0];
-      var cut = path.lastIndexOf("/") + 1;
-      return this.asset(path.slice(0, cut) + "w" + level + "/" + path.slice(cut));
-    },
-
-    /* Pixelbreite einer Stufe (gleiche Rundung wie tools/build-images.py) */
-    levelWidth: function (info, level) {
-      return Math.max(1, Math.floor(info.w * level / Math.max(info.w, info.h) + 0.5));
-    },
-
-    /*
-     * Attribute eines Seitenbildes: srcset aus den vorhandenen Fassungen plus
-     * Original als größter Stufe, src auf w1200 (falls vorhanden), Maße gegen
-     * Layout-Sprünge. o.sizes: Darstellungsbreite je Einsatzort;
-     * o.eager: erstes sichtbares Bild (kein Lazy-Loading, hohe Priorität).
-     * Reihenfolge bewusst: loading/srcset vor src (beim Setzen per DOM).
-     */
-    imageAttrs: function (url, o) {
-      o = o || {};
-      var self = this;
-      var orig = this.asset(String(url).split(/[?#]/)[0]);
-      var info = this.imageInfo(url);
-      var src = orig;
-      var a = {};
-      if (o.eager) a.fetchpriority = "high";
-      else { a.loading = "lazy"; a.decoding = "async"; }
-      if (info) {
-        a.width = info.w;
-        a.height = info.h;
-        if (info.s.length) {
-          a.sizes = o.sizes || "100vw";
-          a.srcset = info.s.map(function (lv) {
-            return self.variantUrl(url, lv) + " " + self.levelWidth(info, lv) + "w";
-          }).concat(orig + " " + info.w + "w").join(", ");
-          if (info.s.indexOf(1200) !== -1) src = this.variantUrl(url, 1200);
-        }
-      }
-      a["data-orig"] = orig;
-      a.src = src;
-      return a;
-    },
-
-    /*
-     * <img>-HTML mit srcset & Co. o.alt: Alternativtext; o.extra: weitere
-     * Attribute als fertiger HTML-Text; o.onerror: Anweisung für den Fall,
-     * dass auch das Original nicht lädt (z. B. Initialen-Fallback).
-     */
-    imageHtml: function (url, o) {
-      o = o || {};
-      var self = this;
-      var a = this.imageAttrs(url, o);
-      var html = '<img alt="' + this.esc(o.alt || "") + '"';
-      Object.keys(a).forEach(function (k) { html += " " + k + '="' + self.esc(a[k]) + '"'; });
-      html += ' onerror="' + this.esc("if(!ADK.imgFallback(this)){" + (o.onerror || "") + "}") + '"';
-      if (o.extra) html += " " + o.extra;
-      return html + ">";
-    },
-
-    /*
-     * Statische Bilder der HTML-Seiten: <img data-img="assets/images/…"
-     * data-sizes="…" [data-eager]> ohne src – hier bekommen sie dieselben
-     * Attribute wie die per JS gerenderten. Ihr onerror ruft selbst
-     * ADK.imgFallback(this) auf.
-     */
-    hydrateImages: function (scope) {
-      var self = this;
-      Array.prototype.forEach.call((scope || document).querySelectorAll("img[data-img]"), function (img) {
-        var a = self.imageAttrs(self.root + img.getAttribute("data-img"), {
-          sizes: img.getAttribute("data-sizes"),
-          eager: img.hasAttribute("data-eager")
-        });
-        img.removeAttribute("data-img");
-        Object.keys(a).forEach(function (k) { img.setAttribute(k, a[k]); });
-      });
-    },
-
-    /*
-     * onerror-Rückfall: Fehlt eine Fassung, wird das Original geladen.
-     * Rückgabe false = das Original selbst ist fehlgeschlagen; dann greift
-     * der bisherige Fallback der jeweiligen Stelle.
-     */
-    imgFallback: function (img) {
-      var orig = img.getAttribute("data-orig");
-      if (!orig || img.hasAttribute("data-fallback")) return false;
-      /* ohne Fassungen wurde schon das Original geladen – nicht doppelt anfragen */
-      if (!img.hasAttribute("srcset") && img.getAttribute("src") === orig) return false;
-      img.setAttribute("data-fallback", "");
-      img.removeAttribute("srcset");
-      img.removeAttribute("sizes");
-      img.src = orig;
-      return true;
-    },
-
-    /* Pfad des Originals eines Bildes (Credits, Lightbox) */
-    origSrc: function (img) {
-      return img.getAttribute("data-orig") || img.getAttribute("src");
-    },
-
     esc: function (s) {
       return String(s === null || s === undefined ? "" : s).replace(/[&<>"']/g, function (c) {
         return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -306,7 +191,7 @@
       Array.prototype.forEach.call(scope.querySelectorAll(sel), function (box) {
         var img = box.querySelector("img");
         if (!img) return;
-        self.setCredit(box, self.origSrc(img));
+        self.setCredit(box, img.getAttribute("src"));
       });
     },
 
@@ -338,56 +223,13 @@
 
   window.ADK = ADK;
 
-  /* Statische Bilder (data-img) sofort versorgen – app.js steht am Ende des
-     <body>, die Elemente existieren also schon; ohne src lädt vorher nichts. */
-  ADK.hydrateImages();
-
   /*
    * Lightbox: jedes Bild mit [data-lightbox] öffnet sich per Klick/Enter
    * bildschirmfüllend. Bilder mit demselben data-gallery-Wert bilden eine
    * Galerie: Pfeil-Knöpfe bzw. Pfeiltasten blättern durch die Bilder.
    * Klick auf das große Bild zoomt auf Originalgröße (scrollbar).
    * Schließen über Klick auf den Hintergrund, Schließen-Knopf oder Escape.
-   *
-   * Zweistufiges Laden: sofort die größte Fassung (w2000, sonst w1200),
-   * parallel das Original, das die Fassung nach vollständigem Laden und
-   * Dekodieren ersetzt. Die Darstellungsgröße kommt aus den Originalmaßen
-   * (IMAGE_SIZES), deshalb springt beim Tausch nichts. Blättern geht
-   * jederzeit; jede Anzeige trägt eine laufende Nummer (req), verspätete
-   * Ladevorgänge eines vorherigen Bildes werden verworfen.
    */
-  var BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
-
-  /* Bild laden und dekodieren; done(im) bzw. fail(). Aus dem Cache sofort. */
-  function preload(url, done, fail) {
-    var im = new Image();
-    im.src = url;
-    if (im.complete && im.naturalWidth) {
-      done(im);
-    } else if (im.decode) {
-      im.decode().then(function () { done(im); }, function () {
-        if (im.complete && im.naturalWidth) done(im); else fail();
-      });
-    } else {
-      im.onload = function () { done(im); };
-      im.onerror = fail;
-    }
-    return im;
-  }
-
-  /* Laufenden Ladevorgang abbrechen (spart Datenvolumen beim Weiterblättern) */
-  function abortLoad(im) {
-    if (im) im.src = BLANK;
-  }
-
-  /* Erste Stufe der Großansicht: w2000, sonst w1200, sonst keine (null) */
-  function lightboxVariant(orig) {
-    var info = ADK.imageInfo(orig);
-    if (!info) return null;
-    var lv = info.s.indexOf(2000) !== -1 ? 2000 : (info.s.indexOf(1200) !== -1 ? 1200 : 0);
-    return lv ? ADK.variantUrl(orig, lv) : null;
-  }
-
   function openLightbox(img) {
     var galleryId = img.getAttribute("data-gallery");
     var group = [img];
@@ -407,19 +249,12 @@
 
     var big = document.createElement("img");
 
-    /* Dezente Ladeanzeige, solange vom aktuellen Bild noch nichts zu sehen ist */
-    var loading = document.createElement("span");
-    loading.className = "lightbox-loading";
-    loading.setAttribute("role", "status");
-    loading.textContent = ADK.t("lightboxLoading");
-
     var close = document.createElement("button");
     close.type = "button";
     close.className = "lightbox-close";
     close.textContent = ADK.t("lightboxClose");
 
     overlay.appendChild(big);
-    overlay.appendChild(loading);
     overlay.appendChild(close);
 
     function navButton(cls, glyph, label, dir) {
@@ -455,142 +290,28 @@
       footer.appendChild(count);
     }
 
-    var req = 0;          /* laufende Nummer der zuletzt angeforderten Anzeige */
-    var dims = null;      /* Originalmaße des aktuellen Bildes */
-    var origLoad = null;  /* Ladevorgang des aktuellen Originals */
-    var preloaded = {};   /* vorgeladene Fassungen der Nachbarbilder */
-
-    /*
-     * Darstellungsgröße: eingepasst so groß wie möglich (auch über die
-     * natürliche Größe hinaus), ohne Zuschnitt; gezoomt in Originalgröße.
-     * Gilt für Fassung und Original gleichermaßen (border-box inkl. Rahmen).
-     */
-    function layout() {
-      if (!dims) {
-        big.style.width = big.style.height = "";
-        return;
-      }
-      /* erst schrumpfen, damit Scrollbalken eines vorherigen Zooms nicht mitmessen */
-      big.style.width = big.style.height = "0px";
-      var cs = getComputedStyle(overlay);
-      var bs = getComputedStyle(big);
-      var bx = parseFloat(bs.borderLeftWidth) + parseFloat(bs.borderRightWidth);
-      var by = parseFloat(bs.borderTopWidth) + parseFloat(bs.borderBottomWidth);
-      var aw = overlay.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - bx;
-      var ah = overlay.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - by;
-      var f = Math.max(0, Math.min(aw / dims.w, ah / dims.h));
-      if (overlay.classList.contains("zoomed")) f = Math.max(f, 1);
-      big.style.width = Math.floor(dims.w * f + bx) + "px";
-      big.style.height = Math.floor(dims.h * f + by) + "px";
-    }
-
     function show(i) {
       index = (i + group.length) % group.length;
-      var my = ++req;
-      var el = group[index];
-      var orig = ADK.origSrc(el);
-      var info = ADK.imageInfo(orig);
-      var first = lightboxVariant(orig);
-      var origShown = false;
-      var firstState = first ? "loading" : "none";   /* loading | shown | failed | none */
-      var origFailed = false;
-
       overlay.classList.remove("zoomed");
-      big.alt = el.alt || "";
+      big.src = group[index].currentSrc || group[index].src;
+      big.alt = group[index].alt || "";
       /* Wasserzeichen der Großansicht: Credit des gerade gezeigten Bildes */
-      ADK.setCredit(overlay, orig);
+      ADK.setCredit(overlay, group[index].getAttribute("src"));
       if (count) count.textContent = (index + 1) + " / " + group.length;
-
-      abortLoad(origLoad);
-      overlay.classList.add("is-loading");
-      dims = info ? { w: info.w, h: info.h } : null;
-      layout();
-
-      function display(url) {
-        big.src = url;
-        overlay.classList.remove("is-loading");
-      }
-
-      /* Weder Fassung noch Original ladbar: Ladeanzeige beenden, Alt-Text zeigen */
-      function giveUp() {
-        if (firstState === "loading" || firstState === "shown" || !origFailed) return;
-        big.removeAttribute("src");
-        overlay.classList.remove("is-loading");
-      }
-
-      if (first) {
-        preload(first, function () {
-          if (my !== req || origShown) return;
-          firstState = "shown";
-          display(first);
-        }, function () {
-          if (my !== req) return;
-          firstState = "failed";
-          giveUp();
-        });
-      }
-      origLoad = preload(orig, function (im) {
-        if (my !== req) return;
-        origLoad = null;
-        origShown = true;
-        if (!dims) {
-          dims = { w: im.naturalWidth, h: im.naturalHeight };
-          layout();
-        }
-        display(orig);
-      }, function () {
-        if (my !== req) return;
-        origLoad = null;
-        origFailed = true;
-        giveUp();   /* steht die Fassung schon, bleibt sie einfach stehen */
-      });
-
-      /* Nachbarbilder: nur die Fassung vorladen, nicht das Original */
-      if (group.length > 1) {
-        [index - 1, index + 1].forEach(function (n) {
-          var url = lightboxVariant(ADK.origSrc(group[(n + group.length) % group.length]));
-          if (url && !preloaded[url]) {
-            preloaded[url] = new Image();
-            preloaded[url].src = url;
-          }
-        });
-      }
     }
 
     /* Klick aufs Bild: zwischen Einpassen und Originalgröße wechseln */
     big.addEventListener("click", function (e) {
       e.stopPropagation();
-      var zoomed = overlay.classList.toggle("zoomed");
-      layout();
-      if (zoomed) {
+      if (overlay.classList.toggle("zoomed")) {
         overlay.scrollLeft = (overlay.scrollWidth - overlay.clientWidth) / 2;
         overlay.scrollTop = (overlay.scrollHeight - overlay.clientHeight) / 2;
       }
     });
 
-    /* Wischen auf Touch-Geräten (nicht im Zoom, dort wird gescrollt) */
-    var touch = null;
-    overlay.addEventListener("touchstart", function (e) {
-      touch = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
-    }, { passive: true });
-    overlay.addEventListener("touchend", function (e) {
-      var start = touch;
-      touch = null;
-      if (!start || group.length < 2 || overlay.classList.contains("zoomed")) return;
-      var dx = e.changedTouches[0].clientX - start.x;
-      var dy = e.changedTouches[0].clientY - start.y;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        e.preventDefault();   /* kein Klick hinterher (würde schließen bzw. zoomen) */
-        show(index + (dx < 0 ? 1 : -1));
-      }
-    });
-
     function destroy() {
-      req++;
-      abortLoad(origLoad);
       overlay.remove();
       document.removeEventListener("keydown", onKey);
-      window.removeEventListener("resize", layout);
       group[index].focus();
     }
     function onKey(e) {
@@ -600,10 +321,8 @@
     }
     overlay.addEventListener("click", destroy);
     document.addEventListener("keydown", onKey);
-    window.addEventListener("resize", layout);
-    /* Erst einhängen, dann anzeigen: layout() misst die Overlay-Größe */
-    document.body.appendChild(overlay);
     show(index);
+    document.body.appendChild(overlay);
     close.focus();
   }
 

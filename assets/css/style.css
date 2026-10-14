@@ -749,7 +749,6 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .head-thumbs img {
   display: block;
   width: 5.5rem;
-  height: auto;   /* sonst gälte das height-Attribut (Originalmaß) */
   aspect-ratio: 3 / 4;
   object-fit: cover;
   border: 2px solid var(--ink);
@@ -778,15 +777,17 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   padding: 1.5rem;
   cursor: zoom-out;
 }
-/* Breite und Höhe setzt assets/js/app.js (openLightbox → layout): eingepasst
-   so groß wie möglich bis zur Viewport-Größe, gezoomt in Originalgröße – für
-   Fassung und Original identisch, damit der Tausch keinen Größensprung macht.
+/* Originaldatei, nie über die natürliche Größe hochskaliert (width/height
+   auto); nur wenn sie größer als der Viewport ist, proportional verkleinert.
    object-fit: contain sichert zusätzlich, dass nichts beschnitten/verzerrt wird. */
 .lightbox img {
   margin: auto;
-  flex: none;
-  max-width: none;
-  max-height: none;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   border: var(--border);
   background: var(--paper);
@@ -794,33 +795,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   cursor: zoom-in;
 }
 .lightbox.zoomed img {
+  max-width: none;
+  max-height: none;
   cursor: zoom-out;
-}
-/* Solange vom aktuellen Bild noch nichts geladen ist: Bild verbergen (kein
-   verzerrtes Vorgängerbild), stattdessen dezente Ladeanzeige. Die Anzeige
-   erscheint leicht verzögert, damit sie bei schnellen Bildern nicht aufblitzt. */
-.lightbox.is-loading img { visibility: hidden; }
-.lightbox-loading {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  color: var(--bg);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-.lightbox.is-loading .lightbox-loading {
-  opacity: 1;
-  transition-delay: 0.25s;
-  animation: lightbox-pulse 1.4s ease-in-out 0.25s infinite;
-}
-@keyframes lightbox-pulse {
-  50% { opacity: 0.45; }
 }
 /* Bedienelemente fixed, damit sie beim Scrollen im Zoom stehen bleiben */
 .lightbox-close {

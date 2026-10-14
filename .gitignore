@@ -5,10 +5,6 @@ AVO Website/
 # Server-Kopie (IONOS /public) und erzeugter Upload-Ordner für FileZilla
 Avo Website alt/
 AVO Website upload/
-AVO Website aktuell/
-# Von tools/build-images.py erzeugte Bildfassungen (Upload per FileZilla)
-_upload/
-__pycache__/
 
 # Medien-Dateien vorerst nur lokal nutzen, nicht committen.
 # (Die Ordnerstruktur bleibt über die .gitkeep-Dateien erhalten.)
