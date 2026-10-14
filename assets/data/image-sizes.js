@@ -5,8 +5,8 @@
  * s: vorhandene Stufen (längste Kante in px) in den Unterordnern w600/ w1200/ w2000/.
  */
 var IMAGE_SIZES = {
-  "group-2.jpg": { w: 1600, h: 1067, s: [600, 1200] },
-  "group.jpg": { w: 2000, h: 1334, s: [600, 1200] },
+  "group-2.jpg": { w: 7821, h: 5217, s: [600, 1200, 2000] },
+  "group.jpg": { w: 7911, h: 5276, s: [600, 1200, 2000] },
   "productions/hamlet-2.jpg": { w: 4272, h: 2848, s: [600, 1200, 2000] },
   "productions/hamlet-3.jpg": { w: 4272, h: 2848, s: [600, 1200, 2000] },
   "productions/hamlet-4.jpg": { w: 4272, h: 2848, s: [600, 1200, 2000] },
