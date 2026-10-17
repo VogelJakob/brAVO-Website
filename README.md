@@ -1,6 +1,6 @@
 # brAVO-Website – ADK Bayern, Abschlussjahrgang 2027
 
-Portfolio-Website der zehn Schauspielstudierenden des Abschlussjahrgangs 2027 der Akademie für Darstellende Kunst Bayern. Reines HTML/CSS/JavaScript – kein Framework, kein Build-Tool. Direkt deploybar auf GitHub Pages oder Netlify.
+Portfolio-Website der zehn Schauspielstudierenden des Abschlussjahrgangs 2027 der Akademie für Darstellende Kunst Bayern. Reines HTML/CSS/JavaScript – kein Framework, kein Build-Tool. Deployment per GitHub Action nach IONOS (siehe unten).
 
 ## Lokal starten
 
@@ -140,10 +140,12 @@ Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepfleg
 
 ## Deployment
 
-- **Caching / Versionskennung:** Bei jedem Upload geänderter CSS/JS/Daten/Bilder die Versionskennung `?v=JJJJMMTT-N` in allen HTML-Dateien erhöhen und die `.htaccess` im Webroot mit hochladen – Details in [`CACHE.md`](CACHE.md).
-- **GitHub Pages:** Repo pushen → Settings → Pages → Branch `main`, Ordner `/ (root)`. Relative Pfade funktionieren auch bei Projekt-Pages (URL mit `/repo-name/`) unverändert.
-- **Netlify:** Ordner per Drag & Drop hochladen oder Repo verbinden – kein Build-Command, Publish-Directory ist die Wurzel.
-- GitHub hat ein Datei-Limit von 100 MB – Showreels ggf. komprimieren (z.B. 1080p, H.264, ~5 Mbit/s) oder Netlify verwenden.
+- **Code:** Push auf `main` → GitHub Action (`.github/workflows/deploy.yml`) lädt alle nicht versteckten Dateien automatisch per SFTP nach IONOS `/public` hoch (`.htaccess` separat). Gelöscht wird dabei nichts.
+- **Medien (Bilder, Videos, Audio):** nur per FileZilla auf den Server, **nie ins Repo** (`.gitignore` schließt sie aus).
+- **Neue Bildfassungen:** mit `tools/build-images.py` erzeugen, dann den Ordner `_upload/` per FileZilla hochladen und die aktualisierte `assets/data/image-sizes.js` committen und pushen – sonst wird sie beim nächsten Push mit der alten Fassung überschrieben.
+- **Caching / Versionskennung:** Bei geänderten CSS/JS/Daten die Versionskennung `?v=JJJJMMTT-N` in allen HTML-Dateien erhöhen – Details in [`CACHE.md`](CACHE.md).
+- **Wichtig:** `delete_remote_files` im Workflow niemals aktivieren – Medien liegen nur auf dem Server und würden gelöscht.
+- Interne Dateien (`*.md`, `*.py`, `*.sh`, `tools/`, `.github/`) werden zwar hochgeladen, aber per `.htaccess` gesperrt.
 
 ## Getroffene Annahmen (bitte prüfen)
 

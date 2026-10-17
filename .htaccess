@@ -43,3 +43,32 @@
 
 </IfModule>
 # ===================== Ende Cache-Steuerung ==========================
+
+# =====================================================================
+# Interne Dateien sperren (Doku, Skripte, Werkzeuge)
+# ---------------------------------------------------------------------
+# Der Deploy lädt alle nicht versteckten Repo-Dateien nach /public hoch,
+# also auch README.md, CACHE.md und tools/. Diese sollen nicht öffentlich
+# abrufbar sein. Die Website selbst lädt keine .md-, .py- oder .sh-Dateien.
+# =====================================================================
+
+# --- Dateitypen *.md, *.py, *.sh (überall) ----------------------------
+<IfModule mod_authz_core.c>
+  # Apache 2.4
+  <FilesMatch "(?i)\.(md|py|sh)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  # Fallback für ältere Apache-Versionen (2.2)
+  <FilesMatch "(?i)\.(md|py|sh)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+# --- Ordner tools/ und .github/ komplett sperren (Antwort 403) --------
+<IfModule mod_alias.c>
+  RedirectMatch 403 ^/(tools|\.github)(/|$)
+</IfModule>
+# ================== Ende Interne Dateien sperren =====================

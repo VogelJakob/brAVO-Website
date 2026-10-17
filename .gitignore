@@ -26,6 +26,17 @@ assets/audio/*.mp4
 # Gruppen- und Szenenfotos ebenfalls nur per FileZilla
 assets/images/*.jpg
 assets/images/productions/*.jpg
+# Absicherung: Medien in ALLEN Unterordnern (z. B. w600/, w1200/, w2000/)
+# Medien liegen nur auf dem Server und dürfen nie ins Repo.
+assets/images/**/*.jpg
+assets/images/**/*.jpeg
+assets/images/**/*.png
+assets/images/**/*.webp
+assets/videos/**/*.mp4
+assets/audio/**
+_upload/
+# Platzhalter für die Ordnerstruktur trotzdem behalten
+!assets/**/.gitkeep
 
 # Entwurfsmaterial und lokale Werkzeug-Einstellungen (gehören nicht ins Webroot)
 design/
