@@ -338,6 +338,40 @@
 
   window.ADK = ADK;
 
+  /*
+   * Immer nur ein Medium gleichzeitig: Startet ein Video oder eine Tonspur,
+   * werden alle anderen pausiert (nicht zurückgespult – die Position bleibt).
+   * "play" bubbelt nicht, daher ein einziger Listener auf document in der
+   * Capture-Phase; er erfasst auch später per JS eingefügte <video>/<audio>.
+   * Medienobjekte außerhalb des DOM (z. B. new Audio()) bei ihrer Erzeugung
+   * mit ADK.registerMedia(el) anmelden. Eingebettete iframe-Player gibt es
+   * derzeit nicht; käme einer dazu, müsste er über die API des Anbieters
+   * hier angebunden werden.
+   */
+  var detachedMedia = [];
+
+  function pauseOtherMedia(current) {
+    var all = Array.prototype.slice.call(document.querySelectorAll("video, audio")).concat(detachedMedia);
+    all.forEach(function (m) {
+      if (m !== current && !m.paused) m.pause();
+    });
+  }
+
+  document.addEventListener("play", function (e) {
+    var el = e.target;
+    if (el instanceof HTMLMediaElement) pauseOtherMedia(el);
+  }, true);
+
+  ADK.registerMedia = function (el) {
+    if (!el || detachedMedia.indexOf(el) !== -1) return el;
+    detachedMedia.push(el);
+    el.addEventListener("play", function () {
+      /* Hängt das Element inzwischen im DOM, erledigt das der document-Listener */
+      if (!el.isConnected) pauseOtherMedia(el);
+    });
+    return el;
+  };
+
   /* Statische Bilder (data-img) sofort versorgen – app.js steht am Ende des
      <body>, die Elemente existieren also schon; ohne src lädt vorher nichts. */
   ADK.hydrateImages();
