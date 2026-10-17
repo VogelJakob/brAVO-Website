@@ -125,7 +125,7 @@ Die Website ist rein deutsch (der frühere DE/EN-Umschalter wurde auf Kundenwuns
 | Karls Doppelname („Karl Georg“ vs. „Karl-Georg“) | `assets/data/students.js` (TODO-Kommentar beim Eintrag) |
 | Domain | projektweit `adk-bayern-2027.de` ersetzen (siehe Checkliste unten) |
 
-Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, AVO-Anmeldeformular (eigener PHP-Endpunkt, siehe „AVO-Anmeldeformular“ unten; `ADK_MAIL` in `assets/js/avo.js` liefert nur den mailto-Fallback im Fehlerfall), AVO-Uhrzeiten (Linz 17:00 Uhr, Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
+Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, AVO-Anmeldeformular (eigener PHP-Endpunkt, siehe „AVO-Anmeldeformular“ unten), AVO-Uhrzeiten (Linz 17:00 Uhr, Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
 
 Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepflegt – neue Einträge immer oben einfügen.
 
@@ -158,6 +158,10 @@ return [
     'to_email'   => '…',   // Empfänger der Anmeldungen
 ];
 ```
+
+Die Empfängeradresse steht **ausschließlich** in dieser Datei – nicht im Repo und nicht auf der Website (auch der Fehlerhinweis des Formulars nennt bewusst keine Adresse). Eine geänderte Adresse also nur dort eintragen.
+
+Vergangene AVO-Termine verschwinden automatisch aus der Formular-Auswahl (der Termin selbst bleibt am Tag noch wählbar) und werden auch vom Skript abgelehnt.
 
 Das Skript findet die Datei über `__DIR__ . '/../../config/avo-anmeldung-mail.php'` (von `/public/api/` aus). Fehlt sie, antwortet es mit einer allgemeinen Fehlermeldung. Die Rate-Limit-Datei `avo-anmeldung-ratelimit.json` legt das Skript ebenfalls in `/config` ab (falls nicht beschreibbar: im Temp-Verzeichnis des Servers); sie enthält nur gehashte IP-Adressen.
 

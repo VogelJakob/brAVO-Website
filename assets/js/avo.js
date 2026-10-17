@@ -3,18 +3,12 @@
  *
  * Das Formular in index.html postet per fetch an den eigenen PHP-Endpunkt
  * api/avo-anmeldung.php (action-Attribut), der die Anmeldung per SMTP
- * verschickt. Die Empfängeradresse steht nur in der Server-Konfiguration
- * /config/avo-anmeldung-mail.php (siehe README), nicht im Repo.
+ * verschickt. Die Empfängeradresse steht bewusst NUR in der Server-
+ * Konfiguration /config/avo-anmeldung-mail.php (siehe README) – nicht im
+ * Repo und nicht auf der Seite, auch nicht im Fehlerhinweis.
  */
 (function () {
   "use strict";
-
-  /*
-   * Rückfall-Kontakt im Fehlerhinweis des Formulars (mailto-Link).
-   * Die Linkseite links/index.html verlinkt bewusst auf das Formular
-   * (index.html#anmeldung) statt auf diese Adresse.
-   */
-  var ADK_MAIL = "adk.bayern27@gmail.com";
 
   /* --- Anmeldeformular: per fetch absenden, Bestätigung inline anzeigen --- */
   function initForm() {
@@ -29,19 +23,11 @@
       /* Gegen Doppelversand: während des Sendens keine zweite Anfrage */
       if (sending) return;
 
-      /* Fehlerfall: Hinweis mit klickbarem mailto-Fallback auf ADK_MAIL. */
+      /* Fehlerfall: allgemeiner Hinweis (ohne E-Mail-Adresse, siehe oben). */
       function fail() {
         status.hidden = false;
         status.classList.add("form-status-error");
-        status.textContent = "";
-        status.appendChild(document.createTextNode(
-          "Senden hat leider nicht geklappt – bitte versucht es später erneut oder schreibt uns direkt an "
-        ));
-        var mail = document.createElement("a");
-        mail.href = "mailto:" + ADK_MAIL + "?subject=AVO-Anmeldung";
-        mail.textContent = ADK_MAIL;
-        status.appendChild(mail);
-        status.appendChild(document.createTextNode("."));
+        status.textContent = "Senden hat leider nicht geklappt – bitte versucht es später erneut.";
       }
 
       status.hidden = false;

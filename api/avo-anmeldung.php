@@ -188,7 +188,9 @@ if (!$termine) {
     error_log('AVO-Anmeldung: Termine konnten nicht gelesen werden.');
     antwort(500, false);
 }
-if (!isset($termine[$werte['vorsprechen']])) {
+/* Vergangene Termine sind nicht mehr wählbar (der heutige noch) */
+$heute = (new DateTime('now', new DateTimeZone('Europe/Berlin')))->format('Y-m-d');
+if (!isset($termine[$werte['vorsprechen']]) || $werte['vorsprechen'] < $heute) {
     antwort(400, false, 'Bitte wählt ein gültiges Vorsprechen aus.');
 }
 if (!in_array($werte['anzahl_personen'], PERSONEN, true)) {

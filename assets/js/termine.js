@@ -98,7 +98,10 @@
     var erste = select.querySelector("option");
     select.innerHTML = "";
     if (erste) select.appendChild(erste);
-    TERMINE.avo.forEach(function (a) {
+    /* Vergangene Vorsprechen fallen aus der Auswahl (der heutige bleibt);
+       api/avo-anmeldung.php lehnt sie ebenfalls ab. */
+    var heute = heuteIso();
+    TERMINE.avo.filter(function (a) { return a.d >= heute; }).forEach(function (a) {
       var d = ADK.datum(a.d);
       var opt = document.createElement("option");
       /* value = ISO-Datum; api/avo-anmeldung.php prüft es gegen diese Datei */
