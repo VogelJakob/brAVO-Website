@@ -1,19 +1,16 @@
 /*
- * AVO-Sektion der Startseite: Anmeldeformular (Formspree) und Trailer.
+ * AVO-Sektion der Startseite: Anmeldeformular und Trailer.
  *
- * Formspree-Setup: Das Formular in index.html postet an die Formular-ID
- * "xaewqpbo" (action="https://formspree.io/f/xaewqpbo"), Zieladresse im
- * Formspree-Account ist adk.bayern27@gmail.com (Konstante ADK_MAIL).
- * Achtung: Der Empfänger wird bei Formspree im Account hinterlegt, nicht im
- * Markup – ADK_MAIL und die Formspree-Zieladresse müssen zusammenpassen.
+ * Das Formular in index.html postet per fetch an den eigenen PHP-Endpunkt
+ * api/avo-anmeldung.php (action-Attribut), der die Anmeldung per SMTP
+ * verschickt. Die Empfängeradresse steht nur in der Server-Konfiguration
+ * /config/avo-anmeldung-mail.php (siehe README), nicht im Repo.
  */
 (function () {
   "use strict";
 
   /*
-   * Zieladresse des Anmeldeformulars. Erscheint als Rückfall-Kontakt im
-   * Fehlerhinweis des Formulars und muss identisch mit der im Formspree-
-   * Account hinterlegten Empfängeradresse sein.
+   * Rückfall-Kontakt im Fehlerhinweis des Formulars (mailto-Link).
    * Die Linkseite links/index.html verlinkt bewusst auf das Formular
    * (index.html#anmeldung) statt auf diese Adresse.
    */
@@ -24,9 +21,13 @@
     var form = document.getElementById("avo-form");
     var status = document.getElementById("avo-form-status");
     if (!form || !status) return;
+    var button = form.querySelector('button[type="submit"]');
+    var sending = false;
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
+      /* Gegen Doppelversand: während des Sendens keine zweite Anfrage */
+      if (sending) return;
 
       /* Fehlerfall: Hinweis mit klickbarem mailto-Fallback auf ADK_MAIL. */
       function fail() {
@@ -46,19 +47,27 @@
       status.hidden = false;
       status.classList.remove("form-status-error");
       status.textContent = "Wird gesendet …";
+      sending = true;
+      if (button) button.disabled = true;
 
+      /* Antwort des Endpunkts: { ok: true } bzw. { ok: false, message } */
       fetch(form.action, {
         method: "POST",
         body: new FormData(form),
         headers: { Accept: "application/json" }
       }).then(function (r) {
-        if (r.ok) {
-          form.reset();
-          status.textContent = "Danke! Eure Anzahl wurde aufgenommen – wir freuen uns auf euch.";
-        } else {
-          fail();
-        }
-      }).catch(fail);
+        return r.json().catch(function () { return { ok: false }; }).then(function (data) {
+          if (r.ok && data && data.ok === true) {
+            form.reset();
+            status.textContent = "Danke! Eure Anzahl wurde aufgenommen – wir freuen uns auf euch.";
+          } else {
+            fail();
+          }
+        });
+      }).catch(fail).then(function () {
+        sending = false;
+        if (button) button.disabled = false;
+      });
     });
   }
 

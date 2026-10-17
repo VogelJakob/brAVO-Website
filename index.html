@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400..700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261017-1">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261017-2">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -201,13 +201,13 @@
         </div>
       </div>
 
-      <!-- Anmeldung: optional, aber gern gesehen. Versand über Formspree –
-           Formular-ID "xaewqpbo" (Zieladresse im Formspree-Account =
-           adk.bayern27@gmail.com, siehe ADK_MAIL in assets/js/avo.js).
+      <!-- Anmeldung: optional, aber gern gesehen. Versand über den eigenen
+           PHP-Endpunkt api/avo-anmeldung.php (SMTP über das IONOS-Postfach,
+           Empfänger nur in der Server-Konfiguration, siehe README).
            Abgeschickt wird per fetch() aus avo.js, nicht als normaler
            Browser-POST – dadurch bleibt die Statusanzeige auf der Seite. -->
       <div id="anmeldung" class="avo-anmeldung">
-        <form id="avo-form" class="avo-form" action="https://formspree.io/f/xaewqpbo" method="POST">
+        <form id="avo-form" class="avo-form" action="api/avo-anmeldung.php" method="POST">
           <h3>Zum Vorsprechen anmelden</h3>
           <p>Man muss sich nicht anmelden – aber es ist gern gesehen und hilft uns bei der Planung.</p>
           <div class="form-field">
@@ -241,6 +241,13 @@
           <div class="form-field">
             <label for="avo-email">E-Mail für Rückfragen <span class="optional">(optional)</span></label>
             <input id="avo-email" name="email" type="email" autocomplete="email">
+          </div>
+          <!-- Honeypot gegen Spam-Bots: für Menschen unsichtbar (visuell
+               versteckt, nicht display:none). Ist es ausgefüllt, verwirft
+               api/avo-anmeldung.php die Anmeldung stillschweigend. -->
+          <div class="form-hp" aria-hidden="true">
+            <label for="avo-website">Website</label>
+            <input id="avo-website" name="website" type="text" tabindex="-1" autocomplete="off">
           </div>
           <button class="btn-cta" type="submit">Anmeldung senden</button>
           <p class="form-status" id="avo-form-status" role="status" aria-live="polite" hidden></p>
@@ -288,13 +295,13 @@
     </nav>
   </footer>
 
-  <script src="assets/data/students.js?v=20261017-1"></script>
-  <script src="assets/data/termine.js?v=20261017-1"></script>
-  <script src="assets/data/credits.js?v=20261017-1"></script>
-  <script src="assets/data/image-sizes.js?v=20261017-1"></script>
-  <script src="assets/js/app.js?v=20261017-1"></script>
-  <script src="assets/js/index.js?v=20261017-1"></script>
-  <script src="assets/js/termine.js?v=20261017-1"></script>
-  <script src="assets/js/avo.js?v=20261017-1"></script>
+  <script src="assets/data/students.js?v=20261017-2"></script>
+  <script src="assets/data/termine.js?v=20261017-2"></script>
+  <script src="assets/data/credits.js?v=20261017-2"></script>
+  <script src="assets/data/image-sizes.js?v=20261017-2"></script>
+  <script src="assets/js/app.js?v=20261017-2"></script>
+  <script src="assets/js/index.js?v=20261017-2"></script>
+  <script src="assets/js/termine.js?v=20261017-2"></script>
+  <script src="assets/js/avo.js?v=20261017-2"></script>
 </body>
 </html>

@@ -101,6 +101,8 @@
     TERMINE.avo.forEach(function (a) {
       var d = ADK.datum(a.d);
       var opt = document.createElement("option");
+      /* value = ISO-Datum; api/avo-anmeldung.php prüft es gegen diese Datei */
+      opt.value = a.d;
       opt.textContent = d.datum + " – " + a.stadt + ", " + (a.zeit || t("timeSoon")) + " (" + a.venue + ")";
       select.appendChild(opt);
     });

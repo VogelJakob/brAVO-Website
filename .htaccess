@@ -72,3 +72,34 @@
   RedirectMatch 403 ^/(tools|\.github)(/|$)
 </IfModule>
 # ================== Ende Interne Dateien sperren =====================
+
+# =====================================================================
+# PHP-Bibliotheken und PHP-Dateien sperren (AVO-Anmeldeformular)
+# ---------------------------------------------------------------------
+# lib/ enthält PHPMailer (wird nur von api/avo-anmeldung.php per require
+# geladen) und muss nie direkt aufgerufen werden. Außerdem werden alle
+# PHP-Dateien gesperrt – einzige Ausnahme ist der Formular-Endpunkt
+# avo-anmeldung.php. Neue öffentliche PHP-Skripte müssen hier bewusst
+# freigeschaltet werden.
+# =====================================================================
+
+# --- Ordner lib/ komplett sperren (Antwort 403) -----------------------
+<IfModule mod_alias.c>
+  RedirectMatch 403 ^/lib(/|$)
+</IfModule>
+
+# --- Alle PHP-Dateien außer avo-anmeldung.php sperren -----------------
+<IfModule mod_authz_core.c>
+  # Apache 2.4
+  <FilesMatch "(?i)^(?!avo-anmeldung\.php$).*\.(php\d?|phtml|phar)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  # Fallback für ältere Apache-Versionen (2.2)
+  <FilesMatch "(?i)^(?!avo-anmeldung\.php$).*\.(php\d?|phtml|phar)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+# ============ Ende PHP-Bibliotheken und PHP-Dateien sperren ==========

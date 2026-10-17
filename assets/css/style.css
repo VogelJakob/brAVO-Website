@@ -1087,6 +1087,16 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .form-status-error { color: var(--acc-deep); }
 /* mailto-Fallback im Fehlerhinweis: übernimmt die Farbe des Status-Texts. */
 .form-status a { color: inherit; text-decoration: underline; }
+/* Honeypot-Feld: visuell versteckt (bewusst nicht display:none, sonst
+   erkennen Bots es leichter). */
+.form-hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.avo-form button[disabled] { opacity: 0.6; cursor: wait; }
 
 /* ---------- News (Startseite) ---------- */
 

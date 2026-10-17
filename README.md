@@ -27,7 +27,9 @@ assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Foto-Credits, He
 assets/js/index.js       Rendert das Ensemble-Grid (alphabetisch nach Nachname)
 assets/js/profile.js     Rendert die Einzelprofile
 assets/js/termine.js     Rendert Laufband, AVO-Liste, Formular-Auswahl, Aufführungs-Termine
-assets/js/avo.js         AVO-Anmeldeformular (Formspree) und Trailer-Einbindung
+assets/js/avo.js         AVO-Anmeldeformular (Versand per fetch an api/) und Trailer-Einbindung
+api/avo-anmeldung.php    PHP-Endpunkt des Anmeldeformulars (Versand per SMTP, siehe unten)
+lib/PHPMailer/           PHPMailer 7.1.1 (nur src-Dateien + LICENSE), per .htaccess gesperrt
 assets/css/style.css     Design-System
 assets/images/students/  Portraitfotos:  {slug}.jpg · Galerie: {slug}-2.jpg … -8.jpg
 assets/images/group.jpg  Gruppenfoto (QUER) für den Hero-Bereich
@@ -123,7 +125,7 @@ Die Website ist rein deutsch (der frühere DE/EN-Umschalter wurde auf Kundenwuns
 | Karls Doppelname („Karl Georg“ vs. „Karl-Georg“) | `assets/data/students.js` (TODO-Kommentar beim Eintrag) |
 | Domain | projektweit `adk-bayern-2027.de` ersetzen (siehe Checkliste unten) |
 
-Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, Formspree-Formular-ID (`index.html` → `action="https://formspree.io/f/xaewqpbo"`; **Zieladresse im Formspree-Account: `adk.bayern27@gmail.com`** – identisch mit `ADK_MAIL` in `assets/js/avo.js`, das nur den mailto-Fallback im Fehlerfall liefert), AVO-Uhrzeiten (Linz 17:00 Uhr, Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
+Erledigt und daher **nicht** mehr offen: Impressum/Datenschutz (echte Daten eingetragen), GoFundMe-Link, AVO-Anmeldeformular (eigener PHP-Endpunkt, siehe „AVO-Anmeldeformular“ unten; `ADK_MAIL` in `assets/js/avo.js` liefert nur den mailto-Fallback im Fehlerfall), AVO-Uhrzeiten (Linz 17:00 Uhr, Regensburg 14 Uhr, übrige Städte 14:30 Uhr – Änderungen jetzt in `assets/data/termine.js`).
 
 Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepflegt – neue Einträge immer oben einfügen.
 
@@ -138,6 +140,27 @@ Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepfleg
 4. Portraits, Szenenfotos (inkl. Galerien) und Videos gemäß Namenskonvention hochladen und die Foto-Credits in `assets/data/credits.js` eintragen.
 5. **Platzhalter aus der Tabelle oben** (Foto-Credits, Domain, …) ausfüllen.
 
+## AVO-Anmeldeformular (PHP-Endpunkt)
+
+Das Formular in `index.html` (`#avo-form`) schickt per `fetch` an `api/avo-anmeldung.php`. Das Skript prüft die Angaben (Termin muss in `assets/data/termine.js` stehen, Anzahl Personen aus der Auswahlliste, E-Mail-Format, Längen), hat einen Honeypot (`website`) und ein Rate-Limit (5 Anfragen pro IP in 10 Minuten) und verschickt die Anmeldung per SMTP (STARTTLS) über das IONOS-Postfach mit PHPMailer aus `lib/PHPMailer/`.
+
+**Server-Konfiguration – liegt nur auf dem Server, NIE ins Repo:** `/config/avo-anmeldung-mail.php` im Webspace-Root, also neben (nicht in) `/public`. Die Datei wird manuell angelegt und gibt ein Array mit diesen Schlüsseln zurück:
+
+```php
+<?php
+return [
+    'smtp_host'  => '…',   // SMTP-Server des IONOS-Postfachs
+    'smtp_port'  => 587,   // STARTTLS
+    'smtp_user'  => '…',
+    'smtp_pass'  => '…',
+    'from_email' => '…',   // Absenderadresse (IONOS-Postfach)
+    'from_name'  => '…',
+    'to_email'   => '…',   // Empfänger der Anmeldungen
+];
+```
+
+Das Skript findet die Datei über `__DIR__ . '/../../config/avo-anmeldung-mail.php'` (von `/public/api/` aus). Fehlt sie, antwortet es mit einer allgemeinen Fehlermeldung. Die Rate-Limit-Datei `avo-anmeldung-ratelimit.json` legt das Skript ebenfalls in `/config` ab (falls nicht beschreibbar: im Temp-Verzeichnis des Servers); sie enthält nur gehashte IP-Adressen.
+
 ## Deployment
 
 - **Code:** Push auf `main` → GitHub Action (`.github/workflows/deploy.yml`) lädt alle nicht versteckten Dateien automatisch per SFTP nach IONOS `/public` hoch (`.htaccess` separat). Gelöscht wird dabei nichts.
@@ -145,7 +168,7 @@ Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepfleg
 - **Neue Bildfassungen:** mit `tools/build-images.py` erzeugen, dann den Ordner `_upload/` per FileZilla hochladen und die aktualisierte `assets/data/image-sizes.js` committen und pushen – sonst wird sie beim nächsten Push mit der alten Fassung überschrieben.
 - **Caching / Versionskennung:** Bei geänderten CSS/JS/Daten die Versionskennung `?v=JJJJMMTT-N` in allen HTML-Dateien erhöhen – Details in [`CACHE.md`](CACHE.md).
 - **Wichtig:** `delete_remote_files` im Workflow niemals aktivieren – Medien liegen nur auf dem Server und würden gelöscht.
-- Interne Dateien (`*.md`, `*.py`, `*.sh`, `tools/`, `.github/`) werden zwar hochgeladen, aber per `.htaccess` gesperrt.
+- Interne Dateien (`*.md`, `*.py`, `*.sh`, `tools/`, `.github/`) werden zwar hochgeladen, aber per `.htaccess` gesperrt. Ebenso `lib/` und alle PHP-Dateien außer `api/avo-anmeldung.php`.
 
 ## Getroffene Annahmen (bitte prüfen)
 
