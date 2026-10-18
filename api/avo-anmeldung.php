@@ -241,7 +241,10 @@ try {
     $mail->CharSet = PHPMailer::CHARSET_UTF8;
     $mail->Encoding = PHPMailer::ENCODING_QUOTED_PRINTABLE;
     $mail->setFrom((string)$config['from_email'], (string)$config['from_name']);
-    $mail->addAddress((string)$config['to_email']);
+    /* to_email: eine Adresse oder eine Liste von Adressen */
+    foreach ((array)$config['to_email'] as $empfaenger) {
+        $mail->addAddress((string)$empfaenger);
+    }
     if ($werte['email'] !== '') {
         $mail->addReplyTo($werte['email'], $werte['name']);
     }

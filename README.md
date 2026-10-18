@@ -155,7 +155,7 @@ return [
     'smtp_pass'  => '…',
     'from_email' => '…',   // Absenderadresse (IONOS-Postfach)
     'from_name'  => '…',
-    'to_email'   => '…',   // Empfänger der Anmeldungen
+    'to_email'   => '…',   // Empfänger der Anmeldungen; mehrere: ['…', '…']
 ];
 ```
 
