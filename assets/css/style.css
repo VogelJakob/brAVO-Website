@@ -915,7 +915,9 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   gap: 1rem;
 }
 .contact-link {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
   background: var(--paper);
   color: var(--ink);
   font-weight: 700;
@@ -925,6 +927,15 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   box-shadow: 5px 5px 0 var(--ink);
   transition: translate 0.15s ease, box-shadow 0.15s ease;
 }
+/* Plattform-Icon vor dem Linktext (Icons: assets/js/profile.js, LINK_ICONS).
+   Icon und Text liegen in einer Flex-Zeile – bei Umbrüchen bricht nur der
+   Text innerhalb seiner Spalte um, das Icon bleibt daneben stehen. */
+.contact-link .link-icon {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+}
+.contact-link-text { min-width: 0; }
 .contact-link:hover {
   translate: -2px -2px;
   box-shadow: 7px 7px 0 var(--acc);
