@@ -798,6 +798,20 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 .lightbox.zoomed img {
   cursor: zoom-out;
 }
+/* Touch: Pinch, Doppeltipp, Verschieben und Wischen übernimmt app.js
+   (Pointer Events). touch-action: none verhindert, dass der Browser dabei
+   die ganze Seite zoomt oder dahinter scrollt – nur innerhalb der Lightbox,
+   der viewport-Meta-Tag bleibt unverändert. Maus/Trackpad betrifft das nicht.
+   Im Maus-Zoom (.zoomed, Overlay scrollt) darf ein Finger weiter scrollen. */
+.lightbox { touch-action: none; }
+.lightbox.zoomed { touch-action: pan-x pan-y; }
+/* Per Finger vergrößert: transform vergrößert sonst die Scrollfläche */
+.lightbox.touch-zoom { overflow: hidden; }
+/* Weiches Zurückfedern / Doppeltipp-Zoom (Zwischenstände ohne Transition) */
+.lightbox img.lb-anim { transition: transform 0.22s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .lightbox img.lb-anim { transition: none; }
+}
 /* Solange vom aktuellen Bild noch nichts geladen ist: Bild verbergen (kein
    verzerrtes Vorgängerbild), stattdessen dezente Ladeanzeige. Die Anzeige
    erscheint leicht verzögert, damit sie bei schnellen Bildern nicht aufblitzt. */

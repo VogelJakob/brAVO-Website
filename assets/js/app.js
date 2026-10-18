@@ -380,7 +380,8 @@
    * Lightbox: jedes Bild mit [data-lightbox] öffnet sich per Klick/Enter
    * bildschirmfüllend. Bilder mit demselben data-gallery-Wert bilden eine
    * Galerie: Pfeil-Knöpfe bzw. Pfeiltasten blättern durch die Bilder.
-   * Klick auf das große Bild zoomt auf Originalgröße (scrollbar).
+   * Klick auf das große Bild zoomt auf Originalgröße (scrollbar) – nur mit
+   * Maus/Trackpad; per Finger gelten Galerie-Gesten (Pinch, Doppeltipp).
    * Schließen über Klick auf den Hintergrund, Schließen-Knopf oder Escape.
    *
    * Zweistufiges Laden: sofort die größte Fassung (w2000, sonst w1200),
@@ -539,6 +540,7 @@
       var origFailed = false;
 
       overlay.classList.remove("zoomed");
+      resetZoom();
       big.alt = el.alt || "";
       /* Wasserzeichen der Großansicht: Credit des gerade gezeigten Bildes */
       ADK.setCredit(overlay, orig);
@@ -600,9 +602,15 @@
       }
     }
 
-    /* Klick aufs Bild: zwischen Einpassen und Originalgröße wechseln */
+    /* Zuletzt benutzte Eingabeart (Pointer Events): "touch" = Finger */
+    var lastPointer = "mouse";
+
+    /* Klick aufs Bild: zwischen Einpassen und Originalgröße wechseln.
+       Nur mit Maus/Trackpad/Stift – per Finger zoomt ein Tipp nicht mehr
+       (dort gelten die Gesten unten: Pinch, Doppeltipp, Verschieben). */
     big.addEventListener("click", function (e) {
       e.stopPropagation();
+      if (lastPointer === "touch") return;
       var zoomed = overlay.classList.toggle("zoomed");
       layout();
       if (zoomed) {
@@ -611,29 +619,228 @@
       }
     });
 
-    /* Wischen auf Touch-Geräten (nicht im Zoom, dort wird gescrollt) */
-    var touch = null;
-    overlay.addEventListener("touchstart", function (e) {
-      touch = e.touches.length === 1 ? { x: e.touches[0].clientX, y: e.touches[0].clientY } : null;
-    }, { passive: true });
-    overlay.addEventListener("touchend", function (e) {
-      var start = touch;
-      touch = null;
-      if (!start || group.length < 2 || overlay.classList.contains("zoomed")) return;
-      var dx = e.changedTouches[0].clientX - start.x;
-      var dy = e.changedTouches[0].clientY - start.y;
-      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
-        e.preventDefault();   /* kein Klick hinterher (würde schließen bzw. zoomen) */
-        show(index + (dx < 0 ? 1 : -1));
+    /*
+     * Touch-Gesten wie in einer Handy-Fotogalerie (nur pointerType "touch"):
+     * Zwei-Finger-Zoom um den Fingermittelpunkt (1x–4x, unter 1x federt es
+     * beim Loslassen zurück), Doppeltipp wechselt 1x ⇄ 2,5x an der getippten
+     * Stelle, vergrößert verschiebt ein Finger das Bild (begrenzt auf den
+     * sichtbaren Bereich), bei 1x blättert Wischen links/rechts.
+     * Dargestellt wird per transform (translate + scale) im
+     * requestAnimationFrame – die Layout-Größe aus layout() bleibt unberührt,
+     * deshalb übersteht der Tausch Fassung → Original Zoom und Position.
+     */
+    var MAX_ZOOM = 4, TAP_ZOOM = 2.5, DOUBLE_TAP_MS = 300;
+    var zs = 1, ztx = 0, zty = 0;   /* aktuelle Zoomstufe und Verschiebung (px) */
+    var frame = 0, animTimer = 0, suppressClickUntil = 0;
+    var pointers = {};              /* aktive Finger: id → {x, y} */
+    var gesture = null;             /* laufende Geste */
+    var lastTap = null;             /* letzter Tipp aufs Bild (Doppeltipp) */
+
+    function pointerCount() { return Object.keys(pointers).length; }
+
+    /* Ungezoomte Lage des Bildes: Mittelpunkt (Viewport-Koordinaten) und Größe */
+    function baseBox() {
+      return {
+        cx: big.offsetLeft - overlay.scrollLeft + big.offsetWidth / 2,
+        cy: big.offsetTop - overlay.scrollTop + big.offsetHeight / 2,
+        w: big.offsetWidth, h: big.offsetHeight,
+        vw: overlay.clientWidth, vh: overlay.clientHeight
+      };
+    }
+
+    /* Verschiebung je Achse begrenzen: ist das Bild größer als der Viewport,
+       darf kein Rand hereinrutschen; sonst bleibt es mittig. */
+    function clampAxis(t, c, size, view) {
+      if (size <= view) return view / 2 - c;
+      return Math.min(size / 2 - c, Math.max(view - c - size / 2, t));
+    }
+    function clampPan(b) {
+      ztx = clampAxis(ztx, b.cx, b.w * zs, b.vw);
+      zty = clampAxis(zty, b.cy, b.h * zs, b.vh);
+    }
+
+    function render() {
+      frame = 0;
+      big.style.transform = (zs === 1 && ztx === 0 && zty === 0) ? "" :
+        "translate(" + ztx + "px," + zty + "px) scale(" + zs + ")";
+    }
+    function requestRender() {
+      if (!frame) frame = requestAnimationFrame(render);
+    }
+    function stopAnim() {
+      clearTimeout(animTimer);
+      big.classList.remove("lb-anim");
+    }
+    /* Zielzustand weich anfahren (kurze CSS-Transition) */
+    function animateTo(s, tx, ty) {
+      zs = s; ztx = tx; zty = ty;
+      big.classList.add("lb-anim");
+      clearTimeout(animTimer);
+      animTimer = setTimeout(stopAnim, 260);
+      overlay.classList.toggle("touch-zoom", zs !== 1);
+      requestRender();
+    }
+    /* Sofort auf 1x zurück (Bildwechsel, Schließen) */
+    function resetZoom() {
+      stopAnim();
+      if (frame) cancelAnimationFrame(frame);
+      zs = 1; ztx = zty = 0;
+      gesture = null; lastTap = null;
+      overlay.classList.remove("touch-zoom");
+      render();
+    }
+
+    /* Zoom auf Stufe s, wobei der Bildpunkt unter (px, py) dort liegen bleibt */
+    function zoomAround(b, s0, tx0, ty0, px, py, s, qx, qy) {
+      var lx = (px - b.cx - tx0) / s0, ly = (py - b.cy - ty0) / s0;
+      zs = s;
+      ztx = qx - b.cx - s * lx;
+      zty = qy - b.cy - s * ly;
+    }
+
+    function startPinch() {
+      var ids = Object.keys(pointers), a = pointers[ids[0]], c = pointers[ids[1]];
+      gesture = {
+        type: "pinch", box: baseBox(), s0: zs, tx0: ztx, ty0: zty,
+        d0: Math.hypot(c.x - a.x, c.y - a.y) || 1,
+        mx: (a.x + c.x) / 2, my: (a.y + c.y) / 2, moved: true
+      };
+    }
+    function startSingle(p, onImage, moved) {
+      gesture = {
+        type: "single", box: baseBox(), x: p.x, y: p.y, t: Date.now(),
+        tx0: ztx, ty0: zty, onImage: onImage, moved: moved, swipe: false
+      };
+    }
+
+    overlay.addEventListener("pointerdown", function (e) {
+      lastPointer = e.pointerType;
+      if (e.pointerType !== "touch" || overlay.classList.contains("zoomed")) return;
+      if (e.target.closest && e.target.closest("button")) return;
+      pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
+      stopAnim();
+      var n = pointerCount();
+      if (n === 1) startSingle(pointers[e.pointerId], e.target === big, false);
+      else if (n === 2) startPinch();
+    });
+
+    overlay.addEventListener("pointermove", function (e) {
+      var p = pointers[e.pointerId];
+      if (!p || !gesture) return;
+      p.x = e.clientX; p.y = e.clientY;
+      var g = gesture, b = g.box;
+      if (g.type === "pinch") {
+        var ids = Object.keys(pointers);
+        if (ids.length < 2) return;
+        var a = pointers[ids[0]], c = pointers[ids[1]];
+        var s = g.s0 * Math.hypot(c.x - a.x, c.y - a.y) / g.d0;
+        s = Math.min(MAX_ZOOM, Math.max(0.6, s));
+        zoomAround(b, g.s0, g.tx0, g.ty0, g.mx, g.my, s, (a.x + c.x) / 2, (a.y + c.y) / 2);
+        clampPan(b);
+        overlay.classList.add("touch-zoom");
+        requestRender();
+        return;
+      }
+      var dx = p.x - g.x, dy = p.y - g.y;
+      if (!g.moved && Math.hypot(dx, dy) < 10) return;
+      g.moved = true;
+      if (zs > 1) {
+        /* vergrößert: Wischen ist ausschließlich Verschieben */
+        ztx = g.tx0 + dx; zty = g.ty0 + dy;
+        clampPan(b);
+        requestRender();
+      } else if (group.length > 1) {
+        /* 1x: Bild folgt dem Finger waagerecht, Auswertung beim Loslassen */
+        g.swipe = true;
+        ztx = dx;
+        requestRender();
       }
     });
+
+    function endPointer(e, cancelled) {
+      var p = pointers[e.pointerId];
+      if (!p) return;
+      delete pointers[e.pointerId];
+      var g = gesture;
+      if (!g) return;
+      if (g.moved) suppressClickUntil = Date.now() + 400;
+      var n = pointerCount();
+
+      if (g.type === "pinch") {
+        if (n === 1) {
+          /* ein Finger bleibt liegen: nahtlos ins Verschieben übergehen */
+          var rest = pointers[Object.keys(pointers)[0]];
+          startSingle(rest, false, true);
+          return;
+        }
+        if (n > 1) return;
+        gesture = null;
+        if (zs <= 1.02) animateTo(1, 0, 0);
+        else { clampPan(g.box); animateTo(zs, ztx, zty); }
+        return;
+      }
+      if (n > 0) return;
+      gesture = null;
+
+      if (g.swipe) {
+        var dx = p.x - g.x, dy = p.y - g.y;
+        if (!cancelled && Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+          show(index + (dx < 0 ? 1 : -1));
+        } else {
+          animateTo(1, 0, 0);
+        }
+        return;
+      }
+      if (g.moved || cancelled || !g.onImage) { lastTap = null; return; }
+
+      /* Tipp aufs Bild: einzeln passiert nichts (kein Warten nötig),
+         zwei kurz nacheinander an etwa derselben Stelle = Doppeltipp */
+      var now = Date.now();
+      if (lastTap && now - lastTap.t < DOUBLE_TAP_MS &&
+          Math.hypot(p.x - lastTap.x, p.y - lastTap.y) < 30) {
+        lastTap = null;
+        var b = baseBox();
+        if (zs > 1.01) {
+          animateTo(1, 0, 0);
+        } else {
+          zoomAround(b, zs, ztx, zty, p.x, p.y, TAP_ZOOM, p.x, p.y);
+          clampPan(b);
+          animateTo(zs, ztx, zty);
+        }
+      } else {
+        lastTap = { x: p.x, y: p.y, t: now };
+      }
+    }
+    overlay.addEventListener("pointerup", function (e) { endPointer(e, false); });
+    overlay.addEventListener("pointercancel", function (e) { endPointer(e, true); });
+
+    /* Nach einer Geste keinen Klick hinterher (würde sonst schließen) */
+    overlay.addEventListener("click", function (e) {
+      if (Date.now() < suppressClickUntil) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    }, true);
+
+    /* iOS Safari: eigene Pinch-Gesten nur im Lightbox-Bereich abfangen,
+       damit nicht die ganze Seite zoomt (viewport-Meta bleibt unverändert) */
+    ["gesturestart", "gesturechange", "gestureend"].forEach(function (type) {
+      overlay.addEventListener(type, function (e) { e.preventDefault(); });
+    });
+
+    /* Größenänderung: Layout neu, Zoomstufe behalten, Verschiebung nachbegrenzen */
+    function onResize() {
+      layout();
+      if (zs !== 1) { clampPan(baseBox()); requestRender(); }
+    }
 
     function destroy() {
       req++;
       abortLoad(origLoad);
+      resetZoom();
       overlay.remove();
       document.removeEventListener("keydown", onKey);
-      window.removeEventListener("resize", layout);
+      window.removeEventListener("resize", onResize);
       group[index].focus();
     }
     function onKey(e) {
@@ -643,7 +850,7 @@
     }
     overlay.addEventListener("click", destroy);
     document.addEventListener("keydown", onKey);
-    window.addEventListener("resize", layout);
+    window.addEventListener("resize", onResize);
     /* Erst einhängen, dann anzeigen: layout() misst die Overlay-Größe */
     document.body.appendChild(overlay);
     show(index);
