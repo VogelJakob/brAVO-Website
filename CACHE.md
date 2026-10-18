@@ -18,7 +18,7 @@ hochgeladen, die Versionskennung erhöhen:
 
 - Format: `JJJJMMTT-N` (Datum des Uploads, `N` = laufende Nummer am Tag),
   z. B. `20261010-1` → `20261010-2` → am nächsten Tag `20261011-1`.
-- Aktueller Stand: **`20261018-2`**
+- Aktueller Stand: **`20261018-4`**
 
 ### Wo die Kennung steht
 
@@ -48,5 +48,6 @@ automatisch: `assets/js/app.js` liest sie aus dem `?v=…` seiner eigenen
 Einbindung (`ADK.version`) und hängt sie über `ADK.asset()` an. In den
 JS-Dateien und in `assets/data/*.js` muss also nichts geändert werden.
 
-Nicht versioniert (bewusst): externe Ressourcen (Google Fonts, …)
-sowie die absoluten `og:image`/`twitter:image`-URLs für Link-Vorschauen.
+Nicht versioniert (bewusst): die lokalen Schriften in `assets/fonts/`
+(werden aus `style.css` und per `<link rel="preload">` ohne Kennung geladen;
+bei neuen Schriftdateien einen neuen Dateinamen wählen) sowie die absoluten `og:image`/`twitter:image`-URLs für Link-Vorschauen.
