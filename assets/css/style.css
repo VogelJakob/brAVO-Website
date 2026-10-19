@@ -996,7 +996,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   text-decoration: none;
 }
 
-/* Kontaktlinks neben dem Namen: nur auf breiten Bildschirmen (siehe Breakpoint) */
+/* Kontaktlinks unter dem Namen: nur auf breiten Bildschirmen (siehe Breakpoint) */
 .contact-links-title {
   display: none;
   flex-wrap: wrap;
@@ -1389,24 +1389,11 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
     top: 5rem;
   }
 
-  /* Kontaktlinks rechtsbündig neben dem Namen statt unter den Fotos –
+  /* Kontaktlinks als Zeile unter Name/Pronomen statt unter den Fotos –
      immer sofort sichtbar, ohne Scrollen. Die Liste am Seitenende bleibt. */
-  .profile-title {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    column-gap: 2.5rem;
-    align-items: end;
-  }
-  .profile-title > h1,
-  .profile-title > .profile-pronouns { grid-column: 1; }
   .profile-title > .contact-links-title {
     display: flex;
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    align-self: end;
-    justify-content: flex-end;
-    max-width: 34rem;
-    padding-bottom: 4px;   /* Platz für den Schatten */
+    margin-top: 1.2rem;
   }
   .profile-side .contact-links-side { display: none; }
 }

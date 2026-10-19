@@ -327,7 +327,7 @@
     return '<div class="contact-links contact-links-side">' + links.join("") + "</div>";
   }
 
-  /* Kontaktlinks rechtsbündig neben dem Namen (nur breite Bildschirme, CSS) */
+  /* Kontaktlinks als Zeile unter dem Namen (nur breite Bildschirme, CSS) */
   function contactTitleHtml(s) {
     var links = contactLinks(s);
     if (!links.length) return "";
