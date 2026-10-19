@@ -866,11 +866,26 @@
 
     /* Strg+Mausrad bzw. Trackpad-Pinch (wheel mit ctrlKey): stufenlos
        1x–LIGHTBOX_MOUSE_MAX_ZOOM um den Mauszeiger; verhindert dabei den
-       Seiten-Zoom des Browsers. Ohne Strg bleibt das Mausrad unberührt. */
+       Seiten-Zoom des Browsers. Ohne Strg verschiebt das Mausrad bzw.
+       Trackpad-Scrollen das vergrößerte Bild (Umschalt+Rad waagerecht);
+       bei 1x bleibt das Mausrad unberührt. */
     overlay.addEventListener("wheel", function (e) {
-      if (!e.ctrlKey || gesture) return;
+      if (gesture) return;
+      var unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1;
+      if (!e.ctrlKey) {
+        if (zs <= 1) return;
+        e.preventDefault();
+        var mx = e.deltaX * unit, my = e.deltaY * unit;
+        if (e.shiftKey && !mx) { mx = my; my = 0; }
+        stopAnim();
+        ztx -= mx; zty -= my;
+        clampPan(baseBox());
+        if (drag) { drag.x = e.clientX; drag.y = e.clientY; drag.tx0 = ztx; drag.ty0 = zty; }
+        requestRender();
+        return;
+      }
       e.preventDefault();
-      var dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1);
+      var dy = e.deltaY * unit;
       var s = zs * Math.exp(-dy * 0.01);
       s = Math.min(LIGHTBOX_MOUSE_MAX_ZOOM, Math.max(1, s));
       stopAnim();
