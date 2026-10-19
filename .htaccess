@@ -24,7 +24,7 @@
   # --- MODUS A (AKTIV): Assets ebenfalls immer nachfragen --------------
   # Änderungen an CSS/JS/Daten/Bildern/Medien kommen sofort an, auch
   # wenn die Versionskennung (?v=…) einmal nicht erhöht wurde.
-  <FilesMatch "\.(css|js|jpe?g|png|gif|webp|avif|svg|ico|mp3|wav|m4a|ogg|mp4|webm|mov|woff2?|ttf|otf|eot)$">
+  <FilesMatch "\.(css|js|jpe?g|png|gif|webp|avif|svg|ico|webmanifest|mp3|wav|m4a|ogg|mp4|webm|mov|woff2?|ttf|otf|eot)$">
     Header set Cache-Control "no-cache"
   </FilesMatch>
 
@@ -37,12 +37,23 @@
   # ACHTUNG: In MODUS B MUSS bei jedem Upload geänderter Assets die
   # Versionskennung erhöht werden, sonst sehen Besucher bis zu ein Jahr
   # lang die alte Datei.
-  # <FilesMatch "\.(css|js|jpe?g|png|gif|webp|avif|svg|ico|mp3|wav|m4a|ogg|mp4|webm|mov|woff2?|ttf|otf|eot)$">
+  # <FilesMatch "\.(css|js|jpe?g|png|gif|webp|avif|svg|ico|webmanifest|mp3|wav|m4a|ogg|mp4|webm|mov|woff2?|ttf|otf|eot)$">
   #   Header set Cache-Control "public, max-age=31536000, immutable"
   # </FilesMatch>
 
 </IfModule>
 # ===================== Ende Cache-Steuerung ==========================
+
+# =====================================================================
+# MIME-Typ für das Web-App-Manifest (site.webmanifest)
+# ---------------------------------------------------------------------
+# Manche Server kennen die Endung .webmanifest nicht und liefern sie als
+# text/plain aus; Browser erwarten application/manifest+json.
+# =====================================================================
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+</IfModule>
+# =================== Ende MIME-Typ Web-App-Manifest ==================
 
 # =====================================================================
 # Interne Dateien sperren (Doku, Skripte, Werkzeuge)

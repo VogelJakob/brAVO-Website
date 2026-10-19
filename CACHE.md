@@ -18,7 +18,7 @@ hochgeladen, die Versionskennung erhöhen:
 
 - Format: `JJJJMMTT-N` (Datum des Uploads, `N` = laufende Nummer am Tag),
   z. B. `20261010-1` → `20261010-2` → am nächsten Tag `20261011-1`.
-- Aktueller Stand: **`20261018-4`**
+- Aktueller Stand: **`20261019-1`**
 
 ### Wo die Kennung steht
 
@@ -27,10 +27,10 @@ austauschen):
 
 | Datei | Stellen |
 |---|---|
-| `index.html` | style.css, 8 Skripte |
-| `impressum.html`, `datenschutz.html` | style.css, app.js |
-| `students/*.html` (10 Profile) | style.css, students.js, credits.js, image-sizes.js, app.js, profile.js |
-| `links/index.html` | style.css |
+| `index.html` | style.css, Favicons + Manifest, 8 Skripte |
+| `impressum.html`, `datenschutz.html` | style.css, Favicons + Manifest, app.js |
+| `students/*.html` (10 Profile) | style.css, Favicons + Manifest, students.js, credits.js, image-sizes.js, app.js, profile.js |
+| `links/index.html` | style.css, Favicons + Manifest |
 
 Befehl dafür (im Projektordner, ALT und NEU anpassen):
 
