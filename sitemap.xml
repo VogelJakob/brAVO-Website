@@ -6,21 +6,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://adk-bayern-2027.de/links/</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://adk-bayern-2027.de/students/konstantin-kloppe.html</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://adk-bayern-2027.de/students/salome-ridder.html</loc>
-    <lastmod>2026-10-19</lastmod>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://adk-bayern-2027.de/students/cedric-corazza.html</loc>
     <lastmod>2026-10-19</lastmod>
     <priority>0.8</priority>
@@ -36,12 +21,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://adk-bayern-2027.de/students/konstantin-kloppe.html</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://adk-bayern-2027.de/students/linda-lehmann.html</loc>
     <lastmod>2026-10-19</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://adk-bayern-2027.de/students/bianca-pitschedell.html</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://adk-bayern-2027.de/students/salome-ridder.html</loc>
     <lastmod>2026-10-19</lastmod>
     <priority>0.8</priority>
   </url>
@@ -59,5 +54,10 @@
     <loc>https://adk-bayern-2027.de/students/rosalie-zwenzner.html</loc>
     <lastmod>2026-10-19</lastmod>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://adk-bayern-2027.de/links/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <priority>0.6</priority>
   </url>
 </urlset>
