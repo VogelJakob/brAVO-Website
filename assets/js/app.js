@@ -380,8 +380,9 @@
    * Lightbox: jedes Bild mit [data-lightbox] öffnet sich per Klick/Enter
    * bildschirmfüllend. Bilder mit demselben data-gallery-Wert bilden eine
    * Galerie: Pfeil-Knöpfe bzw. Pfeiltasten blättern durch die Bilder.
-   * Klick auf das große Bild zoomt auf Originalgröße (scrollbar) – nur mit
-   * Maus/Trackpad; per Finger gelten Galerie-Gesten (Pinch, Doppeltipp).
+   * Klick auf das große Bild zoomt auf LIGHTBOX_MOUSE_ZOOM (an der Klickstelle)
+   * – nur mit Maus/Trackpad/Stift; per Finger gelten Galerie-Gesten (Pinch,
+   * Doppeltipp).
    * Schließen über Klick auf den Hintergrund, Schließen-Knopf oder Escape.
    *
    * Zweistufiges Laden: sofort die größte Fassung (w2000, sonst w1200),
@@ -392,6 +393,15 @@
    * Ladevorgänge eines vorherigen Bildes werden verworfen.
    */
   var BLANK = "data:image/gif;base64,R0lGODlhAQABAAAAACw=";
+
+  /* Maus-Zoom der Lightbox: Klick aufs Bild wechselt zwischen eingepasster
+     Ansicht (1x) und dieser Stufe. Bezieht sich auf die eingepasste
+     Darstellungsgröße, nicht auf die Pixelgröße der Datei. */
+  var LIGHTBOX_MOUSE_ZOOM = 2;
+  /* Höchste Stufe beim stufenlosen Zoomen per Strg+Mausrad / Trackpad-Pinch */
+  var LIGHTBOX_MOUSE_MAX_ZOOM = 4;
+  /* Ab so vielen Pixeln Mausbewegung gilt ein Klick als Ziehen (kein Zoom) */
+  var LIGHTBOX_DRAG_TOLERANCE = 5;
 
   /* Bild laden und dekodieren; done(im) bzw. fail(). Aus dem Cache sofort. */
   function preload(url, done, fail) {
@@ -441,6 +451,8 @@
     overlay.setAttribute("aria-label", ADK.t("lightboxAria"));
 
     var big = document.createElement("img");
+    /* kein natives Bild-Ziehen – Ziehen verschiebt im Zoom das Bild */
+    big.draggable = false;
 
     /* Dezente Ladeanzeige, solange vom aktuellen Bild noch nichts zu sehen ist */
     var loading = document.createElement("span");
@@ -497,7 +509,8 @@
 
     /*
      * Darstellungsgröße: eingepasst so groß wie möglich (auch über die
-     * natürliche Größe hinaus), ohne Zuschnitt; gezoomt in Originalgröße.
+     * natürliche Größe hinaus), ohne Zuschnitt. Zoom (Maus wie Touch) läuft
+     * per transform und lässt diese Größe unberührt.
      * Gilt für Fassung und Original gleichermaßen (border-box inkl. Rahmen).
      */
     function layout() {
@@ -514,7 +527,6 @@
       var aw = overlay.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - bx;
       var ah = overlay.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom) - by;
       var f = Math.max(0, Math.min(aw / dims.w, ah / dims.h));
-      if (overlay.classList.contains("zoomed")) f = Math.max(f, 1);
       /* Höhe aus der gerundeten Breite ableiten (bzw. umgekehrt), damit das
          Seitenverhältnis exakt bleibt – sonst entsteht durch object-fit ein
          Streifen Hintergrund über/unter dem Bild */
@@ -539,7 +551,6 @@
       var firstState = first ? "loading" : "none";   /* loading | shown | failed | none */
       var origFailed = false;
 
-      overlay.classList.remove("zoomed");
       resetZoom();
       big.alt = el.alt || "";
       /* Wasserzeichen der Großansicht: Credit des gerade gezeigten Bildes */
@@ -605,17 +616,21 @@
     /* Zuletzt benutzte Eingabeart (Pointer Events): "touch" = Finger */
     var lastPointer = "mouse";
 
-    /* Klick aufs Bild: zwischen Einpassen und Originalgröße wechseln.
+    /* Klick aufs Bild: zwischen Einpassen (1x) und LIGHTBOX_MOUSE_ZOOM
+       wechseln, die angeklickte Stelle bleibt unter dem Mauszeiger.
        Nur mit Maus/Trackpad/Stift – per Finger zoomt ein Tipp nicht mehr
-       (dort gelten die Gesten unten: Pinch, Doppeltipp, Verschieben). */
+       (dort gelten die Gesten unten: Pinch, Doppeltipp, Verschieben).
+       Ein Ziehen unterdrückt den Klick (suppressClickUntil, siehe unten). */
     big.addEventListener("click", function (e) {
       e.stopPropagation();
       if (lastPointer === "touch") return;
-      var zoomed = overlay.classList.toggle("zoomed");
-      layout();
-      if (zoomed) {
-        overlay.scrollLeft = (overlay.scrollWidth - overlay.clientWidth) / 2;
-        overlay.scrollTop = (overlay.scrollHeight - overlay.clientHeight) / 2;
+      if (zs > 1.01) {
+        animateTo(1, 0, 0);
+      } else {
+        var b = baseBox();
+        zoomAround(b, zs, ztx, zty, e.clientX, e.clientY, LIGHTBOX_MOUSE_ZOOM, e.clientX, e.clientY);
+        clampPan(b);
+        animateTo(zs, ztx, zty);
       }
     });
 
@@ -685,8 +700,8 @@
       stopAnim();
       if (frame) cancelAnimationFrame(frame);
       zs = 1; ztx = zty = 0;
-      gesture = null; lastTap = null;
-      overlay.classList.remove("touch-zoom");
+      gesture = null; lastTap = null; drag = null;
+      overlay.classList.remove("touch-zoom", "lb-dragging");
       render();
     }
 
@@ -715,7 +730,7 @@
 
     overlay.addEventListener("pointerdown", function (e) {
       lastPointer = e.pointerType;
-      if (e.pointerType !== "touch" || overlay.classList.contains("zoomed")) return;
+      if (e.pointerType !== "touch") return;
       if (e.target.closest && e.target.closest("button")) return;
       pointers[e.pointerId] = { x: e.clientX, y: e.clientY };
       stopAnim();
@@ -813,6 +828,60 @@
     }
     overlay.addEventListener("pointerup", function (e) { endPointer(e, false); });
     overlay.addEventListener("pointercancel", function (e) { endPointer(e, true); });
+
+    /*
+     * Maus/Stift (pointerType "mouse"/"pen"), getrennt von den Touch-Gesten:
+     * vergrößert verschiebt Ziehen mit gedrückter Taste das Bild (begrenzt
+     * auf den sichtbaren Bereich). Ab LIGHTBOX_DRAG_TOLERANCE px Bewegung
+     * zählt das Loslassen nicht mehr als Klick (kein Herauszoomen/Schließen).
+     */
+    var drag = null;   /* laufendes Ziehen mit der Maus */
+
+    big.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch" || e.button !== 0) return;
+      stopAnim();
+      drag = { id: e.pointerId, x: e.clientX, y: e.clientY,
+               tx0: ztx, ty0: zty, box: baseBox(), moved: false };
+      if (big.setPointerCapture) big.setPointerCapture(e.pointerId);
+    });
+    big.addEventListener("pointermove", function (e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      var dx = e.clientX - drag.x, dy = e.clientY - drag.y;
+      if (!drag.moved && Math.hypot(dx, dy) < LIGHTBOX_DRAG_TOLERANCE) return;
+      drag.moved = true;
+      if (zs <= 1) return;
+      overlay.classList.add("lb-dragging");
+      ztx = drag.tx0 + dx; zty = drag.ty0 + dy;
+      clampPan(drag.box);
+      requestRender();
+    });
+    function endDrag(e) {
+      if (!drag || e.pointerId !== drag.id) return;
+      if (drag.moved) suppressClickUntil = Date.now() + 400;
+      drag = null;
+      overlay.classList.remove("lb-dragging");
+    }
+    big.addEventListener("pointerup", endDrag);
+    big.addEventListener("pointercancel", endDrag);
+
+    /* Strg+Mausrad bzw. Trackpad-Pinch (wheel mit ctrlKey): stufenlos
+       1x–LIGHTBOX_MOUSE_MAX_ZOOM um den Mauszeiger; verhindert dabei den
+       Seiten-Zoom des Browsers. Ohne Strg bleibt das Mausrad unberührt. */
+    overlay.addEventListener("wheel", function (e) {
+      if (!e.ctrlKey || gesture) return;
+      e.preventDefault();
+      var dy = e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1);
+      var s = zs * Math.exp(-dy * 0.01);
+      s = Math.min(LIGHTBOX_MOUSE_MAX_ZOOM, Math.max(1, s));
+      stopAnim();
+      var b = baseBox();
+      zoomAround(b, zs, ztx, zty, e.clientX, e.clientY, s, e.clientX, e.clientY);
+      if (zs <= 1.001) { zs = 1; ztx = zty = 0; }
+      clampPan(b);
+      if (drag) { drag.x = e.clientX; drag.y = e.clientY; drag.tx0 = ztx; drag.ty0 = zty; }
+      overlay.classList.toggle("touch-zoom", zs !== 1);
+      requestRender();
+    }, { passive: false });
 
     /* Nach einer Geste keinen Klick hinterher (würde sonst schließen) */
     overlay.addEventListener("click", function (e) {

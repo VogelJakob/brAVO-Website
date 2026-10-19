@@ -818,7 +818,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 /*
  * Lightbox: Klick auf ein Foto zeigt es bildschirmfüllend.
- * Klick auf das große Bild zoomt auf Originalgröße (Overlay wird scrollbar),
+ * Klick auf das große Bild zoomt (Maus) auf eine feste Stufe, per transform,
  * Pfeile/Pfeiltasten blättern durch die Bilder derselben Person.
  */
 .lightbox {
@@ -832,7 +832,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   cursor: zoom-out;
 }
 /* Breite und Höhe setzt assets/js/app.js (openLightbox → layout): eingepasst
-   so groß wie möglich bis zur Viewport-Größe, gezoomt in Originalgröße – für
+   so groß wie möglich bis zur Viewport-Größe (Zoom nur per transform) – für
    Fassung und Original identisch, damit der Tausch keinen Größensprung macht.
    object-fit: contain sichert zusätzlich, dass nichts beschnitten/verzerrt wird. */
 .lightbox img {
@@ -848,19 +848,23 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   box-shadow: 9px 9px 0 var(--acc);
   cursor: zoom-in;
 }
-.lightbox.zoomed img {
+.lightbox.touch-zoom img {
   cursor: zoom-out;
+}
+/* Maus: Verschieben per Ziehen im vergrößerten Zustand */
+.lightbox.lb-dragging,
+.lightbox.lb-dragging img {
+  cursor: grabbing;
 }
 /* Touch: Pinch, Doppeltipp, Verschieben und Wischen übernimmt app.js
    (Pointer Events). touch-action: none verhindert, dass der Browser dabei
    die ganze Seite zoomt oder dahinter scrollt – nur innerhalb der Lightbox,
-   der viewport-Meta-Tag bleibt unverändert. Maus/Trackpad betrifft das nicht.
-   Im Maus-Zoom (.zoomed, Overlay scrollt) darf ein Finger weiter scrollen. */
+   der viewport-Meta-Tag bleibt unverändert. Maus/Trackpad betrifft das nicht. */
 .lightbox { touch-action: none; }
-.lightbox.zoomed { touch-action: pan-x pan-y; }
-/* Per Finger vergrößert: transform vergrößert sonst die Scrollfläche */
+/* Vergrößert (Finger oder Maus, Klasse heißt historisch touch-zoom):
+   transform vergrößert sonst die Scrollfläche */
 .lightbox.touch-zoom { overflow: hidden; }
-/* Weiches Zurückfedern / Doppeltipp-Zoom (Zwischenstände ohne Transition) */
+/* Weiches Zurückfedern / Doppeltipp- und Klick-Zoom (Zwischenstände ohne Transition) */
 .lightbox img.lb-anim { transition: transform 0.22s ease-out; }
 @media (prefers-reduced-motion: reduce) {
   .lightbox img.lb-anim { transition: none; }
