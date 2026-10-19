@@ -377,8 +377,12 @@
       "</header>" +
       '<div class="profile-layout">' +
         '<aside class="profile-side">' +
-          portraitHtml(s) +
-          headThumbsHtml(s) +
+          /* Gemeinsamer Bilderbereich: am Desktop schrumpft/scrollt nur er,
+             die Kontaktlinks darunter bleiben immer vollständig sichtbar. */
+          '<div class="profile-side-media">' +
+            portraitHtml(s) +
+            headThumbsHtml(s) +
+          "</div>" +
           contactSideHtml(s) +
         "</aside>" +
         '<div class="profile-main">' +

@@ -1375,9 +1375,64 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
     gap: 3.5rem;
     align-items: start;
   }
+}
+
+/*
+ * Seitenleiste im Profil (zweispaltig, nur bei ausreichender Fensterhöhe):
+ * bleibt unter dem Header stehen und ist nie höher als das Fenster.
+ * Bilder und Kontaktlinks sind dadurch immer vollständig sichtbar – reicht
+ * der Platz nicht, schrumpft zuerst das Portrait (ohne Zuschnitt), danach
+ * scrollt nur der Bilderbereich; die Links bleiben fest darunter.
+ * Unter 600px Fensterhöhe: normaler Seitenfluss (keine Regeln hier).
+ */
+@media (min-width: 960px) and (min-height: 600.02px) {
   .profile-side {
+    --side-gap: 1.25rem;   /* Abstand unter dem Header bzw. zum Fensterrand */
     position: sticky;
-    top: 5rem;
+    top: calc(var(--header-h) + var(--side-gap));
+    max-height: calc(100vh - var(--header-h) - 2 * var(--side-gap));
+    max-height: calc(100dvh - var(--header-h) - 2 * var(--side-gap));
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-side-media {
+    flex: 1 1 auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    /* Luft für Rahmen-Schatten und Hover-Versatz (sonst vom Scrollbereich
+       abgeschnitten), per negativem Rand optisch ausgeglichen */
+    padding: 0.25rem 0.75rem 0 0.25rem;
+    margin: -0.25rem 0 0 -0.25rem;
+  }
+  /* Portrait passt sich dem Restplatz an; das Bild wird nie zugeschnitten */
+  .profile-side-media .portrait {
+    flex: 0 1 auto;
+    min-height: 12rem;
+  }
+  .profile-side-media .portrait img { object-fit: contain; }
+  .profile-side-media .head-thumbs { flex: none; }
+  /* Verlauf am unteren Rand als Hinweis „es geht weiter“: klebt beim
+     Scrollen unten im Bilderbereich, am Ende liegt er nur über Leerraum
+     (ersetzt den oberen Abstand der Kontaktlinks) */
+  .profile-side-media::after {
+    content: "";
+    flex: none;
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    height: 1.6rem;
+    margin-right: -0.75rem;
+    background: linear-gradient(to bottom, rgba(251, 250, 247, 0), var(--bg));
+    pointer-events: none;
+  }
+  .profile-side .contact-links-side {
+    flex: none;
+    margin-top: 0;
+    /* Platz für den Schatten der Links innerhalb der Spaltenhöhe */
+    padding-bottom: 4px;
   }
 }
 
