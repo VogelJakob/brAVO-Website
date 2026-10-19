@@ -996,6 +996,13 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   text-decoration: none;
 }
 
+/* Kontaktlinks neben dem Namen: nur auf breiten Bildschirmen (siehe Breakpoint) */
+.contact-links-title {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
 /* Kompakte Kontaktlinks direkt unter dem Portrait (Seitenleiste) */
 .contact-links-side {
   flex-direction: column;
@@ -1004,14 +1011,16 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   margin-top: 1.6rem;
   max-width: min(100%, 19rem);
 }
-.contact-links-side .contact-link {
+.contact-links-side .contact-link,
+.contact-links-title .contact-link {
   font-size: 0.85rem;
   padding: 0.55rem 0.9rem;
   box-shadow: 4px 4px 0 var(--ink);
   max-width: 100%;
   overflow-wrap: anywhere;
 }
-.contact-links-side .contact-link:hover {
+.contact-links-side .contact-link:hover,
+.contact-links-title .contact-link:hover {
   box-shadow: 6px 6px 0 var(--acc);
 }
 
@@ -1375,43 +1384,31 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
     gap: 3.5rem;
     align-items: start;
   }
-}
-
-/*
- * Seitenleiste im Profil (zweispaltig, nur bei ausreichender Fensterhöhe):
- * bleibt unter dem Header stehen und ist nie höher als das Fenster.
- * Passt sie nicht ganz hinein, lässt sie sich für sich scrollen – so
- * erreicht man die Kontaktlinks, ohne die ganze Seite zu scrollen.
- * Bilder bleiben unverändert. Unter 600px Fensterhöhe: normaler Seitenfluss.
- */
-@media (min-width: 960px) and (min-height: 600.02px) {
   .profile-side {
-    --side-gap: 1.25rem;   /* Abstand unter dem Header bzw. zum Fensterrand */
     position: sticky;
-    top: calc(var(--header-h) + var(--side-gap));
-    max-height: calc(100vh - var(--header-h) - 2 * var(--side-gap));
-    max-height: calc(100dvh - var(--header-h) - 2 * var(--side-gap));
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-    /* Luft für Rahmen-Schatten und Hover-Versatz (sonst vom Scrollbereich
-       abgeschnitten), per negativem Rand optisch ausgeglichen */
-    padding: 0.25rem 0.75rem 0 0.25rem;
-    margin: -0.25rem 0 0 -0.25rem;
+    top: 5rem;
   }
-  /* Dezenter Verlauf am unteren Rand als Hinweis „es geht weiter“: klebt
-     beim Scrollen unten, am Ende liegt er nur über Leerraum */
-  .profile-side::after {
-    content: "";
-    display: block;
-    position: sticky;
-    bottom: 0;
-    z-index: 2;
-    height: 1.5rem;
-    margin-right: -0.75rem;
-    background: linear-gradient(to bottom, rgba(251, 250, 247, 0), var(--bg));
-    pointer-events: none;
+
+  /* Kontaktlinks rechtsbündig neben dem Namen statt unter den Fotos –
+     immer sofort sichtbar, ohne Scrollen. Die Liste am Seitenende bleibt. */
+  .profile-title {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: 2.5rem;
+    align-items: end;
   }
+  .profile-title > h1,
+  .profile-title > .profile-pronouns { grid-column: 1; }
+  .profile-title > .contact-links-title {
+    display: flex;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: end;
+    justify-content: flex-end;
+    max-width: 34rem;
+    padding-bottom: 4px;   /* Platz für den Schatten */
+  }
+  .profile-side .contact-links-side { display: none; }
 }
 
 /* Nutzerpräferenz: reduzierte Bewegung respektieren */

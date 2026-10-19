@@ -327,6 +327,13 @@
     return '<div class="contact-links contact-links-side">' + links.join("") + "</div>";
   }
 
+  /* Kontaktlinks rechtsbündig neben dem Namen (nur breite Bildschirme, CSS) */
+  function contactTitleHtml(s) {
+    var links = contactLinks(s);
+    if (!links.length) return "";
+    return '<div class="contact-links contact-links-title">' + links.join("") + "</div>";
+  }
+
   /* Vollständige Kontakt-Sektion am Seitenende (zusätzlich zur Seitenleiste) */
   function contactHtml(s) {
     var links = contactLinks(s);
@@ -374,6 +381,7 @@
       '<header class="profile-title">' +
         "<h1>" + esc(s.name) + "</h1>" +
         pronounsHtml(s) +
+        contactTitleHtml(s) +
       "</header>" +
       '<div class="profile-layout">' +
         '<aside class="profile-side">' +
