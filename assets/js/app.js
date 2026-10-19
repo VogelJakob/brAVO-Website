@@ -868,13 +868,13 @@
        1x–LIGHTBOX_MOUSE_MAX_ZOOM um den Mauszeiger; verhindert dabei den
        Seiten-Zoom des Browsers. Ohne Strg verschiebt das Mausrad bzw.
        Trackpad-Scrollen das vergrößerte Bild (Umschalt+Rad waagerecht);
-       bei 1x bleibt das Mausrad unberührt. */
+       bei 1x wird es geschluckt, damit die Seite dahinter nicht scrollt. */
     overlay.addEventListener("wheel", function (e) {
       if (gesture) return;
       var unit = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? 400 : 1;
       if (!e.ctrlKey) {
-        if (zs <= 1) return;
         e.preventDefault();
+        if (zs <= 1) return;
         var mx = e.deltaX * unit, my = e.deltaY * unit;
         if (e.shiftKey && !mx) { mx = my; my = 0; }
         stopAnim();
