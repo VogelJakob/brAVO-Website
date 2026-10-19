@@ -32,7 +32,7 @@
         '<a class="card" href="students/' + ADK.esc(s.slug) + '.html">' +
           '<div class="card-media">' +
             ADK.imageHtml(img, {
-              alt: ADK.t("portraitAlt") + " " + s.name,
+              alt: s.name + " – " + ADK.t("portraitAlt"),
               /* 2 Spalten, ab 640px 3 (max. 72rem breit), ab 125rem 5 */
               sizes: "(min-width: 125rem) 20rem, (min-width: 72rem) 21rem, (min-width: 640px) 31vw, 50vw",
               onerror: "this.closest('.card-media').classList.add('no-img')"

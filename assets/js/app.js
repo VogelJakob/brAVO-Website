@@ -69,7 +69,8 @@
       noscript: "Bitte aktivieren Sie JavaScript, um die Profile anzuzeigen.",
       videoFallback: "Ihr Browser unterstützt das Video-Element nicht.",
       audioFallback: "Ihr Browser unterstützt das Audio-Element nicht.",
-      portraitAlt: "Portrait von",
+      portraitAlt: "Portrait",
+      photo: "Foto",
       groupAlt: "Gruppenfoto des Abschlussjahrgangs 2027",
       skipLink: "Zum Inhalt springen",
       footerNote: "Akademie für Darstellende Kunst Bayern · Abschlussjahrgang 2027"

@@ -15,7 +15,7 @@ python3 -m http.server 8000
 
 ```
 index.html               Startseite (Hero, Einleitung, Ensemble, Aufführungen, AVO, News)
-students/{slug}.html     Einzelprofile (dünne Hüllen, Inhalt kommt aus students.js)
+students/{slug}.html     Einzelprofile (Inhalt aus students.js, per tools/build-pages.py vorbefüllt)
 impressum.html           Impressum (Kontaktdaten eingetragen)
 datenschutz.html         Datenschutzerklärung (Hosting-Anbieter vor Livegang ergänzen)
 assets/data/students.js  ZENTRALE DATENBASIS – alle Textinhalte aller Personen
@@ -23,6 +23,7 @@ assets/data/termine.js   ZENTRALE TERMINE – Produktionen und AVO (siehe unten)
 assets/data/credits.js   Foto-Credits pro Bild (Wasserzeichen)
 assets/data/image-sizes.js  Bildmaße + vorhandene Fassungen (erzeugt von tools/build-images.py)
 tools/build-images.py    Erzeugt verkleinerte Bildfassungen w600/w1200/w2000 nach _upload/
+tools/build-pages.py     Schreibt Profilinhalt, Ensemble-Links, Meta-Tags, JSON-LD und sitemap.xml statisch ins HTML
 assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Foto-Credits, Helfer
 assets/js/index.js       Rendert das Ensemble-Grid (alphabetisch nach Nachname)
 assets/js/profile.js     Rendert die Einzelprofile
@@ -39,6 +40,16 @@ assets/images/productions/  Szenenfotos: hamlet.jpg, reise-zum-mond.jpg, kleine-
 assets/videos/           Showreels: {slug}.mp4 · AVO-Trailer: avo-trailer.mp4
 assets/audio/            Audio-Reels:    {slug}.mp3 (optional)
 ```
+
+## Suchmaschinen: statische Vorbefüllung (WICHTIG nach jeder Datenänderung)
+
+Damit Google Namen, Steckbrief, Vita und Bilder sofort im HTML findet, stehen diese Inhalte nicht nur per JavaScript auf der Seite, sondern werden vom Skript `tools/build-pages.py` fest in die HTML-Dateien geschrieben. **Nach jeder Änderung an `assets/data/students.js`, `termine.js` oder `image-sizes.js` und nach jeder neuen Versionskennung** im Projektordner ausführen:
+
+```bash
+python3 tools/build-pages.py
+```
+
+Danach `index.html`, `students/*.html` und `sitemap.xml` mit committen. Das Skript schreibt nur zwischen den Kommentaren `BUILD:SEO …` und `BUILD:CONTENT …` – diese Bereiche nie von Hand bearbeiten. Es erzeugt Titel, Beschreibung, Open-Graph-/Twitter-Tags und strukturierte Daten (JSON-LD: Person mit allen Profil-Links aus `social`, Jahrgang, Termine) und setzt in der `sitemap.xml` das Datum geänderter Seiten. Termine in der Vergangenheit werden dabei weggelassen – das Skript also auch nach dem Ende von Vorstellungsreihen gelegentlich neu laufen lassen. Die Berufsbezeichnung wird aus `pronouns` abgeleitet (`sie/ihr` → Schauspielerin, `er/ihm` → Schauspieler, sonst Schauspieler:in). Eine neue Person braucht vorher eine Profilseite (bestehende kopieren und `data-slug` anpassen).
 
 ## Bildfassungen (schnelles Laden)
 

@@ -114,3 +114,40 @@
   </FilesMatch>
 </IfModule>
 # ============ Ende PHP-Bibliotheken und PHP-Dateien sperren ==========
+
+# =====================================================================
+# Eine einzige Adresse pro Seite (SEO): 301-Weiterleitungen
+# ---------------------------------------------------------------------
+# Hauptvariante ist https://adk-bayern-2027.de (ohne www). Doppelte
+# Adressen derselben Seite werden dauerhaft dorthin umgeleitet, damit
+# Google sie nicht als getrennte Seiten führt. Fehlt mod_rewrite, wird
+# der Block ignoriert. /.well-known/ (SSL-Zertifikatsprüfung) bleibt
+# immer unangetastet.
+# =====================================================================
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # --- www.adk-bayern-2027.de → adk-bayern-2027.de (gleich mit https) --
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+  # --- http → https ----------------------------------------------------
+  # Der zweite Check verhindert eine Endlosschleife, falls der Server
+  # hinter einem Proxy steht, der https selbst entgegennimmt.
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # --- …/index.html → …/ (Startseite und /links/) ----------------------
+  # Nur bei direktem Aufruf (THE_REQUEST); die interne Auslieferung von
+  # index.html für "/" löst so keine Schleife aus.
+  RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.html[\s?] [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # --- Profil ohne Endung → /students/{slug}.html -----------------------
+  RewriteCond %{THE_REQUEST} \s/+students/([^/.?\s]+)/?[\s?]
+  RewriteRule ^ /students/%1.html [R=301,L]
+</IfModule>
+# ================= Ende Weiterleitungen (eine Adresse) ===============

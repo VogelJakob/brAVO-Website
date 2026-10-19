@@ -44,7 +44,7 @@
       '<div class="portrait">' +
         /* Hauptbild der Profilseite: sofort laden (kein Lazy-Loading) */
         ADK.imageHtml(ADK.mediaPath("image", slug), {
-          alt: t("portraitAlt") + " " + student.name,
+          alt: student.name + " – " + t("portraitAlt"),
           sizes: "(max-width: 22rem) 100vw, 19rem",
           eager: true,
           extra: 'data-lightbox data-gallery="' + esc(slug) + '" tabindex="0"',
@@ -64,7 +64,7 @@
     if (!media.gallery || !media.gallery.length) return "";
     var items = media.gallery.map(function (src, i) {
       return ADK.imageHtml(src, {
-        alt: t("portraitAlt") + " " + s.name + " – " + (i + 2),
+        alt: s.name + " – " + t("photo") + " " + (i + 2),
         sizes: "88px",   /* .head-thumbs img: 5.5rem */
         extra: 'data-lightbox data-gallery="' + esc(slug) + '" tabindex="0"'
       });
