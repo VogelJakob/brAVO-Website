@@ -115,10 +115,12 @@ const FOTO_CREDITS = {
   "assets/images/students/karl-georg-roessler-3.jpg": "Werner Hofbauer",
 
   /* Michelle Thielsch */
-  "assets/images/students/michelle-thielsch.jpg": "Christine la Renard",
-  "assets/images/students/michelle-thielsch-2.jpg": "Laukart Photography",
-  "assets/images/students/michelle-thielsch-3.jpg": "Laukart Photography",
-  "assets/images/students/michelle-thielsch-4.jpg": "Salome Ridder",
+  "assets/images/students/michelle-thielsch.jpg": "Felix Rabas",
+  "assets/images/students/michelle-thielsch-2.jpg": "Felix Rabas",
+  "assets/images/students/michelle-thielsch-3.jpg": "Felix Rabas",
+  "assets/images/students/michelle-thielsch-4.jpg": "Felix Rabas",
+  "assets/images/students/michelle-thielsch-5.jpg": "Niobe Albers",
+  "assets/images/students/michelle-thielsch-6.jpg": "Niobe Albers",
 
   /* Rosalie Daria Zwenzner */
   "assets/images/students/rosalie-zwenzner.jpg": "Einbrandfoto",
