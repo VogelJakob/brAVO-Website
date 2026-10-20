@@ -1115,6 +1115,28 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 }
 .avo-time-tba { background: var(--muted); }
 
+/* Handy hochkant: feste Zeilen statt freiem Umbruch – sonst rutscht ein
+   kurzer Spielort neben eine kurze Stadt und die Uhrzeit steht allein.
+   Zeile 1: Datum + Stadt, Zeile 2: Spielort links, Uhrzeit rechts. */
+@media (max-width: 639.98px) and (orientation: portrait) {
+  .avo-dates a {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "date  city  city"
+      "venue venue time";
+    align-items: center;
+  }
+  .avo-date { grid-area: date; align-self: baseline; }
+  .avo-city { grid-area: city; align-self: baseline; min-width: 0; }
+  .avo-venue { grid-area: venue; min-width: 0; overflow-wrap: break-word; }
+  .avo-time { grid-area: time; margin-left: 0; justify-self: end; }
+  /* Ohne Spielort: keine Leerzeile, die Uhrzeit rückt in Zeile 1 */
+  .avo-venue:empty { display: none; }
+  .avo-dates a:has(> .avo-venue:empty) .avo-city { grid-column: 2; }
+  .avo-venue:empty + .avo-time { grid-row: 1; grid-column: 3; }
+}
+
 /* Trailer + GoFundMe nebeneinander – solange der Trailer fehlt (Attribut
    "hidden", siehe avo.js), fuellt der Spendenkasten die Zeile allein aus. */
 .avo-extra {
