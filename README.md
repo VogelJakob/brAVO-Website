@@ -27,9 +27,9 @@ tools/build-pages.py     Schreibt Profilinhalt, Ensemble-Links, Meta-Tags, JSON-
 assets/js/app.js         UI-Texte, Medien-Konvention, Lightbox, Foto-Credits, Helfer
 assets/js/index.js       Rendert das Ensemble-Grid (alphabetisch nach Nachname)
 assets/js/profile.js     Rendert die Einzelprofile
-assets/js/termine.js     Rendert Laufband, AVO-Liste, Formular-Auswahl, Aufführungs-Termine
-assets/js/avo.js         AVO-Anmeldeformular (Versand per fetch an api/) und Trailer-Einbindung
-api/avo-anmeldung.php    PHP-Endpunkt des Anmeldeformulars (Versand per SMTP, siehe unten)
+assets/js/termine.js     Rendert Laufband, AVO-Liste, Aufführungs-Termine
+assets/js/avo.js         AVO-Trailer-Einbindung (Anmeldeformular entfernt, siehe unten)
+api/avo-anmeldung.php    PHP-Endpunkt des Anmeldeformulars – derzeit abgeschaltet (HTTP 410, siehe unten)
 lib/PHPMailer/           PHPMailer 7.1.1 (nur src-Dateien + LICENSE), per .htaccess gesperrt
 assets/css/style.css     Design-System
 assets/images/students/  Portraitfotos:  {slug}.jpg · Galerie: {slug}-2.jpg … -8.jpg
@@ -71,7 +71,7 @@ In `assets/data/students.js` beim jeweiligen Eintrag `placeholder: true` entfern
 
 ### Termine ändern oder ergänzen
 
-Alle Termine stehen **nur** in `assets/data/termine.js`. Daraus entstehen automatisch: das Laufband oben, die AVO-Terminliste, die Auswahl im Anmeldeformular, die Datumszeilen der Aufführungs-Karten und die Event-Auszeichnung für Suchmaschinen.
+Alle Termine stehen **nur** in `assets/data/termine.js`. Daraus entstehen automatisch: das Laufband oben, die AVO-Terminliste, die Datumszeilen der Aufführungs-Karten und die Event-Auszeichnung für Suchmaschinen.
 
 - **Neue Vorstellung:** eine Zeile in `termine` der jeweiligen Produktion ergänzen, z.B. `{ d: "2026-11-14" }`.
 - **Datum immer im Format `"JJJJ-MM-TT"`** – der Wochentag wird daraus berechnet und nie eingetragen.
@@ -152,6 +152,15 @@ Neue News-Einträge werden direkt in `index.html` in der Sektion `#news` gepfleg
 5. **Platzhalter aus der Tabelle oben** (Foto-Credits, Domain, …) ausfüllen.
 
 ## AVO-Anmeldeformular (PHP-Endpunkt)
+
+> **Status: abgeschaltet** (nach den Abschlussvorsprechen 2026). Das Formular ist von der Seite entfernt, `api/avo-anmeldung.php` antwortet mit HTTP 410 und `{"ok":false,"message":"Die Anmeldung ist geschlossen."}` – ohne Konfiguration zu laden und ohne Mailversand. PHPMailer in `lib/` und die Server-Konfiguration bleiben unverändert.
+>
+> **Wieder aktivieren (z. B. nächstes Jahr):**
+> 1. In `api/avo-anmeldung.php` den Schalter `const ANMELDUNG_AKTIV = false;` auf `true` setzen.
+> 2. Formular, Termin-Links und JS/CSS per Git zurückholen. Letzter Stand **mit** Formular ist Commit `ae8b260`; entfernt wurde es im Commit „AVO-Anmeldung nach den Abschlussvorsprechen entfernen“ (`git log --grep="AVO-Anmeldung nach"`). Entweder diesen Commit per `git revert <hash>` rückgängig machen (setzt auch den Schalter zurück) oder einzelne Teile aus `ae8b260` übernehmen, z. B. `git show ae8b260:index.html` (Block `<div id="anmeldung">`, Laufband-/Bauchbinden-Link `#anmeldung`, News-Text, Einleitungstext), `assets/js/avo.js` (`initForm`), `assets/js/termine.js` (`renderAvoOptionen`, Link in `renderAvoListe`), `assets/css/style.css` (Abschnitt „Anmeldeformular“, `.avo-dates a`), `links/index.html` (Button „Anmeldung AVO“).
+> 3. Termine in `assets/data/termine.js` aktualisieren, `python3 tools/build-pages.py` ausführen, Versionskennung erhöhen (siehe `CACHE.md`).
+
+Der folgende Abschnitt beschreibt den Endpunkt im aktiven Zustand.
 
 Das Formular in `index.html` (`#avo-form`) schickt per `fetch` an `api/avo-anmeldung.php`. Das Skript prüft die Angaben (Termin muss in `assets/data/termine.js` stehen, Anzahl Personen aus der Auswahlliste, E-Mail-Format, Längen), hat einen Honeypot (`website`) und ein Rate-Limit (5 Anfragen pro IP in 10 Minuten) und verschickt die Anmeldung per SMTP (STARTTLS) über das IONOS-Postfach mit PHPMailer aus `lib/PHPMailer/`.
 

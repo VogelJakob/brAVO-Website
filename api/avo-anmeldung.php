@@ -18,6 +18,25 @@ declare(strict_types=1);
 
 ini_set('display_errors', '0');
 
+/*
+ * SCHALTER: Anmeldung aktiv?
+ * Nach den Abschlussvorsprechen 2026 abgeschaltet. Bei false antwortet das
+ * Skript sofort mit HTTP 410 – ohne Konfiguration zu laden, ohne Mail.
+ * Wieder aktivieren: auf true setzen UND das Formular in index.html samt
+ * JS (avo.js, termine.js) und CSS wiederherstellen (siehe README,
+ * Abschnitt „AVO-Anmeldeformular“).
+ */
+const ANMELDUNG_AKTIV = false;
+
+if (!ANMELDUNG_AKTIV) {
+    http_response_code(410);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+    header('X-Content-Type-Options: nosniff');
+    echo json_encode(['ok' => false, 'message' => 'Die Anmeldung ist geschlossen.'], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 const CONFIG_FILE = __DIR__ . '/../../config/avo-anmeldung-mail.php';

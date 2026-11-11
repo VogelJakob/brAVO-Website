@@ -1,8 +1,7 @@
 /*
  * Rendert alle Termin-Anzeigen der Startseite aus assets/data/termine.js:
  *   - Laufband oben (8 identische Kopien, wie es die CSS-Animation erwartet)
- *   - AVO-Terminliste
- *   - Auswahlfeld im Anmeldeformular
+ *   - AVO-Terminliste (reine Übersicht, ohne Link)
  *   - Datumszeilen der Aufführungs-Karten (+ Uhrzeiten, Besetzung,
  *     Szenenfoto-Galerien)
  *   - Datums-Platzhalter in den News ([data-news-premiere], [data-news-avo])
@@ -74,7 +73,7 @@
     if (band) band.hidden = false;
   }
 
-  /* ---------- AVO-Liste und Formular-Auswahl ---------- */
+  /* ---------- AVO-Liste ---------- */
 
   function renderAvoListe() {
     var list = document.querySelector(".avo-dates");
@@ -82,33 +81,14 @@
     list.innerHTML = TERMINE.avo.map(function (a) {
       var d = ADK.datum(a.d);
       return (
-        '<li><a href="#anmeldung">' +
+        '<li>' +
           '<span class="avo-date">' + esc(d.datum) + "</span>" +
           '<span class="avo-city">' + esc(a.stadt) + "</span>" +
           '<span class="avo-venue">' + esc(a.venue) + "</span>" +
           '<span class="avo-time">' + esc(a.zeit || t("timeSoon")) + "</span>" +
-        "</a></li>"
+        "</li>"
       );
     }).join("");
-  }
-
-  function renderAvoOptionen() {
-    var select = document.getElementById("avo-termin");
-    if (!select) return;
-    var erste = select.querySelector("option");
-    select.innerHTML = "";
-    if (erste) select.appendChild(erste);
-    /* Vergangene Vorsprechen fallen aus der Auswahl (der heutige bleibt);
-       api/avo-anmeldung.php lehnt sie ebenfalls ab. */
-    var heute = heuteIso();
-    TERMINE.avo.filter(function (a) { return a.d >= heute; }).forEach(function (a) {
-      var d = ADK.datum(a.d);
-      var opt = document.createElement("option");
-      /* value = ISO-Datum; api/avo-anmeldung.php prüft es gegen diese Datei */
-      opt.value = a.d;
-      opt.textContent = d.datum + " – " + a.stadt + ", " + (a.zeit || t("timeSoon")) + " (" + a.venue + ")";
-      select.appendChild(opt);
-    });
   }
 
   /* ---------- Aufführungs-Karten ---------- */
@@ -377,9 +357,12 @@
 
   function renderJsonLd() {
     var events = [];
+    /* Vergangene Termine nicht mehr als bevorstehend auszeichnen (wie
+       tools/build-pages.py) */
+    var heute = heuteIso();
     TERMINE.produktionen.forEach(function (p) {
       p.termine.forEach(function (item) {
-        if (item.unsicher) return;
+        if (item.unsicher || item.d < heute) return;
         /* Eine Event-Auszeichnung je Vorstellung (bei zwei Uhrzeiten zwei) */
         var zeiten = p.uhrzeiten && p.uhrzeiten.length ? p.uhrzeiten : [null];
         zeiten.forEach(function (z) {
@@ -396,6 +379,7 @@
       });
     });
     TERMINE.avo.forEach(function (a) {
+      if (a.d < heute) return;
       events.push({
         "@type": "TheaterEvent",
         name: "Abschlussvorsprechen ADK Bayern 2027 – " + a.stadt,
@@ -414,7 +398,6 @@
   document.addEventListener("DOMContentLoaded", function () {
     renderMarquee();
     renderAvoListe();
-    renderAvoOptionen();
     renderProduktionen();
     renderProdGalerien();
     renderNews();

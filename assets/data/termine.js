@@ -2,7 +2,7 @@
  * ZENTRALE TERMIN-DATENBASIS – Produktionen und Abschlussvorsprechen (AVO).
  *
  * Alles, was auf der Startseite Termine anzeigt, wird aus dieser Datei erzeugt:
- * das Laufband oben, die AVO-Terminliste, die Auswahl im Anmeldeformular und
+ * das Laufband oben, die AVO-Terminliste und
  * die Datumszeilen der Aufführungs-Karten (siehe assets/js/termine.js).
  * Ein Termin wird also genau EINMAL gepflegt – hier.
  *

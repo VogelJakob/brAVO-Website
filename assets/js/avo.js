@@ -1,61 +1,12 @@
 /*
- * AVO-Sektion der Startseite: Anmeldeformular und Trailer.
+ * AVO-Sektion der Startseite: Trailer.
  *
- * Das Formular in index.html postet per fetch an den eigenen PHP-Endpunkt
- * api/avo-anmeldung.php (action-Attribut), der die Anmeldung per SMTP
- * verschickt. Die Empfängeradresse steht bewusst NUR in der Server-
- * Konfiguration /config/avo-anmeldung-mail.php (siehe README) – nicht im
- * Repo und nicht auf der Seite, auch nicht im Fehlerhinweis.
+ * Das frühere Anmeldeformular (Versand an api/avo-anmeldung.php) ist nach
+ * den Abschlussvorsprechen 2026 entfernt worden – Wiederherstellung siehe
+ * README, Abschnitt „AVO-Anmeldeformular“.
  */
 (function () {
   "use strict";
-
-  /* --- Anmeldeformular: per fetch absenden, Bestätigung inline anzeigen --- */
-  function initForm() {
-    var form = document.getElementById("avo-form");
-    var status = document.getElementById("avo-form-status");
-    if (!form || !status) return;
-    var button = form.querySelector('button[type="submit"]');
-    var sending = false;
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      /* Gegen Doppelversand: während des Sendens keine zweite Anfrage */
-      if (sending) return;
-
-      /* Fehlerfall: allgemeiner Hinweis (ohne E-Mail-Adresse, siehe oben). */
-      function fail() {
-        status.hidden = false;
-        status.classList.add("form-status-error");
-        status.textContent = "Senden hat leider nicht geklappt – bitte versucht es später erneut.";
-      }
-
-      status.hidden = false;
-      status.classList.remove("form-status-error");
-      status.textContent = "Wird gesendet …";
-      sending = true;
-      if (button) button.disabled = true;
-
-      /* Antwort des Endpunkts: { ok: true } bzw. { ok: false, message } */
-      fetch(form.action, {
-        method: "POST",
-        body: new FormData(form),
-        headers: { Accept: "application/json" }
-      }).then(function (r) {
-        return r.json().catch(function () { return { ok: false }; }).then(function (data) {
-          if (r.ok && data && data.ok === true) {
-            form.reset();
-            status.textContent = "Danke! Eure Anzahl wurde aufgenommen – wir freuen uns auf euch.";
-          } else {
-            fail();
-          }
-        });
-      }).catch(fail).then(function () {
-        sending = false;
-        if (button) button.disabled = false;
-      });
-    });
-  }
 
   /*
    * Trailer-Konvention: der Kasten steht in index.html auf "hidden" und
@@ -87,7 +38,6 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    initForm();
     initTrailer();
   });
 })();

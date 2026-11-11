@@ -299,7 +299,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   font-weight: 500;
 }
 
-/* Laufband: reine CSS-Animation; als Link führt es direkt zur AVO-Anmeldung.
+/* Laufband: reine CSS-Animation; als Link führt es zur AVO-Terminübersicht.
    Inhalt kommt aus assets/js/termine.js – bis dahin (und ohne JavaScript)
    bleibt das Band per hidden unsichtbar. */
 .marquee[hidden] { display: none; }
@@ -1063,7 +1063,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   margin-bottom: 1.5rem;
 }
 
-/* Terminliste: jede Zeile führt zur Anmeldung */
+/* Terminliste: reine Übersicht, Zeilen ohne Link/Hover */
 .avo-dates {
   list-style: none;
   margin: 0 0 2.5rem;
@@ -1073,19 +1073,12 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   box-shadow: var(--shadow);
 }
 .avo-dates li + li { border-top: 2px solid var(--ink); }
-.avo-dates a {
+.avo-dates li {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.35rem 0.9rem;
   padding: 0.8rem 1rem;
-  color: var(--ink);
-  text-decoration: none;
-  transition: background-color 0.15s ease;
-}
-.avo-dates a:hover, .avo-dates a:focus-visible {
-  background: #f3ede1;
-  text-decoration: none;
   color: var(--ink);
 }
 .avo-date {
@@ -1119,7 +1112,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
    kurzer Spielort neben eine kurze Stadt und die Uhrzeit steht allein.
    Zeile 1: Datum + Stadt, Zeile 2: Spielort links, Uhrzeit rechts. */
 @media (max-width: 639.98px) and (orientation: portrait) {
-  .avo-dates a {
+  .avo-dates li {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr) auto;
     grid-template-areas:
@@ -1133,7 +1126,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   .avo-time { grid-area: time; margin-left: 0; justify-self: end; }
   /* Ohne Spielort: keine Leerzeile, die Uhrzeit rückt in Zeile 1 */
   .avo-venue:empty { display: none; }
-  .avo-dates a:has(> .avo-venue:empty) .avo-city { grid-column: 2; }
+  .avo-dates li:has(> .avo-venue:empty) .avo-city { grid-column: 2; }
   .avo-venue:empty + .avo-time { grid-row: 1; grid-column: 3; }
 }
 
@@ -1145,69 +1138,14 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
   gap: 1.5rem;
   margin-bottom: 2.5rem;
 }
-/* Bewusst ohne Schlagschatten: Terminliste und Anmeldeformular sind die
-   beiden Ankerpunkte der Sektion, diese Kaesten treten dahinter zurueck. */
+/* Bewusst ohne Schlagschatten: die Terminliste ist der Ankerpunkt der
+   Sektion, diese Kaesten treten dahinter zurueck. */
 .avo-trailer, .avo-support {
   background: var(--paper);
   border: var(--border);
   padding: 1.25rem 1.4rem 1.5rem;
 }
 .avo-support p { max-width: 38ch; }
-
-/* Anmeldeformular */
-.avo-form {
-  background: var(--paper);
-  border: var(--border);
-  box-shadow: var(--shadow-acc);
-  padding: 1.5rem 1.4rem 1.75rem;
-  max-width: 38rem;
-}
-.avo-form h3 { margin-bottom: 0.4em; }
-.form-field { margin: 1.1rem 0; }
-.form-field label {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--acc);
-  margin-bottom: 0.35rem;
-}
-.form-field .optional { color: var(--muted); text-transform: none; letter-spacing: 0; }
-.form-field select,
-.form-field input {
-  display: block;
-  width: 100%;
-  font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--ink);
-  background: var(--bg);
-  border: 2px solid var(--ink);
-  border-radius: 0;
-  padding: 0.6rem 0.7rem;
-}
-.form-field select:focus-visible,
-.form-field input:focus-visible {
-  outline: 3px solid var(--acc);
-  outline-offset: 2px;
-}
-.form-status {
-  margin: 1rem 0 0;
-  font-weight: 700;
-  color: var(--acc);
-}
-.form-status-error { color: var(--acc-deep); }
-/* Honeypot-Feld: visuell versteckt (bewusst nicht display:none, sonst
-   erkennen Bots es leichter). */
-.form-hp {
-  position: absolute;
-  left: -10000px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.avo-form button[disabled] { opacity: 0.6; cursor: wait; }
 
 /* ---------- News (Startseite) ---------- */
 
@@ -1243,7 +1181,7 @@ a:hover { color: var(--acc-deep); text-decoration: underline; text-decoration-th
 
 /* ---------- Bauchbinde unten („Engagiert uns“) ----------
    Bewusst auffälliger als das Laufband oben: dunkler Balken,
-   pulsierende Leuchtpfeile als Lauflicht Richtung Anmeldung. */
+   pulsierende Leuchtpfeile als Lauflicht (Link zum Ensemble). */
 
 .hire-banner {
   background: var(--ink);
